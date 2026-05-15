@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync-printful": "node --env-file=.env.local scripts/sync-printful.mjs"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",
+    "@paypal/react-paypal-js": "^9.2.0",
     "@tailwindcss/vite": "^4.2.4",
     "colord": "^2.9.3",
     "embla-carousel-react": "^8.6.0",

@@ -28,3 +28,10 @@ LLM_RULES.md
 /docs/
 .claude/
 /_tmp/
+# Environment files (paypal, printful, etc — never commit)
+.env
+.env.*
+!.env.example
+
+# Vercel CLI local state
+.vercel/

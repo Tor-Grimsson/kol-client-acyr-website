@@ -1,0 +1,25 @@
+[
+  {
+    "source": "printful",
+    "printfulProductId": 432793032,
+    "slug": "all-over-print-gym-bag",
+    "name": "All-over print gym bag",
+    "price": 66,
+    "currency": "EUR",
+    "image": "/brand/shop/pod/all-over-print-gym-bag.png",
+    "sizes": [
+      "One size"
+    ],
+    "variants": [
+      {
+        "syncVariantId": 5308929318,
+        "catalogVariantId": 15155,
+        "size": "One size",
+        "color": "White",
+        "retailPrice": 66,
+        "currency": "EUR",
+        "sku": "6A07380A55BFB"
+      }
+    ]
+  }
+]

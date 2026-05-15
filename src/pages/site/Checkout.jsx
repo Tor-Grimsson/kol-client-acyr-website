@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import usePageTitle from '../../components/hooks/usePageTitle'
 import { BRAND } from '../../brand/config'
 import Button from '../../components/atoms/Button'
@@ -24,6 +25,17 @@ const COUNTRIES = [
   { value: 'US', label: 'United States' },
   { value: 'CA', label: 'Canada' },
 ]
+
+// Must match `FLAT_SHIPPING_EUR` in api/_lib/products.mjs — the server uses its
+// own value for PayPal's order total; this is just for the UI summary.
+const FLAT_SHIPPING_EUR = 10
+
+const PAYPAL_OPTS = {
+  'client-id': import.meta.env.VITE_PAYPAL_CLIENT_ID,
+  currency:    'EUR',
+  intent:      'capture',
+  components:  'buttons',
+}
 
 function StepHeader({ index, label, status, onEdit }) {
   return (
@@ -50,51 +62,23 @@ function StepCollapsed({ children }) {
   return <div className="kol-prose"><p style={{ margin: 0 }}>{children}</p></div>
 }
 
-function PaymentMethodToggle({ value, onChange }) {
-  const options = [
-    { value: 'card', label: 'Card', icon: 'credit-card' },
-    { value: 'paypal', label: 'PayPal', icon: 'paypal' },
-    { value: 'apple', label: 'Apple Pay', icon: 'apple' },
-  ]
-  return (
-    <div className="flex flex-col gap-2">
-      {options.map((opt) => (
-        <label
-          key={opt.value}
-          className="flex items-center gap-3 p-4 rounded border border-fg-08 cursor-pointer transition-colors"
-          style={{ background: value === opt.value ? 'var(--kol-fg-04)' : 'transparent' }}
-        >
-          <input
-            type="radio"
-            name="payment-method"
-            value={opt.value}
-            checked={value === opt.value}
-            onChange={(e) => onChange(e.target.value)}
-            style={{ accentColor: 'currentColor' }}
-          />
-          <span className="kol-prose-label" style={{ margin: 0 }}>{opt.label}</span>
-        </label>
-      ))}
-    </div>
-  )
-}
-
 export default function Checkout() {
   usePageTitle(`Checkout · ${BRAND.name}`)
-  const navigate = useNavigate()
-  const { items, subtotal, currency } = useCart()
+  const navigate              = useNavigate()
+  const { items, subtotal, currency, clear } = useCart()
 
-  const [step, setStep] = useState(items.length === 0 ? null : 'email')
+  const [step, setStep]         = useState(items.length === 0 ? null : 'email')
   const [email, setEmail]       = useState('')
   const [newsletter, setNewsletter] = useState(true)
   const [delivery, setDelivery] = useState({
     firstName: '', lastName: '', street: '', city: '', postcode: '', country: 'IS', phone: '',
   })
-  const [payment, setPayment]   = useState({ method: 'card', cardNumber: '', name: '', exp: '', cvc: '' })
+  const [payError, setPayError] = useState(null)
+  const [paying, setPaying]     = useState(false)
 
-  const tax      = useMemo(() => Math.round(subtotal * 0),     [subtotal])
-  const shipping = useMemo(() => (subtotal > 0 ? 20 : 0),       [subtotal])
-  const total    = subtotal + tax + shipping
+  const shipping = useMemo(() => (subtotal > 0 ? FLAT_SHIPPING_EUR : 0), [subtotal])
+  const tax      = 0
+  const total    = subtotal + shipping
 
   if (items.length === 0) {
     return (
@@ -106,180 +90,225 @@ export default function Checkout() {
     )
   }
 
+  const deliveryReady = Boolean(
+    delivery.firstName && delivery.lastName && delivery.street &&
+    delivery.city && delivery.postcode && delivery.country,
+  )
+
   const states = {
-    email:    step === 'email'    ? 'open' : email                    ? 'done' : 'pending',
-    delivery: step === 'delivery' ? 'open' : delivery.street          ? 'done' : 'pending',
-    payment:  step === 'payment'  ? 'open' : payment.cardNumber       ? 'done' : 'pending',
-    review:   step === 'review'   ? 'open' : 'pending',
+    email:    step === 'email'    ? 'open' : email           ? 'done' : 'pending',
+    delivery: step === 'delivery' ? 'open' : delivery.street ? 'done' : 'pending',
+    pay:      step === 'pay'      ? 'open' : 'pending',
+  }
+
+  const cartPayload = () => items.map((it) => ({ slug: it.slug, size: it.size, qty: it.qty }))
+
+  const createOrder = async () => {
+    setPayError(null)
+    const res = await fetch('/api/paypal/create-order', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ items: cartPayload(), delivery }),
+    })
+    if (!res.ok) {
+      const errBody = await res.json().catch(() => ({}))
+      throw new Error(errBody.error ?? 'Could not create PayPal order')
+    }
+    const { orderID } = await res.json()
+    return orderID
+  }
+
+  const onApprove = async (data) => {
+    setPaying(true)
+    try {
+      const res = await fetch('/api/paypal/capture-order', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          orderID: data.orderID,
+          items:   cartPayload(),
+          delivery,
+          email,
+        }),
+      })
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}))
+        setPaying(false)
+        setPayError(errBody.error ?? 'Payment captured but order processing failed. Please contact support with this reference.')
+        return
+      }
+      const result = await res.json()
+
+      const snapshotItems = items.map((it) => ({ ...it }))
+      clear()
+
+      navigate('/checkout/confirmation', {
+        state: {
+          captureId:       result.captureId,
+          paypalOrderId:   result.paypalOrderId,
+          printfulOrderId: result.printfulOrderId,
+          printfulError:   result.printfulError,
+          autoConfirmed:   result.autoConfirmed,
+          items:           snapshotItems,
+          delivery,
+          email,
+          newsletter,
+          subtotal,
+          shipping,
+          tax,
+          total,
+          currency,
+        },
+      })
+    } catch (err) {
+      setPaying(false)
+      setPayError(err.message)
+    }
   }
 
   return (
-    <main className="bg-surface-primary pb-24">
-      <section className="max-w-6xl mx-auto px-8 pt-16 pb-8">
-        <p className="kol-prose-label">Checkout</p>
-        <h1 className="kol-prose-display-md">Secure checkout</h1>
-      </section>
+    <PayPalScriptProvider options={PAYPAL_OPTS}>
+      <main className="bg-surface-primary pb-24">
+        <section className="max-w-6xl mx-auto px-8 pt-16 pb-8">
+          <p className="kol-prose-label">Checkout</p>
+          <h1 className="kol-prose-display-md">Secure checkout</h1>
+        </section>
 
-      <section className="max-w-6xl mx-auto px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_360px] items-start">
-          {/* Steps */}
-          <div className="flex flex-col gap-4">
-            {/* 01 — Email */}
-            <div className="border border-fg-08 rounded p-6">
-              <StepHeader index={1} label="Your email" status={states.email} onEdit={() => setStep('email')} />
-              {states.email === 'open' ? (
-                <form
-                  onSubmit={(e) => { e.preventDefault(); setStep('delivery') }}
-                  className="flex flex-col gap-4"
-                >
-                  <Input
-                    type="email"
-                    required
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <label className="kol-helper-xxs text-meta inline-flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked={newsletter} onChange={(e) => setNewsletter(e.target.checked)} />
-                    Sign up to get the latest collections in your inbox.
-                  </label>
-                  <div><Button type="submit" variant="primary" size="lg">Continue</Button></div>
-                </form>
-              ) : states.email === 'done' ? (
-                <StepCollapsed>{email}</StepCollapsed>
-              ) : null}
-            </div>
-
-            {/* 02 — Delivery */}
-            <div className="border border-fg-08 rounded p-6">
-              <StepHeader index={2} label="Delivery" status={states.delivery} onEdit={() => setStep('delivery')} />
-              {states.delivery === 'open' ? (
-                <form
-                  onSubmit={(e) => { e.preventDefault(); setStep('payment') }}
-                  className="flex flex-col gap-4"
-                >
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <Input placeholder="First name" required value={delivery.firstName} onChange={(e) => setDelivery({ ...delivery, firstName: e.target.value })} />
-                    <Input placeholder="Last name"  required value={delivery.lastName}  onChange={(e) => setDelivery({ ...delivery, lastName:  e.target.value })} />
-                  </div>
-                  <Input placeholder="Street address" required value={delivery.street} onChange={(e) => setDelivery({ ...delivery, street: e.target.value })} />
-                  <div className="grid gap-4 sm:grid-cols-3">
-                    <Input placeholder="City"       required value={delivery.city}     onChange={(e) => setDelivery({ ...delivery, city:     e.target.value })} />
-                    <Input placeholder="Postcode"   required value={delivery.postcode} onChange={(e) => setDelivery({ ...delivery, postcode: e.target.value })} />
-                    <Dropdown options={COUNTRIES} value={delivery.country} onChange={(v) => setDelivery({ ...delivery, country: v })} />
-                  </div>
-                  <Input type="tel" placeholder="Phone (optional)" value={delivery.phone} onChange={(e) => setDelivery({ ...delivery, phone: e.target.value })} />
-                  <div><Button type="submit" variant="primary" size="lg">Continue to payment</Button></div>
-                </form>
-              ) : states.delivery === 'done' ? (
-                <StepCollapsed>
-                  {delivery.firstName} {delivery.lastName} · {delivery.street}, {delivery.postcode} {delivery.city}, {COUNTRIES.find((c) => c.value === delivery.country)?.label}
-                </StepCollapsed>
-              ) : null}
-            </div>
-
-            {/* 03 — Payment */}
-            <div className="border border-fg-08 rounded p-6">
-              <StepHeader index={3} label="Payment" status={states.payment} onEdit={() => setStep('payment')} />
-              {states.payment === 'open' ? (
-                <form
-                  onSubmit={(e) => { e.preventDefault(); setStep('review') }}
-                  className="flex flex-col gap-5"
-                >
-                  <PaymentMethodToggle value={payment.method} onChange={(method) => setPayment({ ...payment, method })} />
-                  {payment.method === 'card' && (
-                    <div className="flex flex-col gap-4">
-                      <Input placeholder="Card number"     required value={payment.cardNumber} onChange={(e) => setPayment({ ...payment, cardNumber: e.target.value })} />
-                      <Input placeholder="Cardholder name" required value={payment.name}       onChange={(e) => setPayment({ ...payment, name:       e.target.value })} />
-                      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
-                        <Input placeholder="MM / YY"  required value={payment.exp} onChange={(e) => setPayment({ ...payment, exp: e.target.value })} />
-                        <Input placeholder="CVC"      required value={payment.cvc} onChange={(e) => setPayment({ ...payment, cvc: e.target.value })} />
-                      </div>
-                    </div>
-                  )}
-                  <div><Button type="submit" variant="primary" size="lg">Continue to review</Button></div>
-                </form>
-              ) : states.payment === 'done' ? (
-                <StepCollapsed>
-                  {payment.method === 'card'
-                    ? <>Card ending {payment.cardNumber.slice(-4)}</>
-                    : <>{payment.method.charAt(0).toUpperCase() + payment.method.slice(1)}</>}
-                </StepCollapsed>
-              ) : null}
-            </div>
-
-            {/* 04 — Review */}
-            <div className="border border-fg-08 rounded p-6">
-              <StepHeader index={4} label="Review &amp; place order" status={states.review} />
-              {states.review === 'open' && (
-                <div className="flex flex-col gap-4">
-                  <div className="kol-prose">
-                    <p style={{ margin: 0 }}>
-                      You're about to place a {formatPrice(total, currency)} order to {delivery.firstName} {delivery.lastName} at {delivery.street}, {delivery.postcode} {delivery.city}.
-                    </p>
-                  </div>
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    onClick={() => {
-                      const order = {
-                        id: 'AC' + Date.now().toString(36).toUpperCase(),
-                        items, email, delivery, payment, subtotal, shipping, tax, total, currency, newsletter,
-                        placedAt: new Date().toISOString(),
-                      }
-                      try { window.localStorage.setItem('kol.ac.lastOrder', JSON.stringify(order)) } catch { /* no-op */ }
-                      navigate(`/checkout/confirmation?id=${order.id}`)
-                    }}
+        <section className="max-w-6xl mx-auto px-8">
+          <div className="grid gap-12 lg:grid-cols-[1fr_360px] items-start">
+            {/* Steps */}
+            <div className="flex flex-col gap-4">
+              {/* 01 — Email */}
+              <div className="border border-fg-08 rounded p-6">
+                <StepHeader index={1} label="Your email" status={states.email} onEdit={() => setStep('email')} />
+                {states.email === 'open' ? (
+                  <form
+                    onSubmit={(e) => { e.preventDefault(); setStep('delivery') }}
+                    className="flex flex-col gap-4"
                   >
-                    Place order
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
+                    <Input
+                      type="email"
+                      required
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <label className="kol-helper-xxs text-meta inline-flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" checked={newsletter} onChange={(e) => setNewsletter(e.target.checked)} />
+                      Sign up to get the latest collections in your inbox.
+                    </label>
+                    <div><Button type="submit" variant="primary" size="lg">Continue</Button></div>
+                  </form>
+                ) : states.email === 'done' ? (
+                  <StepCollapsed>{email}</StepCollapsed>
+                ) : null}
+              </div>
 
-          {/* Right — order summary */}
-          <aside className="bg-surface-secondary p-6 rounded">
-            <p className="kol-prose-label" style={{ marginBottom: '16px' }}>Order summary</p>
-            <ul className="flex flex-col gap-3" style={{ marginBottom: '20px' }}>
-              {items.map((it) => (
-                <li key={it.id} className="grid gap-3 grid-cols-[40px_1fr_auto] sm:grid-cols-[48px_1fr_auto] items-start">
-                  <div className="w-10 sm:w-12 aspect-[3/4] rounded overflow-hidden bg-surface-primary">
-                    <img src={it.image} alt={it.name} className="w-full h-full object-cover" />
+              {/* 02 — Delivery */}
+              <div className="border border-fg-08 rounded p-6">
+                <StepHeader index={2} label="Delivery" status={states.delivery} onEdit={() => setStep('delivery')} />
+                {states.delivery === 'open' ? (
+                  <form
+                    onSubmit={(e) => { e.preventDefault(); setStep('pay') }}
+                    className="flex flex-col gap-4"
+                  >
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Input placeholder="First name" required value={delivery.firstName} onChange={(e) => setDelivery({ ...delivery, firstName: e.target.value })} />
+                      <Input placeholder="Last name"  required value={delivery.lastName}  onChange={(e) => setDelivery({ ...delivery, lastName:  e.target.value })} />
+                    </div>
+                    <Input placeholder="Street address" required value={delivery.street} onChange={(e) => setDelivery({ ...delivery, street: e.target.value })} />
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      <Input placeholder="City"     required value={delivery.city}     onChange={(e) => setDelivery({ ...delivery, city:     e.target.value })} />
+                      <Input placeholder="Postcode" required value={delivery.postcode} onChange={(e) => setDelivery({ ...delivery, postcode: e.target.value })} />
+                      <Dropdown options={COUNTRIES} value={delivery.country} onChange={(v) => setDelivery({ ...delivery, country: v })} />
+                    </div>
+                    <Input type="tel" placeholder="Phone (optional)" value={delivery.phone} onChange={(e) => setDelivery({ ...delivery, phone: e.target.value })} />
+                    <div><Button type="submit" variant="primary" size="lg">Continue to payment</Button></div>
+                  </form>
+                ) : states.delivery === 'done' ? (
+                  <StepCollapsed>
+                    {delivery.firstName} {delivery.lastName} · {delivery.street}, {delivery.postcode} {delivery.city}, {COUNTRIES.find((c) => c.value === delivery.country)?.label}
+                  </StepCollapsed>
+                ) : null}
+              </div>
+
+              {/* 03 — Pay */}
+              <div className="border border-fg-08 rounded p-6">
+                <StepHeader index={3} label="Pay" status={states.pay} />
+                {states.pay === 'open' && (
+                  <div className="flex flex-col gap-4">
+                    <div className="kol-prose">
+                      <p style={{ margin: 0 }}>
+                        Total {formatPrice(total, currency)} — paid securely through PayPal. Pay with a PayPal account or any major card.
+                      </p>
+                    </div>
+
+                    {payError && (
+                      <div className="p-3 rounded bg-fg-04">
+                        <p className="kol-helper-xs text-emphasis" style={{ margin: 0 }}>{payError}</p>
+                      </div>
+                    )}
+
+                    {paying ? (
+                      <div className="kol-helper-xs text-meta">Processing your order…</div>
+                    ) : (
+                      <PayPalButtons
+                        style={{ layout: 'vertical', color: 'black', shape: 'rect', label: 'pay', height: 48 }}
+                        disabled={!deliveryReady}
+                        createOrder={createOrder}
+                        onApprove={onApprove}
+                        onError={(err) => {
+                          console.error('PayPal error:', err)
+                          setPayError('Payment could not be completed. Please try again.')
+                        }}
+                        onCancel={() => setPayError(null)}
+                      />
+                    )}
                   </div>
-                  <div>
-                    <p className="kol-helper-xxs text-emphasis" style={{ margin: 0 }}>{it.name}</p>
-                    <p className="kol-helper-xxs text-meta" style={{ margin: '2px 0 0' }}>
-                      {it.size && <>Size: {it.size} · </>}
-                      Qty: {it.qty}
-                    </p>
-                  </div>
-                  <p className="kol-helper-xxs text-emphasis" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
-                </li>
-              ))}
-            </ul>
-            <Divider />
-            <div className="kol-prose" style={{ marginTop: '16px' }}>
-              <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 4px' }}>
-                <span>Subtotal</span><span>{formatPrice(subtotal, currency)}</span>
-              </p>
-              <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 4px' }}>
-                <span>Tax</span><span>{formatPrice(tax, currency)}</span>
-              </p>
-              <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 8px' }}>
-                <span>Shipping</span><span>{formatPrice(shipping, currency)}</span>
-              </p>
-              <Divider />
-              <p style={{ display: 'flex', justifyContent: 'space-between', margin: '12px 0 0' }}>
-                <span><strong>Total</strong></span><span><strong>{formatPrice(total, currency)}</strong></span>
-              </p>
+                )}
+              </div>
             </div>
-            <p className="kol-helper-xxs text-meta inline-flex items-center gap-2 mt-6" style={{ marginBottom: 0 }}>
-              <Icon name="lock" size={12} /> Secure checkout
-            </p>
-          </aside>
-        </div>
-      </section>
-    </main>
+
+            {/* Right — order summary */}
+            <aside className="bg-surface-secondary p-6 rounded">
+              <p className="kol-prose-label" style={{ marginBottom: '16px' }}>Order summary</p>
+              <ul className="flex flex-col gap-3" style={{ marginBottom: '20px' }}>
+                {items.map((it) => (
+                  <li key={it.id} className="grid gap-3 grid-cols-[40px_1fr_auto] sm:grid-cols-[48px_1fr_auto] items-start">
+                    <div className="w-10 sm:w-12 aspect-[3/4] rounded overflow-hidden bg-surface-primary">
+                      <img src={it.image} alt={it.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <p className="kol-helper-xxs text-emphasis" style={{ margin: 0 }}>{it.name}</p>
+                      <p className="kol-helper-xxs text-meta" style={{ margin: '2px 0 0' }}>
+                        {it.size && <>Size: {it.size} · </>}
+                        Qty: {it.qty}
+                      </p>
+                    </div>
+                    <p className="kol-helper-xxs text-emphasis" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
+                  </li>
+                ))}
+              </ul>
+              <Divider />
+              <div className="kol-prose" style={{ marginTop: '16px' }}>
+                <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 4px' }}>
+                  <span>Subtotal</span><span>{formatPrice(subtotal, currency)}</span>
+                </p>
+                <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 8px' }}>
+                  <span>Shipping</span><span>{formatPrice(shipping, currency)}</span>
+                </p>
+                <Divider />
+                <p style={{ display: 'flex', justifyContent: 'space-between', margin: '12px 0 0' }}>
+                  <span><strong>Total</strong></span><span><strong>{formatPrice(total, currency)}</strong></span>
+                </p>
+              </div>
+              <p className="kol-helper-xxs text-meta inline-flex items-center gap-2 mt-6" style={{ marginBottom: 0 }}>
+                <Icon name="lock" size={12} /> Secure checkout via PayPal
+              </p>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </PayPalScriptProvider>
   )
 }
