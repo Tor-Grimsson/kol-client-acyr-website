@@ -11,19 +11,3 @@
 
 /* Marketing-site (.kol-site-*) chrome. */
 @import "./styles/kol-site.css";
-
-/* Tailwind token registration — lets JSX use bg-brand-primary, text-ui-ink, etc.
-   instead of bg-[var(--brand-primary)] arbitrary values. */
-@theme {
-  --color-brand-primary:        var(--brand-primary);
-  --color-brand-primary-on:     var(--brand-primary-on);
-  --color-brand-secondary:      var(--brand-secondary);
-  --color-brand-secondary-on:   var(--brand-secondary-on);
-  --color-brand-accent:         var(--kol-accent);
-  --color-brand-accent-primary: var(--kol-accent-primary);
-}
-
-/* Reserve scrollbar gutter regardless of overflow state, so 100vw fullbleed
-   patterns and w-screen carousels don't horizontal-scroll when a vertical
-   scrollbar appears. */
-:root { scrollbar-gutter: stable; }

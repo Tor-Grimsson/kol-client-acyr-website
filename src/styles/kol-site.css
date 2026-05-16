@@ -6,6 +6,11 @@
  * token aliases from kol-color.css and the mono token from kol-typography.
  */
 
+/* Reserve scrollbar gutter regardless of overflow state, so 100vw fullbleed
+   patterns and w-screen carousels don't horizontal-scroll when a vertical
+   scrollbar appears. */
+:root { scrollbar-gutter: stable; }
+
 /* ═════════════════════════════════════════════════════════════════
    FULLBLEED — width: 100vw + negative margin. Shared across every
    landing section that spans viewport edge-to-edge.
