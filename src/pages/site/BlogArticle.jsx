@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import usePageTitle from '../../components/hooks/usePageTitle'
 import { BRAND } from '../../brand/config'
@@ -5,15 +6,28 @@ import Avatar from '../../components/atoms/Avatar'
 import Divider from '../../components/atoms/Divider'
 import Badge from '../../components/molecules/Badge'
 import BlogBody from '../../components/site/BlogBody'
-import { findArticle, findAuthor, formatDate } from '../../brand/data/blog-data'
+import { findArticle, formatDate } from '../../lib/queries'
+import { urlFor } from '../../lib/sanity'
 
 export default function BlogArticle() {
   const { slug } = useParams()
-  const article = findArticle(slug)
-  const author = article ? findAuthor(article.authorSlug) : null
+  const [state, setState] = useState({ status: 'loading', article: null })
+
+  useEffect(() => {
+    setState({ status: 'loading', article: null })
+    findArticle(slug).then((article) =>
+      setState({ status: article ? 'ok' : 'not-found', article }),
+    )
+  }, [slug])
+
+  const { status, article } = state
   usePageTitle(article ? `${article.title} · ${BRAND.name}` : `${BRAND.name} — Journal`)
 
-  if (!article) {
+  if (status === 'loading') {
+    return <main className="bg-surface-primary min-h-[60vh]" />
+  }
+
+  if (status === 'not-found') {
     return (
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
         <p className="kol-prose-label">404</p>
@@ -23,11 +37,18 @@ export default function BlogArticle() {
     )
   }
 
+  const author = article.author
+
   return (
     <main className="bg-surface-primary pb-24">
       {article.cover && (
         <div className="w-full h-[280px] md:h-[400px] overflow-hidden mb-16 bg-surface-secondary">
-          <img src={article.cover} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+          <img
+            src={urlFor(article.cover).width(1600).height(800).url()}
+            alt=""
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          />
         </div>
       )}
 

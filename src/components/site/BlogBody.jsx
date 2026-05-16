@@ -1,26 +1,41 @@
-/**
- * BlogBody — renders a block-structured article body.
- * See blog-data.js for supported block shapes.
- */
+import { PortableText } from '@portabletext/react'
+
+const components = {
+  block: {
+    normal: ({ children }) => <p>{children}</p>,
+    h2: ({ children }) => <h2>{children}</h2>,
+    h3: ({ children }) => <h3>{children}</h3>,
+    blockquote: ({ children, value }) => {
+      const cite = value.markDefs?.find((m) => m._type === 'cite')
+      return (
+        <blockquote>
+          <p>{children}</p>
+          {cite?.source && <cite>{cite.source}</cite>}
+        </blockquote>
+      )
+    },
+  },
+  marks: {
+    cite: ({ children }) => <>{children}</>,
+    link: ({ children, value }) => (
+      <a
+        href={value.href}
+        target={value.href?.startsWith('http') ? '_blank' : undefined}
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    ),
+    em: ({ children }) => <em>{children}</em>,
+    strong: ({ children }) => <strong>{children}</strong>,
+  },
+}
+
 export default function BlogBody({ blocks = [] }) {
+  if (!Array.isArray(blocks) || blocks.length === 0) return null
   return (
     <div className="kol-prose">
-      {blocks.map((block, i) => {
-        switch (block.type) {
-          case 'p':     return <p key={i}>{block.text}</p>
-          case 'h2':    return <h2 key={i}>{block.text}</h2>
-          case 'h3':    return <h3 key={i}>{block.text}</h3>
-          case 'quote': return (
-            <blockquote key={i}>
-              <p>{block.text}</p>
-              {block.cite && <cite>{block.cite}</cite>}
-            </blockquote>
-          )
-          case 'ul':    return <ul key={i}>{block.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-          case 'ol':    return <ol key={i}>{block.items.map((it, j) => <li key={j}>{it}</li>)}</ol>
-          default:      return null
-        }
-      })}
+      <PortableText value={blocks} components={components} />
     </div>
   )
 }

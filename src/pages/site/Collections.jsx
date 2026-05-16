@@ -1,13 +1,18 @@
-import { Fragment } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import usePageTitle from '../../components/hooks/usePageTitle'
 import { BRAND } from '../../brand/config'
 import Divider from '../../components/atoms/Divider'
-import { sortedCollections } from '../../brand/data/collections-data'
+import { sortedCollections } from '../../lib/queries'
+import { urlFor } from '../../lib/sanity'
 
 export default function Collections() {
   usePageTitle(`${BRAND.name} — Collections`)
-  const collections = sortedCollections()
+  const [collections, setCollections] = useState(null)
+
+  useEffect(() => {
+    sortedCollections().then(setCollections)
+  }, [])
 
   return (
     <main className="bg-surface-primary">
@@ -33,32 +38,36 @@ export default function Collections() {
       </section>
 
       <section className="max-w-5xl mx-auto px-8 pb-24">
-        <ul className="grid gap-12 md:grid-cols-2">
-          {collections.map((collection) => (
-            <li key={collection.slug}>
-              <Link
-                to={`/collections/${collection.slug}`}
-                className="block no-underline group"
-              >
-                <div className="aspect-[3/4] rounded overflow-hidden bg-surface-secondary mb-6">
-                  <img
-                    src={collection.cover}
-                    alt=""
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                    aria-hidden="true"
-                  />
-                </div>
-                <p className="kol-prose-label" style={{ marginBottom: '12px' }}>
-                  {collection.title} · {collection.year}
-                </p>
-                <div className="kol-prose">
-                  <h3 style={{ margin: '0 0 12px' }}>{collection.subtitle ?? collection.title}</h3>
-                  <p style={{ margin: 0 }}>{collection.excerpt}</p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {collections && (
+          <ul className="grid gap-12 md:grid-cols-2">
+            {collections.map((collection) => (
+              <li key={collection.slug}>
+                <Link
+                  to={`/collections/${collection.slug}`}
+                  className="block no-underline group"
+                >
+                  <div className="aspect-[3/4] rounded overflow-hidden bg-surface-secondary mb-6">
+                    {collection.cover && (
+                      <img
+                        src={urlFor(collection.cover).width(900).height(1200).url()}
+                        alt=""
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                  <p className="kol-prose-label" style={{ marginBottom: '12px' }}>
+                    {collection.title} · {collection.year}
+                  </p>
+                  <div className="kol-prose">
+                    <h3 style={{ margin: '0 0 12px' }}>{collection.subtitle ?? collection.title}</h3>
+                    <p style={{ margin: 0 }}>{collection.excerpt}</p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <section className="max-w-3xl mx-auto px-8 pb-24">

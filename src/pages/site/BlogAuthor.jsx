@@ -1,19 +1,32 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import usePageTitle from '../../components/hooks/usePageTitle'
 import { BRAND } from '../../brand/config'
 import Avatar from '../../components/atoms/Avatar'
 import Divider from '../../components/atoms/Divider'
 import Badge from '../../components/molecules/Badge'
-import { findAuthor, articlesByAuthor, formatDate } from '../../brand/data/blog-data'
+import { findAuthor, articlesByAuthor, formatDate } from '../../lib/queries'
+import { urlFor } from '../../lib/sanity'
 
 export default function BlogAuthor() {
   const { slug } = useParams()
-  const author = findAuthor(slug)
-  const articles = author ? articlesByAuthor(slug) : []
+  const [state, setState] = useState({ status: 'loading', author: null, articles: [] })
+
+  useEffect(() => {
+    setState({ status: 'loading', author: null, articles: [] })
+    Promise.all([findAuthor(slug), articlesByAuthor(slug)]).then(([author, articles]) =>
+      setState({ status: author ? 'ok' : 'not-found', author, articles: articles ?? [] }),
+    )
+  }, [slug])
+
+  const { status, author, articles } = state
   usePageTitle(author ? `${author.name} · ${BRAND.name} Journal` : `${BRAND.name} — Journal`)
 
-  if (!author) {
+  if (status === 'loading') {
+    return <main className="bg-surface-primary min-h-[60vh]" />
+  }
+
+  if (status === 'not-found') {
     return (
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
         <p className="kol-prose-label">404</p>
@@ -40,13 +53,13 @@ export default function BlogAuthor() {
             <p className="kol-prose-label">{author.role}</p>
             <h1 className="kol-prose-display-md">{author.name}</h1>
             <p className="kol-prose-lede">{author.bio}</p>
-            {author.links.length > 0 && (
+            {author.links?.length > 0 && (
               <ul className="flex gap-4 flex-wrap kol-prose-label" style={{ marginBottom: 0 }}>
                 {author.links.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      target={link.href?.startsWith('http') ? '_blank' : undefined}
                       rel="noopener noreferrer"
                       className="text-meta hover:text-emphasis underline underline-offset-4"
                     >
@@ -74,7 +87,12 @@ export default function BlogAuthor() {
                 >
                   {article.cover && (
                     <div className="aspect-[4/3] rounded overflow-hidden bg-surface-secondary">
-                      <img src={article.cover} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+                      <img
+                        src={urlFor(article.cover).width(480).height(360).url()}
+                        alt=""
+                        className="w-full h-full object-cover"
+                        aria-hidden="true"
+                      />
                     </div>
                   )}
                   <div className="flex flex-col justify-center">

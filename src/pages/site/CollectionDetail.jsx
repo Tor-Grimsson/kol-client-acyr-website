@@ -1,18 +1,27 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import usePageTitle from '../../components/hooks/usePageTitle'
 import { BRAND } from '../../brand/config'
 import Divider from '../../components/atoms/Divider'
 import BlogBody from '../../components/site/BlogBody'
-import { findCollection, adjacentCollections, formatShowDate } from '../../brand/data/collections-data'
+import { findCollection, adjacentCollections, formatShowDate } from '../../lib/queries'
+import { urlFor } from '../../lib/sanity'
 
-function CollectionHero({ hero, title, subtitle, year, show }) {
+function CollectionHero({ heroImage, heroVideo, heroVideoPoster, cover, title, subtitle, year, show }) {
+  const videoUrl = heroVideo?.asset?.url
+  const posterUrl = heroVideoPoster ? urlFor(heroVideoPoster).width(1600).url() : null
+  const imageUrl = heroImage
+    ? urlFor(heroImage).width(1920).url()
+    : cover
+    ? urlFor(cover).width(1920).url()
+    : null
+
   return (
     <section className="relative w-full h-[88dvh] overflow-hidden">
-      {hero?.type === 'video' && hero.src ? (
+      {videoUrl ? (
         <video
-          src={hero.src}
-          poster={hero.poster}
+          src={videoUrl}
+          poster={posterUrl ?? undefined}
           autoPlay
           muted
           loop
@@ -21,12 +30,14 @@ function CollectionHero({ hero, title, subtitle, year, show }) {
           aria-hidden="true"
         />
       ) : (
-        <img
-          src={hero?.src ?? hero}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          aria-hidden="true"
-        />
+        imageUrl && (
+          <img
+            src={imageUrl}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            aria-hidden="true"
+          />
+        )
       )}
       <div
         aria-hidden="true"
@@ -49,53 +60,30 @@ function CollectionHero({ hero, title, subtitle, year, show }) {
   )
 }
 
-function VideoEmbed({ video }) {
-  const [active, setActive] = useState(false)
-  if (!video?.embedUrl) return null
-  return (
-    <div className="relative aspect-video rounded overflow-hidden bg-surface-secondary">
-      {active ? (
-        <iframe
-          src={`${video.embedUrl}${video.embedUrl.includes('?') ? '&' : '?'}autoplay=1`}
-          title={video.kind ?? 'video'}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          className="absolute inset-0 w-full h-full border-0"
-        />
-      ) : (
-        <button
-          type="button"
-          onClick={() => setActive(true)}
-          className="absolute inset-0 w-full h-full p-0 border-0 cursor-pointer group"
-          aria-label={`Play ${video.kind ?? 'video'}`}
-          style={{ background: 'transparent' }}
-        >
-          {video.poster && (
-            <img src={video.poster} alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
-          )}
-          <span
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ background: 'color-mix(in srgb, black 30%, transparent)' }}
-          >
-            <span
-              className="kol-prose-label"
-              style={{ color: 'var(--kol-surface-on-inverse, #fff)', fontSize: '14px', margin: 0, padding: '12px 24px', border: '1px solid currentColor', borderRadius: '999px' }}
-            >
-              ▶ Play {video.duration && `· ${video.duration}`}
-            </span>
-          </span>
-        </button>
-      )}
-    </div>
-  )
-}
-
 export default function CollectionDetail() {
   const { slug } = useParams()
-  const collection = findCollection(slug)
+  const [state, setState] = useState({ status: 'loading', collection: null, prev: null, next: null })
+
+  useEffect(() => {
+    setState({ status: 'loading', collection: null, prev: null, next: null })
+    Promise.all([findCollection(slug), adjacentCollections(slug)]).then(([collection, adjacent]) =>
+      setState({
+        status: collection ? 'ok' : 'not-found',
+        collection,
+        prev: adjacent?.prev ?? null,
+        next: adjacent?.next ?? null,
+      }),
+    )
+  }, [slug])
+
+  const { status, collection, prev, next } = state
   usePageTitle(collection ? `${collection.title} · ${BRAND.name}` : `${BRAND.name} — Collections`)
 
-  if (!collection) {
+  if (status === 'loading') {
+    return <main className="bg-surface-primary min-h-[60vh]" />
+  }
+
+  if (status === 'not-found') {
     return (
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
         <p className="kol-prose-label">404</p>
@@ -105,16 +93,18 @@ export default function CollectionDetail() {
     )
   }
 
-  const { prev, next } = adjacentCollections(slug)
   const showHasContent = collection.show && Object.values(collection.show).some(Boolean)
   const hasCollaborators = collection.collaborators?.length > 0
   const hasPress = collection.press?.length > 0
-  const hasVideos = collection.videos?.length > 0
+  const looks = collection.looks ?? []
 
   return (
     <main className="bg-surface-primary pb-24">
       <CollectionHero
-        hero={collection.hero}
+        heroImage={collection.heroImage}
+        heroVideo={collection.heroVideo}
+        heroVideoPoster={collection.heroVideoPoster}
+        cover={collection.cover}
         title={collection.title}
         subtitle={collection.subtitle}
         year={collection.year}
@@ -139,18 +129,27 @@ export default function CollectionDetail() {
         <p className="kol-prose-label">The looks</p>
         <Divider className="mb-8" />
         <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {collection.looks.map((look) => (
+          {looks.map((look) => (
             <li key={look.number} className="flex flex-col">
               <div className="aspect-[3/4] rounded overflow-hidden bg-surface-secondary mb-3">
-                <img src={look.image} alt={look.name} className="w-full h-full object-cover" />
+                {look.image && (
+                  <img
+                    src={urlFor(look.image).width(800).height(1066).url()}
+                    alt={look.name ?? `Look ${look.number}`}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </div>
               <p className="kol-prose-label" style={{ marginBottom: '4px' }}>
-                Look {String(look.number).padStart(2, '0')} · {look.family}
+                Look {String(look.number).padStart(2, '0')}
+                {look.family && <> · {look.family}</>}
               </p>
-              <div className="kol-prose">
-                <p style={{ margin: '0 0 4px' }}><strong>{look.name}</strong></p>
-                <p style={{ margin: 0, fontSize: '14px', lineHeight: '20px' }}>{look.fabric}</p>
-              </div>
+              {(look.name || look.fabric) && (
+                <div className="kol-prose">
+                  {look.name && <p style={{ margin: '0 0 4px' }}><strong>{look.name}</strong></p>}
+                  {look.fabric && <p style={{ margin: 0, fontSize: '14px', lineHeight: '20px' }}>{look.fabric}</p>}
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -225,23 +224,6 @@ export default function CollectionDetail() {
         </section>
       )}
 
-      {hasVideos && (
-        <section className="max-w-5xl mx-auto px-8 py-12">
-          <p className="kol-prose-label">Watch</p>
-          <Divider className="mb-8" />
-          <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2">
-            {collection.videos.map((v, i) => (
-              <li key={i}>
-                <VideoEmbed video={v} />
-                <p className="kol-prose-label" style={{ marginTop: '8px', marginBottom: 0 }}>
-                  {v.kind} {v.duration && `· ${v.duration}`}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {hasPress && (
         <section className="max-w-3xl mx-auto px-8 py-12">
           <p className="kol-prose-label">Press</p>
@@ -277,7 +259,6 @@ export default function CollectionDetail() {
               <p className="kol-prose-label" style={{ marginBottom: '8px' }}>← Previous</p>
               <div className="kol-prose">
                 <p style={{ margin: '0 0 4px' }}>{prev.title} · {prev.year}</p>
-                <p style={{ margin: 0 }}><strong>{prev.subtitle ?? prev.title}</strong></p>
               </div>
             </Link>
           ) : <span />}
@@ -286,7 +267,6 @@ export default function CollectionDetail() {
               <p className="kol-prose-label" style={{ marginBottom: '8px' }}>Next →</p>
               <div className="kol-prose">
                 <p style={{ margin: '0 0 4px' }}>{next.title} · {next.year}</p>
-                <p style={{ margin: 0 }}><strong>{next.subtitle ?? next.title}</strong></p>
               </div>
             </Link>
           ) : <span />}

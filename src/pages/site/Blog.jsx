@@ -1,14 +1,19 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import usePageTitle from '../../components/hooks/usePageTitle'
 import { BRAND } from '../../brand/config'
 import Badge from '../../components/molecules/Badge'
 import Divider from '../../components/atoms/Divider'
-import { sortedArticles, findAuthor, formatDate } from '../../brand/data/blog-data'
+import { sortedArticles, formatDate } from '../../lib/queries'
+import { urlFor } from '../../lib/sanity'
 
 export default function Blog() {
   usePageTitle(`${BRAND.name} — Journal`)
-  const articles = sortedArticles()
+  const [articles, setArticles] = useState(null)
+
+  useEffect(() => {
+    sortedArticles().then(setArticles)
+  }, [])
 
   return (
     <main className="bg-surface-primary">
@@ -35,10 +40,9 @@ export default function Blog() {
       </section>
 
       <section className="max-w-4xl mx-auto px-8 pb-24">
-        <ul className="flex flex-col">
-          {articles.map((article, i) => {
-            const author = findAuthor(article.authorSlug)
-            return (
+        {articles && (
+          <ul className="flex flex-col">
+            {articles.map((article, i) => (
               <Fragment key={article.slug}>
                 {i > 0 && <Divider />}
                 <li>
@@ -48,7 +52,12 @@ export default function Blog() {
                   >
                     {article.cover && (
                       <div className="aspect-[4/3] rounded overflow-hidden bg-surface-secondary">
-                        <img src={article.cover} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+                        <img
+                          src={urlFor(article.cover).width(560).height(420).url()}
+                          alt=""
+                          className="w-full h-full object-cover"
+                          aria-hidden="true"
+                        />
                       </div>
                     )}
                     <div className="flex flex-col justify-center">
@@ -61,7 +70,7 @@ export default function Blog() {
                         <p>{article.excerpt}</p>
                       </div>
                       <div className="kol-prose-label flex gap-3" style={{ marginBottom: 0, marginTop: '4px' }}>
-                        {author && <span>{author.name}</span>}
+                        {article.author && <span>{article.author.name}</span>}
                         <span aria-hidden="true">·</span>
                         <span>{article.readingMinutes} min read</span>
                       </div>
@@ -69,9 +78,9 @@ export default function Blog() {
                   </Link>
                 </li>
               </Fragment>
-            )
-          })}
-        </ul>
+            ))}
+          </ul>
+        )}
       </section>
     </main>
   )

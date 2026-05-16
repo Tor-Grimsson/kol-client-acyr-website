@@ -8,11 +8,17 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync-printful": "node --env-file=.env.local scripts/sync-printful.mjs"
+    "sync-printful": "node --env-file=.env.local scripts/sync-printful.mjs",
+    "studio:dev": "cd studio && pnpm dev",
+    "studio:build": "cd studio && pnpm build",
+    "migrate-sanity": "node --env-file=.env.local scripts/migrate-to-sanity.mjs"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",
     "@paypal/react-paypal-js": "^9.2.0",
+    "@portabletext/react": "^6.2.0",
+    "@sanity/client": "^7.22.0",
+    "@sanity/image-url": "^2.1.1",
     "@tailwindcss/vite": "^4.2.4",
     "colord": "^2.9.3",
     "embla-carousel-react": "^8.6.0",
