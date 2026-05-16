@@ -11,7 +11,11 @@
     "sync-printful": "node --env-file=.env.local scripts/sync-printful.mjs",
     "studio:dev": "cd studio && pnpm dev",
     "studio:build": "cd studio && pnpm build",
-    "migrate-sanity": "node --env-file=.env.local scripts/migrate-to-sanity.mjs"
+    "styleguide:dev": "cd styleguide && pnpm dev",
+    "styleguide:build": "cd styleguide && pnpm build",
+    "dev-server": "pnpm dev & pnpm studio:dev & pnpm styleguide:dev",
+    "migrate-sanity": "node --env-file=.env.local scripts/migrate-to-sanity.mjs",
+    "verify-versions": "node scripts/verify-versions.mjs"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",

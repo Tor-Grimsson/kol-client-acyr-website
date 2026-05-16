@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "../../src/styles/kol-theme.css";
+
+/* Brand layer — AC identity (burgundy ramp, cream, brand-primary/secondary, accent rebind).
+   Layers ON TOP of kol-color.css; the DS ships brand-neutral, this binds the brand.
+   Loaded BEFORE framework so framework can override at equal specificity. */
+@import "../../src/brand/kol-brand-color.css";
+
+/* Framework layer — page chrome, brand layout, structural rules. */
+@import "../../src/components/framework/kol-framework.css";
