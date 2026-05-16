@@ -6,6 +6,9 @@ import { BRAND } from '@brand/config'
 import { ACImages } from '@brand/data/images'
 
 const HERO_IMAGE = ACImages.hero
+const LIVE_SITE_URL = import.meta.env.DEV
+  ? 'http://localhost:5173'
+  : 'https://another-creation.xyz'
 
 export default function Landing() {
   usePageTitle()
@@ -34,7 +37,7 @@ export default function Landing() {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
-          <Button variant="primary" size="md" onClick={() => navigate('/site')}>Enter site</Button>
+          <Button variant="primary" size="md" onClick={() => { window.location.href = LIVE_SITE_URL }}>Enter site</Button>
           <Button variant="outline" size="md" onClick={() => navigate('/styleguide')}>Styleguide</Button>
         </div>
       </div>

@@ -7,15 +7,19 @@ const BROWSE = [
   { label: 'Handmade',     to: '/handmade' },
   { label: 'Collections',  to: '/collections' },
   { label: 'Journal',      to: '/blog' },
-  { label: 'About',        to: null },
+  { label: 'About',        to: '/about' },
+  { label: 'Contact',      to: '/contact' },
 ]
 
 const SOCIAL = [
   { label: 'Instagram', href: 'https://www.instagram.com/anothercreation_yr/' },
   { label: 'Facebook',  href: 'https://www.facebook.com/anothercreationyr/' },
+  { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/creatoryr/' },
 ]
 
-const LEGAL = [
+const MORE = [
+  { label: 'Brand',              to: '/brand' },
+  { label: 'Press',              to: '/press' },
   { label: 'Shipping & Returns', to: '/shipping-returns' },
   { label: 'Terms',              to: '/terms' },
   { label: 'Privacy',            to: '/privacy' },
@@ -79,9 +83,9 @@ export default function Footer() {
         </div>
 
         <div className="kol-site-footer-col">
-          <p className="kol-site-footer-label">Legal</p>
+          <p className="kol-site-footer-label">More</p>
           <ul className="kol-site-footer-list">
-            {LEGAL.map((l) => (
+            {MORE.map((l) => (
               <li key={l.label}><FooterLink {...l} /></li>
             ))}
           </ul>

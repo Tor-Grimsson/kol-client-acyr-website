@@ -12,6 +12,9 @@
  * Last enriched 2026-04-28 from a bio dossier (`_tmp/bing.md`) — added film-school
  * education, BA essay archive link, films, residencies, and additional press
  * citations (DV, Heimildin, Iceland Monitor, Mbl, Midpoint Institute).
+ *
+ * Updated 2026-05-16 — added 2011/2013/2018/2020 press from Ýr (Vísir, Mannlíf,
+ * Mbl) and LinkedIn social profile; resolved Address open question (Vatnsstígur 3).
  */
 
 /* ── Personal / bio facts (private — surface only what's appropriate per page). ── */
@@ -86,6 +89,11 @@ export const TIMELINE = [
   { year: 2023, kind: 'film', title: 'Portret Orri Finn', org: 'Director', notes: 'Documentary.' },
 
   /* ── Press / interviews / mentions ─────────────────────────────── */
+  { year: 2011, kind: 'press', title: "Ýr fundaði með Barney's",                                       org: 'Vísir.is',                     href: 'https://www.visir.is/g/2011809758d/yr-fundadi-med-barney-s' },
+  { year: 2013, kind: 'press', title: 'Ýr og Harpa Einars sameina krafta sína',                        org: 'Vísir.is',                     href: 'https://www.visir.is/g/20131228946d/yr-og-harpa-einars-sameina-krafta-sina', notes: 'On the Another Creation co-founding partnership.' },
+  { year: 2013, kind: 'press', title: 'Yfirhöfn sem nota má á 112 mismunandi vegu',                    org: 'Vísir.is',                     href: 'https://www.visir.is/g/2013410483d/yfirhofn-sem-nota-ma-a-112-mismunandi-vegu', notes: 'On the multi-use cape.' },
+  { year: 2018, kind: 'press', title: 'Fjölnota kápan í mestu uppáhaldi',                              org: 'Mannlíf',                      href: 'https://gamla.mannlif.is/vikan/fjolnota-kapan-i-mestu-uppahaldi/' },
+  { year: 2020, kind: 'press', title: 'Lilja Pálma mætti í tískuteiti til Áslaugar',                   org: 'Mbl.is',                       href: 'https://www.mbl.is/smartland/samkvaemislifid/2020/05/11/lilja_palma_maetti_i_tiskuteiti_til_aslaugar/', mediaType: 'photo-gallery' },
   { year: 2015, kind: 'press', title: 'RFF 15: Another Creation changes up with the times',            org: 'Icelandmag',                  href: 'https://icelandmag.is/article/rff-15-another-creation-changes-times' },
   { year: 2015, kind: 'press', title: 'Í beinni: Another Creation — RFF',                              org: 'Trendnet.is',                  href: 'http://trendnet.is/rff/i-beinni-another-creation/', notes: 'RFF live coverage, 2015-03-14.' },
   { year: 2015, kind: 'press', title: 'Reykjavík Fashion Festival 2015 — featured',                    org: 'Interview Magazine',          href: 'https://www.interviewmagazine.com/fashion/reykjavik-fashion-festival-2015' },
@@ -150,6 +158,7 @@ export const SOCIAL = [
   { platform: 'Instagram',   handle: '@anothercreation_yr', url: 'https://www.instagram.com/anothercreation_yr/', notes: 'Primary brand account.' },
   { platform: 'Instagram',   handle: '@xyrx',               url: 'https://www.instagram.com/xyrx/',               notes: "Ýr's secondary handle." },
   { platform: 'Facebook',    handle: '@anothercreationyr',  url: 'https://www.facebook.com/anothercreationyr/',   notes: null },
+  { platform: 'LinkedIn',    handle: 'creatoryr',           url: 'https://www.linkedin.com/in/creatoryr/',        notes: "Ýr's professional profile." },
   { platform: 'FilmFreeway', handle: 'YrThrastardottir',    url: 'https://filmfreeway.com/YrThrastardottir',      notes: 'Director profile.' },
 ]
 
@@ -254,6 +263,5 @@ export const OPEN_QUESTIONS = [
   { topic: 'Runway videos',       note: 'Footage exists for RFF 2015 only. Other shows TBD.' },
   { topic: 'Italian production',  note: 'Atelier / mill name + contact for the Italian production partner mentioned in 2015 bio.' },
   { topic: 'Stockists',           note: 'Confirm whether retail stockists exist; drives whether /stockists ships.' },
-  { topic: 'Address',             note: 'brand-info.js has Klapparstígur 16 (matches live contact page). Squarespace JSON had 3 Laugavegur — likely outdated. Confirm.' },
   { topic: 'Films — Portret Orri Finn', note: 'Festival circuit for the documentary.' },
 ]

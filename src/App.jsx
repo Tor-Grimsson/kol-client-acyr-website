@@ -16,6 +16,8 @@ import Contact from './pages/site/Contact'
 import About from './pages/site/About'
 import Privacy from './pages/site/Privacy'
 import Terms from './pages/site/Terms'
+import Brand from './pages/site/Brand'
+import Press from './pages/site/Press'
 import ShippingReturns from './pages/site/ShippingReturns'
 import Cart from './pages/site/Cart'
 import Checkout from './pages/site/Checkout'
@@ -40,6 +42,8 @@ export default function App() {
           <Route path="/handmade/:slug"         element={<ProductDetail />} />
           <Route path="/privacy"                element={<Privacy />} />
           <Route path="/terms"                  element={<Terms />} />
+          <Route path="/brand"                  element={<Brand />} />
+          <Route path="/press"                  element={<Press />} />
           <Route path="/shipping-returns"       element={<ShippingReturns />} />
           <Route path="/cart"                   element={<Cart />} />
           <Route path="/checkout"               element={<Checkout />} />

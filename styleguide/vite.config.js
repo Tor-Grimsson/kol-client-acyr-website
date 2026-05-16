@@ -10,6 +10,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   server: {
+    // Pin styleguide to 5174 so the live site reliably owns 5173 — keeps
+    // the dev `Live site` link (Landing + sidebar) pointing somewhere real.
+    port: 5174,
+    strictPort: false,
     fs: {
       // Allow imports from the parent repo's src/ (brand tokens + shared components)
       allow: ['..'],

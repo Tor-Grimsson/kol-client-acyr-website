@@ -162,7 +162,13 @@ export const NAV_TREE = [
 
   { id: 'editor', label: 'Editor', to: '/editor/compose', icon: 'pencil' },
 
-  { id: 'site', label: 'Live site', to: '/site', icon: 'shopping-bag' },
+  {
+    id: 'site',
+    label: 'Live site',
+    to: import.meta.env.DEV ? 'http://localhost:5173' : 'https://another-creation.xyz',
+    icon: 'shopping-bag',
+    external: true,
+  },
 
 ]
 

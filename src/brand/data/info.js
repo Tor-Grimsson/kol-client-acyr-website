@@ -5,25 +5,26 @@
  * Update once, propagates everywhere. Used by StationeryMocks plus
  * future generators (social, type lab) that surface contact details.
  *
- * Pulled from anothercreation.com 2026-04-28.
+ * Last updated 2026-05-16 from Ýr direct.
  */
 
 export const BRAND_INFO = {
   identity: {
     founder:     'Ýr Þrastardóttir',
     role:        'Founder · Designer',
-    established: '2024',
+    established: '2013',
     name:        'Another Creation',
     nameShort:   'AC',
   },
   contact: {
-    email: 'yr@another-creation.com',
-    phone: '+354 698 5802',
-    web:   'another-creation.com',
+    email: 'yr@another-creation.xyz',
+    phone: '+354-698-5802',
+    web:   'another-creation.xyz',
   },
   studio: {
-    street:   'Klapparstígur 16',
+    street:   'Vatnsstígur 3',
     postcode: '101 Reykjavík',
+    region:   'Gullbringa',
     country:  'Iceland',
     city:     'Reykjavík',
     locShort: 'Reykjavík · IS',

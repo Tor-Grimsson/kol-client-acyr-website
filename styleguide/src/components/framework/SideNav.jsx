@@ -154,20 +154,34 @@ export default function SideNav({ drawerOpen = false, onCloseDrawer }) {
         <ul className="kol-sidenav-tree flex flex-col gap-[2px]">
           {NAV_TREE.map((page) => {
             const isActivePage = activePage?.id === page.id
+            const hopClass = `kol-sidenav-hop kol-helper-12 relative flex items-center gap-3 py-2 pr-10 pl-6 no-underline`
             return (
               <li key={page.id}>
-                <NavLink
-                  to={page.to}
-                  end={page.to === '/'}
-                  className={({ isActive }) =>
-                    `kol-sidenav-hop kol-helper-12 relative flex items-center gap-3 py-2 pr-10 pl-6 no-underline${isActive ? ' is-active' : ''}`
-                  }
-                >
-                  <span className="kol-sidenav-hop-icon inline-flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
-                    <Icon name={page.icon} size={16} />
-                  </span>
-                  <span className="kol-sidenav-hop-label flex-1 min-w-0">{page.label}</span>
-                </NavLink>
+                {page.external ? (
+                  <a
+                    href={page.to}
+                    className={hopClass}
+                    rel="noopener"
+                  >
+                    <span className="kol-sidenav-hop-icon inline-flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
+                      <Icon name={page.icon} size={16} />
+                    </span>
+                    <span className="kol-sidenav-hop-label flex-1 min-w-0">{page.label}</span>
+                  </a>
+                ) : (
+                  <NavLink
+                    to={page.to}
+                    end={page.to === '/'}
+                    className={({ isActive }) =>
+                      `${hopClass}${isActive ? ' is-active' : ''}`
+                    }
+                  >
+                    <span className="kol-sidenav-hop-icon inline-flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
+                      <Icon name={page.icon} size={16} />
+                    </span>
+                    <span className="kol-sidenav-hop-label flex-1 min-w-0">{page.label}</span>
+                  </NavLink>
+                )}
 
                 {isActivePage && page.children && (
                   <ul className="kol-sidenav-list mb-2 flex flex-col gap-2">
