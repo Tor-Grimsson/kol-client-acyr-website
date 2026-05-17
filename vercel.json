@@ -4,6 +4,7 @@
     { "source": "/site/:path*", "destination": "/:path*", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/", "destination": "/api/metadata-proxy" },
     { "source": "/:path*", "destination": "/api/metadata-proxy" }
   ]
 }
