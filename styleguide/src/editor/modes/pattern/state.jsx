@@ -15,7 +15,7 @@ import { newRule, randomRule } from './RuleRow'
 const DEFAULT_COLOR_TOKENS = { color: '--brand-blue-400', background: '--cream-100' }
 
 /* Random-palette tokens — resolve at draw time so the random pool tracks
- * any KOL token edits in kol-color.css. Mirrors combo-lab/pools.js. */
+ * any KOL token edits in ac-color.css. Mirrors combo-lab/pools.js. */
 const RANDOM_PALETTE_TOKENS = [
   '--brand-blue-400', '--brand-blue-500', '--grey-400', '--grey-300', '--grey-200', '--grey-50',
   '--cream-100',      '--cream-400',      '--cream-500',

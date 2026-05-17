@@ -34,7 +34,7 @@ const components = {
 export default function BlogBody({ blocks = [] }) {
   if (!Array.isArray(blocks) || blocks.length === 0) return null
   return (
-    <div className="kol-prose">
+    <div className="ac-prose">
       <PortableText value={blocks} components={components} />
     </div>
   )

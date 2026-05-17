@@ -9,7 +9,7 @@ export default function Newsletter() {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div
         style={{
-          background: 'color-mix(in srgb, var(--kol-surface-on-primary) 88%, transparent)',
+          background: 'color-mix(in srgb, var(--ac-surface-on-primary) 88%, transparent)',
           padding: 'clamp(32px, 8vw, 64px) clamp(20px, 5vw, 48px)',
           display: 'flex',
           flexDirection: 'column',
@@ -25,7 +25,7 @@ export default function Newsletter() {
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
             textAlign: 'center',
-            color: 'color-mix(in srgb, var(--kol-surface-primary) 40%, transparent)',
+            color: 'color-mix(in srgb, var(--ac-surface-primary) 40%, transparent)',
           }}
         >
           Newsletter
@@ -37,14 +37,14 @@ export default function Newsletter() {
             fontWeight: 400,
             lineHeight: 1.3,
             textAlign: 'center',
-            color: 'var(--kol-surface-primary)',
+            color: 'var(--ac-surface-primary)',
             maxWidth: '400px',
           }}
         >
           Sign up for early access on new releases<br />
           and save 10% on your first order
         </p>
-        <div className="kol-site-newsletter-row" style={{ maxWidth: '480px', width: '100%' }}>
+        <div className="ac-site-newsletter-row" style={{ maxWidth: '480px', width: '100%' }}>
           <input
             type="email"
             placeholder="Your email"
@@ -56,15 +56,15 @@ export default function Newsletter() {
               letterSpacing: '0.04em',
               background: 'transparent',
               border: 'none',
-              borderBottom: '1px solid color-mix(in srgb, var(--kol-surface-primary) 40%, transparent)',
-              color: 'var(--kol-surface-primary)',
+              borderBottom: '1px solid color-mix(in srgb, var(--ac-surface-primary) 40%, transparent)',
+              color: 'var(--ac-surface-primary)',
               padding: '10px 0',
               flex: 1,
               outline: 'none',
             }}
           />
           <button
-            className="kol-btn kol-btn-primary kol-btn-sm kol-site-newsletter-submit"
+            className="ac-btn ac-btn-primary ac-btn-sm ac-site-newsletter-submit"
             style={{
               fontFamily: NARROW,
               letterSpacing: '0.08em',

@@ -21,7 +21,7 @@ export default function PropertyInput({
 }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <Label className="kol-helper-10">{label}</Label>
+      <Label className="ac-helper-10">{label}</Label>
       {type === 'number' ? (
         <Stepper value={value} onChange={onChange} min={min} max={max} step={step} />
       ) : (

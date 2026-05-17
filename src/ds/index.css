@@ -1,0 +1,35 @@
+/**
+ * AC Design System — cascade entry point.
+ *
+ * Single canonical import order. Apps consume this once:
+ *     @import "./ds/index.css";
+ *
+ * Cascade discipline (load-bearing — see docs/llm-context/ARCHITECTURE.md §4):
+ *   1. Theme tokens (spacing, radius, shadow, z, transition, opacity scales)
+ *   2. Color tokens (surface tiers, accent default — brand-neutral)
+ *   3. Opacity tokens (fg scale + text-role classes)
+ *   4. Typography (Right Grotesk family + scales)
+ *   5. Typography-mono (JetBrains Mono — DS default mono)
+ *   6. Brand color (AC burgundy ramp + cream + accent rebind + @theme Tailwind contract)
+ *   7. Brand typography (AC Right Grotesk Mono override of the DS mono token)
+ *   8. Utilities (flex-center, sr-only, text-balance, etc.)
+ *   9. Typography helpers (small mono helper-text classes)
+ *  10. Components — atoms (controls, inputs, buttons)
+ *  11. Components — molecules (popovers, pills, tooltips)
+ *  12. Components — organisms (table, etc.)
+ *  13. Framework (page scaffold, sidenav layout, overlay, carousel, exit-preview)
+ */
+
+@import "./tokens/theme.css";
+@import "./tokens/color.css";
+@import "./tokens/opacity.css";
+@import "./tokens/typography.css";
+@import "./tokens/typography-mono.css";
+@import "./tokens/brand-color.css";
+@import "./tokens/brand-typography.css";
+@import "./utilities/utilities.css";
+@import "./utilities/typography-helpers.css";
+@import "./components/atoms.css";
+@import "./components/molecules.css";
+@import "./components/organisms.css";
+@import "./framework/framework.css";

@@ -1,0 +1,476 @@
+/**
+ * kol-client — site-local structural rules only.
+ *
+ * This file holds layout / positioning / sizing that the Kolkrabbi DS doesn't
+ * cover. Color, typography, borders, and state come from DS utilities
+ * (bg-fg-*, border-fg-*, text-fg-*, bg-surface-*, kol-display-*, kol-heading-*,
+ * kol-text-*, kol-helper-*) on JSX. No `__` BEM, no `color-mix()` for chrome.
+ *
+ * Global rule: border-radius never exceeds 4px.
+ */
+
+html,
+body {
+  background: var(--ac-surface-primary);
+  color: var(--ac-surface-on-primary);
+}
+
+/* Selection highlight uses brand-primary so it reads on-brand when it appears. */
+::selection {
+  background-color: var(--brand-primary);
+  color: var(--brand-on-primary);
+}
+
+:root {
+  --ac-topnav-h: 0px;
+  --ac-sidenav-w: 260px;
+  --ac-sidenav-w-collapsed: 56px;
+  --ac-container-max: 100%;
+
+  /* Opacity tokens (--ac-fg-*) + text-role tokens (--ac-text-*) live in
+     kol-opacity.css — see that file for the full 14-stop scale + inverse tier
+     + hover variants + role utility classes. */
+
+  /* CTA / button transition shortcut (matches prevailing ease curve in site CSS).
+     Distinct from DS --ac-transition-base (which uses a Material cubic-bezier).
+     Intentional: site chrome uses browser-ease for a softer feel. */
+  --ac-t-btn: background 200ms ease, color 200ms ease, border-color 200ms ease;
+
+  /* Stepped page / section / band padding tokens.
+     Used by chrome (topnav, sidenav) and landing bands. Scaled at 768 / 1024
+     breakpoints so one set of rules covers mobile → desktop without clamp(). */
+  --ac-pad-page-x:    20px;
+  --ac-pad-page-y:    64px;
+  --ac-pad-section-x: 20px;
+  --ac-pad-section-y: 48px;
+  --ac-pad-band-y:    56px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --ac-pad-page-x:    32px;
+    --ac-pad-page-y:    96px;
+    --ac-pad-section-x: 32px;
+    --ac-pad-section-y: 64px;
+    --ac-pad-band-y:    80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --ac-container-max: 1400px;
+    --ac-pad-page-x:    56px;
+    --ac-pad-page-y:    128px;
+    --ac-pad-section-x: 48px;
+    --ac-pad-section-y: 80px;
+    --ac-pad-band-y:    104px;
+  }
+}
+
+@media (min-width: 1280px) { :root { --ac-container-max: 1600px; } }
+
+:root[data-sidenav="collapsed"] { --ac-sidenav-w: var(--ac-sidenav-w-collapsed); }
+
+/* ───── Brand doc layout (sidebar + content) ─────
+   The grid lives in CSS for its dynamic --ac-sidenav-w + transition. */
+
+.ac-brand-layout {
+  display: grid;
+  grid-template-columns: var(--ac-sidenav-w) minmax(0, 1fr);
+  transition: grid-template-columns 180ms ease;
+}
+
+@media (max-width: 1024px) {
+  /* Force rail mode below lg — keep nav accessible, hide panels + labels.
+     User's localStorage expand preference is overridden while viewport is narrow;
+     restored once they cross back over the threshold. */
+  .ac-brand-layout { grid-template-columns: var(--ac-sidenav-w-collapsed) minmax(0, 1fr); }
+  .ac-sidenav-toggle { display: none; }
+  .ac-sidenav-hops { padding: 0 0 16px; margin-bottom: 16px; }
+  .ac-sidenav-hop { padding: 8px 0; justify-content: center; gap: 0; }
+  .ac-sidenav-hop-label { display: none; }
+  .ac-sidenav-body { display: none; }
+}
+
+@media (max-width: 767px) {
+  /* Mobile drawer mode: hide the sidebar from the layout grid entirely.
+     SideNav repositions as a fixed slide-in panel triggered by the hamburger
+     in BrandLayout. Backdrop is the sibling .ac-sidenav-backdrop. */
+  .ac-brand-layout { grid-template-columns: minmax(0, 1fr); }
+  .ac-sidenav {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(80vw, 280px);
+    transform: translateX(-100%);
+    transition: transform 220ms ease;
+  }
+  .ac-sidenav.is-drawer-open { transform: translateX(0); }
+  /* Restore expanded labels + body inside the open drawer (override the rail rules above). */
+  .ac-sidenav.is-drawer-open .ac-sidenav-hop { padding: 8px 0; justify-content: flex-start; gap: 12px; }
+  .ac-sidenav.is-drawer-open .ac-sidenav-hop-label { display: inline; }
+  .ac-sidenav.is-drawer-open .ac-sidenav-body { display: block; }
+  .ac-brand-layout[data-drawer-open="true"] .ac-sidenav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* SideNav primitives (.ac-sidenav-hop, -hop-icon, -hop-label, -link,
+ * -group) promoted to kol-components-atoms.css 2026-04-30. The .is-collapsed
+ * responsive cascade rules below stay here — they're page-grid concerns,
+ * not component chrome. */
+
+/* ───── SideNav collapsed (rail mode) — overrides inlined hop padding/gap ───── */
+
+.ac-sidenav.is-collapsed .ac-sidenav-hops {
+  padding: 0 0 16px;
+  margin-bottom: 16px;
+}
+
+.ac-sidenav.is-collapsed .ac-sidenav-hop {
+  padding: 8px 0;
+  justify-content: center;
+  gap: 0;
+}
+
+.ac-sidenav.is-collapsed .ac-sidenav-hop-label {
+  display: none;
+}
+
+.ac-sidenav.is-collapsed .ac-sidenav-body {
+  display: none;
+}
+
+/* ───── Page scaffold ───── */
+
+.ac-page {
+  max-width: var(--ac-container-max);
+  margin: 0 auto;
+  padding: 64px var(--ac-pad-section-x);
+}
+
+.ac-page-hero {
+  min-height: 72dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px var(--ac-pad-section-x);
+  max-width: var(--ac-container-max);
+  margin: 0 auto;
+}
+
+/* .ac-page-section-divider promoted to kol-components-atoms.css 2026-04-30. */
+
+.ac-page--fullbleed {
+  max-width: none !important;
+  min-height: 100vh;
+  padding: 64px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ───── Standard 4-col content grid ─────
+   The page-wide grid all chapter content lays out against. Always 4 cols.
+   Rows size to content; children control their own height via aspect-ratio
+   or explicit sizing. Use col-span-N / row-span-N utilities for spans. */
+.ac-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.ac-grid--tight-y { row-gap: 0.75rem; }
+
+/* Editor + compose rail rules moved to src/editor/styles/kol-editor.css.
+   Canvas patterns (.ac-grid-bg, .ac-checker) moved with them. */
+
+@media (max-width: 768px) { .ac-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .ac-grid { grid-template-columns: 1fr; } }
+
+
+
+
+
+
+/* ───── Fullscreen overlay ───── */
+
+.ac-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ac-z-modal, 100);
+  background: color-mix(in srgb, var(--ac-surface-inverse) 88%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.ac-overlay-sheet {
+  position: relative;
+  max-width: var(--ac-container-max);
+  max-height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ac-overlay-sheet img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  display: block;
+}
+
+.ac-overlay-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--ac-surface-on-inverse) 32%, transparent);
+  color: var(--ac-surface-on-inverse);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.ac-overlay-close:hover {
+  background: color-mix(in srgb, var(--ac-surface-on-inverse) 8%, transparent);
+}
+
+/* ───── Carousel (embla) ───── */
+
+.ac-embla { overflow: hidden; }
+.ac-embla-viewport { overflow: hidden; }
+.ac-embla-container {
+  display: flex;
+  gap: 16px;
+}
+.ac-embla-slide {
+  flex: 0 0 auto;
+  width: clamp(260px, 32vw, 420px);
+}
+
+.ac-embla.is-slides .ac-embla-slide {
+  width: clamp(320px, 72vw, 900px);
+}
+
+.ac-embla-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.ac-embla-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.ac-embla-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+
+/* ───── Brand logo base ───── */
+
+.ac-brand-logo {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.ac-brand-logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ───── Kolkrabbi DS logo base ───── */
+
+.ac-logomark {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.ac-logomark svg {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+}
+
+
+/* ───── Exit preview (floating × button on client surfaces) ───── */
+
+.ac-exit-preview {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  background: var(--ac-surface-inverse);
+  color: var(--ac-surface-on-inverse);
+  border: 1px solid color-mix(in srgb, var(--ac-surface-on-inverse) 16%, transparent);
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.ac-exit-preview:hover {
+  border-color: color-mix(in srgb, var(--ac-surface-on-inverse) 32%, transparent);
+}
+
+.ac-exit-preview-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.ac-exit-preview-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 220ms ease, padding-right 220ms ease;
+  padding-right: 0;
+}
+
+.ac-exit-preview:hover .ac-exit-preview-label {
+  max-width: 120px;
+  padding-right: 20px;
+}
+
+/* ───── Portal footer (simple — Kolkrabbi wordmark + year) ───── */
+
+.ac-portal-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 24px;
+  border-top: 1px solid var(--ac-fg-08);
+}
+
+.ac-portal-footer p { margin: 0; }
+
+.ac-portal-footer a { text-decoration: none; transition: opacity 150ms ease; }
+.ac-portal-footer a:hover { opacity: 0.8; }
+
+/* ───── Back link (structural only; use kol-helper-xs uppercase tracking-widest text-fg-64 on JSX) ───── */
+
+.ac-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  text-decoration: none;
+}
+
+/* ───── Code block (rich-text + prose) ───── */
+
+.ac-codeblock {
+  position: relative;
+  margin: 16px 0;
+  border: 1px solid var(--ac-fg-16);
+  border-radius: 4px;
+  background: var(--ac-fg-04);
+  overflow: hidden;
+}
+
+.ac-codeblock pre {
+  margin: 0;
+  padding: 20px 24px 20px 24px;
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-x: auto;
+  color: var(--ac-surface-on-primary);
+}
+
+.ac-codeblock pre code {
+  font-family: inherit;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+.ac-codeblock-lang {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ac-fg-40);
+}
+
+.ac-codeblock-lang + pre {
+  padding-top: 32px;
+}
+
+.ac-codeblock-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: color-mix(in srgb, var(--ac-surface-primary) 80%, transparent);
+  border: 1px solid var(--ac-fg-16);
+  border-radius: 3px;
+  color: var(--ac-fg-64);
+  cursor: pointer;
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.ac-codeblock-copy:hover {
+  color: var(--ac-surface-on-primary);
+  border-color: var(--ac-fg-48);
+}
+
+/* ───── Reveal utility ───── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Text-role utility classes (.text-emphasis/.text-lede/.text-body/.text-meta/.text-subtle
+   + hover variants) and .hover:border-fg-* variants live in kol-opacity.css. */

@@ -29,7 +29,7 @@
  */
 export default function SegmentedToggle({ value, onChange, options = [], size = 'md', className = '' }) {
   const wrapHeight = size === 'sm' ? 'h-4' : 'h-[26px]'   /* 16 vs 26 */
-  const cellType   = size === 'sm' ? '' : 'kol-mono-12'
+  const cellType   = size === 'sm' ? '' : 'ac-mono-12'
   return (
     <div className={`flex ${wrapHeight} border border-fg-04 rounded overflow-hidden ${className}`}>
       {options.map((opt, i) => {

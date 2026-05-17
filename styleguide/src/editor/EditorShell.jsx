@@ -23,13 +23,13 @@ function Rail({ side, panels }) {
   const header = panelsForSlot(panels, `${side}.header`)
   const body   = panelsForSlot(panels, `${side}.body`)
   return (
-    <aside className={`kol-editor-${side}`}>
+    <aside className={`ac-editor-${side}`}>
       {header.length > 0 && (
-        <div className="kol-editor-rail-header">
+        <div className="ac-editor-rail-header">
           {header.map(({ Component }, i) => <Component key={i} />)}
         </div>
       )}
-      <div className="kol-editor-rail-body">
+      <div className="ac-editor-rail-body">
         {body.map(({ Component }, i) => <Component key={i} />)}
       </div>
     </aside>
@@ -45,17 +45,17 @@ export default function EditorShell({ registry }) {
    * deselects. New rails / panels don't need to update CanvasArea — being
    * inside the shell is sufficient. */
   return (
-    <div className="kol-editor-shell" data-editor-keep-selection>
+    <div className="ac-editor-shell" data-editor-keep-selection>
       <MenuTop />
-      <div className="kol-editor-grid">
+      <div className="ac-editor-grid">
         <Rail side="left"  panels={registry?.panels} />
-        <div className="kol-editor-canvas-column">
+        <div className="ac-editor-canvas-column">
           {canvasHeader.length > 0 && (
-            <div className="kol-editor-canvas-header">
+            <div className="ac-editor-canvas-header">
               {canvasHeader.map(({ Component }, i) => <Component key={i} />)}
             </div>
           )}
-          <main className="kol-editor-canvas">
+          <main className="ac-editor-canvas">
             {Canvas ? <Canvas /> : null}
           </main>
         </div>

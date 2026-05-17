@@ -263,7 +263,7 @@
 }
 
 /* Right Grotesk Mono @font-face blocks moved to kol-typography-mono.css.
- * Mono family token (--kol-font-family-mono) lives there too — repointed at
+ * Mono family token (--ac-font-family-mono) lives there too — repointed at
  * JetBrains Mono. See docs/kol-migration/locked/typography-system.md. */
 
 /* =============================================================================
@@ -274,48 +274,48 @@
   /* Sans family tokens — three cuts loaded. Editor convention used in prose:
    * Narrow for top-of-scale (display, large headings), Compact for mid (smaller
    * headings, lede), base for body. Atomic classes follow the same convention. */
-  --kol-font-family-sans:         'Right Grotesk', sans-serif;
-  --kol-font-family-sans-narrow:  'Right Grotesk Narrow', 'Right Grotesk', sans-serif;
-  --kol-font-family-sans-compact: 'Right Grotesk Compact', 'Right Grotesk', sans-serif;
+  --ac-font-family-sans:         'Right Grotesk', sans-serif;
+  --ac-font-family-sans-narrow:  'Right Grotesk Narrow', 'Right Grotesk', sans-serif;
+  --ac-font-family-sans-compact: 'Right Grotesk Compact', 'Right Grotesk', sans-serif;
 
   /* Type size tokens — numbered scale, 01 = largest, ascending = smaller.
    * Mobile-first; @media overrides below scale display + heading-01 up on
    * wider viewports. All other sizes stay fixed. */
 
   /* Display — hero typography (3 stops) */
-  --kol-text-display-01: 56px;
-  --kol-text-display-02: 44px;
-  --kol-text-display-03: 36px;
+  --ac-text-display-01: 56px;
+  --ac-text-display-02: 44px;
+  --ac-text-display-03: 36px;
 
   /* Heading — H1 → H6 (6 stops) */
-  --kol-text-heading-01: 48px;
-  --kol-text-heading-02: 40px;
-  --kol-text-heading-03: 32px;
-  --kol-text-heading-04: 24px;
-  --kol-text-heading-05: 20px;
-  --kol-text-heading-06: 16px;
+  --ac-text-heading-01: 48px;
+  --ac-text-heading-02: 40px;
+  --ac-text-heading-03: 32px;
+  --ac-text-heading-04: 24px;
+  --ac-text-heading-05: 20px;
+  --ac-text-heading-06: 16px;
 
   /* Body — reading copy (3 stops) */
-  --kol-text-body-01: 16px;
-  --kol-text-body-02: 14px;
-  --kol-text-body-03: 12px;
+  --ac-text-body-01: 16px;
+  --ac-text-body-02: 14px;
+  --ac-text-body-03: 12px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --kol-text-display-01: 80px;
-    --kol-text-display-02: 56px;
-    --kol-text-display-03: 42px;
-    --kol-text-heading-01: 56px;
+    --ac-text-display-01: 80px;
+    --ac-text-display-02: 56px;
+    --ac-text-display-03: 42px;
+    --ac-text-heading-01: 56px;
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --kol-text-display-01: 96px;
-    --kol-text-display-02: 64px;
-    --kol-text-display-03: 48px;
-    --kol-text-heading-01: 64px;
+    --ac-text-display-01: 96px;
+    --ac-text-display-02: 64px;
+    --ac-text-display-03: 48px;
+    --ac-text-heading-01: 64px;
   }
 }
 
@@ -323,21 +323,21 @@
  * DISPLAY — sans Narrow, weight 600. Numbered 01 (largest) → 03 (smallest).
  * ============================================================================= */
 
-.kol-sans-display-01 {
-  font-family: var(--kol-font-family-sans-narrow);
-  font-size: var(--kol-text-display-01);
+.ac-sans-display-01 {
+  font-family: var(--ac-font-family-sans-narrow);
+  font-size: var(--ac-text-display-01);
   line-height: 100%;
   font-weight: 600;
 }
 
-.kol-sans-display-02 {
-  font-family: var(--kol-font-family-sans-narrow);
-  font-size: var(--kol-text-display-02);
+.ac-sans-display-02 {
+  font-family: var(--ac-font-family-sans-narrow);
+  font-size: var(--ac-text-display-02);
   line-height: 100%;
   font-weight: 600;
 }
 
-/* .kol-sans-display-03 deferred — orphan in current consumers. Token defined.
+/* .ac-sans-display-03 deferred — orphan in current consumers. Token defined.
  * Add the class when a consumer needs it. */
 
 /* =============================================================================
@@ -346,70 +346,70 @@
  * (matches prose H2-H4). 06 token defined; class deferred until consumer.
  * ============================================================================= */
 
-.kol-sans-heading-01 {
-  font-family: var(--kol-font-family-sans-narrow);
-  font-size: var(--kol-text-heading-01);
+.ac-sans-heading-01 {
+  font-family: var(--ac-font-family-sans-narrow);
+  font-size: var(--ac-text-heading-01);
   line-height: 110%;
   font-weight: 500;
 }
 
-.kol-sans-heading-02 {
-  font-family: var(--kol-font-family-sans-compact);
-  font-size: var(--kol-text-heading-02);
+.ac-sans-heading-02 {
+  font-family: var(--ac-font-family-sans-compact);
+  font-size: var(--ac-text-heading-02);
   line-height: 110%;
   font-weight: 500;
 }
 
-.kol-sans-heading-03 {
-  font-family: var(--kol-font-family-sans-compact);
-  font-size: var(--kol-text-heading-03);
+.ac-sans-heading-03 {
+  font-family: var(--ac-font-family-sans-compact);
+  font-size: var(--ac-text-heading-03);
   line-height: 120%;
   font-weight: 500;
 }
 
-.kol-sans-heading-04 {
-  font-family: var(--kol-font-family-sans-compact);
-  font-size: var(--kol-text-heading-04);
+.ac-sans-heading-04 {
+  font-family: var(--ac-font-family-sans-compact);
+  font-size: var(--ac-text-heading-04);
   line-height: 100%;
   font-weight: 500;
 }
 
-.kol-sans-heading-05 {
-  font-family: var(--kol-font-family-sans-compact);
-  font-size: var(--kol-text-heading-05);
+.ac-sans-heading-05 {
+  font-family: var(--ac-font-family-sans-compact);
+  font-size: var(--ac-text-heading-05);
   line-height: 125%;
   font-weight: 500;
 }
 
 /* =============================================================================
  * BODY — sans base, weight 400. Atomic body copy for chrome / cards / descriptions.
- * Distinct from .kol-prose body (300, lighter, for editorial long-form copy).
+ * Distinct from .ac-prose body (300, lighter, for editorial long-form copy).
  * ============================================================================= */
 
-.kol-sans-body-01 {
-  font-family: var(--kol-font-family-sans);
-  font-size: var(--kol-text-body-01);
+.ac-sans-body-01 {
+  font-family: var(--ac-font-family-sans);
+  font-size: var(--ac-text-body-01);
   line-height: 160%;
   font-weight: 400;
 }
 
-.kol-sans-body-02 {
-  font-family: var(--kol-font-family-sans);
-  font-size: var(--kol-text-body-02);
+.ac-sans-body-02 {
+  font-family: var(--ac-font-family-sans);
+  font-size: var(--ac-text-body-02);
   line-height: 160%;
   font-weight: 400;
 }
 
-.kol-sans-body-03 {
-  font-family: var(--kol-font-family-sans);
-  font-size: var(--kol-text-body-03);
+.ac-sans-body-03 {
+  font-family: var(--ac-font-family-sans);
+  font-size: var(--ac-text-body-03);
   line-height: 150%;
   font-weight: 400;
 }
 
-/* `.kol-mono-text` retired — consumers use Tailwind `font-mono` (single-class
- * family marker). `.kol-helper-{xl..xxxxs}` t-shirt scale retired — consumers
- * migrated to `.kol-helper-{8,10,12,14,16,20}` defined in kol-typography-mono.css. */
+/* `.ac-mono-text` retired — consumers use Tailwind `font-mono` (single-class
+ * family marker). `.ac-helper-{xl..xxxxs}` t-shirt scale retired — consumers
+ * migrated to `.ac-helper-{8,10,12,14,16,20}` defined in kol-typography-mono.css. */
 
 
 /* =============================================================================
@@ -417,87 +417,87 @@
  * Right Grotesk family. 4-pt grid sizes, absolute px line-heights.
  * ============================================================================= */
 
-.kol-prose {
+.ac-prose {
   max-width: 720px;
-  font-family: var(--kol-font-family-sans);
+  font-family: var(--ac-font-family-sans);
   font-size: 16px;
   font-weight: 300;
   line-height: 24px;
   letter-spacing: 0.02em;
-  color: var(--kol-fg-80);
+  color: var(--ac-fg-80);
 }
 
-.kol-prose > :first-child { margin-top: 0; }
-.kol-prose > :last-child  { margin-bottom: 0; }
+.ac-prose > :first-child { margin-top: 0; }
+.ac-prose > :last-child  { margin-bottom: 0; }
 
 /* ─── Section head — label + title + lede.
-       Self-contained: do NOT nest inside .kol-prose, the descendant
+       Self-contained: do NOT nest inside .ac-prose, the descendant
        p/h2 rules below would override these. Render as flat siblings. ─── */
 
-.kol-prose-label {
-  font-family: var(--kol-font-family-mono);
+.ac-prose-label {
+  font-family: var(--ac-font-family-mono);
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--kol-fg-48);
+  color: var(--ac-fg-48);
   margin: 0 0 16px;
 }
 
-/* Display scale — D1 (hero), D2 (sub-hero), D3 (chapter title / .kol-prose-title alias). */
+/* Display scale — D1 (hero), D2 (sub-hero), D3 (chapter title / .ac-prose-title alias). */
 
-.kol-prose-display {
-  font-family: var(--kol-font-family-sans-narrow);
+.ac-prose-display {
+  font-family: var(--ac-font-family-sans-narrow);
   font-size: 80px;
   font-weight: 500;
   line-height: 80px;
   letter-spacing: -0.01em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
   margin: 0 0 24px;
 }
 
-.kol-prose-display-md {
-  font-family: var(--kol-font-family-sans-narrow);
+.ac-prose-display-md {
+  font-family: var(--ac-font-family-sans-narrow);
   font-size: 64px;
   font-weight: 500;
   line-height: 68px;
   letter-spacing: -0.01em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
   margin: 0 0 24px;
 }
 
-.kol-prose-title {
-  font-family: var(--kol-font-family-sans-narrow);
+.ac-prose-title {
+  font-family: var(--ac-font-family-sans-narrow);
   font-size: 56px;
   font-weight: 500;
   line-height: 60px;
   letter-spacing: -0.01em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
   margin: 0 0 24px;
 }
 
-.kol-prose-lede {
-  font-family: var(--kol-font-family-sans-compact);
+.ac-prose-lede {
+  font-family: var(--ac-font-family-sans-compact);
   font-size: 24px;
   font-weight: 400;
   line-height: 28px;
   letter-spacing: 0.02em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
   margin: 0 0 40px;
 }
 
 /* Editorial subtitle — sits under a display/title as the tagline. Narrow
- * family at 13px uppercase, dimmed via fg-64. Distinct from .kol-prose-label
+ * family at 13px uppercase, dimmed via fg-64. Distinct from .ac-prose-label
  * which is Mono and used for section eyebrows / kickers. */
-.kol-prose-tagline {
-  font-family: var(--kol-font-family-sans-narrow);
+.ac-prose-tagline {
+  font-family: var(--ac-font-family-sans-narrow);
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--kol-fg-64);
+  color: var(--ac-fg-64);
   margin: 0;
 }
 
@@ -507,65 +507,65 @@
  * H2 intentionally skips heading-02 (40px) — visual hierarchy works better with
  * a bigger jump from H1 (48 → 32 vs 48 → 40). Convention preserved from prior
  * prose. Sizes resolve through tokens — edit token, every consumer follows. */
-.kol-prose h1,
-.kol-prose h2,
-.kol-prose h3,
-.kol-prose h4,
-.kol-prose h5,
-.kol-prose h6 {
+.ac-prose h1,
+.ac-prose h2,
+.ac-prose h3,
+.ac-prose h4,
+.ac-prose h5,
+.ac-prose h6 {
   font-weight: 500;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-prose h1 { font-family: var(--kol-font-family-sans-narrow);  font-size: var(--kol-text-heading-01); line-height: 52px; margin: 0 0 24px; }
-.kol-prose h2 { font-family: var(--kol-font-family-sans-compact); font-weight: 400; font-size: var(--kol-text-heading-03); line-height: 40px; margin: 56px 0 16px; }
-.kol-prose h3 { font-family: var(--kol-font-family-sans-compact); font-weight: 400; font-size: var(--kol-text-heading-04); line-height: 32px; margin: 40px 0 12px; }
-.kol-prose h4 { font-family: var(--kol-font-family-sans-compact); font-weight: 400; font-size: var(--kol-text-heading-05); line-height: 28px; margin: 32px 0  8px; }
-.kol-prose h5 { font-family: var(--kol-font-family-sans-compact); font-weight: 500; font-size: var(--kol-text-heading-06); line-height: 24px; margin: 24px 0  6px; }
-.kol-prose h6 { font-family: var(--kol-font-family-sans-compact); font-weight: 500; font-size: var(--kol-text-heading-06); line-height: 24px; margin: 24px 0  6px; text-transform: uppercase; letter-spacing: 0.04em; }
+.ac-prose h1 { font-family: var(--ac-font-family-sans-narrow);  font-size: var(--ac-text-heading-01); line-height: 52px; margin: 0 0 24px; }
+.ac-prose h2 { font-family: var(--ac-font-family-sans-compact); font-weight: 400; font-size: var(--ac-text-heading-03); line-height: 40px; margin: 56px 0 16px; }
+.ac-prose h3 { font-family: var(--ac-font-family-sans-compact); font-weight: 400; font-size: var(--ac-text-heading-04); line-height: 32px; margin: 40px 0 12px; }
+.ac-prose h4 { font-family: var(--ac-font-family-sans-compact); font-weight: 400; font-size: var(--ac-text-heading-05); line-height: 28px; margin: 32px 0  8px; }
+.ac-prose h5 { font-family: var(--ac-font-family-sans-compact); font-weight: 500; font-size: var(--ac-text-heading-06); line-height: 24px; margin: 24px 0  6px; }
+.ac-prose h6 { font-family: var(--ac-font-family-sans-compact); font-weight: 500; font-size: var(--ac-text-heading-06); line-height: 24px; margin: 24px 0  6px; text-transform: uppercase; letter-spacing: 0.04em; }
 
 /* ─── Body + lists ─── */
 
-.kol-prose p     { margin: 0 0 24px; letter-spacing: 0.02em; }
-.kol-prose p + p { margin-top: 0; }
+.ac-prose p     { margin: 0 0 24px; letter-spacing: 0.02em; }
+.ac-prose p + p { margin-top: 0; }
 
-.kol-prose ul,
-.kol-prose ol { padding-left: 24px; margin: 0 0 24px; }
-.kol-prose ul { list-style-type: disc; }
-.kol-prose ol { list-style-type: decimal; }
-.kol-prose li { margin: 0 0 8px; line-height: 24px; }
+.ac-prose ul,
+.ac-prose ol { padding-left: 24px; margin: 0 0 24px; }
+.ac-prose ul { list-style-type: disc; }
+.ac-prose ol { list-style-type: decimal; }
+.ac-prose li { margin: 0 0 8px; line-height: 24px; }
 
 /* ─── Inline ─── */
 
-.kol-prose em     { font-style: italic; }
-.kol-prose strong { font-weight: 700; }
+.ac-prose em     { font-style: italic; }
+.ac-prose strong { font-weight: 700; }
 
 /* ─── Code (inline + block) — JetBrains Mono via the mono token. Same family
- *     as `.kol-mono-N` so a future swap cascades. Body weight 400. ─── */
+ *     as `.ac-mono-N` so a future swap cascades. Body weight 400. ─── */
 
-.kol-prose code {
-  font-family: var(--kol-font-family-mono);
+.ac-prose code {
+  font-family: var(--ac-font-family-mono);
   font-size: 0.875em;          /* ~14px when prose body is 16px — proportional */
   font-weight: 400;
-  background: var(--kol-fg-04);
+  background: var(--ac-fg-04);
   padding: 0.1em 0.35em;
   border-radius: 3px;
 }
 
-.kol-prose pre {
-  font-family: var(--kol-font-family-mono);
+.ac-prose pre {
+  font-family: var(--ac-font-family-mono);
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
   margin: 24px 0;
   padding: 16px 20px;
-  background: var(--kol-fg-04);
+  background: var(--ac-fg-04);
   border-radius: 6px;
   overflow-x: auto;
 }
 
 /* Code inside pre — strip inline-code styles to avoid double background / padding. */
-.kol-prose pre code {
+.ac-prose pre code {
   background: none;
   padding: 0;
   font-size: inherit;
@@ -574,21 +574,21 @@
 
 /* ─── Blockquote ─── */
 
-.kol-prose blockquote {
+.ac-prose blockquote {
   margin: 40px 0;
   padding: 8px 0 8px 24px;
-  border-left: 2px solid var(--kol-fg-32);
+  border-left: 2px solid var(--ac-fg-32);
   font-weight: 600;
 }
 
-.kol-prose blockquote p {
+.ac-prose blockquote p {
   margin: 0 0 8px;
   font-size: 24px;
   line-height: 32px;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-prose blockquote cite {
+.ac-prose blockquote cite {
   display: block;
   margin-top: 12px;
   font-style: normal;
@@ -596,10 +596,10 @@
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 0.04em;
-  color: var(--kol-fg-48);
+  color: var(--ac-fg-48);
 }
 
-.kol-prose blockquote cite::before { content: '— '; opacity: 0.6; }
+.ac-prose blockquote cite::before { content: '— '; opacity: 0.6; }
 
 /* =============================================================================
  * TAILWIND CONTRACT — font-family exposures

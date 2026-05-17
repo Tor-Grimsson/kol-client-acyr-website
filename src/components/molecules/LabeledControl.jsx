@@ -13,7 +13,7 @@
  *   </LabeledControl>
  *
  * Props:
- *   label  — small label text (uppercase, kol-helper-10).
+ *   label  — small label text (uppercase, ac-helper-10).
  *   hint   — optional secondary text after the label (lower-case, less
  *            weight). Useful for current-value displays, units, etc.
  *   inline — bool. When true, renders horizontally with label on the left.
@@ -44,7 +44,7 @@ export default function LabeledControl({
       <div className={`flex items-center gap-3 ${className}`}>
         {showLabel && (
           <span
-            className="kol-helper-10 uppercase tracking-widest text-meta shrink-0"
+            className="ac-helper-10 uppercase tracking-widest text-meta shrink-0"
             style={{ width: labelWidth }}
           >
             {labelInner}
@@ -58,7 +58,7 @@ export default function LabeledControl({
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       {showLabel && (
-        <span className="kol-helper-10 uppercase tracking-widest text-meta">{labelInner}</span>
+        <span className="ac-helper-10 uppercase tracking-widest text-meta">{labelInner}</span>
       )}
       {children}
     </div>

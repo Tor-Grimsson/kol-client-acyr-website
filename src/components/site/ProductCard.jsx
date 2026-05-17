@@ -8,7 +8,7 @@ export default function ProductCard({ src, label, name, price, sizes = [], color
   return (
     <Wrapper {...wrapperProps}>
       <div
-        className="kol-product-card bg-surface-secondary group"
+        className="ac-product-card bg-surface-secondary group"
         style={{ position: 'relative', aspectRatio: '3 / 4', overflow: 'hidden' }}
       >
         <img
@@ -58,10 +58,10 @@ export default function ProductCard({ src, label, name, price, sizes = [], color
               </span>
             ))}
           </div>
-          <button className="kol-btn kol-btn-primary kol-btn-sm" style={{ fontFamily: NARROW, letterSpacing: '0.08em', width: '100%', marginBottom: '6px' }}>
+          <button className="ac-btn ac-btn-primary ac-btn-sm" style={{ fontFamily: NARROW, letterSpacing: '0.08em', width: '100%', marginBottom: '6px' }}>
             Add to Bag
           </button>
-          <button className="kol-btn kol-btn-outline kol-btn-sm" style={{ fontFamily: NARROW, letterSpacing: '0.08em', width: '100%', borderColor: 'rgba(255,255,255,0.3)', color: '#fff' }}>
+          <button className="ac-btn ac-btn-outline ac-btn-sm" style={{ fontFamily: NARROW, letterSpacing: '0.08em', width: '100%', borderColor: 'rgba(255,255,255,0.3)', color: '#fff' }}>
             Wishlist
           </button>
         </div>
@@ -73,7 +73,7 @@ export default function ProductCard({ src, label, name, price, sizes = [], color
           fontWeight: 400,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          color: 'color-mix(in srgb, var(--kol-surface-on-primary) 48%, transparent)',
+          color: 'color-mix(in srgb, var(--ac-surface-on-primary) 48%, transparent)',
           marginTop: '8px',
         }}
       >

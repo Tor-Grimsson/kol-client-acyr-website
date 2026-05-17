@@ -53,7 +53,7 @@ export default function SupportCTA() {
         When you buy from Another Creation you support an independent atelier,
         not a factory floor. Made to order. Made to last.
       </p>
-      <div className="kol-site-support-cta-actions" style={{ marginTop: '16px' }}>
+      <div className="ac-site-support-cta-actions" style={{ marginTop: '16px' }}>
         <Button size="lg">Shop Collection</Button>
         <Button size="lg" variant="outline">Learn More</Button>
       </div>

@@ -1,5 +1,5 @@
 /**
- * Stepper — number input + chevron buttons, built on the .kol-control shell.
+ * Stepper — number input + chevron buttons, built on the .ac-control shell.
  *
  *   size="sm" (default) / "md" / "lg" — matched padding + type class.
  *   Chevron scale follows the size: 8 / 10 / 12 px each, stacked.
@@ -10,7 +10,7 @@
  */
 import Icon from '../loaders/icons/Icon'
 
-const SIZE_TYPE    = { sm: 'kol-mono-12', md: 'kol-mono-14', lg: 'kol-mono-16' }
+const SIZE_TYPE    = { sm: 'ac-mono-12', md: 'ac-mono-14', lg: 'ac-mono-16' }
 const CHEVRON_SIZE = { sm: 8,             md: 10,            lg: 12 }
 
 export default function Stepper({
@@ -47,9 +47,9 @@ export default function Stepper({
   }
 
   const shellCls = [
-    'kol-control',
-    'kol-control--filled',
-    `kol-control-${size}`,
+    'ac-control',
+    'ac-control--filled',
+    `ac-control-${size}`,
     SIZE_TYPE[size],
     'relative',
     className,

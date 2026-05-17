@@ -6,7 +6,7 @@
  *   defaults  — canonical 6-color arrangement (5 layout slots + 1 background).
  *
  * Both are LIVE — resolved from CSS custom properties at access time via the
- * `colors` / `defaults` getters. Single source of truth: src/styles/kol-color.css.
+ * `colors` / `defaults` getters. Single source of truth: src/ds/tokens/color.css.
  * Edit a token there and the lab regenerates with the new value on next render.
  *
  * Architecture: docs/kol-migration/locked/color-system.md

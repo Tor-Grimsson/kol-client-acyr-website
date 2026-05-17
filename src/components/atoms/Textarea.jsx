@@ -1,7 +1,7 @@
 import Icon from '../loaders/icons/Icon'
 
 /**
- * Textarea — multi-line text atom built on the .kol-control shell with the
+ * Textarea — multi-line text atom built on the .ac-control shell with the
  * `--textarea` modifier (display: block).
  *
  *   variant="filled" (default) — persistent solid bg
@@ -21,7 +21,7 @@ import Icon from '../loaders/icons/Icon'
  * Pairs with `<Input>` for single-line.
  */
 
-const SIZE_TYPE = { sm: 'kol-mono-12', md: 'kol-mono-14', lg: 'kol-mono-16' }
+const SIZE_TYPE = { sm: 'ac-mono-12', md: 'ac-mono-14', lg: 'ac-mono-16' }
 
 export default function Textarea({
   value,
@@ -35,10 +35,10 @@ export default function Textarea({
   ...props
 }) {
   const wrapperCls = [
-    'kol-control',
-    `kol-control--${variant}`,
-    'kol-control--textarea',
-    `kol-control-${size}`,
+    'ac-control',
+    `ac-control--${variant}`,
+    'ac-control--textarea',
+    `ac-control-${size}`,
     SIZE_TYPE[size],
     'relative block w-full',
     className,
@@ -62,7 +62,7 @@ export default function Textarea({
         style={{ resize: 'none' }}
         {...props}
       />
-      <span aria-hidden="true" className="kol-textarea-resize-icon text-meta pointer-events-none">
+      <span aria-hidden="true" className="ac-textarea-resize-icon text-meta pointer-events-none">
         <Icon name="resize-corner" size={12} />
       </span>
     </label>

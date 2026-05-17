@@ -2,7 +2,7 @@
  * FeatureSplit — text + image editorial pull.
  * Used as the main hero on /site and as the "The fleet" feature on /.
  * `meta` renders a stats strip; `ctas` renders a button row — pick one.
- * Styled by `.site-feature*` in kol-site.css.
+ * Styled by `.site-feature*` in ac-site.css.
  */
 export default function FeatureSplit({ kicker, title, body, meta, ctas, media, caption, className = '', innerClassName = '', columnClassName = '', bgImage }) {
   const sectionStyle = bgImage

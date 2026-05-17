@@ -33,7 +33,7 @@ export function TabsRow({ tabs = COLOR_TABS, active, onChange, onClose, onMinimi
             onClick={() => onChange?.(t)}
             aria-pressed={isActive}
             className={[
-              'kol-mono-12 flex items-center cursor-pointer border-b-2',
+              'ac-mono-12 flex items-center cursor-pointer border-b-2',
               isActive
                 ? 'text-emphasis border-fg'
                 : 'text-meta hover:text-emphasis border-transparent',

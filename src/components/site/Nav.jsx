@@ -10,7 +10,7 @@ const linkStyle = {
   fontWeight: 400,
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
-  color: 'var(--kol-surface-on-primary)',
+  color: 'var(--ac-surface-on-primary)',
   cursor: 'pointer',
   whiteSpace: 'nowrap',
   textDecoration: 'none',
@@ -22,7 +22,7 @@ function NavLink({ label, to, onClick, drawer = false }) {
       <Link
         to={to}
         onClick={onClick}
-        className="kol-site-nav-link"
+        className="ac-site-nav-link"
         style={drawer ? { ...linkStyle, fontSize: '14px' } : linkStyle}
       >
         {label}
@@ -32,7 +32,7 @@ function NavLink({ label, to, onClick, drawer = false }) {
   return (
     <span
       onClick={onClick}
-      className="kol-site-nav-link"
+      className="ac-site-nav-link"
       style={drawer ? { ...linkStyle, fontSize: '14px' } : linkStyle}
     >
       {label}
@@ -76,7 +76,7 @@ export default function Nav({
   }, [])
 
   const leftCluster = (
-    <div className="kol-site-nav-cluster flex items-center gap-6">
+    <div className="ac-site-nav-cluster flex items-center gap-6">
       {leftLinks.map(l => (
         <NavLink key={l.label} label={l.label} to={l.to} onClick={() => onNavigate?.(l.label.toLowerCase())} />
       ))}
@@ -90,7 +90,7 @@ export default function Nav({
   )
 
   const rightCluster = (
-    <div className="kol-site-nav-cluster flex items-center gap-5 justify-end">
+    <div className="ac-site-nav-cluster flex items-center gap-5 justify-end">
       {rightLinks.map(l => (
         <NavLink key={l.label} label={l.label} to={l.to} />
       ))}
@@ -101,7 +101,7 @@ export default function Nav({
   const hamburger = (
     <button
       type="button"
-      className="kol-site-nav-hamburger"
+      className="ac-site-nav-hamburger"
       aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={mobileOpen}
       onClick={() => setMobileOpen((v) => !v)}
@@ -113,7 +113,7 @@ export default function Nav({
   return (
     <>
       <nav
-        className={`kol-site-nav${variant === 'center' ? ' is-center' : ''}${hidden ? ' is-hidden' : ''}`}
+        className={`ac-site-nav${variant === 'center' ? ' is-center' : ''}${hidden ? ' is-hidden' : ''}`}
       >
         {variant === 'center' ? (
           <>
@@ -132,13 +132,13 @@ export default function Nav({
       </nav>
 
       <div
-        className={`kol-site-nav-backdrop${mobileOpen ? ' is-open' : ''}`}
+        className={`ac-site-nav-backdrop${mobileOpen ? ' is-open' : ''}`}
         onClick={() => setMobileOpen(false)}
         aria-hidden="true"
       />
 
-      <div className={`kol-site-nav-drawer${mobileOpen ? ' is-open' : ''}`} aria-hidden={!mobileOpen}>
-        <div className="kol-site-nav-drawer-inner">
+      <div className={`ac-site-nav-drawer${mobileOpen ? ' is-open' : ''}`} aria-hidden={!mobileOpen}>
+        <div className="ac-site-nav-drawer-inner">
           {leftLinks.map(l => (
             <NavLink key={l.label} label={l.label} to={l.to} drawer onClick={() => { onNavigate?.(l.label.toLowerCase()); setMobileOpen(false) }} />
           ))}
@@ -146,7 +146,7 @@ export default function Nav({
             <NavLink key={l.label} label={l.label} to={l.to} drawer onClick={() => setMobileOpen(false)} />
           ))}
           {rightActions && (
-            <div className="kol-site-nav-drawer-actions" style={{ display: 'flex', gap: '20px', marginTop: '16px' }}>
+            <div className="ac-site-nav-drawer-actions" style={{ display: 'flex', gap: '20px', marginTop: '16px' }}>
               {rightActions}
             </div>
           )}

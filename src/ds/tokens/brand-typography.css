@@ -1,0 +1,46 @@
+/**
+ * brand-typography.css — AC brand typography (Right Grotesk Mono).
+ *
+ * @font-face declarations + the `--ac-font-family-mono` override that
+ * points the DS mono token at Right Grotesk Mono (AC's chosen mono face).
+ * Helper-scale classes live in `../utilities/typography-helpers.css`.
+ */
+
+/* =============================================================================
+ * @font-face — Right Grotesk Mono
+ * ============================================================================= */
+
+@font-face {
+  font-family: "Right Grotesk Mono";
+  src: url("/fonts/Right-Grotesk-Mono/PPRightGroteskMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Right Grotesk Mono";
+  src: url("/fonts/Right-Grotesk-Mono/PPRightGroteskMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Right Grotesk Mono";
+  src: url("/fonts/Right-Grotesk-Mono/PPRightGroteskMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =============================================================================
+ * Tokens — t-shirt-scale helper sizes + mono family override
+ * ============================================================================= */
+
+:root {
+  --ac-text-helper-s:   14px;
+  --ac-text-helper-xs:  12px;
+  --ac-text-helper-xxs: 10px;
+
+  /* Brand mono — overrides the DS-default jetbrains-mono. */
+  --ac-font-family-mono: 'Right Grotesk Mono', monospace;
+}

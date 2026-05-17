@@ -33,9 +33,9 @@ export default function Contact() {
   return (
     <main className="bg-surface-primary pb-24">
       <section className="max-w-3xl mx-auto px-8 pt-20">
-        <p className="kol-prose-label">Contact</p>
-        <h1 className="kol-prose-display-md">Studio &amp; enquiries.</h1>
-        <p className="kol-prose-lede">
+        <p className="ac-prose-label">Contact</p>
+        <h1 className="ac-prose-display-md">Studio &amp; enquiries.</h1>
+        <p className="ac-prose-lede">
           For appointments, made-to-order fittings, press, or general enquiries — write directly. We answer within two business days.
         </p>
       </section>
@@ -44,23 +44,23 @@ export default function Contact() {
         <Divider />
         <div className="grid gap-8 sm:grid-cols-2 pt-8">
           <div>
-            <p className="kol-prose-label">Studio</p>
-            <div className="kol-prose">
+            <p className="ac-prose-label">Studio</p>
+            <div className="ac-prose">
               <p style={{ margin: '0 0 4px' }}><strong>{BRAND_INFO.studio.street}</strong></p>
               <p style={{ margin: '0 0 4px' }}>{BRAND_INFO.studio.postcode}</p>
               <p style={{ margin: 0 }}>{BRAND_INFO.studio.country}</p>
             </div>
           </div>
           <div>
-            <p className="kol-prose-label">Hours</p>
-            <div className="kol-prose">
+            <p className="ac-prose-label">Hours</p>
+            <div className="ac-prose">
               <p style={{ margin: '0 0 4px' }}>Mon–Fri 13:00–18:00</p>
               <p style={{ margin: 0 }}>Sat 13:00–16:00</p>
             </div>
           </div>
           <div>
-            <p className="kol-prose-label">Direct</p>
-            <div className="kol-prose">
+            <p className="ac-prose-label">Direct</p>
+            <div className="ac-prose">
               <p style={{ margin: '0 0 4px' }}>
                 <a href={`mailto:${BRAND_INFO.contact.email}`}>{BRAND_INFO.contact.email}</a>
               </p>
@@ -68,8 +68,8 @@ export default function Contact() {
             </div>
           </div>
           <div>
-            <p className="kol-prose-label">Press</p>
-            <div className="kol-prose">
+            <p className="ac-prose-label">Press</p>
+            <div className="ac-prose">
               <p style={{ margin: 0 }}>
                 <a href={`mailto:${BRAND_INFO.contact.email}?subject=${encodeURIComponent('[Press] Enquiry')}`}>{BRAND_INFO.contact.email}</a>
               </p>
@@ -80,8 +80,8 @@ export default function Contact() {
 
       <section className="max-w-3xl mx-auto px-8 pb-24">
         <Divider />
-        <p className="kol-prose-label" style={{ marginTop: '32px' }}>Write to us</p>
-        <p className="kol-prose-tagline" style={{ marginTop: '4px' }}>
+        <p className="ac-prose-label" style={{ marginTop: '32px' }}>Write to us</p>
+        <p className="ac-prose-tagline" style={{ marginTop: '4px' }}>
           The form opens your mail client with the message pre-filled.
         </p>
 

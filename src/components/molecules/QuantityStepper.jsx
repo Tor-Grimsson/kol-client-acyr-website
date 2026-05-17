@@ -80,10 +80,10 @@ const QuantityStepper = ({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     border: 'none',
-    color: 'var(--kol-surface-on-primary)',
+    color: 'var(--ac-surface-on-primary)',
     cursor: 'pointer',
     transition: 'opacity 0.15s',
-    fontFamily: 'var(--kol-font-family-mono)',
+    fontFamily: 'var(--ac-font-family-mono)',
     fontSize: `${metrics.fontSize}px`,
     lineHeight: '120%'
   }
@@ -99,9 +99,9 @@ const QuantityStepper = ({
       style={{
         width: componentWidth,
         minWidth: componentWidth,
-        border: '1px solid var(--kol-border-default)',
+        border: '1px solid var(--ac-border-default)',
         borderRadius: `${metrics.radius}px`,
-        backgroundColor: 'var(--kol-surface-primary)'
+        backgroundColor: 'var(--ac-surface-primary)'
       }}
     >
       <button
@@ -121,8 +121,8 @@ const QuantityStepper = ({
         style={{
           minWidth: '24px',
           textAlign: 'center',
-          color: 'var(--kol-surface-on-primary)',
-          fontFamily: 'var(--kol-font-family-mono)',
+          color: 'var(--ac-surface-on-primary)',
+          fontFamily: 'var(--ac-font-family-mono)',
           fontSize: `${metrics.fontSize}px`,
           lineHeight: '120%'
         }}

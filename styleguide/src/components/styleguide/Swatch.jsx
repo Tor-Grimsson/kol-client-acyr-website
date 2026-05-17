@@ -1,7 +1,7 @@
 export default function Swatch({ hex, name, anchor = false }) {
   return (
-    <div className="kol-swatch">
-      <div className="kol-swatch-chip relative border border-fg-08" style={{ background: hex }}>
+    <div className="ac-swatch">
+      <div className="ac-swatch-chip relative border border-fg-08" style={{ background: hex }}>
         {anchor && (
           <span
             aria-label="Canonical anchor"
@@ -14,7 +14,7 @@ export default function Swatch({ hex, name, anchor = false }) {
           </span>
         )}
       </div>
-      <div className="kol-swatch-meta kol-helper-10">
+      <div className="ac-swatch-meta ac-helper-10">
         {name && <span className="text-meta">{name}</span>}
         <span className="text-strong font-semibold">{hex.toUpperCase()}</span>
       </div>

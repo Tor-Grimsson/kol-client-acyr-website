@@ -26,12 +26,12 @@ export default function Collections() {
         <div
           aria-hidden="true"
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--kol-surface-primary) 60%, transparent), color-mix(in srgb, var(--kol-surface-primary) 30%, transparent), var(--kol-surface-primary))' }}
+          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--ac-surface-primary) 60%, transparent), color-mix(in srgb, var(--ac-surface-primary) 30%, transparent), var(--ac-surface-primary))' }}
         />
         <div className="relative max-w-3xl mx-auto px-5 py-24 text-center flex flex-col items-center">
-          <p className="kol-prose-label">Collections</p>
-          <h1 className="kol-prose-display">Seasons.</h1>
-          <p className="kol-prose-lede max-w-xl">
+          <p className="ac-prose-label">Collections</p>
+          <h1 className="ac-prose-display">Seasons.</h1>
+          <p className="ac-prose-lede max-w-xl">
             One collection a year, occasionally two. Materials come first; shapes follow. Each season is built from a small set of cloths and shown once at home in Reykjavík before it goes anywhere else.
           </p>
         </div>
@@ -56,10 +56,10 @@ export default function Collections() {
                       />
                     )}
                   </div>
-                  <p className="kol-prose-label" style={{ marginBottom: '12px' }}>
+                  <p className="ac-prose-label" style={{ marginBottom: '12px' }}>
                     {collection.title} · {collection.year}
                   </p>
-                  <div className="kol-prose">
+                  <div className="ac-prose">
                     <h3 style={{ margin: '0 0 12px' }}>{collection.subtitle ?? collection.title}</h3>
                     <p style={{ margin: 0 }}>{collection.excerpt}</p>
                   </div>
@@ -72,7 +72,7 @@ export default function Collections() {
 
       <section className="max-w-3xl mx-auto px-8 pb-24">
         <Divider />
-        <div className="kol-prose pt-12 text-center">
+        <div className="ac-prose pt-12 text-center">
           <p>
             Older collections live in the archive at the studio. For private viewings or made-to-order revivals of any past piece, write to{' '}
             <a href="mailto:yr@another-creation.com">yr@another-creation.com</a>.

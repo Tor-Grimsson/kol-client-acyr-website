@@ -1,6 +1,6 @@
 /**
  * FAQ — collapsible Q/A list with left-column header.
- * Styled by `.site-faq*` in kol-site.css.
+ * Styled by `.site-faq*` in ac-site.css.
  * items: [{ q, a }]
  */
 export default function FAQ({ kicker, title, items = [] }) {

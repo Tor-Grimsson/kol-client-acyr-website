@@ -21,7 +21,7 @@ export default function ButtonNav({
           <Icon name={iconName} size={12} className={isBack ? '' : iconRotation} />
         </span>
       )}
-      <span className="kol-helper-s">{label}</span>
+      <span className="ac-helper-s">{label}</span>
       {!isBack && (
         <span className="inline-flex items-center h-[12px]">
           <Icon name={iconName} size={12} className={iconRotation} />

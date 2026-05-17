@@ -10,17 +10,17 @@ export default function SectionLabel({
     sm: {
       height: 'h-4',
       iconSize: 16,
-      textClass: 'kol-label-compact-md'
+      textClass: 'ac-label-compact-md'
     },
     md: {
       height: 'h-5',
       iconSize: 24,
-      textClass: 'kol-label-compact-lg'
+      textClass: 'ac-label-compact-lg'
     },
     lg: {
       height: 'h-8',
       iconSize: 40,
-      textClass: 'kol-sans-heading-03'
+      textClass: 'ac-sans-heading-03'
     }
   }
 

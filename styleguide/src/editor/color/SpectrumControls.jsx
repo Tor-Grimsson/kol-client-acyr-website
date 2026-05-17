@@ -290,19 +290,19 @@ export function WheelTriangle({ hue, sat, val, onChangeHue, onChangeSV }) {
       className="block cursor-crosshair select-none w-full h-full"
     >
       <defs>
-        <clipPath id="kol-wheel-ring-clip" clipPathUnits="userSpaceOnUse">
+        <clipPath id="ac-wheel-ring-clip" clipPathUnits="userSpaceOnUse">
           <path
             d={`M 50 ${50 - RING_OUTER} a ${RING_OUTER} ${RING_OUTER} 0 1 0 0.001 0 Z
                 M 50 ${50 - RING_INNER} a ${RING_INNER} ${RING_INNER} 0 1 1 -0.001 0 Z`}
             fillRule="evenodd"
           />
         </clipPath>
-        <linearGradient id="kol-wheel-white-fade" gradientUnits="userSpaceOnUse"
+        <linearGradient id="ac-wheel-white-fade" gradientUnits="userSpaceOnUse"
           x1={midHB[0]} y1={midHB[1]} x2={Vw[0]} y2={Vw[1]}>
           <stop offset="0"  stopColor="#FFFFFF" stopOpacity="0" />
           <stop offset="1"  stopColor="#FFFFFF" stopOpacity="1" />
         </linearGradient>
-        <linearGradient id="kol-wheel-black-fade" gradientUnits="userSpaceOnUse"
+        <linearGradient id="ac-wheel-black-fade" gradientUnits="userSpaceOnUse"
           x1={midHW[0]} y1={midHW[1]} x2={Vb[0]} y2={Vb[1]}>
           <stop offset="0"  stopColor="#000000" stopOpacity="0" />
           <stop offset="1"  stopColor="#000000" stopOpacity="1" />

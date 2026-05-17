@@ -51,7 +51,7 @@ export default function Graphic({
   }
   return (
     <span
-      className={`kol-graphic inline-flex w-full h-auto [&>svg]:w-full [&>svg]:h-auto [&>svg]:block ${className}`.trim()}
+      className={`ac-graphic inline-flex w-full h-auto [&>svg]:w-full [&>svg]:h-auto [&>svg]:block ${className}`.trim()}
       style={style}
       role={title ? 'img' : undefined}
       aria-label={title}

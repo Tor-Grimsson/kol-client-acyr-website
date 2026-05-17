@@ -4,7 +4,6 @@ import ThemeToggle from '../framework/ThemeToggle'
 import Footer from './Footer'
 import Icon from '../loaders/icons/Icon'
 import { CartProvider, useCart } from './CartContext'
-import '../../brand/kol-brand-typography.css'
 
 const NAV_LEFT = [
   { label: 'Shop',        to: '/shop' },
@@ -19,7 +18,7 @@ const iconBtnStyle = {
   background: 'transparent',
   border: 'none',
   cursor: 'pointer',
-  color: 'var(--kol-surface-on-primary)',
+  color: 'var(--ac-surface-on-primary)',
   display: 'flex',
   alignItems: 'center',
   padding: '4px',
@@ -34,9 +33,9 @@ const cartBadgeStyle = {
   height: 14,
   padding: '0 3px',
   borderRadius: 7,
-  background: 'var(--kol-accent-primary)',
-  color: 'var(--kol-surface-on-primary)',
-  fontFamily: 'var(--kol-font-family-mono)',
+  background: 'var(--ac-accent-primary)',
+  color: 'var(--ac-surface-on-primary)',
+  fontFamily: 'var(--ac-font-family-mono)',
   fontSize: 9,
   fontWeight: 600,
   lineHeight: '14px',
@@ -46,7 +45,7 @@ const cartBadgeStyle = {
 function CartIcon() {
   const { itemCount } = useCart()
   return (
-    <Link to="/cart" aria-label={`Cart (${itemCount})`} style={iconBtnStyle} className="kol-site-nav-link">
+    <Link to="/cart" aria-label={`Cart (${itemCount})`} style={iconBtnStyle} className="ac-site-nav-link">
       <Icon name="shopping-bag" size={16} />
       {itemCount > 0 && <span style={cartBadgeStyle}>{itemCount}</span>}
     </Link>
@@ -55,7 +54,7 @@ function CartIcon() {
 
 function SearchIcon() {
   return (
-    <button type="button" aria-label="Search" style={iconBtnStyle} className="kol-site-nav-link">
+    <button type="button" aria-label="Search" style={iconBtnStyle} className="ac-site-nav-link">
       <Icon name="search" size={16} />
     </button>
   )
@@ -71,7 +70,7 @@ function SiteShell() {
         logoTo="/"
         rightActions={
           <>
-            <span style={{ color: 'var(--kol-surface-on-primary)', display: 'flex', alignItems: 'center' }}>
+            <span style={{ color: 'var(--ac-surface-on-primary)', display: 'flex', alignItems: 'center' }}>
               <ThemeToggle />
             </span>
             <SearchIcon />

@@ -1,5 +1,5 @@
 /**
- * Input — single-input atom built on the .kol-control shell.
+ * Input — single-input atom built on the .ac-control shell.
  *
  *   variant="filled" (default) — persistent solid bg
  *   variant="ghost"            — borderless at rest, reveals on hover/focus
@@ -23,11 +23,11 @@
  *     the shell at text-meta. aria-hidden — affordances, not labels.
  *   uppercase — adds Tailwind `uppercase` to the input element only.
  *
- * Chrome (bg/border/padding/transition/disabled) comes from .kol-control;
+ * Chrome (bg/border/padding/transition/disabled) comes from .ac-control;
  * Input owns prefix/suffix layout + the inner <input> styling.
  */
 
-const SIZE_TYPE = { sm: 'kol-mono-12', md: 'kol-mono-14', lg: 'kol-mono-16' }
+const SIZE_TYPE = { sm: 'ac-mono-12', md: 'ac-mono-14', lg: 'ac-mono-16' }
 
 export default function Input({
   type = 'text',
@@ -50,9 +50,9 @@ export default function Input({
   const fixedChars = typeof chars === 'number'
 
   const shellCls = [
-    'kol-control',
-    `kol-control--${variant}`,
-    `kol-control-${size}`,
+    'ac-control',
+    `ac-control--${variant}`,
+    `ac-control-${size}`,
     SIZE_TYPE[size],
     'cursor-text',
     className,
@@ -60,10 +60,10 @@ export default function Input({
 
   /* Pin inner input height to the typography token's line-height. Without
    * this the `<input>` renders ~0.5px taller than the equivalent <button>
-   * or <label> at the same kol-mono-N — Chromium computes input height
+   * or <label> at the same ac-mono-N — Chromium computes input height
    * from the font's ascender+descender (font-metric), not strictly from
-   * CSS line-height. Result: kol-control-sm ends up 26.5px instead of 26.
-   * h-4 / h-[18px] / h-[22px] match the kol-mono-12 / -14 / -16 line-heights. */
+   * CSS line-height. Result: ac-control-sm ends up 26.5px instead of 26.
+   * h-4 / h-[18px] / h-[22px] match the ac-mono-12 / -14 / -16 line-heights. */
   const heightCls = size === 'sm' ? 'h-4' : size === 'md' ? 'h-[18px]' : 'h-[22px]'
 
   const inputCls = [

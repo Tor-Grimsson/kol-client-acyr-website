@@ -9,7 +9,7 @@ const SIZE_MAP = {
   lg: { fontSize: 14, paddingY: 8, paddingX: 16, radius: 24, panelRadius: 24, icon: 14 }
 }
 
-const SIZE_TYPE = { sm: 'kol-mono-12', md: 'kol-mono-12', lg: 'kol-mono-14' }
+const SIZE_TYPE = { sm: 'ac-mono-12', md: 'ac-mono-12', lg: 'ac-mono-14' }
 
 const Dropdown = ({
   options = [],
@@ -95,11 +95,11 @@ const Dropdown = ({
   // Variant-specific styles
   const variantStyles = {
     default: {
-      border: '1px solid var(--kol-border-default)',
+      border: '1px solid var(--ac-border-default)',
       borderRadius: isOpen
         ? `${metrics.radius}px ${metrics.radius}px 0 0`
         : `${metrics.radius}px`,
-      backgroundColor: 'var(--kol-surface-primary)',
+      backgroundColor: 'var(--ac-surface-primary)',
       padding: `${metrics.paddingY}px ${metrics.paddingX}px`
     },
     minimal: {
@@ -117,7 +117,7 @@ const Dropdown = ({
        * hover/focus consistency). Without this, subtle is 2px shorter. */
       border: '1px solid transparent',
       borderRadius: isOpen ? '4px 4px 0 0' : '4px',
-      backgroundColor: 'var(--kol-surface-secondary)',
+      backgroundColor: 'var(--ac-surface-secondary)',
       padding: `${metrics.paddingY}px ${metrics.paddingX}px`
     }
   }
@@ -150,7 +150,7 @@ const Dropdown = ({
           border: styles.border,
           borderRadius: styles.borderRadius,
           backgroundColor: styles.backgroundColor,
-          color: 'var(--kol-surface-on-primary)',
+          color: 'var(--ac-surface-on-primary)',
           padding: styles.padding,
           transition: 'background-color 0.2s, color 0.2s, border-color 0.2s',
           ...(variant === 'minimal' && {
@@ -179,9 +179,9 @@ const Dropdown = ({
         focus={false}
         style={{
           backgroundColor: variant === 'minimal'
-            ? 'var(--kol-surface-primary)'
+            ? 'var(--ac-surface-primary)'
             : styles.backgroundColor,
-          color: 'var(--kol-surface-on-primary)',
+          color: 'var(--ac-surface-on-primary)',
           border: variant === 'subtle' ? 'none' : styles.border,
           borderRadius: variant === 'minimal'
             ? '0'
@@ -195,7 +195,7 @@ const Dropdown = ({
             <div
               style={{
                 height: '1px',
-                backgroundColor: 'var(--kol-border-default)'
+                backgroundColor: 'var(--ac-border-default)'
               }}
             />
           </div>

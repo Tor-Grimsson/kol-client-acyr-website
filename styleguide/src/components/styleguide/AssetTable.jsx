@@ -33,8 +33,8 @@ const GRAPHIC_RAW = Object.entries(graphicRawModules).reduce((acc, [p, raw]) => 
   return acc
 }, {})
 
-const TOKEN_INK     = '--kol-surface-on-primary'
-const TOKEN_INVERSE = '--kol-surface-on-inverse'
+const TOKEN_INK     = '--ac-surface-on-primary'
+const TOKEN_INVERSE = '--ac-surface-on-inverse'
 
 function resolveToken(token) {
   if (typeof document === 'undefined') return ''
@@ -69,7 +69,7 @@ function buildColumns({ previewWidthFor, getToken, toggleToken, openOverlay }) {
     {
       accessor: 'preview',
       header: 'Preview',
-      className: (row) => `kol-table-cell-text${getToken(row.id) !== TOKEN_INK ? ' bg-surface-inverse' : ''}`,
+      className: (row) => `ac-table-cell-text${getToken(row.id) !== TOKEN_INK ? ' bg-surface-inverse' : ''}`,
       style: { minWidth: 200 },
       render: (row) => {
         const width = previewWidthFor(row)
@@ -93,19 +93,19 @@ function buildColumns({ previewWidthFor, getToken, toggleToken, openOverlay }) {
     {
       accessor: 'name',
       header: 'Name',
-      className: 'kol-table-cell-text',
+      className: 'ac-table-cell-text',
       render: (row) => row.name.replace(/-/g, ' / '),
     },
     {
       accessor: 'path',
       header: 'Path',
-      className: 'kol-table-cell-meta',
+      className: 'ac-table-cell-meta',
       render: (row) => <code>{row.path.replace(/^.*?\/svg\//, 'svg/')}</code>,
     },
     {
       accessor: 'color',
       header: 'Color',
-      className: 'kol-table-cell-meta',
+      className: 'ac-table-cell-meta',
       render: (row) => <code>{getToken(row.id)}</code>,
     },
     {
@@ -139,7 +139,7 @@ function buildColumns({ previewWidthFor, getToken, toggleToken, openOverlay }) {
                   width: 8,
                   height: 8,
                   background: `var(${token})`,
-                  borderColor: 'var(--kol-fg-24)',
+                  borderColor: 'var(--ac-fg-24)',
                 }}
               />
             </button>

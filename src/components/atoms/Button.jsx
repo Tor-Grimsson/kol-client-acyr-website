@@ -48,27 +48,27 @@ const Button = ({
   ...props
 }) => {
   const variantClass = variant === 'primary'
-    ? 'kol-btn-primary'
+    ? 'ac-btn-primary'
     : variant === 'accent'
-    ? 'kol-btn-accent'
+    ? 'ac-btn-accent'
     : variant === 'outline'
-    ? 'kol-btn-outline'
+    ? 'ac-btn-outline'
     : variant === 'ghost'
-    ? 'kol-btn-ghost'
-    : 'kol-btn-secondary'
+    ? 'ac-btn-ghost'
+    : 'ac-btn-secondary'
 
   // Add size class — pairs the padding rule with its mono type class.
   const sizeClass = size === 'sm'
-    ? 'kol-btn-sm kol-mono-12'
+    ? 'ac-btn-sm ac-mono-12'
     : size === 'lg'
-    ? 'kol-btn-lg kol-mono-16'
-    : 'kol-btn-md kol-mono-14'
+    ? 'ac-btn-lg ac-mono-16'
+    : 'ac-btn-md ac-mono-14'
 
-  // Add kol-btn-animate class if animateIcon is true to disable default hover states
-  const animateClass = animateIcon ? 'kol-btn-animate' : ''
-  const quietClass   = quiet ? 'kol-btn-quiet' : ''
+  // Add ac-btn-animate class if animateIcon is true to disable default hover states
+  const animateClass = animateIcon ? 'ac-btn-animate' : ''
+  const quietClass   = quiet ? 'ac-btn-quiet' : ''
 
-  const combinedClass = `kol-btn ${variantClass} ${sizeClass} ${animateClass} ${quietClass} ${className}`.trim()
+  const combinedClass = `ac-btn ${variantClass} ${sizeClass} ${animateClass} ${quietClass} ${className}`.trim()
 
   // Render icon with optional hover state
   const renderIcon = (iconName, iconHoverName) => {
@@ -81,17 +81,17 @@ const Button = ({
 
     // Render both default and hover icons with positioning
     return (
-      <span className="kol-icon-swap-container" style={{ position: 'relative', display: 'inline-flex', width: iconSize, height: iconSize, overflow: 'hidden' }}>
+      <span className="ac-icon-swap-container" style={{ position: 'relative', display: 'inline-flex', width: iconSize, height: iconSize, overflow: 'hidden' }}>
         <Icon
           name={iconName}
           size={iconSize}
-          className="kol-icon-default"
+          className="ac-icon-default"
           style={{ position: 'absolute' }}
         />
         <Icon
           name={iconHoverName}
           size={iconSize}
-          className="kol-icon-hover"
+          className="ac-icon-hover"
           style={{ position: 'absolute' }}
         />
       </span>

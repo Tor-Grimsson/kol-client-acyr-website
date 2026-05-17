@@ -4,14 +4,14 @@ import KolLogo from '@brand/logos/KolLogo'
 /**
  * PortalIndex — editorial anchor + 6-card numbered grid.
  * Each item: { num, label, sub, to?, mark?, isClient? }
- * Styled by `.site-anchor*` in kol-site.css.
+ * Styled by `.site-anchor*` in ac-site.css.
  */
 export default function PortalIndex({ kicker, title, body, items = [] }) {
   return (
     <section className="site-anchor">
       <div className="max-w-[1200px] mx-auto">
         {kicker && (
-          <span className="kol-helper-12 uppercase tracking-widest text-meta">{kicker}</span>
+          <span className="ac-helper-12 uppercase tracking-widest text-meta">{kicker}</span>
         )}
         {title && <h2 className="site-anchor-pull">{title}</h2>}
         {body && <p className="site-anchor-body">{body}</p>}

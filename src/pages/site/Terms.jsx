@@ -11,19 +11,19 @@ export default function Terms() {
       <section className="max-w-3xl mx-auto px-8 pt-20">
         <Link
           to="/"
-          className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
+          className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
           ← Back
         </Link>
 
-        <p className="kol-prose-label">Legal</p>
-        <h1 className="kol-prose-display-md">Terms of service</h1>
-        <p className="kol-prose-tagline" style={{ marginTop: '8px' }}>
+        <p className="ac-prose-label">Legal</p>
+        <h1 className="ac-prose-display-md">Terms of service</h1>
+        <p className="ac-prose-tagline" style={{ marginTop: '8px' }}>
           Effective {new Date().toLocaleDateString('en', { day: 'numeric', month: 'long', year: 'numeric' })}
         </p>
 
-        <div className="kol-prose">
+        <div className="ac-prose">
           <p>This is a placeholder template. Replace with the studio's actual terms before going live. By using anothercreation.com you agree to these terms. The site is operated by {BRAND_INFO.legal.entity}, kennitala {BRAND_INFO.legal.kt}.</p>
 
           <h2>Orders</h2>

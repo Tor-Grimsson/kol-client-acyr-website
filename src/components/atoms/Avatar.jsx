@@ -7,7 +7,7 @@ const SIZE_MAP = {
 
 export default function Avatar({ initial, src, alt, size = 'sm', className = '' }) {
   const sizeCls = SIZE_MAP[size] ?? SIZE_MAP.sm
-  const base = `kol-avatar inline-flex items-center justify-center rounded-full bg-surface-secondary text-emphasis font-narrow font-semibold shrink-0 overflow-hidden ${sizeCls} ${className}`
+  const base = `ac-avatar inline-flex items-center justify-center rounded-full bg-surface-secondary text-emphasis font-narrow font-semibold shrink-0 overflow-hidden ${sizeCls} ${className}`
   if (src) {
     return (
       <span className={base}>

@@ -117,8 +117,8 @@ export default function MenuTop() {
   }
 
   return (
-    <div className="kol-editor-topbar flex items-center gap-3 px-4 h-12 border-b border-fg-08">
-      <span className="kol-helper-12 text-emphasis truncate">
+    <div className="ac-editor-topbar flex items-center gap-3 px-4 h-12 border-b border-fg-08">
+      <span className="ac-helper-12 text-emphasis truncate">
         {currentPresetName || 'Untitled'}
       </span>
       <div className="flex items-center gap-1 ml-auto">
@@ -219,7 +219,7 @@ export default function MenuTop() {
                   label={`${SLOT_META[slot].label} · ${items.length}`}
                 >
                   {items.length === 0 ? (
-                    <div className="kol-helper-10 text-subtle px-3 py-1">empty</div>
+                    <div className="ac-helper-10 text-subtle px-3 py-1">empty</div>
                   ) : (
                     items.map((item, i) => {
                       const fallback = `${SLOT_META[slot].label.slice(0, -1)} ${i + 1}`

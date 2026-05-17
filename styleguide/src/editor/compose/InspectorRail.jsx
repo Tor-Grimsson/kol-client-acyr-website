@@ -45,7 +45,7 @@ export default function InspectorRail() {
     title = `${layerOnlyIds.length} layers`
     body = (
       <div className="flex flex-col gap-3">
-        <p className="kol-helper-12 text-meta">{layerOnlyIds.length} layers selected.</p>
+        <p className="ac-helper-12 text-meta">{layerOnlyIds.length} layers selected.</p>
         <AlignmentPanel />
         <EditorButton
           variant="primary"
@@ -63,9 +63,9 @@ export default function InspectorRail() {
   else if (layer) { title = labelForLayer(layer); body = <LayerInspector layer={layer} /> }
 
   return (
-    <div className="kol-compose-rail kol-compose-rail--inspector">
+    <div className="ac-compose-rail ac-compose-rail--inspector">
       <div className="flex items-center gap-3 px-4 pt-3 pb-2">
-        {title && <span className="kol-helper-12 text-emphasis">{title}</span>}
+        {title && <span className="ac-helper-12 text-emphasis">{title}</span>}
         {canDelete && (
           <EditorButton
             variant="primary"
@@ -83,7 +83,7 @@ export default function InspectorRail() {
         )}
       </div>
       {body && (
-        <div className="kol-compose-inspector-body">
+        <div className="ac-compose-inspector-body">
           {body}
         </div>
       )}

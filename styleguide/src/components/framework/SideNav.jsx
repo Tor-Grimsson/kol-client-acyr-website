@@ -22,7 +22,7 @@ function collectSectionIds(node) {
   return ids
 }
 
-const linkBase = 'kol-sidenav-link kol-helper-10 block relative py-[4px] no-underline transition-colors duration-150'
+const linkBase = 'ac-sidenav-link ac-helper-10 block relative py-[4px] no-underline transition-colors duration-150'
 const linkCls = `${linkBase} text-body hover:text-emphasis`
 const linkActiveCls = `${linkBase} is-active`
 
@@ -38,7 +38,7 @@ function hasActiveDescendant(children, activeSectionId) {
 
 const leafStyle = (indent) => ({
   paddingLeft: indent,
-  '--kol-sidenav-dot-left': `${indent - 14}px`,
+  '--ac-sidenav-dot-left': `${indent - 14}px`,
 })
 
 function SectionLeaf({ leaf, basePath, isActive, indent }) {
@@ -75,12 +75,12 @@ function GroupNode({ group, basePath, activeSectionId, indent }) {
   return (
     <li>
       <div
-        className={`kol-sidenav-group kol-helper-10 uppercase ${isAncestor ? 'text-emphasis' : 'text-subtle'}`}
+        className={`ac-sidenav-group ac-helper-10 uppercase ${isAncestor ? 'text-emphasis' : 'text-subtle'}`}
         style={{ paddingLeft: indent }}
       >
         {group.label}
       </div>
-      <ul className="kol-sidenav-list">
+      <ul className="ac-sidenav-list">
         {group.children.map((child, i) => (
           <ChildNode
             key={child.id ?? child.to ?? `g-${i}`}
@@ -138,11 +138,11 @@ export default function SideNav({ drawerOpen = false, onCloseDrawer }) {
 
   return (
     <aside
-      className={`kol-sidenav sticky top-0 self-start h-dvh flex flex-col border-r border-fg-08 z-20 bg-surface-primary${collapsed ? ' is-collapsed' : ''}${drawerOpen ? ' is-drawer-open' : ''}`}
+      className={`ac-sidenav sticky top-0 self-start h-dvh flex flex-col border-r border-fg-08 z-20 bg-surface-primary${collapsed ? ' is-collapsed' : ''}${drawerOpen ? ' is-drawer-open' : ''}`}
     >
       <button
         type="button"
-        className="kol-sidenav-toggle absolute top-5 right-[-12px] z-[2] w-6 h-6 inline-flex items-center justify-center bg-[var(--kol-surface-primary)] border border-[var(--kol-border-default)] rounded-full p-0 cursor-pointer text-[14px] leading-none transition-colors duration-150 text-meta hover:text-emphasis hover:border-fg-24"
+        className="ac-sidenav-toggle absolute top-5 right-[-12px] z-[2] w-6 h-6 inline-flex items-center justify-center bg-[var(--ac-surface-primary)] border border-[var(--ac-border-default)] rounded-full p-0 cursor-pointer text-[14px] leading-none transition-colors duration-150 text-meta hover:text-emphasis hover:border-fg-24"
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         title={collapsed ? 'Expand' : 'Collapse'}
         onClick={() => setCollapsed((v) => !v)}
@@ -150,11 +150,11 @@ export default function SideNav({ drawerOpen = false, onCloseDrawer }) {
         <Icon name={collapsed ? 'chevron-right' : 'chevron-left'} size={12} />
       </button>
 
-      <div className="kol-sidenav-scroll flex-1 flex flex-col justify-between overflow-y-auto pt-4 pb-4 [scrollbar-width:thin]">
-        <ul className="kol-sidenav-tree flex flex-col gap-[2px]">
+      <div className="ac-sidenav-scroll flex-1 flex flex-col justify-between overflow-y-auto pt-4 pb-4 [scrollbar-width:thin]">
+        <ul className="ac-sidenav-tree flex flex-col gap-[2px]">
           {NAV_TREE.map((page) => {
             const isActivePage = activePage?.id === page.id
-            const hopClass = `kol-sidenav-hop kol-helper-12 relative flex items-center gap-3 py-2 pr-10 pl-6 no-underline`
+            const hopClass = `ac-sidenav-hop ac-helper-12 relative flex items-center gap-3 py-2 pr-10 pl-6 no-underline`
             return (
               <li key={page.id}>
                 {page.external ? (
@@ -163,10 +163,10 @@ export default function SideNav({ drawerOpen = false, onCloseDrawer }) {
                     className={hopClass}
                     rel="noopener"
                   >
-                    <span className="kol-sidenav-hop-icon inline-flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
+                    <span className="ac-sidenav-hop-icon inline-flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
                       <Icon name={page.icon} size={16} />
                     </span>
-                    <span className="kol-sidenav-hop-label flex-1 min-w-0">{page.label}</span>
+                    <span className="ac-sidenav-hop-label flex-1 min-w-0">{page.label}</span>
                   </a>
                 ) : (
                   <NavLink
@@ -176,15 +176,15 @@ export default function SideNav({ drawerOpen = false, onCloseDrawer }) {
                       `${hopClass}${isActive ? ' is-active' : ''}`
                     }
                   >
-                    <span className="kol-sidenav-hop-icon inline-flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
+                    <span className="ac-sidenav-hop-icon inline-flex items-center justify-center w-5 h-5 shrink-0" aria-hidden="true">
                       <Icon name={page.icon} size={16} />
                     </span>
-                    <span className="kol-sidenav-hop-label flex-1 min-w-0">{page.label}</span>
+                    <span className="ac-sidenav-hop-label flex-1 min-w-0">{page.label}</span>
                   </NavLink>
                 )}
 
                 {isActivePage && page.children && (
-                  <ul className="kol-sidenav-list mb-2 flex flex-col gap-2">
+                  <ul className="ac-sidenav-list mb-2 flex flex-col gap-2">
                     {page.children.map((child, i) => (
                       <ChildNode
                         key={child.id ?? child.to ?? `g-${i}`}
@@ -206,12 +206,12 @@ export default function SideNav({ drawerOpen = false, onCloseDrawer }) {
         </div>
       </div>
 
-      <div className="kol-sidenav-footer flex items-center pl-6 pr-4 h-14 border-t border-fg-08 min-w-0">
+      <div className="ac-sidenav-footer flex items-center pl-6 pr-4 h-14 border-t border-fg-08 min-w-0">
         <a
           href="https://kolkrabbi.io"
           target="_blank"
           rel="noopener"
-          className="kol-helper-10 !font-normal no-underline group whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
+          className="ac-helper-10 !font-normal no-underline group whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
         >
           <span className="text-body group-hover:text-emphasis">Kolkrabbi Vinnustofa</span>
           <span className="text-meta group-hover:text-emphasis"> · {new Date().getFullYear()}</span>

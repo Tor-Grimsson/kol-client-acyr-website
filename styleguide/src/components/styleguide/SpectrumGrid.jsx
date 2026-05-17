@@ -6,7 +6,7 @@
  * Scannable overview of the entire color system in one grid.
  *
  * Hex values are read from CSS custom properties at mount so the theme file
- * stays the single source of truth. Change a ramp value in kol-color.css,
+ * stays the single source of truth. Change a ramp value in ac-color.css,
  * the grid picks it up automatically.
  */
 import { useEffect, useState } from 'react'
@@ -29,22 +29,22 @@ export default function SpectrumGrid({ ramps, stops = DEFAULT_STOPS, brandAnchor
     setResolved(out)
   }, [ramps, stops])
 
-  if (!resolved) return <div className="kol-spectrum-grid kol-spectrum-grid--loading" aria-busy="true" />
+  if (!resolved) return <div className="ac-spectrum-grid ac-spectrum-grid--loading" aria-busy="true" />
 
   const isBrandAnchor = (ramp, stop) =>
     brandAnchors.some((a) => a.ramp === ramp && a.stop === stop)
 
   return (
-    <div className="kol-spectrum-grid">
-      <div className="kol-spectrum-grid-head">
-        <span className="kol-spectrum-grid-corner" aria-hidden="true" />
+    <div className="ac-spectrum-grid">
+      <div className="ac-spectrum-grid-head">
+        <span className="ac-spectrum-grid-corner" aria-hidden="true" />
         {stops.map((s) => (
-          <span key={s} className="kol-spectrum-grid-stop-label">{s}</span>
+          <span key={s} className="ac-spectrum-grid-stop-label">{s}</span>
         ))}
       </div>
       {ramps.map((ramp) => (
-        <div key={ramp} className="kol-spectrum-grid-row">
-          <span className="kol-spectrum-grid-row-label">{ramp}</span>
+        <div key={ramp} className="ac-spectrum-grid-row">
+          <span className="ac-spectrum-grid-row-label">{ramp}</span>
           {stops.map((stop) => {
             const hex = resolved[ramp][stop]
             const textColor = isLight(hex) ? '#000' : '#fff'
@@ -52,13 +52,13 @@ export default function SpectrumGrid({ ramps, stops = DEFAULT_STOPS, brandAnchor
             return (
               <div
                 key={stop}
-                className="kol-spectrum-grid-cell"
+                className="ac-spectrum-grid-cell"
                 style={{ background: hex, color: textColor }}
                 title={`${ramp}-${stop}  ${hex}${brand ? '  · brand anchor' : ''}`}
               >
-                <span className="kol-spectrum-grid-cell-stop">{stop}</span>
-                {brand && <span className="kol-spectrum-grid-cell-marker" aria-hidden="true" />}
-                <span className="kol-spectrum-grid-cell-hex">{hex}</span>
+                <span className="ac-spectrum-grid-cell-stop">{stop}</span>
+                {brand && <span className="ac-spectrum-grid-cell-marker" aria-hidden="true" />}
+                <span className="ac-spectrum-grid-cell-hex">{hex}</span>
               </div>
             )
           })}

@@ -80,15 +80,15 @@ const QuantityInput = ({
         style={{
           position: 'relative',
           height: '42.5px',
-          border: '1px solid var(--kol-border-default)',
+          border: '1px solid var(--ac-border-default)',
           borderRadius: `${metrics.radius}px`,
-          backgroundColor: 'var(--kol-surface-primary)',
-          color: 'var(--kol-surface-on-primary)',
+          backgroundColor: 'var(--ac-surface-primary)',
+          color: 'var(--ac-surface-on-primary)',
           paddingLeft: `${metrics.paddingX}px`,
           paddingRight: `${metrics.paddingX}px`,
           fontSize: `${metrics.fontSize}px`,
           lineHeight: '120%',
-          fontFamily: 'var(--kol-font-family-mono)',
+          fontFamily: 'var(--ac-font-family-mono)',
           boxSizing: 'border-box'
         }}
       >

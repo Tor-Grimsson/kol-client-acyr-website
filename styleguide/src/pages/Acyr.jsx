@@ -18,8 +18,8 @@ import { ARTICLES, AUTHORS } from '@brand/data/blog-data'
 
 /* ── Helpers ── */
 
-const TokenName = ({ children }) => <code className="kol-helper-xs text-emphasis">{children}</code>
-const Meta = ({ children }) => <span className="kol-helper-xs text-meta">{children}</span>
+const TokenName = ({ children }) => <code className="ac-helper-xs text-emphasis">{children}</code>
+const Meta = ({ children }) => <span className="ac-helper-xs text-meta">{children}</span>
 
 const yearAsc  = (a, b) => a.year - b.year
 const yearDesc = (a, b) => (b.year ?? 0) - (a.year ?? 0)
@@ -227,14 +227,14 @@ export default function Acyr() {
   }
 
   return (
-    <main className="kol-page">
+    <main className="ac-page">
       <PageSection
         id="overview"
         label="ACYR · Source of truth"
         title="Yr Þrastardóttir"
         body="Single-page registry of everything we know about the brand: identity, career timeline, press, collaborators, vendors, live-site mirror, and gaps. All data drawn live from the project's data files — edit once, propagate everywhere."
       >
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <p>
             <strong>Snapshot.</strong> {counts.collections} collections · {counts.looks} runway looks ·
             {' '}{counts.products} catalog products · {counts.articles} journal articles ·
@@ -251,7 +251,7 @@ export default function Acyr() {
       </PageSection>
 
       <PageSection id="bio" label="02 — bio" title="Designer & director" body="Two parallel biographies — fashion designer and filmmaker — plus a personal-detail card.">
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <p>
             <strong>Born.</strong> {new Date(BIO.birthDate).toLocaleDateString('en', { day: 'numeric', month: 'long', year: 'numeric' })} in {BIO.birthCity}. Moved to Iceland age {BIO.movedToIcelandAge}; grew up in {BIO.hometown}.
           </p>

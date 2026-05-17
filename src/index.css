@@ -1,13 +1,3 @@
 @import "tailwindcss";
-@import "./styles/kol-theme.css";
-
-/* Brand layer — Kolkrabbi identity (hue ramps, brand-primary/secondary, accent rebind).
-   Layers ON TOP of kol-color.css; the DS ships brand-neutral, this binds the brand.
-   Loaded BEFORE framework so framework can override at equal specificity. */
-@import "./brand/kol-brand-color.css";
-
-/* Framework layer — page chrome, brand layout, structural rules. */
-@import "./components/framework/kol-framework.css";
-
-/* Marketing-site (.kol-site-*) chrome. */
-@import "./styles/kol-site.css";
+@import "./ds/index.css";
+@import "./styles/site.css";

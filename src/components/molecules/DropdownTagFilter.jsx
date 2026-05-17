@@ -111,12 +111,12 @@ const DropdownTagFilter = ({
       <div
         className="min-w-[180px]"
         style={{
-          border: '1px solid var(--kol-border-default)',
+          border: '1px solid var(--ac-border-default)',
           borderRadius: isOpen
             ? `${metrics.radius}px ${metrics.radius}px 0 0`
             : `${metrics.radius}px`,
-          backgroundColor: 'var(--kol-surface-primary)',
-          color: 'var(--kol-surface-on-primary)'
+          backgroundColor: 'var(--ac-surface-primary)',
+          color: 'var(--ac-surface-on-primary)'
         }}
       >
         <button
@@ -129,7 +129,7 @@ const DropdownTagFilter = ({
             padding: `${metrics.paddingY}px ${metrics.paddingX}px`,
             fontSize: `${metrics.fontSize}px`,
             lineHeight: '120%',
-            fontFamily: 'var(--kol-font-family-mono)'
+            fontFamily: 'var(--ac-font-family-mono)'
           }}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -162,9 +162,9 @@ const DropdownTagFilter = ({
         <div
           className="absolute w-full border border-t-0"
           style={{
-            backgroundColor: 'var(--kol-surface-primary)',
-            color: 'var(--kol-surface-on-primary)',
-            borderColor: 'var(--kol-border-default)',
+            backgroundColor: 'var(--ac-surface-primary)',
+            color: 'var(--ac-surface-on-primary)',
+            borderColor: 'var(--ac-border-default)',
             top: '100%',
             left: 0,
             marginTop: '-1px',
@@ -176,7 +176,7 @@ const DropdownTagFilter = ({
             <div
               style={{
                 height: '1px',
-                backgroundColor: 'var(--kol-border-default)'
+                backgroundColor: 'var(--ac-border-default)'
               }}
             />
           </div>
@@ -192,7 +192,7 @@ const DropdownTagFilter = ({
                 padding: `8px ${metrics.paddingX}px`,
                 fontSize: `${metrics.fontSize}px`,
                 lineHeight: '120%',
-                fontFamily: 'var(--kol-font-family-mono)'
+                fontFamily: 'var(--ac-font-family-mono)'
               }}
             >
               Deselect all
@@ -212,7 +212,7 @@ const DropdownTagFilter = ({
                     padding: `8px ${metrics.paddingX}px`,
                     fontSize: `${metrics.fontSize}px`,
                     lineHeight: '120%',
-                    fontFamily: 'var(--kol-font-family-mono)'
+                    fontFamily: 'var(--ac-font-family-mono)'
                   }}
                   role="option"
                   aria-selected={isSelected}
@@ -235,7 +235,7 @@ const DropdownTagFilter = ({
                         width: '4px',
                         height: '4px',
                         borderRadius: '50%',
-                        backgroundColor: 'var(--kol-surface-on-primary)'
+                        backgroundColor: 'var(--ac-surface-on-primary)'
                       }}
                     />
                   )}

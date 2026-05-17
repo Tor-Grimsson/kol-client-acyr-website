@@ -57,7 +57,7 @@ export default function KolLogo({
     <Cmp
       width={width}
       height={height}
-      className={`kol-logo ${className}`.trim()}
+      className={`ac-logo ${className}`.trim()}
       style={style}
       role={title ? 'img' : undefined}
       aria-label={title}

@@ -13,7 +13,7 @@
  * voice (16px / 0.1em / 100% / 500). Display type stays untouched.
  *
  * Font-faces are NOT registered here — the SPA already loads the full
- * Right Grotesk family via kol-typography.css.
+ * Right Grotesk family via ac-typography.css.
  */
 
 /* Auto-inject the slide CSS once on module load. Both DeckShell (carousel
@@ -23,9 +23,9 @@ let _injected = false
 function injectOnce(css) {
   if (_injected) return
   if (typeof document === 'undefined') return
-  if (document.getElementById('kol-slide-css')) { _injected = true; return }
+  if (document.getElementById('ac-slide-css')) { _injected = true; return }
   const el = document.createElement('style')
-  el.id = 'kol-slide-css'
+  el.id = 'ac-slide-css'
   el.textContent = css
   document.head.appendChild(el)
   _injected = true
@@ -61,7 +61,7 @@ export const SHARED = `
   --display: 'Right Grotesk Narrow', system-ui, sans-serif;
   --tall:    'Right Grotesk Tall',    system-ui, sans-serif;
   --text:    'Right Grotesk Compact', system-ui, sans-serif;
-  --tight:   var(--kol-font-family-mono);
+  --tight:   var(--ac-font-family-mono);
   --wide:    'Right Grotesk Wide',    system-ui, sans-serif;
   --spatial: 'Right Grotesk Spatial', system-ui, sans-serif;
   --base:    'Right Grotesk',         system-ui, sans-serif;
@@ -75,12 +75,12 @@ export const SHARED = `
 .s-credits, .s-end, .s-season {
   position: absolute; inset: 0;
   overflow: hidden;
-  background: var(--slide-bg, var(--kol-color-absolute-black));
+  background: var(--slide-bg, var(--ac-color-absolute-black));
   color: var(--slide-fg, var(--grey-50));
   font-family: var(--text);
 }
 
-/* ── Universal chrome — kol-helper-10 alignment everywhere ─────── */
+/* ── Universal chrome — ac-helper-10 alignment everywhere ─────── */
 .eyebrow {
   position: absolute; top: 60px; left: 80px; right: 80px;
   display: flex; justify-content: space-between; align-items: baseline;
@@ -130,7 +130,7 @@ export const SHARED = `
 .s-look .frame .mono em { font-family: var(--display); font-style: italic; font-weight: 500; color: var(--grey-300); }
 .s-look .corners::before, .s-look .corners::after,
 .s-look .corners > i::before, .s-look .corners > i::after {
-  content: ''; position: absolute; width: 18px; height: 18px; background: var(--kol-color-absolute-black); border: 1px solid var(--grey-500);
+  content: ''; position: absolute; width: 18px; height: 18px; background: var(--ac-color-absolute-black); border: 1px solid var(--grey-500);
 }
 .s-look .corners::before { top: 132px; left: 232px; }
 .s-look .corners::after  { top: 132px; right: 232px; }
@@ -342,23 +342,23 @@ export const SHARED = `
 }
 .runway-deck-inline-counter {
   position: absolute; top: 12px; left: 16px; z-index: 5;
-  font-family: var(--kol-font-family-mono);
+  font-family: var(--ac-font-family-mono);
   font-size: 11px; letter-spacing: 0.3em;
   color: rgba(245, 245, 245, 0.7);
 }
-/* Reusable arrow button — same visual treatment as .kol-sidenav-toggle (small
+/* Reusable arrow button — same visual treatment as .ac-sidenav-toggle (small
    round, themed border, themed bg). One class for both inline + fullscreen
    variants, position/size deltas applied via the variant modifiers. */
 .runway-deck-arrow {
   display: inline-flex; align-items: center; justify-content: center;
-  background: var(--kol-surface-primary);
-  border: 1px solid var(--kol-border-default);
-  color: var(--kol-fg-48);
+  background: var(--ac-surface-primary);
+  border: 1px solid var(--ac-border-default);
+  color: var(--ac-fg-48);
   cursor: pointer; padding: 0;
   border-radius: 999px;
   transition: color 150ms ease, border-color 150ms ease, opacity 150ms ease;
 }
-.runway-deck-arrow:hover { color: var(--kol-surface-on-primary); border-color: var(--kol-fg-24); }
+.runway-deck-arrow:hover { color: var(--ac-surface-on-primary); border-color: var(--ac-fg-24); }
 .runway-deck-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
 
 .runway-deck-arrow--inline-prev,
@@ -372,7 +372,7 @@ export const SHARED = `
 /* ── Fullscreen UI (controls / counter / exit) ────────────────── */
 .runway-deck-ui {
   position: fixed; z-index: 110;
-  font-family: var(--kol-font-family-mono);
+  font-family: var(--ac-font-family-mono);
   color: rgba(245, 245, 245, 0.8); user-select: none;
 }
 .runway-deck-ui--counter { top: 24px; left: 24px; font-size: 12px; letter-spacing: 0.3em; }

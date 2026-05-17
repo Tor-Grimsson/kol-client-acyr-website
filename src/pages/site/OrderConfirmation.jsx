@@ -23,12 +23,12 @@ export default function OrderConfirmation() {
   if (!state || !state.captureId) {
     return (
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
-        <p className="kol-prose-label">Confirmation</p>
-        <h1 className="kol-prose-display-md">No order found.</h1>
-        <p className="kol-prose-tagline" style={{ marginBottom: '24px' }}>
+        <p className="ac-prose-label">Confirmation</p>
+        <h1 className="ac-prose-display-md">No order found.</h1>
+        <p className="ac-prose-tagline" style={{ marginBottom: '24px' }}>
           If you just placed an order, your confirmation email is on its way.
         </p>
-        <Link to="/shop" className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline">← Back to shop</Link>
+        <Link to="/shop" className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline">← Back to shop</Link>
       </main>
     )
   }
@@ -53,9 +53,9 @@ export default function OrderConfirmation() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-secondary" style={{ marginBottom: '24px' }}>
           <Icon name="check" size={28} />
         </div>
-        <p className="kol-prose-label">Thank you</p>
-        <h1 className="kol-prose-display-md">Your order is confirmed.</h1>
-        <p className="kol-prose-lede">
+        <p className="ac-prose-label">Thank you</p>
+        <h1 className="ac-prose-display-md">Your order is confirmed.</h1>
+        <p className="ac-prose-lede">
           A receipt has been sent to <strong>{email}</strong>. PayPal capture ID <strong>{captureId}</strong>.
         </p>
       </section>
@@ -64,19 +64,19 @@ export default function OrderConfirmation() {
         <Divider className="mb-8" />
         <div className="grid gap-8 sm:grid-cols-2">
           <div>
-            <p className="kol-prose-label">Order reference</p>
-            <div className="kol-prose">
+            <p className="ac-prose-label">Order reference</p>
+            <div className="ac-prose">
               <p style={{ margin: 0 }}>
                 {printfulOrderId ? `Printful #${printfulOrderId}` : 'Fulfillment processing'}
               </p>
-              <p className="kol-helper-xxs text-meta" style={{ margin: '4px 0 0' }}>
+              <p className="ac-helper-xxs text-meta" style={{ margin: '4px 0 0' }}>
                 Tracking will be emailed when the order ships (typically 2–7 business days).
               </p>
             </div>
           </div>
           <div>
-            <p className="kol-prose-label">Shipping to</p>
-            <div className="kol-prose">
+            <p className="ac-prose-label">Shipping to</p>
+            <div className="ac-prose">
               <p style={{ margin: '0 0 2px' }}>{delivery.firstName} {delivery.lastName}</p>
               <p style={{ margin: '0 0 2px' }}>{delivery.street}</p>
               <p style={{ margin: 0 }}>{delivery.postcode} {delivery.city}</p>
@@ -85,7 +85,7 @@ export default function OrderConfirmation() {
         </div>
         {printfulError && (
           <div className="mt-8 p-4 rounded bg-fg-04">
-            <p className="kol-helper-xs text-emphasis" style={{ margin: 0 }}>
+            <p className="ac-helper-xs text-emphasis" style={{ margin: 0 }}>
               Payment received. Fulfillment hasn't been queued yet — our team will follow up by email.
             </p>
           </div>
@@ -93,7 +93,7 @@ export default function OrderConfirmation() {
       </section>
 
       <section className="max-w-3xl mx-auto px-8 pt-12">
-        <p className="kol-prose-label">Order</p>
+        <p className="ac-prose-label">Order</p>
         <Divider className="mb-6" />
         <ul className="flex flex-col gap-4" style={{ marginBottom: '24px' }}>
           {items.map((it) => (
@@ -102,18 +102,18 @@ export default function OrderConfirmation() {
                 <img src={it.image} alt={it.name} className="w-full h-full object-cover" />
               </div>
               <div>
-                <p className="kol-helper-xs text-emphasis" style={{ margin: 0 }}>{it.name}</p>
-                <p className="kol-helper-xxs text-meta" style={{ margin: '4px 0 0' }}>
+                <p className="ac-helper-xs text-emphasis" style={{ margin: 0 }}>{it.name}</p>
+                <p className="ac-helper-xxs text-meta" style={{ margin: '4px 0 0' }}>
                   {it.size && <>Size: {it.size} · </>}
                   Qty: {it.qty}
                 </p>
               </div>
-              <p className="kol-helper-xs text-emphasis" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
+              <p className="ac-helper-xs text-emphasis" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
             </li>
           ))}
         </ul>
         <Divider />
-        <div className="kol-prose" style={{ marginTop: '16px' }}>
+        <div className="ac-prose" style={{ marginTop: '16px' }}>
           <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 4px' }}><span>Subtotal</span><span>{formatPrice(subtotal, currency)}</span></p>
           {tax > 0 && (
             <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 4px' }}><span>Tax</span><span>{formatPrice(tax, currency)}</span></p>

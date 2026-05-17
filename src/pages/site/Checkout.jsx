@@ -36,7 +36,7 @@ const PAYPAL_OPTS = {
 function StepHeader({ index, label, status, onEdit }) {
   return (
     <div className="flex items-center justify-between" style={{ marginBottom: '8px' }}>
-      <p className="kol-prose-label" style={{ margin: 0 }}>
+      <p className="ac-prose-label" style={{ margin: 0 }}>
         <span className="text-meta">{String(index).padStart(2, '0')}</span>
         <span style={{ marginLeft: '12px' }}>{label}</span>
       </p>
@@ -44,7 +44,7 @@ function StepHeader({ index, label, status, onEdit }) {
         <button
           type="button"
           onClick={onEdit}
-          className="kol-helper-xxs text-meta hover:text-emphasis"
+          className="ac-helper-xxs text-meta hover:text-emphasis"
           style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
         >
           Edit
@@ -55,7 +55,7 @@ function StepHeader({ index, label, status, onEdit }) {
 }
 
 function StepCollapsed({ children }) {
-  return <div className="kol-prose"><p style={{ margin: 0 }}>{children}</p></div>
+  return <div className="ac-prose"><p style={{ margin: 0 }}>{children}</p></div>
 }
 
 export default function Checkout() {
@@ -105,9 +105,9 @@ export default function Checkout() {
   if (items.length === 0) {
     return (
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
-        <p className="kol-prose-label">Checkout</p>
-        <h1 className="kol-prose-display-md">Your cart is empty.</h1>
-        <Link to="/shop" className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline">← Back to shop</Link>
+        <p className="ac-prose-label">Checkout</p>
+        <h1 className="ac-prose-display-md">Your cart is empty.</h1>
+        <Link to="/shop" className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline">← Back to shop</Link>
       </main>
     )
   }
@@ -192,8 +192,8 @@ export default function Checkout() {
     <PayPalScriptProvider options={PAYPAL_OPTS}>
       <main className="bg-surface-primary pb-24">
         <section className="max-w-6xl mx-auto px-8 pt-16 pb-8">
-          <p className="kol-prose-label">Checkout</p>
-          <h1 className="kol-prose-display-md">Secure checkout</h1>
+          <p className="ac-prose-label">Checkout</p>
+          <h1 className="ac-prose-display-md">Secure checkout</h1>
         </section>
 
         <section className="max-w-6xl mx-auto px-8">
@@ -215,7 +215,7 @@ export default function Checkout() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label className="kol-helper-xxs text-meta inline-flex items-center gap-2 cursor-pointer">
+                    <label className="ac-helper-xxs text-meta inline-flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" checked={newsletter} onChange={(e) => setNewsletter(e.target.checked)} />
                       Sign up to get the latest collections in your inbox.
                     </label>
@@ -264,7 +264,7 @@ export default function Checkout() {
                 <StepHeader index={3} label="Pay" status={states.pay} />
                 {states.pay === 'open' && (
                   <div className="flex flex-col gap-4">
-                    <div className="kol-prose">
+                    <div className="ac-prose">
                       <p style={{ margin: 0 }}>
                         {shipping
                           ? <>Total {formatPrice(total, currency)} — paid securely through PayPal. Pay with a PayPal account or any major card.</>
@@ -276,12 +276,12 @@ export default function Checkout() {
 
                     {(payError || shippingError) && (
                       <div className="p-3 rounded bg-fg-04">
-                        <p className="kol-helper-xs text-emphasis" style={{ margin: 0 }}>{payError ?? shippingError}</p>
+                        <p className="ac-helper-xs text-emphasis" style={{ margin: 0 }}>{payError ?? shippingError}</p>
                       </div>
                     )}
 
                     {paying ? (
-                      <div className="kol-helper-xs text-meta">Processing your order…</div>
+                      <div className="ac-helper-xs text-meta">Processing your order…</div>
                     ) : (
                       <PayPalButtons
                         style={{ layout: 'vertical', color: 'black', shape: 'rect', label: 'pay', height: 48 }}
@@ -302,7 +302,7 @@ export default function Checkout() {
 
             {/* Right — order summary */}
             <aside className="bg-surface-secondary p-6 rounded">
-              <p className="kol-prose-label" style={{ marginBottom: '16px' }}>Order summary</p>
+              <p className="ac-prose-label" style={{ marginBottom: '16px' }}>Order summary</p>
               <ul className="flex flex-col gap-3" style={{ marginBottom: '20px' }}>
                 {items.map((it) => (
                   <li key={it.id} className="grid gap-3 grid-cols-[40px_1fr_auto] sm:grid-cols-[48px_1fr_auto] items-start">
@@ -310,18 +310,18 @@ export default function Checkout() {
                       <img src={it.image} alt={it.name} className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <p className="kol-helper-xxs text-emphasis" style={{ margin: 0 }}>{it.name}</p>
-                      <p className="kol-helper-xxs text-meta" style={{ margin: '2px 0 0' }}>
+                      <p className="ac-helper-xxs text-emphasis" style={{ margin: 0 }}>{it.name}</p>
+                      <p className="ac-helper-xxs text-meta" style={{ margin: '2px 0 0' }}>
                         {it.size && <>Size: {it.size} · </>}
                         Qty: {it.qty}
                       </p>
                     </div>
-                    <p className="kol-helper-xxs text-emphasis" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
+                    <p className="ac-helper-xxs text-emphasis" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
                   </li>
                 ))}
               </ul>
               <Divider />
-              <div className="kol-prose" style={{ marginTop: '16px' }}>
+              <div className="ac-prose" style={{ marginTop: '16px' }}>
                 <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 4px' }}>
                   <span>Subtotal</span><span>{formatPrice(subtotal, currency)}</span>
                 </p>
@@ -340,7 +340,7 @@ export default function Checkout() {
                   <span><strong>Total</strong></span><span><strong>{formatPrice(total, currency)}</strong></span>
                 </p>
               </div>
-              <p className="kol-helper-xxs text-meta inline-flex items-center gap-2 mt-6" style={{ marginBottom: 0 }}>
+              <p className="ac-helper-xxs text-meta inline-flex items-center gap-2 mt-6" style={{ marginBottom: 0 }}>
                 <Icon name="lock" size={12} /> Secure checkout via PayPal
               </p>
             </aside>

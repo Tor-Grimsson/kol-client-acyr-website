@@ -48,13 +48,13 @@ export default function Shop() {
         <div
           aria-hidden="true"
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--kol-surface-primary) 30%, transparent), color-mix(in srgb, var(--kol-surface-primary) 30%, transparent), var(--kol-surface-primary))' }}
+          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--ac-surface-primary) 30%, transparent), color-mix(in srgb, var(--ac-surface-primary) 30%, transparent), var(--ac-surface-primary))' }}
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-8">
-            <p className="kol-prose-label">All-over print</p>
-            <h1 className="kol-prose-display">Shop</h1>
-            <p className="kol-prose-tagline" style={{ marginTop: '8px' }}>{BRAND_INFO.labels.manifesto}</p>
+            <p className="ac-prose-label">All-over print</p>
+            <h1 className="ac-prose-display">Shop</h1>
+            <p className="ac-prose-tagline" style={{ marginTop: '8px' }}>{BRAND_INFO.labels.manifesto}</p>
           </div>
         </div>
       </section>

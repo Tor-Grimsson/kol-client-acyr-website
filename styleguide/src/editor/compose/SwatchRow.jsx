@@ -14,7 +14,7 @@ import { tokenNameFor } from '../modes/palette/pools'
 export default function SwatchRow({ label, hex, disabled, unused, locked, edited, onToggleLock, onChangeHex }) {
   return (
     <div
-      className={`kol-swatch-row grid items-center gap-2${disabled ? ' opacity-30 pointer-events-none' : ''}${unused ? ' is-unused' : ''}`}
+      className={`ac-swatch-row grid items-center gap-2${disabled ? ' opacity-30 pointer-events-none' : ''}${unused ? ' is-unused' : ''}`}
       style={{ gridTemplateColumns: '24px 1fr 1fr 1fr' }}
       aria-disabled={disabled || undefined}
     >
@@ -36,8 +36,8 @@ export default function SwatchRow({ label, hex, disabled, unused, locked, edited
           <EditorIcon name={locked ? 'lock' : 'unlock'} size={12} />
         </span>
       </div>
-      <span className={`kol-helper-12 truncate ${unused ? 'text-meta' : 'text-emphasis'}`}>{label}</span>
-      <span className={`kol-helper-10 truncate ${unused ? 'text-subtle' : 'text-meta'}`}>{tokenNameFor(hex) ?? ''}</span>
+      <span className={`ac-helper-12 truncate ${unused ? 'text-meta' : 'text-emphasis'}`}>{label}</span>
+      <span className={`ac-helper-10 truncate ${unused ? 'text-subtle' : 'text-meta'}`}>{tokenNameFor(hex) ?? ''}</span>
       <Input
         variant="filled"
         size="sm"

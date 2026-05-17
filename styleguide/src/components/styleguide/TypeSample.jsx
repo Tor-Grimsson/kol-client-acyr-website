@@ -8,14 +8,14 @@ export default function TypeSample({
   children,
 }) {
   return (
-    <div className="kol-type-sample py-6">
+    <div className="ac-type-sample py-6">
       {label && (
-        <p className="kol-helper-12 uppercase tracking-wider text-meta m-0 mb-3">
+        <p className="ac-helper-12 uppercase tracking-wider text-meta m-0 mb-3">
           {label}
         </p>
       )}
       <p
-        className="kol-type-sample-body m-0 text-auto"
+        className="ac-type-sample-body m-0 text-auto"
         style={{
           fontFamily: `"${family}", sans-serif`,
           fontWeight: weight,

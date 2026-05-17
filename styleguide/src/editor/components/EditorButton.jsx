@@ -5,8 +5,8 @@ import EditorIcon from '../icons/EditorIcon'
  * but resolves icon names against the editor's own icon registry
  * (`src/editor/icons/svg/`) via `EditorIcon`.
  *
- * Lives outside `kol-component` syncing — KOL Button is unmodified. Shared
- * `kol-btn-*` CSS classes still come from `kol-components-atoms.css` so
+ * Lives outside `ac-component` syncing — KOL Button is unmodified. Shared
+ * `ac-btn-*` CSS classes still come from `ac-components-atoms.css` so
  * the visual treatment stays consistent.
  *
  * Supports the prop subset the editor actually uses:
@@ -37,20 +37,20 @@ export default function EditorButton({
   ...props
 }) {
   const variantClass =
-    variant === 'primary'  ? 'kol-btn-primary'
-    : variant === 'accent' ? 'kol-btn-accent'
-    : variant === 'outline' ? 'kol-btn-outline'
-    : variant === 'ghost'  ? 'kol-btn-ghost'
-    : 'kol-btn-secondary'
+    variant === 'primary'  ? 'ac-btn-primary'
+    : variant === 'accent' ? 'ac-btn-accent'
+    : variant === 'outline' ? 'ac-btn-outline'
+    : variant === 'ghost'  ? 'ac-btn-ghost'
+    : 'ac-btn-secondary'
 
   const sizeClass =
-    size === 'sm' ? 'kol-btn-sm kol-mono-12'
-    : size === 'lg' ? 'kol-btn-lg kol-mono-16'
-    : 'kol-btn-md kol-mono-14'
+    size === 'sm' ? 'ac-btn-sm ac-mono-12'
+    : size === 'lg' ? 'ac-btn-lg ac-mono-16'
+    : 'ac-btn-md ac-mono-14'
 
-  const animateClass = animateIcon ? 'kol-btn-animate' : ''
-  const quietClass   = quiet ? 'kol-btn-quiet' : ''
-  const combinedClass = `kol-btn ${variantClass} ${sizeClass} ${animateClass} ${quietClass} ${className}`.trim()
+  const animateClass = animateIcon ? 'ac-btn-animate' : ''
+  const quietClass   = quiet ? 'ac-btn-quiet' : ''
+  const combinedClass = `ac-btn ${variantClass} ${sizeClass} ${animateClass} ${quietClass} ${className}`.trim()
 
   const renderIcon = (name, hoverName) => {
     if (!name && !hoverName) return null
@@ -59,11 +59,11 @@ export default function EditorButton({
     }
     return (
       <span
-        className="kol-icon-swap-container"
+        className="ac-icon-swap-container"
         style={{ position: 'relative', display: 'inline-flex', width: iconSize, height: iconSize, overflow: 'hidden' }}
       >
-        <EditorIcon name={name}      size={iconSize} className="kol-icon-default" style={{ position: 'absolute' }} />
-        <EditorIcon name={hoverName} size={iconSize} className="kol-icon-hover"   style={{ position: 'absolute' }} />
+        <EditorIcon name={name}      size={iconSize} className="ac-icon-default" style={{ position: 'absolute' }} />
+        <EditorIcon name={hoverName} size={iconSize} className="ac-icon-hover"   style={{ position: 'absolute' }} />
       </span>
     )
   }

@@ -28,33 +28,33 @@ const MORE = [
 function FooterLink({ label, to, href }) {
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className="kol-site-footer-link">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="ac-site-footer-link">
         {label}
       </a>
     )
   }
   if (to) {
-    return <Link to={to} className="kol-site-footer-link">{label}</Link>
+    return <Link to={to} className="ac-site-footer-link">{label}</Link>
   }
-  return <span className="kol-site-footer-link">{label}</span>
+  return <span className="ac-site-footer-link">{label}</span>
 }
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="kol-site-footer">
-      <div className="kol-site-footer-grid">
+    <footer className="ac-site-footer">
+      <div className="ac-site-footer-grid">
 
-        <div className="kol-site-footer-col">
-          <div className="kol-site-footer-mark" aria-hidden="true">
+        <div className="ac-site-footer-col">
+          <div className="ac-site-footer-mark" aria-hidden="true">
             <KolLogo variant="wordmark" />
           </div>
         </div>
 
-        <div className="kol-site-footer-col">
-          <p className="kol-site-footer-label">Studio</p>
-          <ul className="kol-site-footer-list">
+        <div className="ac-site-footer-col">
+          <p className="ac-site-footer-label">Studio</p>
+          <ul className="ac-site-footer-list">
             <li>{BRAND_INFO.studio.street}</li>
             <li>{BRAND_INFO.studio.postcode}</li>
             <li>Mon–Fri 13:00–18:00</li>
@@ -64,27 +64,27 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="kol-site-footer-col">
-          <p className="kol-site-footer-label">Browse</p>
-          <ul className="kol-site-footer-list">
+        <div className="ac-site-footer-col">
+          <p className="ac-site-footer-label">Browse</p>
+          <ul className="ac-site-footer-list">
             {BROWSE.map((l) => (
               <li key={l.label}><FooterLink {...l} /></li>
             ))}
           </ul>
         </div>
 
-        <div className="kol-site-footer-col">
-          <p className="kol-site-footer-label">Connect</p>
-          <ul className="kol-site-footer-list">
+        <div className="ac-site-footer-col">
+          <p className="ac-site-footer-label">Connect</p>
+          <ul className="ac-site-footer-list">
             {SOCIAL.map((l) => (
               <li key={l.label}><FooterLink {...l} /></li>
             ))}
           </ul>
         </div>
 
-        <div className="kol-site-footer-col">
-          <p className="kol-site-footer-label">More</p>
-          <ul className="kol-site-footer-list">
+        <div className="ac-site-footer-col">
+          <p className="ac-site-footer-label">More</p>
+          <ul className="ac-site-footer-list">
             {MORE.map((l) => (
               <li key={l.label}><FooterLink {...l} /></li>
             ))}
@@ -95,9 +95,9 @@ export default function Footer() {
 
       <div className="border-t border-fg-12 mx-8" aria-hidden="true" />
 
-      <div className="kol-site-footer-bottom">
-        <span className="kol-site-footer-meta">© {year} {BRAND_INFO.identity.name}</span>
-        <span className="kol-site-footer-meta">{BRAND_INFO.legal.entity} · kt {BRAND_INFO.legal.kt}</span>
+      <div className="ac-site-footer-bottom">
+        <span className="ac-site-footer-meta">© {year} {BRAND_INFO.identity.name}</span>
+        <span className="ac-site-footer-meta">{BRAND_INFO.legal.entity} · kt {BRAND_INFO.legal.kt}</span>
       </div>
     </footer>
   )

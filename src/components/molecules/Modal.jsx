@@ -77,15 +77,15 @@ function ModalView({ state, closeWith }) {
     >
       <div
         onMouseDown={(e) => e.stopPropagation()}
-        className="kol-modal flex flex-col gap-4 p-5 rounded border border-fg-08"
+        className="ac-modal flex flex-col gap-4 p-5 rounded border border-fg-08"
         style={{
-          background: 'var(--kol-surface-primary)',
-          color: 'var(--kol-surface-on-primary)',
+          background: 'var(--ac-surface-primary)',
+          color: 'var(--ac-surface-on-primary)',
           minWidth: 320,
           maxWidth: '90vw',
         }}
       >
-        <p className="kol-helper-12 text-emphasis">{state.title}</p>
+        <p className="ac-helper-12 text-emphasis">{state.title}</p>
         {state.kind === 'prompt' && (
           <Input
             ref={inputRef}

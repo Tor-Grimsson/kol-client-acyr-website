@@ -21,25 +21,25 @@ export default function Carousel({ children, options = { align: 'start', loop: f
   const slides = Children.toArray(children)
 
   return (
-    <div className={`kol-embla ${className}`.trim()}>
-      <div className="kol-embla-viewport" ref={emblaRef}>
-        <div className="kol-embla-container">
+    <div className={`ac-embla ${className}`.trim()}>
+      <div className="ac-embla-viewport" ref={emblaRef}>
+        <div className="ac-embla-container">
           {slides.map((child, i) => (
-            <div key={i} className="kol-embla-slide">{child}</div>
+            <div key={i} className="ac-embla-slide">{child}</div>
           ))}
         </div>
       </div>
-      <div className="kol-embla-controls">
+      <div className="ac-embla-controls">
         <button
           type="button"
-          className="kol-embla-btn border border-fg-16 hover:border-fg-32 text-auto"
+          className="ac-embla-btn border border-fg-16 hover:border-fg-32 text-auto"
           aria-label="Previous"
           onClick={() => emblaApi?.scrollPrev()}
           disabled={!canPrev}
         >‹</button>
         <button
           type="button"
-          className="kol-embla-btn border border-fg-16 hover:border-fg-32 text-auto"
+          className="ac-embla-btn border border-fg-16 hover:border-fg-32 text-auto"
           aria-label="Next"
           onClick={() => emblaApi?.scrollNext()}
           disabled={!canNext}

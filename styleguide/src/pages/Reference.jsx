@@ -20,11 +20,11 @@ const Chip = ({ value }) => (
 )
 
 const TokenName = ({ children }) => (
-  <code className="kol-helper-12 text-emphasis">{children}</code>
+  <code className="ac-helper-12 text-emphasis">{children}</code>
 )
 
 /** LiveHex — reads the resolved hex of a CSS custom property. Single source of
- *  truth: kol-color.css. Edit a token there, this column updates on next render. */
+ *  truth: ac-color.css. Edit a token there, this column updates on next render. */
 function LiveHex({ token }) {
   const [hex, setHex] = useState('')
   useEffect(() => { setHex(resolveCssVar(token)) }, [token])
@@ -41,7 +41,7 @@ const routeCols = [
       ? <Link to={r.path} className="text-emphasis underline underline-offset-4 decoration-fg-24 hover:decoration-fg-64">{r.page}</Link>
       : r.page },
   { accessor: 'layout',  header: 'Layout' },
-  { accessor: 'file',    header: 'File',    render: (r) => <code className="kol-helper-12 text-meta">{r.file}</code> },
+  { accessor: 'file',    header: 'File',    render: (r) => <code className="ac-helper-12 text-meta">{r.file}</code> },
 ]
 
 const routeRows = [
@@ -93,7 +93,7 @@ const COLOR_COLUMNS = {
   'fg-primitives': [
     { accessor: 'token',   header: 'Token',           render: (r) => <TokenName>{r.token}</TokenName> },
     { accessor: 'swatch',  header: 'Swatch',          render: (r) => <Chip value={`var(${r.token})`} /> },
-    { accessor: 'utility', header: 'Utility classes', render: (r) => <code className="kol-helper-12 text-meta">{r.utility}</code> },
+    { accessor: 'utility', header: 'Utility classes', render: (r) => <code className="ac-helper-12 text-meta">{r.utility}</code> },
     { accessor: 'use',     header: 'Use' },
   ],
   'fg-families': [
@@ -161,9 +161,9 @@ const brandedAssetCols = [
   { accessor: 'aspect',   header: 'Aspect' },
   { accessor: 'category', header: 'Category', render: (r) => {
     const display = r.category === 'labels' ? 'tags & labels' : r.category === 'garment-bags' ? 'packaging' : r.category
-    return <span className="kol-helper-12 text-meta uppercase tracking-widest">{display}</span>
+    return <span className="ac-helper-12 text-meta uppercase tracking-widest">{display}</span>
   } },
-  { accessor: 'status',   header: 'Status',   render: (r) => <span className="kol-helper-12 text-meta uppercase tracking-widest">{r.status}</span> },
+  { accessor: 'status',   header: 'Status',   render: (r) => <span className="ac-helper-12 text-meta uppercase tracking-widest">{r.status}</span> },
   {
     accessor: 'download',
     header: 'Download',
@@ -249,7 +249,7 @@ function SystemSection({ section, columnsDict }) {
       divider={section.divider === true}
     >
       {section.reasoning && (
-        <div className="kol-prose mt-8 max-w-[60ch]">
+        <div className="ac-prose mt-8 max-w-[60ch]">
           <p className="text-meta">{section.reasoning}</p>
         </div>
       )}
@@ -293,7 +293,7 @@ export default function Reference() {
     { accessor: 'name', header: 'Group', render: (r) => (
       <Link to={`/gallery#${encodeURIComponent(r.name)}`} className="text-emphasis underline underline-offset-4 decoration-fg-24 hover:decoration-fg-64">{r.name}</Link>
     ) },
-    { accessor: 'folder', header: 'Folder', render: (r) => <code className="kol-helper-12 text-meta">{r.folder}</code> },
+    { accessor: 'folder', header: 'Folder', render: (r) => <code className="ac-helper-12 text-meta">{r.folder}</code> },
     { accessor: 'count',  header: 'Count',  render: (r) => <span className="text-emphasis">{r.count}</span> },
   ]
 

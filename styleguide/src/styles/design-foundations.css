@@ -1,0 +1,736 @@
+/* ───── Asset figure / grid ─────
+   Wrappers (figure margin via Preflight, frame radius/overflow, grid base
+   display+gap+margin) inlined in AssetFigure.jsx + AssetGrid.jsx. CSS retains
+   the responsive column-count variants and the descendant img sizing. */
+
+.ac-asset-figure-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ac-asset-grid-2col { grid-template-columns: repeat(2, 1fr); }
+.ac-asset-grid-3col { grid-template-columns: repeat(3, 1fr); }
+.ac-asset-grid-4col { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .ac-asset-grid-3col,
+  .ac-asset-grid-4col { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .ac-asset-grid-2col,
+  .ac-asset-grid-3col,
+  .ac-asset-grid-4col { grid-template-columns: 1fr; }
+}
+/* ───── Mood tile (image + overlay logomark) ─────
+   Wrappers inlined in MoodTile.jsx. CSS retains descendant img positioning
+   (cover-crop the photo) + overlay logo sizing. */
+
+.ac-mood-tile-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ac-mood-tile-overlay .ac-brand-logo {
+  width: 32%;
+  max-width: 180px;
+  display: inline-flex;
+}
+
+.ac-mood-tile-overlay svg {
+  width: 100%;
+  height: auto;
+}
+/* ───── Swatch / Ramp (color specimens) ───── */
+
+.ac-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ac-swatch-chip {
+  height: 96px;
+  border-radius: 4px;
+}
+
+.ac-swatch-meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-family: var(--ac-font-family-mono, monospace);
+}
+
+.ac-ramp-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 4px;
+}
+/* ───── Type sample (brand type specimen) ─────
+   Wrapper padding inlined in TypeSample.jsx; body margin handled by Preflight.
+   CSS retains the adjacent-sibling border-top that separates stacked samples. */
+
+.ac-type-sample + .ac-type-sample {
+  border-top: 1px solid var(--ac-fg-08);
+}
+
+/* Prose moved to DS typography — see kol-typography-mono.css.
+   See docs/documentation/06-framework/06-amendments.md 2026-04-23. */
+
+.ac-prose-indented {
+  padding-left: 32px;
+  border-left: 1px solid var(--ac-fg-16);
+}
+
+.ac-prose pre {
+  margin: 0 0 24px;
+  padding: 16px;
+  border-radius: 4px;
+  font-family: 'Right Grotesk Mono', monospace;
+  font-size: 16px;
+  line-height: 24px;
+  overflow-x: auto;
+}
+
+.ac-prose code {
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 0.9em;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.ac-prose pre code {
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+
+.ac-prose-pullout {
+  padding: 16px 0;
+  margin: 32px 0;
+  border-top: 1px solid var(--ac-fg-08);
+  border-bottom: 1px solid var(--ac-fg-08);
+}
+
+/* ───── Asset carousel + card tiles ─────
+   Section owns the height: the carousel viewport is a fixed box, and cards
+   flex to fill it. Frame holds the image, caption sits under it at natural
+   height. Image mode: default `contain` (artwork/diagrams), opt-in `.is-cover`
+   (photos, screenshots) crops to the top. */
+
+.ac-embla.ac-asset-carousel .ac-embla-viewport {
+  height: 440px;
+}
+
+.ac-embla.ac-asset-carousel.is-slides .ac-embla-viewport {
+  height: 560px;
+}
+
+.ac-embla.ac-asset-carousel .ac-embla-container {
+  height: 100%;
+  align-items: stretch;
+}
+
+.ac-embla.ac-asset-carousel .ac-embla-slide {
+  height: 100%;
+}
+
+.ac-asset-card {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ac-asset-card-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid var(--ac-fg-08);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ac-fg-04);
+  cursor: zoom-in;
+  transition: border-color 200ms ease;
+}
+
+.ac-asset-card-frame:hover {
+  border-color: var(--ac-fg-24);
+}
+
+.ac-asset-card-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  padding: 16px;
+}
+
+.ac-asset-card-frame.is-cover img {
+  object-fit: cover;
+  object-position: top center;
+  padding: 0;
+}
+
+.ac-asset-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ac-fg-96);
+  pointer-events: none;
+}
+
+.ac-asset-card-overlay .ac-brand-logo { width: 24%; }
+
+/* ───── Website preview ───── */
+
+.ac-website-preview { margin-bottom: 32px; }
+.ac-website-preview .ac-asset-figure-frame {
+  background: var(--ac-fg-02);
+}
+/* ───── Typography spec card (meta panel + live sample) ─────
+   Wrappers + meta-row grid + responsive layout inlined in TypeSpecCard.jsx.
+   CSS retains the descendant <p> overrides for sample prose (Preflight zeros
+   <p> margin; specs need 16px gap between paragraphs). */
+
+.ac-type-spec-sample p { margin: 0 0 16px; }
+.ac-type-spec-sample p:last-child { margin-bottom: 0; }
+/**
+ * foundations.css — /foundations page specific styles.
+ *
+ * Color anatomy spectrum, color tokens table, and combo lab rules.
+ * Portal chrome (sidebar, topnav, page scaffold) stays in app.css.
+ */
+
+/* ───── Foundations · typography specimens ─────
+   Wrappers fully inlined in TypographySections.jsx. */
+
+/* ───── Combo Lab layout primitives — shared structure classes ───── */
+
+.ac-combo-frame {
+  border-radius: 4px;
+  overflow: hidden;
+  transition: background-color 400ms ease, border-color 400ms ease;
+}
+
+.ac-combo-slab {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+.ac-combo-slab--end     { justify-content: flex-end; }
+.ac-combo-slab--between { justify-content: space-between; }
+
+.ac-combo-label {
+  font-family: 'Right Grotesk Compact', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ac-combo-number {
+  font-family: 'Right Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 0.02em;
+}
+
+.ac-combo-stage--fill {
+  height: 100%;
+  min-height: 360px;
+  width: 100%;
+}
+
+.ac-combo-logo {
+  display: inline-flex;
+  color: currentColor;
+}
+
+/* 60 / 30 / 10 */
+.ac-combo-stage--ratio { display: flex; }
+.ac-combo-stage--ratio > :nth-child(1) { flex: 1; }
+.ac-combo-stage--ratio > :nth-child(2) { flex: 3; }
+.ac-combo-stage--ratio > :nth-child(3) { flex: 6; }
+
+/* Tower */
+.ac-combo-stage--tower {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.ac-combo-stage--tower > * { flex: 1; }
+
+/* Quad split */
+.ac-combo-stage--quad { display: flex; }
+.ac-combo-stage--quad > * { flex: 1; }
+
+.ac-combo-quad-col {
+  display: flex;
+  flex-direction: column;
+}
+.ac-combo-quad-col > * { flex: 1; }
+
+/* Card row */
+.ac-combo-stage--card-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  height: 100%;
+  min-height: 360px;
+  width: 100%;
+}
+
+.ac-combo-card {
+  flex: 1;
+  min-height: 240px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+.ac-combo-card--end     { justify-content: flex-end; }
+.ac-combo-card--between { justify-content: space-between; }
+
+/* Stripe row */
+.ac-combo-stage--stripe-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  min-height: 360px;
+  width: 100%;
+}
+
+.ac-combo-stripe-row {
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+  width: 100%;
+}
+
+.ac-combo-stripe-bar {
+  display: flex;
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ac-combo-stripe-seg { transition: background-color 400ms ease; }
+.ac-combo-stripe-seg--6 { flex: 6; }
+.ac-combo-stripe-seg--3 { flex: 3; }
+.ac-combo-stripe-seg--1 { flex: 1; }
+
+.ac-combo-stripe-group { display: flex; }
+.ac-combo-stripe-group--3 { flex: 3; }
+.ac-combo-stripe-group--1 { flex: 1; }
+
+.ac-combo-stripe-neutral {
+  border-top: 1px solid var(--stripe-rule, transparent);
+  border-bottom: 1px solid var(--stripe-rule, transparent);
+}
+
+.ac-combo-stripe-accent-border {
+  border: 1.73px solid var(--stripe-accent, transparent);
+}
+
+.ac-combo-stripe-method {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: 'Right Grotesk Compact', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: white;
+  pointer-events: none;
+}
+
+/* Applied card */
+.ac-combo-stage--applied {
+  display: flex;
+  height: 100%;
+  min-height: 360px;
+  width: 100%;
+}
+
+.ac-combo-applied-plate {
+  flex: 2;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+.ac-combo-applied-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ac-combo-applied-surface { flex: 3; }
+.ac-combo-applied-band--lg { flex: 2; }
+.ac-combo-applied-band--sm { flex: 1; }
+.ac-combo-applied-band { transition: background-color 400ms ease; }
+
+.ac-combo-applied-accent-strip {
+  display: flex;
+  gap: 8px;
+}
+
+.ac-combo-applied-accent-chip {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  transition: background-color 400ms ease;
+}
+
+/* ───── Foundations · combo lab ───── */
+
+.ac-combo-lab {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+  border: 1px solid var(--ac-fg-08);
+  border-radius: 4px;
+  background: var(--ac-fg-02);
+}
+
+.ac-combo-controls { margin-bottom: 24px; }
+
+.ac-combo-stage-wrap {
+  flex: 1;
+  margin-bottom: 24px;
+  padding: 32px;
+  background: var(--ac-fg-02);
+  border-radius: 4px;
+  min-height: 440px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.ac-combo-stage-anim {
+  width: 100%;
+  height: 100%;
+  animation: kol-combo-fade 260ms ease;
+  display: flex;
+  align-items: stretch;
+}
+
+.ac-combo-stage-anim > * { width: 100%; height: 100%; }
+
+/* In fullbleed mode, let the lab fill the section */
+.ac-page--fullbleed .ac-combo-lab { flex: 1; }
+.ac-page--fullbleed .ac-combo-stage-wrap { min-height: 520px; }
+
+@keyframes kol-combo-fade {
+  from { opacity: 0.2; transform: translateY(6px); }
+  to   { opacity: 1;   transform: none; }
+}
+
+.ac-combo-readout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ac-fg-08);
+}
+
+/* Combo Lab — control rows (Layout / Palette / Logo selectors) */
+.ac-combo-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.ac-combo-row-label { min-width: 72px; }
+
+.ac-combo-row-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ac-combo-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.ac-combo-footer-desc { flex: 1; }
+
+.ac-combo-randomize {
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--ac-fg-80);
+  border: 1px solid var(--ac-fg-16);
+  border-radius: 4px;
+  font-family: var(--ac-font-family-mono, monospace);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.ac-combo-randomize:hover {
+  color: var(--ac-surface-on-primary);
+  border-color: var(--ac-fg-48);
+  background: var(--ac-fg-04);
+}
+
+/* Combo Lab — live palette readout rows */
+.ac-combo-swatch-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.ac-combo-swatch-chip {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  transition: background 400ms ease;
+}
+
+.ac-combo-swatch-label {
+  min-width: 88px;
+  font-weight: 600;
+}
+
+.ac-combo-swatch-hex {
+  font-family: var(--ac-font-family-mono, monospace);
+  text-transform: uppercase;
+}
+
+.ac-combo-summary { margin-top: 16px; }
+
+/* ═════════════════════════════════════════════════════════════════════
+   SpectrumGrid — matrix color-token grid (9 ramps × 10 stops)
+   ═════════════════════════════════════════════════════════════════════ */
+
+.ac-spectrum-grid {
+  display: grid;
+  grid-template-columns: 100px repeat(10, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+}
+
+.ac-spectrum-grid--loading {
+  min-height: 400px;
+  background: var(--ac-fg-02);
+  border-radius: 6px;
+}
+
+.ac-spectrum-grid-head {
+  display: contents;
+}
+
+.ac-spectrum-grid-corner {
+  grid-column: 1;
+}
+
+.ac-spectrum-grid-stop-label {
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ac-fg-48);
+  padding: 4px 6px;
+  text-align: center;
+}
+
+.ac-spectrum-grid-row {
+  display: contents;
+}
+
+.ac-spectrum-grid-row-label {
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ac-surface-on-primary);
+  align-self: center;
+  padding-right: 12px;
+}
+
+.ac-spectrum-grid-row-label::first-letter {
+  text-transform: uppercase;
+}
+
+.ac-spectrum-grid-cell {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  min-width: 0;
+  border-radius: 4px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 120ms ease;
+}
+
+.ac-spectrum-grid-cell-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.ac-spectrum-grid-cell:hover {
+  transform: scale(1.04);
+}
+
+.ac-spectrum-grid-cell-stop {
+  font-family: var(--ac-font-family-mono, monospace);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.ac-spectrum-grid-cell-hex {
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 9px;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+@media (max-width: 900px) {
+  .ac-spectrum-grid {
+    grid-template-columns: 72px repeat(10, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .ac-spectrum-grid-cell {
+    padding: 4px;
+  }
+  .ac-spectrum-grid-cell-hex {
+    display: none;
+  }
+}
+
+
+/* ═════════════════════════════════════════════════════════════════════
+   Color Anatomy — token composition samples
+
+   Wrappers inlined in ColorAnatomy.jsx; figure margin via Preflight.
+   CSS retains the descendant typography for figcaption + inline <code>.
+   ═════════════════════════════════════════════════════════════════════ */
+
+.ac-anatomy-sample figcaption {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--ac-fg-48);
+  font-style: italic;
+}
+
+.ac-anatomy-sample code {
+  font-family: var(--ac-font-family-mono, monospace);
+  font-size: 11px;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  padding: 1px 4px;
+  border-radius: 3px;
+  opacity: 1;
+}
+
+
+/* ═════════════════════════════════════════════════════════════════════
+   Accordion — collapsible panel group
+
+   Wrapper, panel borders, trigger button reset, title/meta/chevron typography
+   all inlined in Accordion.jsx. CSS retains the two state cascades:
+   - .is-open chevron color flip
+   - :has(meta) chevron margin reset (so meta + chevron sit together)
+   ═════════════════════════════════════════════════════════════════════ */
+
+.ac-accordion-panel.is-open .ac-accordion-chevron {
+  color: var(--ac-surface-on-primary);
+}
+
+.ac-accordion-trigger:has(.ac-accordion-meta) .ac-accordion-chevron {
+  margin-left: 0;
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   AssetPlaceholder — deliberate missing/pending fallback frame
+   Wrappers + label typography inlined in AssetPlaceholder.jsx.
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* ═════════════════════════════════════════════════════════════════════
+   Graphic wrapper
+
+   Base wrapper inlined in Graphic.jsx. CSS retains:
+   - descendant SVG sizing (svg comes from dangerouslySetInnerHTML — no
+     way to apply utility classes inside the raw markup)
+   - .ac-graphic--native modifier (opt-in: respect SVG's intrinsic
+     width/height attributes instead of the default fluid 100%)
+   ═════════════════════════════════════════════════════════════════════ */
+
+.ac-graphic svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ac-graphic--native { width: auto; }
+.ac-graphic--native svg { width: auto; height: auto; }
+
+/* Image wrapper inlined in Image.jsx. Graphics registry tiles
+   (.ac-graphic-tile) deleted — zero JSX consumers. */
+
+/* ═════════════════════════════════════════════════════════════════════
+   Logo subsections — consistent rhythm inside sections
+
+   Wrappers + subhead title typography inlined in Logo.jsx (SubSection fn).
+   CSS retains the descendant <p> rule for body prose (Preflight zeros <p>
+   margin; logo-section paragraphs need explicit typography + measure cap).
+   ═════════════════════════════════════════════════════════════════════ */
+
+.ac-logo-subsection-body p {
+  font-family: var(--ac-font-family-mono);
+  font-size: var(--ac-text-body-03);
+  line-height: 1.6;
+  color: var(--ac-fg-64);
+  max-width: 70ch;
+  margin: 0;
+}
+
+/* .ac-checker + .ac-grid-bg — moved to src/editor/styles/kol-editor.css */

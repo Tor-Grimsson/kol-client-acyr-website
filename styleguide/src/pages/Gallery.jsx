@@ -23,7 +23,7 @@ export default function Gallery() {
     minHeight: '100vh',
     background: '#0b0b0b',
     color: '#ddd',
-    fontFamily: 'var(--kol-font-family-mono)',
+    fontFamily: 'var(--ac-font-family-mono)',
   }
 
   if (error) {

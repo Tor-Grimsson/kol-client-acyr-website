@@ -24,7 +24,7 @@ export default function AlignmentPanel() {
           onClick={() => alignSelected(b.axis, b.mode)}
           title={b.title}
           aria-label={b.title}
-          className="kol-btn-quiet inline-flex items-center justify-center rounded text-emphasis"
+          className="ac-btn-quiet inline-flex items-center justify-center rounded text-emphasis"
           style={{ width: '100%', height: 28, padding: 6 }}
         >
           <EditorIcon name={b.icon} size={16} />

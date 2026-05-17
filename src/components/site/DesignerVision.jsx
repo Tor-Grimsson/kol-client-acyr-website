@@ -25,7 +25,7 @@ export default function DesignerVision() {
             fontWeight: 400,
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            color: 'color-mix(in srgb, var(--kol-surface-on-primary) 32%, transparent)',
+            color: 'color-mix(in srgb, var(--ac-surface-on-primary) 32%, transparent)',
           }}
         >
           The Designer
@@ -38,7 +38,7 @@ export default function DesignerVision() {
             lineHeight: 1.05,
             textTransform: 'uppercase',
             letterSpacing: '0.02em',
-            color: 'var(--kol-surface-on-primary)',
+            color: 'var(--ac-surface-on-primary)',
           }}
         >
           Designer's<br />Vision
@@ -50,7 +50,7 @@ export default function DesignerVision() {
             fontWeight: 400,
             lineHeight: 1.75,
             maxWidth: '380px',
-            color: 'color-mix(in srgb, var(--kol-surface-on-primary) 72%, transparent)',
+            color: 'color-mix(in srgb, var(--ac-surface-on-primary) 72%, transparent)',
           }}
         >
           Every piece begins with a single question: what does a woman truly need?
@@ -65,7 +65,7 @@ export default function DesignerVision() {
             fontWeight: 400,
             lineHeight: 1.75,
             maxWidth: '380px',
-            color: 'color-mix(in srgb, var(--kol-surface-on-primary) 48%, transparent)',
+            color: 'color-mix(in srgb, var(--ac-surface-on-primary) 48%, transparent)',
           }}
         >
           Based in Central Europe, our small atelier works with local artisans

@@ -1,13 +1,13 @@
 /**
  * Marquee — scrolling band of names. Accepts items as strings or { name } objects.
- * Styled by `.site-marquee*` in kol-site.css.
+ * Styled by `.site-marquee*` in ac-site.css.
  */
 export default function Marquee({ kicker, note, items = [] }) {
   const list = items.map((it) => (typeof it === 'string' ? { name: it } : it))
   return (
     <section className="site-marquee">
       {(kicker || note) && (
-        <div className="max-w-[1200px] mx-auto mb-10 px-[var(--kol-pad-page-x)] flex items-baseline justify-between gap-4 flex-wrap">
+        <div className="max-w-[1200px] mx-auto mb-10 px-[var(--ac-pad-page-x)] flex items-baseline justify-between gap-4 flex-wrap">
           {kicker && <span className="site-marquee-kicker">{kicker}</span>}
           {note && <span className="site-marquee-head-note">{note}</span>}
         </div>

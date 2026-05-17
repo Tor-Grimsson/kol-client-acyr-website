@@ -80,12 +80,12 @@ const aliasRows = [
  * ============================================================================ */
 
 const surfaceRows = [
-  { token: '--kol-surface-primary',    light: '#FAFAFA', dark: '#121215', use: 'Page background' },
-  { token: '--kol-surface-on-primary', light: '#121215', dark: '#FAFAFA', use: 'Text on page (text-auto)' },
-  { token: '--kol-surface-secondary',  light: '#F2F2F2', dark: '#19191D', use: 'Raised surface (cards, panels)' },
-  { token: '--kol-surface-tertiary',   light: '#FFFFFF', dark: '#0E0E11', use: 'Elevated tier' },
-  { token: '--kol-surface-inverse',    light: '#0E0E11', dark: '#FCFBF8', use: 'Inverted panel (.bg-surface-inverse)' },
-  { token: '--kol-surface-on-inverse', light: '#FCFBF8', dark: '#0E0E11', use: 'Text on inverse panel' },
+  { token: '--ac-surface-primary',    light: '#FAFAFA', dark: '#121215', use: 'Page background' },
+  { token: '--ac-surface-on-primary', light: '#121215', dark: '#FAFAFA', use: 'Text on page (text-auto)' },
+  { token: '--ac-surface-secondary',  light: '#F2F2F2', dark: '#19191D', use: 'Raised surface (cards, panels)' },
+  { token: '--ac-surface-tertiary',   light: '#FFFFFF', dark: '#0E0E11', use: 'Elevated tier' },
+  { token: '--ac-surface-inverse',    light: '#0E0E11', dark: '#FCFBF8', use: 'Inverted panel (.bg-surface-inverse)' },
+  { token: '--ac-surface-on-inverse', light: '#FCFBF8', dark: '#0E0E11', use: 'Text on inverse panel' },
 ]
 
 /* ============================================================================
@@ -104,34 +104,34 @@ const stateRows = [
  * ============================================================================ */
 
 const absoluteRows = [
-  { token: '--kol-color-absolute-black', note: 'Strict black. Sunken role (e.g., marquee bg).' },
-  { token: '--kol-color-absolute-white', note: 'Strict white. On-imagery cream button text.' },
+  { token: '--ac-color-absolute-black', note: 'Strict black. Sunken role (e.g., marquee bg).' },
+  { token: '--ac-color-absolute-white', note: 'Strict white. On-imagery cream button text.' },
 ]
 
 /* ============================================================================
  * UI · fg-* opacity primitives — 14-stop foreground ramp
  *
- * --kol-fg-NN tokens are color-mix expressions over --kol-surface-on-primary;
+ * --ac-fg-NN tokens are color-mix expressions over --ac-surface-on-primary;
  * they auto-flip on .bg-surface-inverse via the surface-context redeclaration
- * in kol-color.css. The ink-hierarchy descriptors (subtle/mute/meta/body/
+ * in ac-color.css. The ink-hierarchy descriptors (subtle/mute/meta/body/
  * strong/emphasis) live under typography — they alias these primitives.
  * ============================================================================ */
 
 const fgPrimitiveRows = [
-  { token: '--kol-fg-01', utility: 'text-fg-01 / bg-fg-01 / border-fg-01', use: 'Barely visible — texture, near-invisible washes' },
-  { token: '--kol-fg-02', utility: 'text-fg-02 / bg-fg-02 / border-fg-02', use: 'Faint background tint' },
-  { token: '--kol-fg-04', utility: 'text-fg-04 / bg-fg-04 / border-fg-04', use: 'Code block bg, very subtle fill' },
-  { token: '--kol-fg-08', utility: 'text-fg-08 / bg-fg-08 / border-fg-08', use: 'Hairlines, dividers, default border (workhorse)' },
-  { token: '--kol-fg-12', utility: 'text-fg-12 / bg-fg-12 / border-fg-12', use: 'Soft borders, hover-state bgs' },
-  { token: '--kol-fg-16', utility: 'text-fg-16 / bg-fg-16 / border-fg-16', use: 'Faint elements, secondary borders' },
-  { token: '--kol-fg-24', utility: 'text-fg-24 / bg-fg-24 / border-fg-24 (≈ text-subtle)', use: 'Disabled hints, lightest descriptor stop' },
-  { token: '--kol-fg-32', utility: 'text-fg-32 / bg-fg-32 / border-fg-32',   use: 'Dim labels, quiet UI hints' },
-  { token: '--kol-fg-40', utility: 'text-fg-40 / border-fg-40',                            use: 'Outline-button border' },
-  { token: '--kol-fg-48', utility: 'text-fg-48 / bg-fg-48 / border-fg-48 (≈ text-meta)',   use: 'Labels, eyebrows, captions' },
-  { token: '--kol-fg-64', utility: 'text-fg-64 / bg-fg-64 / border-fg-64 (≈ text-body)',   use: 'Running copy, link default' },
-  { token: '--kol-fg-80', utility: 'text-fg-80 / bg-fg-80 / border-fg-80 (≈ text-strong)', use: 'Lede paragraphs, emphasized body, <strong>' },
-  { token: '--kol-fg-88', utility: 'text-fg-88 / border-fg-88',                            use: 'Near-emphasis (rarely needed; prefer text-emphasis)' },
-  { token: '--kol-fg-96', utility: 'text-fg-96',                                            use: 'Strong text just below full ink' },
+  { token: '--ac-fg-01', utility: 'text-fg-01 / bg-fg-01 / border-fg-01', use: 'Barely visible — texture, near-invisible washes' },
+  { token: '--ac-fg-02', utility: 'text-fg-02 / bg-fg-02 / border-fg-02', use: 'Faint background tint' },
+  { token: '--ac-fg-04', utility: 'text-fg-04 / bg-fg-04 / border-fg-04', use: 'Code block bg, very subtle fill' },
+  { token: '--ac-fg-08', utility: 'text-fg-08 / bg-fg-08 / border-fg-08', use: 'Hairlines, dividers, default border (workhorse)' },
+  { token: '--ac-fg-12', utility: 'text-fg-12 / bg-fg-12 / border-fg-12', use: 'Soft borders, hover-state bgs' },
+  { token: '--ac-fg-16', utility: 'text-fg-16 / bg-fg-16 / border-fg-16', use: 'Faint elements, secondary borders' },
+  { token: '--ac-fg-24', utility: 'text-fg-24 / bg-fg-24 / border-fg-24 (≈ text-subtle)', use: 'Disabled hints, lightest descriptor stop' },
+  { token: '--ac-fg-32', utility: 'text-fg-32 / bg-fg-32 / border-fg-32',   use: 'Dim labels, quiet UI hints' },
+  { token: '--ac-fg-40', utility: 'text-fg-40 / border-fg-40',                            use: 'Outline-button border' },
+  { token: '--ac-fg-48', utility: 'text-fg-48 / bg-fg-48 / border-fg-48 (≈ text-meta)',   use: 'Labels, eyebrows, captions' },
+  { token: '--ac-fg-64', utility: 'text-fg-64 / bg-fg-64 / border-fg-64 (≈ text-body)',   use: 'Running copy, link default' },
+  { token: '--ac-fg-80', utility: 'text-fg-80 / bg-fg-80 / border-fg-80 (≈ text-strong)', use: 'Lede paragraphs, emphasized body, <strong>' },
+  { token: '--ac-fg-88', utility: 'text-fg-88 / border-fg-88',                            use: 'Near-emphasis (rarely needed; prefer text-emphasis)' },
+  { token: '--ac-fg-96', utility: 'text-fg-96',                                            use: 'Strong text just below full ink' },
 ]
 
 /* Numeric-suffix class families — same NN suffix, different property prefix. */
@@ -167,7 +167,7 @@ export const BRAND_COLORS_SECTIONS = [
     title: 'Burgundy ramp',
     intro:
       "AC brand identity hue. 5 stops (100–500). Anchor at 200 — Burgundy. Hex " +
-      "values resolve live from kol-brand-color.css — edit a token there, this " +
+      "values resolve live from ac-brand-color.css — edit a token there, this " +
       "updates on next render.",
     reasoning:
       "Anchor at 200 (light side) matches the source design references rather " +
@@ -246,10 +246,10 @@ export const UI_COLORS_SECTIONS = [
   {
     id: 'fg-primitives',
     label: '08 — ui · opacity primitives',
-    title: 'Opacity primitives (--kol-fg-NN)',
+    title: 'Opacity primitives (--ac-fg-NN)',
     intro:
       "14-stop numeric foreground ramp. Each token is a color-mix expression " +
-      "over --kol-surface-on-primary, so opacity tokens auto-contrast-flip on " +
+      "over --ac-surface-on-primary, so opacity tokens auto-contrast-flip on " +
       ".bg-surface-inverse without re-declaration at consumer sites.",
     reasoning:
       "Numeric stops (01, 02, 04, 08, 12, 16, 24, 32, 40, 48, 64, 80, 88, 96) " +

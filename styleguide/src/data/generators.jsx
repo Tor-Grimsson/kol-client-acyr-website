@@ -44,15 +44,15 @@ export const GENERATOR_ROWS = [
 ]
 
 export const generatorCols = [
-  { accessor: 'label',  header: '#',           className: 'kol-table-cell-meta',  style: { width: 56 } },
-  { accessor: 'title',  header: 'Mode',        className: 'kol-table-cell-text' },
-  { accessor: 'status', header: 'Status',      className: 'kol-table-cell-meta',  style: { width: 96 } },
+  { accessor: 'label',  header: '#',           className: 'ac-table-cell-meta',  style: { width: 56 } },
+  { accessor: 'title',  header: 'Mode',        className: 'ac-table-cell-text' },
+  { accessor: 'status', header: 'Status',      className: 'ac-table-cell-meta',  style: { width: 96 } },
   {
     accessor: 'route',
     header:   'Route',
-    className: 'kol-table-cell-meta',
+    className: 'ac-table-cell-meta',
     style: { width: 180 },
-    render:   (row) => <code className="kol-helper-10 text-meta">{row.to}</code>,
+    render:   (row) => <code className="ac-helper-10 text-meta">{row.to}</code>,
   },
-  { accessor: 'description', header: 'Description', className: 'kol-table-cell-text' },
+  { accessor: 'description', header: 'Description', className: 'ac-table-cell-text' },
 ]

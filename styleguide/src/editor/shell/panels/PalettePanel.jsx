@@ -9,9 +9,9 @@ import PaletteInspector from '../../compose/inspectors/PaletteInspector'
  */
 export default function PalettePanel() {
   return (
-    <div className="kol-compose-rail">
-      <div className="kol-compose-rail-head">
-        <span className="kol-helper-10 uppercase text-meta">Palette</span>
+    <div className="ac-compose-rail">
+      <div className="ac-compose-rail-head">
+        <span className="ac-helper-10 uppercase text-meta">Palette</span>
       </div>
       <div className="p-4">
         <PaletteInspector />

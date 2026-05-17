@@ -21,10 +21,10 @@ export default function BrandLayout() {
   return (
     <GeneratorLibraryProvider>
       <ModalProvider>
-      <div className="kol-brand-layout" data-drawer-open={drawerOpen ? 'true' : undefined}>
+      <div className="ac-brand-layout" data-drawer-open={drawerOpen ? 'true' : undefined}>
         <button
           type="button"
-          className="kol-sidenav-hamburger md:hidden fixed top-3 left-3 z-30 w-10 h-10 inline-flex items-center justify-center rounded-full bg-surface-primary border border-fg-08 text-emphasis"
+          className="ac-sidenav-hamburger md:hidden fixed top-3 left-3 z-30 w-10 h-10 inline-flex items-center justify-center rounded-full bg-surface-primary border border-fg-08 text-emphasis"
           aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={drawerOpen}
           onClick={() => setDrawerOpen((v) => !v)}
@@ -33,7 +33,7 @@ export default function BrandLayout() {
         </button>
 
         <div
-          className="kol-sidenav-backdrop fixed inset-0 z-20 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-200 md:hidden"
+          className="ac-sidenav-backdrop fixed inset-0 z-20 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-200 md:hidden"
           onClick={() => setDrawerOpen(false)}
           aria-hidden="true"
         />

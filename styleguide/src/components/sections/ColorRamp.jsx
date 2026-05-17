@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react'
  * full resolution). SSR-safe.
  *
  * Use cases:
- *   - size tokens: --kol-text-heading-01 → "48px"
- *   - family tokens: --kol-font-family-sans-narrow → "'Right Grotesk Narrow', ..."
+ *   - size tokens: --ac-text-heading-01 → "48px"
+ *   - family tokens: --ac-font-family-sans-narrow → "'Right Grotesk Narrow', ..."
  *   - any non-color token where you want the literal declared value
  */
 export function resolveCssVarRaw(name) {
@@ -27,7 +27,7 @@ export function resolveCssVarRaw(name) {
  * Returns uppercase hex format (e.g. '#FFCF33'). SSR-safe — returns empty
  * string when window is undefined.
  *
- * Single source of truth for any color in the system: kol-color.css. Edit a
+ * Single source of truth for any color in the system: ac-color.css. Edit a
  * token there, every consumer (chips, ramps, palettes, generators) updates on
  * next render.
  */

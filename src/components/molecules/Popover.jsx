@@ -33,7 +33,7 @@ import {
  *   2. `<PopoverPanel popover={...}>` — renders the floater into a
  *      `FloatingPortal` (escapes overflow:hidden ancestors), wraps in
  *      `FloatingFocusManager` (focus trap + return-focus), applies the
- *      `.kol-popover` panel chrome.
+ *      `.ac-popover` panel chrome.
  *
  * Position middleware: `offset` (gap), `flip` (auto-flip on overflow),
  * `shift` (slide along the cross-axis to stay in viewport), optional
@@ -143,10 +143,10 @@ export function Tooltip({
         popover={popover}
         focus={false}
         panel={false}
-        className="kol-tooltip"
+        className="ac-tooltip"
       >
         <span className="text-emphasis">{label}</span>
-        {shortcut && <span className="kol-tooltip-key">{shortcut}</span>}
+        {shortcut && <span className="ac-tooltip-key">{shortcut}</span>}
       </PopoverPanel>
     </>
   )
@@ -157,7 +157,7 @@ export function Tooltip({
  *
  * Props:
  *   popover         — the value returned from `usePopover`
- *   panel           — apply default `.kol-popover` chrome (default: true)
+ *   panel           — apply default `.ac-popover` chrome (default: true)
  *   modal           — focus modality (default: false — non-modal popover)
  *   focus           — wrap in FloatingFocusManager (default: true)
  *   className       — extra classes on the panel
@@ -175,7 +175,7 @@ export function PopoverPanel({
   if (!popover.open) return null
 
   const { refs, floatingStyles, context, getFloatingProps } = popover
-  const cls = [panel && 'kol-popover', className].filter(Boolean).join(' ')
+  const cls = [panel && 'ac-popover', className].filter(Boolean).join(' ')
 
   /* `data-editor-keep-selection` mirrors the marker on the EditorShell
    * root. Popovers render via FloatingPortal (mounted on <body>, outside

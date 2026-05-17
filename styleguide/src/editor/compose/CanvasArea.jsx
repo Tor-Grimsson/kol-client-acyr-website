@@ -465,7 +465,7 @@ export default function CanvasArea() {
         const insideStack = e.target.closest?.('[data-layer-stack]')
         if (insideStack) {
           const onCanvasRow  = e.target.closest?.('[data-layer-id="canvas"]')
-          const onAnyRow     = e.target.closest?.('.kol-compose-layer-row')
+          const onAnyRow     = e.target.closest?.('.ac-compose-layer-row')
           const onButton     = e.target.closest?.('button')
           /* Buttons inside the stack (Add layer [+], Trash, Group, lock/eye)
            * never deselect canvas on click — they perform actions on the
@@ -634,7 +634,7 @@ export default function CanvasArea() {
 
   /* Tool cursor lives on the OUTER wrapper so it covers the dark backdrop
    * around the canvas frame too — not just the bright frame area. Layers
-   * inherit via the kol-editor.css rule
+   * inherit via the ac-editor.css rule
    * `[data-tool]:not([data-tool="select"]) [data-layer-id]`, which
    * overrides their inline `cursor: 'move'`. Cursor is an inherited CSS
    * property, so the stage and its descendants pick up the wrapper's
@@ -685,9 +685,9 @@ export default function CanvasArea() {
                 position: 'absolute',
                 left: drag.vx, top: drag.vy,
                 width: drag.vw, height: drag.vh,
-                outline: '1px dashed var(--kol-accent-primary)',
+                outline: '1px dashed var(--ac-accent-primary)',
                 pointerEvents: 'none',
-                background: 'color-mix(in srgb, var(--kol-accent-primary) 12%, transparent)',
+                background: 'color-mix(in srgb, var(--ac-accent-primary) 12%, transparent)',
               }}
             />
           )}
@@ -697,9 +697,9 @@ export default function CanvasArea() {
                 position: 'absolute',
                 left: drag.vx, top: drag.vy,
                 width: drag.vw, height: drag.vh,
-                outline: '1px solid var(--kol-accent-primary)',
+                outline: '1px solid var(--ac-accent-primary)',
                 pointerEvents: 'none',
-                background: 'color-mix(in srgb, var(--kol-accent-primary) 8%, transparent)',
+                background: 'color-mix(in srgb, var(--ac-accent-primary) 8%, transparent)',
               }}
             />
           )}
@@ -713,13 +713,13 @@ export default function CanvasArea() {
               <line
                 x1={linePlacement.x1} y1={linePlacement.y1}
                 x2={linePreview.vx}   y2={linePreview.vy}
-                stroke="var(--kol-accent-primary)"
+                stroke="var(--ac-accent-primary)"
                 strokeWidth={2}
                 strokeDasharray="6 4"
                 strokeLinecap="round"
                 vectorEffect="non-scaling-stroke"
               />
-              <circle cx={linePlacement.x1} cy={linePlacement.y1} r="4" fill="var(--kol-accent-primary)" />
+              <circle cx={linePlacement.x1} cy={linePlacement.y1} r="4" fill="var(--ac-accent-primary)" />
             </svg>
           )}
           {snapGuides?.h != null && (

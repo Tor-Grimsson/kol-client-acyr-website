@@ -16,9 +16,9 @@
 
 /* Popover — default chrome for floating-ui-positioned panels.
  * Used by molecules/Popover.jsx PopoverPanel. */
-.kol-popover {
-  background: var(--kol-surface-secondary);
-  border: 1px solid var(--kol-fg-08);
+.ac-popover {
+  background: var(--ac-surface-secondary);
+  border: 1px solid var(--ac-fg-08);
   border-radius: 6px;
   box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4),
               0 2px 6px -2px rgba(0, 0, 0, 0.3);
@@ -29,14 +29,14 @@
 /* Tooltip — hover-triggered text label with optional kbd-style shortcut chip.
  * Used by molecules/Popover.jsx Tooltip. No border (intentionally distinct
  * from native browser tooltips); shortcut renders as a fg-tinted chip. */
-.kol-tooltip {
+.ac-tooltip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--kol-surface-secondary);
+  background: var(--ac-surface-secondary);
   border-radius: 6px;
   padding: 4px 4px 4px 8px;
-  font-family: var(--kol-font-family-mono);
+  font-family: var(--ac-font-family-mono);
   font-size: 11px;
   line-height: 1;
   white-space: nowrap;
@@ -45,28 +45,28 @@
   box-shadow: 0 6px 16px -4px rgba(0, 0, 0, 0.5);
 }
 
-.kol-tooltip-key {
+.ac-tooltip-key {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 16px;
   height: 16px;
   padding: 0 4px;
-  background: var(--kol-fg-08);
+  background: var(--ac-fg-08);
   border-radius: 3px;
   font-size: 10px;
   letter-spacing: 0.02em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
 .pill-inverse {
   display: inline-flex;
   align-items: center;
   padding: 4px 16px;
-  border-radius: var(--kol-radius-full);
-  background-color: var(--kol-surface-on-primary);
-  font-family: var(--kol-font-family-mono);
-  color: var(--kol-surface-primary);
+  border-radius: var(--ac-radius-full);
+  background-color: var(--ac-surface-on-primary);
+  font-family: var(--ac-font-family-mono);
+  color: var(--ac-surface-primary);
   border: none;
 }
 
@@ -74,10 +74,10 @@
   display: inline-flex;
   align-items: center;
   padding: 4px 16px;
-  border-radius: var(--kol-radius-full);
-  background-color: color-mix(in srgb, var(--kol-surface-on-primary) 16%, transparent);
-  font-family: var(--kol-font-family-mono);
-  color: var(--kol-surface-on-primary);
+  border-radius: var(--ac-radius-full);
+  background-color: color-mix(in srgb, var(--ac-surface-on-primary) 16%, transparent);
+  font-family: var(--ac-font-family-mono);
+  color: var(--ac-surface-on-primary);
   border: 1px solid transparent;
 }
 
@@ -85,11 +85,11 @@
   display: inline-flex;
   align-items: center;
   padding: 4px 16px;
-  border-radius: var(--kol-radius-full);
-  background-color: var(--kol-surface-primary);
-  font-family: var(--kol-font-family-mono);
-  color: var(--kol-surface-on-primary);
-  border: 1px solid var(--kol-border-default);
+  border-radius: var(--ac-radius-full);
+  background-color: var(--ac-surface-primary);
+  font-family: var(--ac-font-family-mono);
+  color: var(--ac-surface-on-primary);
+  border: 1px solid var(--ac-border-default);
 }
 
 .pill-sm {
@@ -121,27 +121,27 @@
   display: inline-flex;
   align-items: center;
   padding: 4px 16px;
-  border-radius: var(--kol-radius-full);
-  background-color: var(--kol-surface-primary);
+  border-radius: var(--ac-radius-full);
+  background-color: var(--ac-surface-primary);
   font-size: 10px;
   font-weight: 400;
-  font-family: var(--kol-font-family-mono);
-  color: var(--kol-surface-on-primary);
-  border: 1px solid var(--kol-border-default);
-  transition: background-color var(--kol-transition-base),
-              color var(--kol-transition-base);
+  font-family: var(--ac-font-family-mono);
+  color: var(--ac-surface-on-primary);
+  border: 1px solid var(--ac-border-default);
+  transition: background-color var(--ac-transition-base),
+              color var(--ac-transition-base);
 }
 
 .tag-control:hover {
-  background-color: color-mix(in srgb, var(--kol-surface-on-primary) 24%, transparent);
-  color: var(--kol-surface-on-primary);
+  background-color: color-mix(in srgb, var(--ac-surface-on-primary) 24%, transparent);
+  color: var(--ac-surface-on-primary);
   border-color: transparent;
 }
 
 .tag-control.is-active {
-  background-color: color-mix(in srgb, var(--kol-surface-on-primary) 24%, transparent);
-  color: var(--kol-surface-on-primary);
-  border-color: color-mix(in srgb, var(--kol-surface-on-primary) 24%, transparent);
+  background-color: color-mix(in srgb, var(--ac-surface-on-primary) 24%, transparent);
+  color: var(--ac-surface-on-primary);
+  border-color: color-mix(in srgb, var(--ac-surface-on-primary) 24%, transparent);
 }
 
 .tag-sm { font-size: 10px; font-weight: 470; padding: 4px 10px; }
@@ -152,17 +152,17 @@
   display: inline-flex;
   align-items: center;
   padding: 4px 0;
-  border-radius: var(--kol-radius-full);
-  background-color: var(--kol-surface-on-primary);
-  color: var(--kol-surface-primary);
+  border-radius: var(--ac-radius-full);
+  background-color: var(--ac-surface-on-primary);
+  color: var(--ac-surface-primary);
   border: 1px solid transparent;
-  transition: background-color var(--kol-transition-base),
-              color var(--kol-transition-base);
+  transition: background-color var(--ac-transition-base),
+              color var(--ac-transition-base);
 }
 
 .control-unified-inverse:hover {
-  background-color: var(--kol-surface-primary);
-  color: var(--kol-surface-on-primary);
+  background-color: var(--ac-surface-primary);
+  color: var(--ac-surface-on-primary);
 }
 
 
@@ -177,78 +177,78 @@
  * tokens in a future pass.
  * ───────────────────────────────────────────────────────────────────── */
 
-.kol-badge {
+.ac-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  font-family: var(--kol-font-family-mono);
+  font-family: var(--ac-font-family-mono);
   font-weight: 470;
-  transition: background-color var(--kol-transition-base),
-              color var(--kol-transition-base);
+  transition: background-color var(--ac-transition-base),
+              color var(--ac-transition-base);
 }
 
-.kol-badge-default {
-  background-color: var(--kol-surface-on-primary);
-  color: var(--kol-surface-primary);
+.ac-badge-default {
+  background-color: var(--ac-surface-on-primary);
+  color: var(--ac-surface-primary);
   border: 1px solid transparent;
 }
 
-.kol-badge-secondary {
-  background-color: color-mix(in srgb, var(--kol-surface-on-primary) 12%, transparent);
-  color: var(--kol-surface-on-primary);
+.ac-badge-secondary {
+  background-color: color-mix(in srgb, var(--ac-surface-on-primary) 12%, transparent);
+  color: var(--ac-surface-on-primary);
   border: 1px solid transparent;
 }
 
-.kol-badge-destructive {
+.ac-badge-destructive {
   background-color: color-mix(in srgb, #ef4444 20%, transparent);
   color: #ef4444;
   border: 1px solid color-mix(in srgb, #ef4444 30%, transparent);
 }
 
-.kol-badge-outline {
+.ac-badge-outline {
   background-color: transparent;
-  color: var(--kol-surface-on-primary);
-  border: 1px solid var(--kol-border-default);
+  color: var(--ac-surface-on-primary);
+  border: 1px solid var(--ac-border-default);
 }
 
-.kol-badge-success {
+.ac-badge-success {
   background-color: color-mix(in srgb, #22c55e 20%, transparent);
   color: #22c55e;
   border: 1px solid color-mix(in srgb, #22c55e 30%, transparent);
 }
 
-.kol-badge-warning {
+.ac-badge-warning {
   background-color: color-mix(in srgb, #eab308 20%, transparent);
   color: #eab308;
   border: 1px solid color-mix(in srgb, #eab308 30%, transparent);
 }
 
-.kol-badge-critical {
+.ac-badge-critical {
   background-color: color-mix(in srgb, #ef4444 20%, transparent);
   color: #ef4444;
   border: 1px solid color-mix(in srgb, #ef4444 30%, transparent);
 }
 
-.kol-badge-info {
+.ac-badge-info {
   background-color: color-mix(in srgb, #3b82f6 20%, transparent);
   color: #3b82f6;
   border: 1px solid color-mix(in srgb, #3b82f6 30%, transparent);
 }
 
-.kol-badge-sm {
+.ac-badge-sm {
   height: 20px;
   padding: 0 6px;
   font-size: 10px;
 }
 
-.kol-badge-md {
+.ac-badge-md {
   height: 24px;
   padding: 0 8px;
   font-size: 12px;
 }
 
-.kol-badge-lg {
+.ac-badge-lg {
   height: 28px;
   padding: 0 12px;
   font-size: 14px;

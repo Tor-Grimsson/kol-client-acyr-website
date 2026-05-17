@@ -42,14 +42,14 @@ function CollectionHero({ heroImage, heroVideo, heroVideoPoster, cover, title, s
       <div
         aria-hidden="true"
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(to bottom, transparent 40%, color-mix(in srgb, var(--kol-surface-primary) 50%, transparent) 75%, var(--kol-surface-primary) 100%)' }}
+        style={{ background: 'linear-gradient(to bottom, transparent 40%, color-mix(in srgb, var(--ac-surface-primary) 50%, transparent) 75%, var(--ac-surface-primary) 100%)' }}
       />
       <div className="absolute inset-0 flex items-end">
         <div className="w-full max-w-5xl mx-auto px-8 pb-16">
-          <p className="kol-prose-label">{title} · {year}</p>
-          <h1 className="kol-prose-display" style={{ marginBottom: '16px' }}>{subtitle ?? title}</h1>
+          <p className="ac-prose-label">{title} · {year}</p>
+          <h1 className="ac-prose-display" style={{ marginBottom: '16px' }}>{subtitle ?? title}</h1>
           {show?.venue && (
-            <p className="kol-prose-tagline">
+            <p className="ac-prose-tagline">
               {show.venue}
               {show.date && <> · {formatShowDate(show.date)}</>}
             </p>
@@ -86,9 +86,9 @@ export default function CollectionDetail() {
   if (status === 'not-found') {
     return (
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
-        <p className="kol-prose-label">404</p>
-        <h1 className="kol-prose-display-md">Collection not found.</h1>
-        <Link to="/collections" className="kol-prose-label" style={{ marginBottom: 0 }}>← Back to collections</Link>
+        <p className="ac-prose-label">404</p>
+        <h1 className="ac-prose-display-md">Collection not found.</h1>
+        <Link to="/collections" className="ac-prose-label" style={{ marginBottom: 0 }}>← Back to collections</Link>
       </main>
     )
   }
@@ -114,19 +114,19 @@ export default function CollectionDetail() {
       <section className="max-w-3xl mx-auto px-8 pt-20 pb-12">
         <Link
           to="/collections"
-          className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
+          className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
           ← Back to collections
         </Link>
 
-        <p className="kol-prose-lede">{collection.excerpt}</p>
+        <p className="ac-prose-lede">{collection.excerpt}</p>
 
         <BlogBody blocks={collection.notes} />
       </section>
 
       <section className="max-w-6xl mx-auto px-8 py-12">
-        <p className="kol-prose-label">The looks</p>
+        <p className="ac-prose-label">The looks</p>
         <Divider className="mb-8" />
         <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {looks.map((look) => (
@@ -140,12 +140,12 @@ export default function CollectionDetail() {
                   />
                 )}
               </div>
-              <p className="kol-prose-label" style={{ marginBottom: '4px' }}>
+              <p className="ac-prose-label" style={{ marginBottom: '4px' }}>
                 Look {String(look.number).padStart(2, '0')}
                 {look.family && <> · {look.family}</>}
               </p>
               {(look.name || look.fabric) && (
-                <div className="kol-prose">
+                <div className="ac-prose">
                   {look.name && <p style={{ margin: '0 0 4px' }}><strong>{look.name}</strong></p>}
                   {look.fabric && <p style={{ margin: 0, fontSize: '14px', lineHeight: '20px' }}>{look.fabric}</p>}
                 </div>
@@ -157,42 +157,42 @@ export default function CollectionDetail() {
 
       {showHasContent && (
         <section className="max-w-3xl mx-auto px-8 py-12">
-          <p className="kol-prose-label">The show</p>
+          <p className="ac-prose-label">The show</p>
           <Divider className="mb-8" />
-          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 kol-prose">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 ac-prose">
             {collection.show.event && (
               <div>
-                <dt className="kol-prose-label" style={{ margin: 0 }}>Event</dt>
+                <dt className="ac-prose-label" style={{ margin: 0 }}>Event</dt>
                 <dd style={{ margin: 0 }}>{collection.show.event}</dd>
               </div>
             )}
             {collection.show.venue && (
               <div>
-                <dt className="kol-prose-label" style={{ margin: 0 }}>Venue</dt>
+                <dt className="ac-prose-label" style={{ margin: 0 }}>Venue</dt>
                 <dd style={{ margin: 0 }}>{collection.show.venue}</dd>
               </div>
             )}
             {collection.show.date && (
               <div>
-                <dt className="kol-prose-label" style={{ margin: 0 }}>Date</dt>
+                <dt className="ac-prose-label" style={{ margin: 0 }}>Date</dt>
                 <dd style={{ margin: 0 }}>{formatShowDate(collection.show.date)}</dd>
               </div>
             )}
             {collection.show.music && (
               <div>
-                <dt className="kol-prose-label" style={{ margin: 0 }}>Music</dt>
+                <dt className="ac-prose-label" style={{ margin: 0 }}>Music</dt>
                 <dd style={{ margin: 0 }}>{collection.show.music}</dd>
               </div>
             )}
             {collection.show.film && (
               <div>
-                <dt className="kol-prose-label" style={{ margin: 0 }}>Film</dt>
+                <dt className="ac-prose-label" style={{ margin: 0 }}>Film</dt>
                 <dd style={{ margin: 0 }}>{collection.show.film}</dd>
               </div>
             )}
             {collection.show.lighting && (
               <div>
-                <dt className="kol-prose-label" style={{ margin: 0 }}>Lighting</dt>
+                <dt className="ac-prose-label" style={{ margin: 0 }}>Lighting</dt>
                 <dd style={{ margin: 0 }}>{collection.show.lighting}</dd>
               </div>
             )}
@@ -202,15 +202,15 @@ export default function CollectionDetail() {
 
       {hasCollaborators && (
         <section className="max-w-3xl mx-auto px-8 py-12">
-          <p className="kol-prose-label">Collaborators</p>
+          <p className="ac-prose-label">Collaborators</p>
           <Divider className="mb-8" />
           <ul className="flex flex-col">
             {collection.collaborators.map((c, i) => (
               <Fragment key={`${c.role}-${c.name}`}>
                 {i > 0 && <Divider />}
                 <li className="py-4 grid gap-4 sm:grid-cols-[160px_1fr]">
-                  <p className="kol-prose-label" style={{ margin: 0 }}>{c.role}</p>
-                  <div className="kol-prose">
+                  <p className="ac-prose-label" style={{ margin: 0 }}>{c.role}</p>
+                  <div className="ac-prose">
                     <p style={{ margin: 0 }}>
                       {c.href
                         ? <a href={c.href} target="_blank" rel="noopener noreferrer"><strong>{c.name}</strong></a>
@@ -226,17 +226,17 @@ export default function CollectionDetail() {
 
       {hasPress && (
         <section className="max-w-3xl mx-auto px-8 py-12">
-          <p className="kol-prose-label">Press</p>
+          <p className="ac-prose-label">Press</p>
           <Divider className="mb-8" />
           <ul className="flex flex-col">
             {collection.press.map((p, i) => (
               <Fragment key={p.outlet}>
                 {i > 0 && <Divider />}
                 <li className="py-6">
-                  <p className="kol-prose-label" style={{ marginBottom: '8px' }}>
+                  <p className="ac-prose-label" style={{ marginBottom: '8px' }}>
                     {p.outlet}{p.date && <> · {p.date}</>}
                   </p>
-                  <div className="kol-prose">
+                  <div className="ac-prose">
                     <p style={{ margin: 0 }}>
                       "{p.quote}"
                       {p.href && (
@@ -256,16 +256,16 @@ export default function CollectionDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-12">
           {prev ? (
             <Link to={`/collections/${prev.slug}`} className="block no-underline">
-              <p className="kol-prose-label" style={{ marginBottom: '8px' }}>← Previous</p>
-              <div className="kol-prose">
+              <p className="ac-prose-label" style={{ marginBottom: '8px' }}>← Previous</p>
+              <div className="ac-prose">
                 <p style={{ margin: '0 0 4px' }}>{prev.title} · {prev.year}</p>
               </div>
             </Link>
           ) : <span />}
           {next ? (
             <Link to={`/collections/${next.slug}`} className="block no-underline text-right">
-              <p className="kol-prose-label" style={{ marginBottom: '8px' }}>Next →</p>
-              <div className="kol-prose">
+              <p className="ac-prose-label" style={{ marginBottom: '8px' }}>Next →</p>
+              <div className="ac-prose">
                 <p style={{ margin: '0 0 4px' }}>{next.title} · {next.year}</p>
               </div>
             </Link>

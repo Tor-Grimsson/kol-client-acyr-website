@@ -28,7 +28,7 @@ export default function Logomark({ name = 'logomark', className = '', style, tit
   }
   return (
     <span
-      className={`kol-logomark ${className}`.trim()}
+      className={`ac-logomark ${className}`.trim()}
       style={style}
       role={title ? 'img' : undefined}
       aria-label={title}

@@ -45,14 +45,14 @@ export default function LogoScaling() {
         >
         <div />
         {COLUMNS.map((c) => (
-          <div key={c.variant} className="kol-helper-12 uppercase tracking-widest">
+          <div key={c.variant} className="ac-helper-12 uppercase tracking-widest">
             {c.label}
           </div>
         ))}
 
         {STEPS.map((px) => (
           <Fragment key={px}>
-            <div className="kol-helper-12 text-right font-mono">{px}</div>
+            <div className="ac-helper-12 text-right font-mono">{px}</div>
             {COLUMNS.map((c) => (
               <div key={c.variant} style={{ width: px * c.widthMul }}>
                 <KolLogo variant={c.variant} />

@@ -29,9 +29,9 @@ export default function BlogAuthor() {
   if (status === 'not-found') {
     return (
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
-        <p className="kol-prose-label">404</p>
-        <h1 className="kol-prose-display-md">Author not found.</h1>
-        <Link to="/blog" className="kol-prose-label" style={{ marginBottom: 0 }}>← Back to journal</Link>
+        <p className="ac-prose-label">404</p>
+        <h1 className="ac-prose-display-md">Author not found.</h1>
+        <Link to="/blog" className="ac-prose-label" style={{ marginBottom: 0 }}>← Back to journal</Link>
       </main>
     )
   }
@@ -41,7 +41,7 @@ export default function BlogAuthor() {
       <section className="max-w-4xl mx-auto px-8 py-20">
         <Link
           to="/blog"
-          className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
+          className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
           ← Back to journal
@@ -55,11 +55,11 @@ export default function BlogAuthor() {
             size="xl"
           />
           <div className="flex-1 min-w-0">
-            <p className="kol-prose-label">{author.role}</p>
-            <h1 className="kol-prose-display-md">{author.name}</h1>
-            <p className="kol-prose-lede">{author.bio}</p>
+            <p className="ac-prose-label">{author.role}</p>
+            <h1 className="ac-prose-display-md">{author.name}</h1>
+            <p className="ac-prose-lede">{author.bio}</p>
             {author.links?.length > 0 && (
-              <ul className="flex gap-4 flex-wrap kol-prose-label" style={{ marginBottom: 0 }}>
+              <ul className="flex gap-4 flex-wrap ac-prose-label" style={{ marginBottom: 0 }}>
                 {author.links.map((link) => (
                   <li key={link.href}>
                     <a
@@ -79,7 +79,7 @@ export default function BlogAuthor() {
       </section>
 
       <section className="max-w-4xl mx-auto px-8 pb-24">
-        <p className="kol-prose-label">Published by {author.name}</p>
+        <p className="ac-prose-label">Published by {author.name}</p>
         <Divider className="mb-6" />
         <ul className="flex flex-col">
           {articles.map((article, i) => (
@@ -101,11 +101,11 @@ export default function BlogAuthor() {
                     </div>
                   )}
                   <div className="flex flex-col justify-center">
-                    <div className="kol-prose-label flex items-center gap-3" style={{ marginBottom: '12px' }}>
+                    <div className="ac-prose-label flex items-center gap-3" style={{ marginBottom: '12px' }}>
                       {article.tag && <Badge variant="outline" size="sm">{article.tag}</Badge>}
                       <span>{formatDate(article.publishedAt)}</span>
                     </div>
-                    <div className="kol-prose">
+                    <div className="ac-prose">
                       <h3>{article.title}</h3>
                       <p>{article.excerpt}</p>
                     </div>

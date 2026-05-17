@@ -93,14 +93,14 @@ export default function TypeControlsPanel() {
   }
 
   return (
-    <div className="kol-compose-rail">
-      <div className="kol-compose-rail-head">
-        <span className="kol-helper-10 uppercase text-meta">Type controls</span>
+    <div className="ac-compose-rail">
+      <div className="ac-compose-rail-head">
+        <span className="ac-helper-10 uppercase text-meta">Type controls</span>
       </div>
       <div className="flex flex-col gap-4 p-4">
         {boundLayerId && (
           <div className="flex items-center gap-2 px-3 py-2 rounded bg-surface-secondary border border-fg-08">
-            <span className="kol-helper-10 text-emphasis flex-1">Linked → Compose layer</span>
+            <span className="ac-helper-10 text-emphasis flex-1">Linked → Compose layer</span>
             <EditorButton variant="primary" size="sm" onClick={onDoneLink}>Done</EditorButton>
             <EditorButton variant="secondary" size="sm" onClick={unbindLayer} title="Unlink without leaving">Unlink</EditorButton>
           </div>

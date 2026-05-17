@@ -41,9 +41,9 @@ export default function PaletteControls() {
   const navigate = useNavigate()
 
   return (
-    <div className="kol-compose-rail">
-      <div className="kol-compose-rail-head">
-        <span className="kol-helper-10 uppercase text-meta">Palette controls</span>
+    <div className="ac-compose-rail">
+      <div className="ac-compose-rail-head">
+        <span className="ac-helper-10 uppercase text-meta">Palette controls</span>
       </div>
       <div className="flex flex-col gap-4 p-4">
         <div className="grid grid-cols-4 items-end gap-2">

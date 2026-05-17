@@ -14,11 +14,11 @@ export default function CodeBlock({ children, language }) {
   }
 
   return (
-    <div className="kol-codeblock">
-      {language && <span className="kol-codeblock-lang">{language}</span>}
+    <div className="ac-codeblock">
+      {language && <span className="ac-codeblock-lang">{language}</span>}
       <button
         type="button"
-        className="kol-codeblock-copy"
+        className="ac-codeblock-copy"
         onClick={onCopy}
         aria-label={copied ? 'Copied' : 'Copy to clipboard'}
         title={copied ? 'Copied' : 'Copy'}

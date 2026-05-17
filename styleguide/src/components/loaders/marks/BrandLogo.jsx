@@ -21,7 +21,7 @@ export default function BrandLogo({ name = 'logomark-uncontained', className = '
   }
   return (
     <span
-      className={`kol-brand-logo ${className}`.trim()}
+      className={`ac-brand-logo ${className}`.trim()}
       style={style}
       role={title ? 'img' : undefined}
       aria-label={title}

@@ -62,7 +62,7 @@ export default function ColorPicker({ values, onChange, onCopyCss, onReset }) {
   }
 
   /* Resolve token names to live hex at render time — palette stays in sync
-   * with token edits in kol-color.css. */
+   * with token edits in ac-color.css. */
   const rows = useMemo(() => [
     ROW_WARM_TOKENS.map((t) => resolveCssVar(t)),
     ROW_GREY_TOKENS.map((t) => resolveCssVar(t)),

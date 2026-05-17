@@ -1,0 +1,79 @@
+/**
+ * theme.css — AC DS theme-level design tokens.
+ *
+ * Spacing, radius, shadow, z-index, transition, opacity scales. Cascade
+ * order for the whole DS is declared in `src/ds/index.css`; this file
+ * holds only the theme tokens themselves.
+ */
+
+/* Theme-level design tokens */
+:root {
+  /* Spacing scale (4px base) */
+  --ac-spacing-1: 0.25rem;    /* 4px */
+  --ac-spacing-2: 0.5rem;     /* 8px */
+  --ac-spacing-3: 0.75rem;    /* 12px */
+  --ac-spacing-4: 1rem;       /* 16px */
+  --ac-spacing-5: 1.25rem;    /* 20px */
+  --ac-spacing-6: 1.5rem;     /* 24px */
+  --ac-spacing-8: 2rem;       /* 32px */
+  --ac-spacing-10: 2.5rem;    /* 40px */
+  --ac-spacing-12: 3rem;      /* 48px */
+  --ac-spacing-16: 4rem;      /* 64px */
+  --ac-spacing-20: 5rem;      /* 80px */
+  --ac-spacing-24: 6rem;      /* 96px */
+
+  /* Semantic spacing aliases */
+  --ac-spacing-section: var(--ac-spacing-20);
+  --ac-spacing-container: var(--ac-spacing-10);
+  --ac-spacing-gap-sm: var(--ac-spacing-2);
+  --ac-spacing-gap-md: var(--ac-spacing-4);
+  --ac-spacing-gap-lg: var(--ac-spacing-6);
+
+  /* Border radius (4px increments) */
+  --ac-radius-none: 0;
+  --ac-radius-sm: 4px;
+  --ac-radius-md: 8px;
+  --ac-radius-lg: 12px;
+  --ac-radius-xl: 16px;
+  --ac-radius-2xl: 20px;
+  --ac-radius-full: 9999px;
+
+  /* Shadows (subtle elevation) */
+  --ac-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --ac-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --ac-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --ac-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --ac-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  /* Transitions (consistent timing) */
+  --ac-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ac-transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ac-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ac-transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Z-index scale */
+  --ac-z-base: 1;
+  --ac-z-dropdown: 10;
+  --ac-z-sticky: 20;
+  --ac-z-overlay: 50;
+  --ac-z-modal: 100;
+  --ac-z-toast: 200;
+  --ac-z-tooltip: 300;
+  --ac-z-nav: 1000;
+
+  /* Opacity values */
+  --ac-opacity-hover: 0.8;
+  --ac-opacity-disabled: 0.5;
+  --ac-opacity-subtle: 0.6;
+  --ac-opacity-loading: 0.7;
+}
+
+/* Dark mode shadow adjustments */
+[data-theme="dark"],
+.dark {
+  --ac-shadow-sm: 0 1px 2px rgba(255, 255, 255, 0.03);
+  --ac-shadow-md: 0 4px 6px rgba(255, 255, 255, 0.05);
+  --ac-shadow-lg: 0 10px 15px rgba(255, 255, 255, 0.08);
+  --ac-shadow-xl: 0 20px 25px rgba(255, 255, 255, 0.1);
+  --ac-shadow-inner: inset 0 2px 4px rgba(255, 255, 255, 0.04);
+}

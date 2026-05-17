@@ -14,7 +14,7 @@ import { TOOL_META, useTool } from '../../state/tools'
  * trigger arms the last-picked variant; opening the dropdown lets the
  * user switch.
  *
- * All buttons use `kol-btn-quiet` (dimmed at rest, brightens on hover) —
+ * All buttons use `ac-btn-quiet` (dimmed at rest, brightens on hover) —
  * matches the LayerStack `+`/trash idiom. The active tool drops the
  * quiet class so it stays at full opacity, making it the only fully-lit
  * button at rest. No background fill, no brand color. Icons come from
@@ -46,7 +46,7 @@ function ToolButton({ id, active, onClick }) {
       aria-label={meta.label}
       aria-pressed={active}
       title={`${meta.label} (${meta.shortcut})`}
-      className={`inline-flex items-center justify-center rounded text-emphasis ${active ? '' : 'kol-btn-quiet'}`}
+      className={`inline-flex items-center justify-center rounded text-emphasis ${active ? '' : 'ac-btn-quiet'}`}
       style={{ width: 28, height: 28, padding: 6 }}
     >
       <EditorIcon name={meta.icon} size={14} />
@@ -84,7 +84,7 @@ function ShapeDropdown({ tool, setTool }) {
         aria-label={`Shape: ${triggerVariant.label}`}
         aria-pressed={active}
         title={`Shape: ${triggerVariant.label} (${triggerVariant.shortcut})`}
-        className={`relative inline-flex items-center justify-center rounded text-emphasis ${active ? '' : 'kol-btn-quiet'}`}
+        className={`relative inline-flex items-center justify-center rounded text-emphasis ${active ? '' : 'ac-btn-quiet'}`}
         style={{ width: 28, height: 28, padding: 6 }}
       >
         <EditorIcon name={triggerVariant.icon} size={14} />
@@ -108,13 +108,13 @@ function ShapeDropdown({ tool, setTool }) {
                 setOpen(false)
                 e.currentTarget.blur()
               }}
-              className="w-full kol-helper-12 px-3 h-8 inline-flex items-center gap-2 text-body hover:text-emphasis text-left"
+              className="w-full ac-helper-12 px-3 h-8 inline-flex items-center gap-2 text-body hover:text-emphasis text-left"
             >
               <span className="shrink-0 w-4 inline-flex items-center justify-center">
                 <EditorIcon name={v.icon} size={14} />
               </span>
               <span className="flex-1 truncate">{v.label}</span>
-              <span className="kol-helper-10 text-emphasis shrink-0">{isActive ? '✓' : v.shortcut}</span>
+              <span className="ac-helper-10 text-emphasis shrink-0">{isActive ? '✓' : v.shortcut}</span>
             </button>
           )
         })}

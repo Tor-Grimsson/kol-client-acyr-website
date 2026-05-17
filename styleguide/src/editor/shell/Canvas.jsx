@@ -75,7 +75,7 @@ export function CanvasFrame({
           top:           6,
           left:          8,
           fontSize:      10,
-          fontFamily:    'var(--kol-font-family-mono)',
+          fontFamily:    'var(--ac-font-family-mono)',
           letterSpacing: '0.1em',
           color:         `color-mix(in srgb, ${guideColor} 70%, transparent)`,
           pointerEvents: 'none',
@@ -241,7 +241,7 @@ function PanViewport({ children }) {
         {/* Oversized grid behind the letterbox — extends 2 viewport sizes
             in each direction so practical panning never reveals an edge. */}
         <div
-          className="kol-grid-bg absolute"
+          className="ac-grid-bg absolute"
           style={{ left: '-200%', top: '-200%', width: '500%', height: '500%' }}
         />
         <div className="relative w-full h-full">{children}</div>

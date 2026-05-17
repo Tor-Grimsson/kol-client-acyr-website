@@ -3,8 +3,8 @@
  *
  * Curated from kol-theme/_new-css/utilities.css during Phase 5 sync. Dropped:
  *  - bg-opacity-hex-* / hover:bg-opacity-hex-* / inverse-* family (~600 lines)
- *    The --kol-opacity-hex-* tokens were retired in kol-client Phase 4a and
- *    consolidated into the color-mix-based --kol-fg-* family in kol-opacity.css.
+ *    The --ac-opacity-hex-* tokens were retired in kol-client Phase 4a and
+ *    consolidated into the color-mix-based --ac-fg-* family in kol-opacity.css.
  *  - .reveal* family ([data-reveal] is the canonical reveal pattern in
  *    kol-client; shipping a parallel .reveal API would create drift)
  *  - wordmarkBrand / logomarkBrand filter utilities (proposal-specific

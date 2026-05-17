@@ -112,7 +112,7 @@ const ContentFilters = ({
 
   const renderFilterGroup = (group) => (
     <div key={group.key}>
-      <h4 className="kol-helper-12 text-fg-48">{group.label}</h4>
+      <h4 className="ac-helper-12 text-fg-48">{group.label}</h4>
       <div className="flex flex-wrap gap-2 pt-3">
         {group.values.map((value) => {
           const filterKey = `${group.key}:${value}`
@@ -133,7 +133,7 @@ const ContentFilters = ({
     <div className="w-full" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-6">
-          <h2 className="kol-helper-14">{title}</h2>
+          <h2 className="ac-helper-14">{title}</h2>
           <div className="flex items-center gap-1">
             <button
               type="button"
@@ -149,7 +149,7 @@ const ContentFilters = ({
               style={{
                 height: 28,
                 width: searchOpen ? 200 : 28,
-                background: searchOpen ? 'var(--kol-opacity-hex-04, rgba(255,255,255,0.04))' : 'transparent',
+                background: searchOpen ? 'var(--ac-opacity-hex-04, rgba(255,255,255,0.04))' : 'transparent',
                 transition: 'width 600ms cubic-bezier(0.16, 1, 0.3, 1), background 400ms cubic-bezier(0.16, 1, 0.3, 1)',
                 overflow: 'hidden',
               }}
@@ -177,7 +177,7 @@ const ContentFilters = ({
                   onChange={(e) => setSearchText(e.target.value)}
                   onClick={(e) => e.stopPropagation()}
                   placeholder=""
-                  className="bg-transparent outline-none kol-helper-12 flex-1 text-fg-80 caret-current px-4"
+                  className="bg-transparent outline-none ac-helper-12 flex-1 text-fg-80 caret-current px-4"
                   onBlur={() => { if (!searchText) setSearchOpen(false) }}
                   onKeyDown={(e) => { if (e.key === 'Escape') { setSearchOpen(false); setSearchText('') } }}
                 />
@@ -187,7 +187,7 @@ const ContentFilters = ({
           </div>
           {activeFilters.size > 0 && (
             <span
-              className="kol-helper-12 text-fg-48 cursor-pointer select-none group flex items-center gap-2"
+              className="ac-helper-12 text-fg-48 cursor-pointer select-none group flex items-center gap-2"
               onClick={(e) => { e.stopPropagation(); clearAllFilters() }}
             >
               <span className="underline">({activeFilters.size}) {activeFilters.size === 1 ? 'filter' : 'filters'} active</span>
@@ -198,7 +198,7 @@ const ContentFilters = ({
 
         <div className="flex items-center gap-8">
           {(!showCountOnlyWhenFiltering || isExpanded || searchOpen || activeFilters.size > 0) && (
-            <span className="kol-helper-14 text-fg-64">
+            <span className="ac-helper-14 text-fg-64">
               {filteredItems.length} of {totalCount}
             </span>
           )}
@@ -208,7 +208,7 @@ const ContentFilters = ({
                 <span
                   key={opt.value}
                   onClick={() => handleViewModeChange(opt.value)}
-                  className={`kol-helper-14 cursor-pointer select-none ${viewMode === opt.value ? 'text-fg-96' : 'text-fg-32 hover:text-fg-48'}`}
+                  className={`ac-helper-14 cursor-pointer select-none ${viewMode === opt.value ? 'text-fg-96' : 'text-fg-32 hover:text-fg-48'}`}
                   style={{ textTransform: 'uppercase', letterSpacing: 1 }}
                 >
                   {opt.label}
@@ -228,7 +228,7 @@ const ContentFilters = ({
             <button
               type="button"
               onClick={clearAllFilters}
-              className="kol-helper-12 transition-colors underline text-fg-48"
+              className="ac-helper-12 transition-colors underline text-fg-48"
               style={{ marginLeft: 'auto', background: 'transparent', border: 'none', cursor: 'pointer' }}
             >
               Clear all ({activeFilters.size})
@@ -243,7 +243,7 @@ const ContentFilters = ({
             <span
               key={opt.value}
               onClick={() => setLayout(opt.value)}
-              className={`kol-helper-12 cursor-pointer select-none ${layout === opt.value ? 'text-fg-96' : 'text-fg-32 hover:text-fg-48'}`}
+              className={`ac-helper-12 cursor-pointer select-none ${layout === opt.value ? 'text-fg-96' : 'text-fg-32 hover:text-fg-48'}`}
               style={{ textTransform: 'uppercase', letterSpacing: 1 }}
             >
               {opt.label}

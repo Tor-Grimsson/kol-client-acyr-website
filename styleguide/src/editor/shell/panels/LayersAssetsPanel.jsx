@@ -14,7 +14,7 @@ export default function LayersAssetsPanel() {
   const [tab, setTab] = useState('Layers')
 
   return (
-    <div className="kol-compose-rail border-b border-fg-08">
+    <div className="ac-compose-rail border-b border-fg-08">
       <div className="border-b border-fg-08">
         <TabsRow tabs={TABS} active={tab} onChange={setTab} />
       </div>

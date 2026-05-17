@@ -50,7 +50,7 @@ export default function ShortcutsOverlay() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 h-12 border-b border-fg-08">
-          <span className="kol-helper-12 text-emphasis">Keyboard shortcuts</span>
+          <span className="ac-helper-12 text-emphasis">Keyboard shortcuts</span>
           <EditorButton
             variant="primary"
             size="sm"
@@ -74,13 +74,13 @@ export default function ShortcutsOverlay() {
 function Section({ title, items }) {
   return (
     <div>
-      <p className="kol-helper-10 uppercase tracking-widest text-meta mb-2">{title}</p>
+      <p className="ac-helper-10 uppercase tracking-widest text-meta mb-2">{title}</p>
       <ul className="flex flex-col">
         {items.map((s) => (
           <li key={s.id} className="flex items-center justify-between py-1">
-            <span className="kol-helper-12 text-emphasis normal-case tracking-normal">{s.label}</span>
+            <span className="ac-helper-12 text-emphasis normal-case tracking-normal">{s.label}</span>
             <kbd
-              className="kol-mono-10 text-meta px-2 py-0.5 rounded border border-fg-08 bg-fg-04"
+              className="ac-mono-10 text-meta px-2 py-0.5 rounded border border-fg-08 bg-fg-04"
               style={{ minWidth: 32, textAlign: 'center' }}
             >
               {comboLabel(s.combo)}

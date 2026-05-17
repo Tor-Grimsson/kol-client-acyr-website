@@ -93,7 +93,7 @@ function patternLayerSvg(layer, palette, w, h, idx) {
     size:        scale,
   })
   const dataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(tile)}`
-  const id = `kol-compose-pattern-${idx}`
+  const id = `ac-compose-pattern-${idx}`
   const def = `<pattern id="${id}" x="0" y="0" width="${scale}" height="${scale}" patternUnits="userSpaceOnUse"><image href="${dataUrl}" x="0" y="0" width="${scale}" height="${scale}"/></pattern>`
   /* Phase 1b: positioned. Defensive defaults fall back to full-canvas for
    * any pre-1b data lacking bounds. */

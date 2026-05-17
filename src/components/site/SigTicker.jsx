@@ -1,6 +1,6 @@
 /**
  * SigTicker — bottom signature band with identity + token references.
- * Styled by `.site-sig*` in kol-site.css.
+ * Styled by `.site-sig*` in ac-site.css.
  * line: array of strings | null (separator)
  * tokens: array of strings (flagged as .site-sig-hex if starts with #)
  */

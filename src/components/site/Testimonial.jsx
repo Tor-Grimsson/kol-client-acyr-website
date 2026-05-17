@@ -1,7 +1,7 @@
 /**
  * Testimonial — centered editorial pull quote.
  * `inverse` flips the panel polarity (light bg + dark text for dark-mode pages).
- * Styled by `.site-testimonial*` in kol-site.css.
+ * Styled by `.site-testimonial*` in ac-site.css.
  */
 export default function Testimonial({ kicker, quote, cite, inverse = false }) {
   const cls = 'site-testimonial' + (inverse ? ' site-testimonial--inverse' : '')

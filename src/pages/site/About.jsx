@@ -34,12 +34,12 @@ export default function About() {
         <div
           aria-hidden="true"
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--kol-surface-primary) 60%, transparent), color-mix(in srgb, var(--kol-surface-primary) 30%, transparent), var(--kol-surface-primary))' }}
+          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--ac-surface-primary) 60%, transparent), color-mix(in srgb, var(--ac-surface-primary) 30%, transparent), var(--ac-surface-primary))' }}
         />
         <div className="relative max-w-3xl mx-auto px-5 py-24 text-center flex flex-col items-center">
-          <p className="kol-prose-label">About</p>
-          <h1 className="kol-prose-display">{BRAND.name}.</h1>
-          <p className="kol-prose-lede max-w-xl">
+          <p className="ac-prose-label">About</p>
+          <h1 className="ac-prose-display">{BRAND.name}.</h1>
+          <p className="ac-prose-lede max-w-xl">
             Founded in Reykjavík in 2013 by {BRAND_INFO.identity.founder} — clothing made by hand, in small numbers, for the independent woman.
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function About() {
       <section className="max-w-3xl mx-auto px-8 pt-12 pb-12">
         <Divider />
 
-        <div className="kol-prose pt-8">
+        <div className="ac-prose pt-8">
           <h2>Designer's vision</h2>
           <p>
             Ýr is committed to breaking the cycle of overproduction and material waste in the fashion industry. With a deep understanding of the environmental impact of fast fashion, Ýr is driven by the belief that sustainable practices are not only necessary but also achievable without compromising on style or functionality. Another Creation is more than just a fashion brand; it's a movement toward conscious consumption and responsible production.
@@ -67,12 +67,12 @@ export default function About() {
             className="block w-full h-auto rounded-sm"
             loading="lazy"
           />
-          <figcaption className="kol-helper-12 uppercase tracking-widest text-meta mt-3">
+          <figcaption className="ac-helper-12 uppercase tracking-widest text-meta mt-3">
             {BRAND_INFO.identity.founder} · {BRAND_INFO.identity.role}
           </figcaption>
         </figure>
 
-        <div className="kol-prose">
+        <div className="ac-prose">
           <h2>Ýr Þrastardóttir — creator of Another Creation</h2>
           <p>
             {BRAND_INFO.identity.founder} is the founder of Another Creation, a fashion label she has been working on since 2013. She graduated with a BA in fashion design from the Icelandic Academy of the Arts in 2010 and has been working on her own labels since then.
@@ -97,7 +97,7 @@ export default function About() {
           <Divider />
         </div>
         <Carousel
-          className="[&_.kol-embla-container]:!gap-0 [&_.kol-embla-slide]:!w-[clamp(200px,70vw,300px)] [&_.kol-embla-slide]:!h-[clamp(280px,90vw,400px)]"
+          className="[&_.ac-embla-container]:!gap-0 [&_.ac-embla-slide]:!w-[clamp(200px,70vw,300px)] [&_.ac-embla-slide]:!h-[clamp(280px,90vw,400px)]"
           options={{ align: 'start', loop: false, dragFree: true, containScroll: 'trimSnaps' }}
         >
           {STORY_GALLERY.map((src) => (

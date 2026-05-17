@@ -17,7 +17,7 @@ export default function PaletteCanvas() {
     <Canvas aspect={aspect} bgColor={bgColor} panEnabled>
       <div
         key={`${layoutId}-${colors.join('')}`}
-        className="kol-combo-stage-anim w-full h-full self-stretch p-8"
+        className="ac-combo-stage-anim w-full h-full self-stretch p-8"
       >
         {LayoutComponent ? <LayoutComponent palette={palette} logo={logo} /> : null}
       </div>

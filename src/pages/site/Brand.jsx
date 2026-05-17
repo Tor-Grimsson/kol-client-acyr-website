@@ -19,19 +19,19 @@ export default function Brand() {
       <section className="max-w-3xl mx-auto px-8 pt-20">
         <Link
           to="/"
-          className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
+          className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
           ← Back
         </Link>
 
-        <p className="kol-prose-label">Brand</p>
-        <h1 className="kol-prose-display-md">Brand</h1>
-        <p className="kol-prose-tagline" style={{ marginTop: '8px' }}>
+        <p className="ac-prose-label">Brand</p>
+        <h1 className="ac-prose-display-md">Brand</h1>
+        <p className="ac-prose-tagline" style={{ marginTop: '8px' }}>
           The mark, palette, and type — at a glance.
         </p>
 
-        <div className="kol-prose">
+        <div className="ac-prose">
           <p>Another Creation is a womenswear label from Reykjavík, founded in 2013 by Ýr Þrastardóttir. Garments are made by hand in small numbers. This page is the short version — full assets and the press kit are available on request.</p>
 
           <h2>The mark</h2>
@@ -51,9 +51,9 @@ export default function Brand() {
             {SWATCHES.map((s) => (
               <div key={s.name}>
                 <div className="aspect-square rounded" style={{ backgroundColor: s.hex }} />
-                <p className="kol-helper-xs text-emphasis mt-2">{s.name}</p>
-                <p className="kol-helper-xs text-meta">{s.hex}</p>
-                <p className="kol-helper-xs text-meta">{s.role}</p>
+                <p className="ac-helper-xs text-emphasis mt-2">{s.name}</p>
+                <p className="ac-helper-xs text-meta">{s.hex}</p>
+                <p className="ac-helper-xs text-meta">{s.role}</p>
               </div>
             ))}
           </div>

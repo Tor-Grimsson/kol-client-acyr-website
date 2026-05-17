@@ -29,7 +29,7 @@ export default function Image({
       src={src}
       alt={alt}
       loading={loading}
-      className={`kol-image block max-w-full h-auto ${className}`.trim()}
+      className={`ac-image block max-w-full h-auto ${className}`.trim()}
       style={aspectRatio ? { aspectRatio } : undefined}
       onError={() => setFailed(true)}
       {...rest}

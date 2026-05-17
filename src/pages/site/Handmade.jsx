@@ -22,11 +22,11 @@ function FaqItem({ q, a, open, onToggle }) {
         style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit' }}
         aria-expanded={open}
       >
-        <span className="kol-prose-label" style={{ margin: 0 }}>{q}</span>
+        <span className="ac-prose-label" style={{ margin: 0 }}>{q}</span>
         <Icon name={open ? 'minus' : 'plus'} size={14} />
       </button>
       {open && (
-        <div className="kol-prose pb-5">
+        <div className="ac-prose pb-5">
           <p style={{ margin: 0 }}>{a}</p>
         </div>
       )}
@@ -61,20 +61,20 @@ export default function Handmade() {
         <div
           aria-hidden="true"
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--kol-surface-primary) 30%, transparent), color-mix(in srgb, var(--kol-surface-primary) 30%, transparent), var(--kol-surface-primary))' }}
+          style={{ background: 'linear-gradient(to bottom, color-mix(in srgb, var(--ac-surface-primary) 30%, transparent), color-mix(in srgb, var(--ac-surface-primary) 30%, transparent), var(--ac-surface-primary))' }}
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-8">
-            <p className="kol-prose-label">Made by hand by Ýr</p>
-            <h1 className="kol-prose-display">Custom Made</h1>
-            <p className="kol-prose-tagline" style={{ marginTop: '8px' }}>{BRAND_INFO.labels.manifesto}</p>
+            <p className="ac-prose-label">Made by hand by Ýr</p>
+            <h1 className="ac-prose-display">Custom Made</h1>
+            <p className="ac-prose-tagline" style={{ marginTop: '8px' }}>{BRAND_INFO.labels.manifesto}</p>
           </div>
         </div>
       </section>
 
       {/* Pieces */}
       <section className="max-w-6xl mx-auto px-8 pt-16">
-        <p className="kol-prose-label">Pieces</p>
+        <p className="ac-prose-label">Pieces</p>
         <Divider className="mb-8" />
         <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
@@ -94,7 +94,7 @@ export default function Handmade() {
 
       {/* FAQ */}
       <section className="max-w-3xl mx-auto px-8 pt-24">
-        <p className="kol-prose-label">Frequently asked questions</p>
+        <p className="ac-prose-label">Frequently asked questions</p>
         <Divider />
         <ul className="flex flex-col">
           {HANDMADE_FAQ.map((item, i) => (
@@ -111,9 +111,9 @@ export default function Handmade() {
 
       {/* Inline contact form (mailto-styled) */}
       <section className="max-w-3xl mx-auto px-8 pt-20">
-        <p className="kol-prose-label">Have questions?</p>
-        <h2 className="kol-prose-title" style={{ fontSize: '40px', lineHeight: '44px', marginBottom: '16px' }}>Ask the studio.</h2>
-        <p className="kol-prose-lede">
+        <p className="ac-prose-label">Have questions?</p>
+        <h2 className="ac-prose-title" style={{ fontSize: '40px', lineHeight: '44px', marginBottom: '16px' }}>Ask the studio.</h2>
+        <p className="ac-prose-lede">
           Brief us on what you have in mind. We respond within two business days.
         </p>
 

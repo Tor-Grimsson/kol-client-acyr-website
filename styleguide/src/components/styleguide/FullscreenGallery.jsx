@@ -9,7 +9,7 @@ export default function FullscreenGallery({ items, layout = 'stack', cols = 4, t
   const tiles = items.map((item) => (
     <div
       key={item.src}
-      className={`kol-fs-tile cursor-zoom-in ${tileClassName}`.trim()}
+      className={`ac-fs-tile cursor-zoom-in ${tileClassName}`.trim()}
       onClick={() => setCurrent(item)}
       role="button"
       tabIndex={0}

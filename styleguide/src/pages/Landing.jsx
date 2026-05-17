@@ -30,9 +30,9 @@ export default function Landing() {
           <KolLogo variant="logomark" title={BRAND.name} className="w-full h-auto" />
         </div>
 
-        <h1 className="kol-prose-display uppercase">{BRAND.name}</h1>
+        <h1 className="ac-prose-display uppercase">{BRAND.name}</h1>
 
-        <p className="kol-prose-tagline">
+        <p className="ac-prose-tagline">
           A Central European atelier crafting timeless womenswear by hand.
         </p>
 

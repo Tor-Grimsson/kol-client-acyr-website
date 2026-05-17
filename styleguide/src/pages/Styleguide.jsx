@@ -33,7 +33,7 @@ function GraphicCard({ category, name, polarity = 'dark' }) {
       <div className={`aspect-square flex items-center justify-center rounded-[4px] overflow-hidden ${bg}`}>
         <Graphic category={category} name={name} />
       </div>
-      <figcaption className="kol-helper-12 uppercase tracking-wider text-meta mt-2">
+      <figcaption className="ac-helper-12 uppercase tracking-wider text-meta mt-2">
         {category} / {name}
       </figcaption>
     </figure>
@@ -41,7 +41,7 @@ function GraphicCard({ category, name, polarity = 'dark' }) {
 }
 
 /** LiveSwatch — same visual as Swatch, but reads its hex from the CSS token at
- *  runtime. Single source of truth: kol-color.css. */
+ *  runtime. Single source of truth: ac-color.css. */
 function LiveSwatch({ token, name, anchor }) {
   const [hex, setHex] = useState('#')
   useEffect(() => { setHex(resolveCssVar(token)) }, [token])
@@ -60,11 +60,11 @@ function TypeShowcase({ sectionId, row }) {
   if (sectionId === 'sans-families') {
     return (
       <div className="flex flex-col gap-2 py-3 border-b border-fg-08">
-        <span className="kol-helper-12 text-meta uppercase tracking-wider">{row.token}</span>
+        <span className="ac-helper-12 text-meta uppercase tracking-wider">{row.token}</span>
         <span className="text-emphasis" style={{ fontFamily: `var(${row.token})`, fontSize: 28 }}>
           {row.cut}
         </span>
-        <span className="kol-helper-10 text-subtle">{row.role}</span>
+        <span className="ac-helper-10 text-subtle">{row.role}</span>
       </div>
     )
   }
@@ -74,7 +74,7 @@ function TypeShowcase({ sectionId, row }) {
     const cls = row.cls.replace(/^\./, '')
     return (
       <div className="flex flex-col gap-2 py-3 border-b border-fg-08">
-        <span className="kol-helper-12 text-meta uppercase tracking-wider">
+        <span className="ac-helper-12 text-meta uppercase tracking-wider">
           {row.cls} · {row.family} · {row.weight}
         </span>
         <div className={cls}>The quick brown fox jumps over the lazy dog</div>
@@ -82,7 +82,7 @@ function TypeShowcase({ sectionId, row }) {
     )
   }
 
-  // Prose: wrap in .kol-prose so descendant selectors apply
+  // Prose: wrap in .ac-prose so descendant selectors apply
   if (sectionId === 'prose') {
     const ProseRow = () => {
       const tag = (row.class.match(/h[1-6]|p|code|pre/) || [])[0]
@@ -95,16 +95,16 @@ function TypeShowcase({ sectionId, row }) {
       if (tag === 'h6') return <h6>{word}</h6>
       if (tag === 'code') return <p>Inline <code>code</code> in body copy.</p>
       if (tag === 'pre') return <pre>{`code block\nlines preserved`}</pre>
-      // .kol-prose-* sub-classes — apply the class directly
-      const cls = row.class.replace(/^\./, '').replace(/^kol-prose /, '')
+      // .ac-prose-* sub-classes — apply the class directly
+      const cls = row.class.replace(/^\./, '').replace(/^ac-prose /, '')
       return <span className={cls}>{word}</span>
     }
     return (
       <div className="flex flex-col gap-2 py-3 border-b border-fg-08">
-        <span className="kol-helper-12 text-meta uppercase tracking-wider">
+        <span className="ac-helper-12 text-meta uppercase tracking-wider">
           {row.class} · {row.family} · {row.weight}
         </span>
-        <div className="kol-prose"><ProseRow /></div>
+        <div className="ac-prose"><ProseRow /></div>
       </div>
     )
   }
@@ -114,7 +114,7 @@ function TypeShowcase({ sectionId, row }) {
     const cls = row.cls.replace(/^\./, '')
     return (
       <div className="flex flex-col gap-2 py-3 border-b border-fg-08">
-        <span className="kol-helper-10 text-meta uppercase tracking-wider">
+        <span className="ac-helper-10 text-meta uppercase tracking-wider">
           {row.cls} · weight {row.weight} · LH {typeof row.lh === 'number' ? `${row.lh}px` : row.lh} · LS {row.ls}
         </span>
         <span className={cls}>The quick brown fox jumps over the lazy dog</span>
@@ -128,7 +128,7 @@ function TypeShowcase({ sectionId, row }) {
     if (row.name && row.pct !== undefined) {
       return (
         <div className="flex flex-col gap-2 py-3 border-b border-fg-08">
-          <span className="kol-helper-12 text-meta uppercase tracking-wider">
+          <span className="ac-helper-12 text-meta uppercase tracking-wider">
             .text-{row.name} · {row.pct}% · {row.role}
           </span>
           <span className={`text-${row.name}`} style={{ fontSize: 18 }}>
@@ -161,7 +161,7 @@ export default function Styleguide() {
         title="About Another Creation"
         body="An Icelandic womenswear label by Ýr Þrastardóttir — handmade clothing built on conscious production, made for the independent woman."
       >
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <p>Founded in Reykjavík in 2013, Another Creation works against the cycle of overproduction and material waste that defines mainstream fashion. Each garment is made by hand, in small numbers, with sustainability written into every step — from material sourcing to finishing.</p>
 
           <p>Ýr Þrastardóttir, the brand's creator, draws on a long Icelandic lineage of strong, independent women, translating that heritage into modern garments designed for long ownership. She holds a BA in fashion design from the Icelandic Academy of the Arts (2010) and represented Iceland at Designer's Nest during Copenhagen Fashion Week in 2011. Another Creation has shown four times at Reykjavík Fashion Festival, was selected from over 200 applicants for StartupReykjavík in 2013, and earned a special award that year at the Creative Business Cup for combining creative power with commercial sensibility.</p>
@@ -185,7 +185,7 @@ export default function Styleguide() {
         title="Voice"
         body="How the brand sounds — quiet, deliberate, anti-trend."
       >
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <p>Another Creation speaks quietly and deliberately. The voice is anti-trend, anti-noise — it favours specifics over claims, materials over marketing, the considered phrase over the loud one. It addresses the buyer who reads the label, not the one who chases the season.</p>
         </div>
       </PageSection>
@@ -196,7 +196,7 @@ export default function Styleguide() {
         title="Look"
         body="How the brand appears — editorial, restrained, photo-driven."
       >
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <p>Visually, the brand sits in restraint. Photography leans editorial — landscape, material, figure — with natural light over studio gloss. Compositions are direct, not styled. Type is set quietly, with deliberate spacing. Color holds to a small, confident palette anchored on burgundy and cream. The brand never ornaments where it can let the garment speak.</p>
         </div>
       </PageSection>
@@ -207,10 +207,10 @@ export default function Styleguide() {
         title="The mark"
         body="Two distinct marks — a wordmark and a signature — used alone or in lockup."
       >
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <p>The current mark system replaces the previous brand mark with a pair: the wordmark, set in Right Grotesk Compact Medium (the earlier Baskerville-set wordmark is retired), and the signature — a personal trace from Ýr Þrastardóttir herself. Used alone, each carries the brand; together as a lockup, they form the primary application.</p>
         </div>
-        <div className="kol-grid mt-12">
+        <div className="ac-grid mt-12">
           <LogoCard variant="wordmark" clearspace={false} frame={false} />
           <LogoCard variant="logomark" clearspace={false} frame={false} />
         </div>
@@ -234,9 +234,9 @@ export default function Styleguide() {
         id="color"
         label="06 — color"
         title="Palette"
-        body="Greyscale carries the structure; five brand hue ramps + cream carry identity. All swatches read live from kol-color.css."
+        body="Greyscale carries the structure; five brand hue ramps + cream carry identity. All swatches read live from ac-color.css."
       >
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <h3>Concept</h3>
           <p>The system splits color into two roles. Greyscale handles the structural backbone — surfaces, ink, dividers, the canvas. The brand palette names the identity through five hue families (yellow, red, blue, orange, teal), with cream as a complementary neutral surface.</p>
 
@@ -249,7 +249,7 @@ export default function Styleguide() {
 
         {HUE_RAMPS.map((ramp) => (
           <div key={ramp.id}>
-            <div className="kol-prose mt-12">
+            <div className="ac-prose mt-12">
               <h3>{ramp.label} ramp</h3>
               <p>{ramp.note}</p>
             </div>
@@ -266,7 +266,7 @@ export default function Styleguide() {
           </div>
         ))}
 
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <h3>{CREAM_RAMP.label} ramp</h3>
           <p>{CREAM_RAMP.note} Use for warm-light editorial moments and tinting.</p>
         </div>
@@ -274,7 +274,7 @@ export default function Styleguide() {
           {CREAM_RAMP.stops.map((s) => <LiveSwatch key={s} token={`--${CREAM_RAMP.id}-${s}`} />)}
         </div>
 
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <h3>Usage</h3>
           <p>Greyscale carries the canvas and structural ink. The five brand ramps name the identity — yellow primary, red secondary, with blue, orange, and teal as supporting hues. Cream sits as a neutral surface for warm-leaning compositions. Apply brand color with restraint, never decoratively.</p>
           <p>Try compositions in the <a href="/generators#combo-lab">Combo lab</a> — interactive scratchpad for layout × palette × logo combinations.</p>
@@ -287,7 +287,7 @@ export default function Styleguide() {
         title="Type"
         body="Right Grotesk across the whole system — one family carrying display, headings, body, and labels through its sub-cuts."
       >
-        <div className="kol-prose mt-12">
+        <div className="ac-prose mt-12">
           <h3>Concept</h3>
           <p>Right Grotesk is the brand voice. The family covers the full scale through its variants — Narrow for display, title, and H1; Compact for H2–H4 and lede; Mono for labels and code. The base cut carries the body. Designed for editorial set, quiet by default.</p>
 
@@ -341,17 +341,17 @@ export default function Styleguide() {
         title="Stationery"
         body="Standard correspondence — business card, envelope, letterhead, email signature. Quiet typography, generous space, monochrome restraint."
       >
-        <div className="kol-grid mt-8">
+        <div className="ac-grid mt-8">
           <div className="col-span-2"><AssetCard caption="Business card · front"><Graphic category="stationery" name="business-card-front" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Business card · back"><Graphic category="stationery" name="business-card-back" /></AssetCard></div>
         </div>
 
-        <div className="kol-grid mt-6">
+        <div className="ac-grid mt-6">
           <div className="col-span-2"><AssetCard caption="Letterhead · A4 [A]"><Graphic category="stationery" name="letterhead-a4-mock" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Letterhead · A4 [B]"><Graphic category="stationery" name="letterhead-a4-empty" /></AssetCard></div>
         </div>
 
-        <div className="kol-grid mt-6">
+        <div className="ac-grid mt-6">
           <div className="col-span-2"><AssetCard caption="Envelope · DL"><Graphic category="stationery" name="envelope" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Email signature"><Graphic category="stationery" name="email-signature" /></AssetCard></div>
         </div>
@@ -364,13 +364,13 @@ export default function Styleguide() {
         body="Sewn into the garment, tied to it, or bundled with it on arrival."
       >
         {/* Edition cards — large, paired side by side */}
-        <div className="kol-grid mt-8">
+        <div className="ac-grid mt-8">
           <div className="col-span-2"><AssetCard caption="Edition card [A]"><Graphic category="labels" name="certificate-of-authenticity-01" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Edition card [B]"><Graphic category="labels" name="certificate-of-authenticity-02" /></AssetCard></div>
         </div>
 
         {/* Hangtags — 4-wide */}
-        <div className="kol-grid mt-6 items-start">
+        <div className="ac-grid mt-6 items-start">
           <div className="col-span-1"><AssetCard caption="Hangtag · front [A]"><Graphic category="labels" name="hang-label-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Hangtag · back [A]"><Graphic category="labels" name="hang-label-02" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Hangtag · front [B]"><Graphic category="labels" name="hang-label-03" /></AssetCard></div>
@@ -378,7 +378,7 @@ export default function Styleguide() {
         </div>
 
         {/* Size labels — 4-wide */}
-        <div className="kol-grid mt-6 items-start">
+        <div className="ac-grid mt-6 items-start">
           <div className="col-span-1"><AssetCard caption="Size label [A]"><Graphic category="labels" name="size-label-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Size · S [B]"><Graphic category="labels" name="size-label-02" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Size · M [B]"><Graphic category="labels" name="size-label-03" /></AssetCard></div>
@@ -386,7 +386,7 @@ export default function Styleguide() {
         </div>
 
         {/* Care, Neck, Swing — 4-wide */}
-        <div className="kol-grid mt-6 items-start">
+        <div className="ac-grid mt-6 items-start">
           <div className="col-span-1"><AssetCard caption="Care label [A]"><Graphic category="labels" name="care-label-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Care label [B]"><Graphic category="labels" name="care-label-02" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Neck label"><Graphic category="labels" name="neck-label" /></AssetCard></div>
@@ -401,14 +401,14 @@ export default function Styleguide() {
         body="How the garment travels — dust bag, garment bag, and gift box."
       >
         {/* Garment bags + package — paired side by side, package fills 2 cols */}
-        <div className="kol-grid kol-grid--tight-y mt-8 items-start">
+        <div className="ac-grid ac-grid--tight-y mt-8 items-start">
           <div className="col-span-1"><AssetCard caption="Garment bag [A]"><Graphic category="garment-bags" name="garment-bag-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Garment bag [B]"><Graphic category="garment-bags" name="garment-bag-02" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Gift box [A]"><Graphic category="packaging" name="package" /></AssetCard></div>
         </div>
 
         {/* Dust bags — paired side by side */}
-        <div className="kol-grid mt-6 items-start">
+        <div className="ac-grid mt-6 items-start">
           <div className="col-span-2"><AssetCard caption="Dust bag [A]"><Graphic category="garment-bags" name="dust-bag-01" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Dust bag [B]"><Graphic category="garment-bags" name="dust-bag-02" /></AssetCard></div>
         </div>
@@ -440,7 +440,7 @@ export default function Styleguide() {
                     </section>
                   ))}
                 </DeckShell>
-                <figcaption className="kol-helper-12 uppercase tracking-widest text-meta">
+                <figcaption className="ac-helper-12 uppercase tracking-widest text-meta">
                   Branded mockups — {visible.length} frames
                 </figcaption>
               </figure>
@@ -468,7 +468,7 @@ export default function Styleguide() {
         title="Profile"
         body="Avatar treatment for profile pictures across platforms — round-cropped on burgundy, signature centered."
       >
-        <div className="kol-grid mt-8 items-start">
+        <div className="ac-grid mt-8 items-start">
           <AssetCard><Avatar bg="#FCFBFB" polarity="dark" /></AssetCard>
           <AssetCard><Avatar bg="#F2E5CB" polarity="dark" /></AssetCard>
           <AssetCard><Avatar bg="#750E20" polarity="light" /></AssetCard>
@@ -494,7 +494,7 @@ export default function Styleguide() {
         <div className="flex flex-col gap-12 mt-12">
           <figure className="flex flex-col gap-3">
             <SlideDeck inline />
-            <figcaption className="kol-helper-12 uppercase tracking-widest text-meta">Slide deck — 14 slides</figcaption>
+            <figcaption className="ac-helper-12 uppercase tracking-widest text-meta">Slide deck — 14 slides</figcaption>
           </figure>
         </div>
       </PageSection>
@@ -505,7 +505,7 @@ export default function Styleguide() {
         title="Patterns"
         body="Tileable patterns from src/components/loaders/graphics/svg/patterns/, rendered via the Graphic loader inside a labeled card."
       >
-        <div className="kol-grid mt-8">
+        <div className="ac-grid mt-8">
           {(GRAPHICS.patterns ?? []).map((name) => (
             <GraphicCard key={name} category="patterns" name={name} />
           ))}

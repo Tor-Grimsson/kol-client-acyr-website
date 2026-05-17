@@ -21,7 +21,7 @@ export default function Collection() {
             fontSize: '13px',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: 'var(--kol-surface-on-primary)',
+            color: 'var(--ac-surface-on-primary)',
           }}
         >
           Collection
@@ -33,14 +33,14 @@ export default function Collection() {
             fontWeight: 400,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: 'color-mix(in srgb, var(--kol-surface-on-primary) 32%, transparent)',
+            color: 'color-mix(in srgb, var(--ac-surface-on-primary) 32%, transparent)',
           }}
         >
           SS 2024
         </span>
       </div>
 
-      <div className="kol-site-collection-grid">
+      <div className="ac-site-collection-grid">
         {ACImages.looks.map(look => (
           <ProductCard key={look.label} {...look} />
         ))}

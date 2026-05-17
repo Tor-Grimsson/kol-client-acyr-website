@@ -11,19 +11,19 @@ export default function ShippingReturns() {
       <section className="max-w-3xl mx-auto px-8 pt-20">
         <Link
           to="/"
-          className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
+          className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
           ← Back
         </Link>
 
-        <p className="kol-prose-label">Legal</p>
-        <h1 className="kol-prose-display-md">Shipping &amp; returns</h1>
-        <p className="kol-prose-tagline" style={{ marginTop: '8px' }}>
+        <p className="ac-prose-label">Legal</p>
+        <h1 className="ac-prose-display-md">Shipping &amp; returns</h1>
+        <p className="ac-prose-tagline" style={{ marginTop: '8px' }}>
           Effective {new Date().toLocaleDateString('en', { day: 'numeric', month: 'long', year: 'numeric' })}
         </p>
 
-        <div className="kol-prose">
+        <div className="ac-prose">
           <p>This is a placeholder template. Replace specifics with the studio's actual policy before going live.</p>
 
           <h2>Production time</h2>
@@ -54,7 +54,7 @@ export default function ShippingReturns() {
           <h2>Contact</h2>
           <p><a href={`mailto:${BRAND_INFO.contact.email}`}>{BRAND_INFO.contact.email}</a> · {BRAND_INFO.contact.phone}</p>
 
-          <p className="kol-prose-label" style={{ marginTop: '32px' }}>
+          <p className="ac-prose-label" style={{ marginTop: '32px' }}>
             See also: <Link to="/terms">Terms</Link> · <Link to="/privacy">Privacy</Link>
           </p>
         </div>

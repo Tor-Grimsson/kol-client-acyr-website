@@ -48,7 +48,7 @@ export default function Image({
     <img
       src={src}
       alt={alt}
-      className={`kol-image block w-full h-auto ${className}`.trim()}
+      className={`ac-image block w-full h-auto ${className}`.trim()}
       style={style}
       loading={loading}
     />

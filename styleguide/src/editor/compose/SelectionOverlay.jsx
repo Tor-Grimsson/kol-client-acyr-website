@@ -37,7 +37,7 @@ export default function SelectionOverlay({ layer, showHandles = true, showLabel 
       <div
         style={{
           position: 'absolute', inset: 0,
-          outline: '1px dashed var(--kol-accent-primary)',
+          outline: '1px dashed var(--ac-accent-primary)',
           outlineOffset: 0,
         }}
       />
@@ -52,7 +52,7 @@ export default function SelectionOverlay({ layer, showHandles = true, showLabel 
             width:  HANDLE_SIZE,
             height: HANDLE_SIZE,
             background: 'white',
-            border: '1px solid var(--kol-accent-primary)',
+            border: '1px solid var(--ac-accent-primary)',
             cursor,
             pointerEvents: 'auto',
           }}
@@ -65,10 +65,10 @@ export default function SelectionOverlay({ layer, showHandles = true, showLabel 
             left: 0,
             top: '100%',
             marginTop: 6,
-            fontFamily: 'var(--kol-font-family-mono)',
+            fontFamily: 'var(--ac-font-family-mono)',
             fontSize: 10,
             letterSpacing: '0.04em',
-            color: 'var(--kol-accent-primary)',
+            color: 'var(--ac-accent-primary)',
             background: 'rgba(0,0,0,0.6)',
             padding: '2px 6px',
             borderRadius: 2,

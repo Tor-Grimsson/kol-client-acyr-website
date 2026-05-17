@@ -6,35 +6,35 @@
  * from these classes instead of reinventing bg/border/padding/transitions.
  *
  * ─────────────────────────────────────────────────────────────────────
- * .kol-control — control shell primitive
+ * .ac-control — control shell primitive
  * ─────────────────────────────────────────────────────────────────────
  *
  * Apply: <div class="kol-control kol-control--{variant} kol-control-{size} kol-mono-{N}">
  *
  *   Always:
- *     .kol-control                 base (transition, radius 4px, layout border)
+ *     .ac-control                 base (transition, radius 4px, layout border)
  *
  *   Variant (visual treatment) — pick one:
- *     .kol-control--filled         persistent solid bg
+ *     .ac-control--filled         persistent solid bg
  *                                  (Input filled, Stepper, ViewToggle active)
- *     .kol-control--ghost          transparent at rest, border reveals on
+ *     .ac-control--ghost          transparent at rest, border reveals on
  *                                  hover / focus-within
  *                                  (Input ghost, hex chip, inline editable)
- *     .kol-control--outline        bordered, transparent bg
+ *     .ac-control--outline        bordered, transparent bg
  *                                  (Dropdown default trigger, segmented bar,
  *                                  also: forced-reveal "is-edited" state on
  *                                  what would otherwise be a ghost)
  *
  *   Size (padding + matched type class) — pick one:
- *     .kol-control-sm              padding 4px 12px   → pair w/ kol-mono-12
- *     .kol-control-md              padding 6px 16px   → pair w/ kol-mono-14
- *     .kol-control-lg              padding 8px 20px   → pair w/ kol-mono-16
+ *     .ac-control-sm              padding 4px 12px   → pair w/ kol-mono-12
+ *     .ac-control-md              padding 6px 16px   → pair w/ kol-mono-14
+ *     .ac-control-lg              padding 8px 20px   → pair w/ kol-mono-16
  *
  *   State:
  *     [aria-disabled="true"] /
  *     :disabled                    auto opacity-50 + pointer-events-none
  *
- * Single visible-border tone (--kol-fg-16). No hover/focus escalation,
+ * Single visible-border tone (--ac-fg-16). No hover/focus escalation,
  * no `--bordered` modifier. When you want a ghost field to render
  * persistently visible (e.g. "is-edited" indicator), switch the variant
  * to `--outline` — same visual, clearer semantic.
@@ -45,14 +45,14 @@
  * override the type class for one-off cases (e.g. uppercase labels in helpers)
  * without forking the size variant.
  *
- * Radius is hard-coded to var(--kol-radius-sm) (4px). Repo invariant — never
+ * Radius is hard-coded to var(--ac-radius-sm) (4px). Repo invariant — never
  * exceed 4px.
  */
 
-.kol-control {
+.ac-control {
   display: inline-flex;
   align-items: center;
-  border-radius: var(--kol-radius-sm);
+  border-radius: var(--ac-radius-sm);
   border: 1px solid transparent;
   transition: background-color 150ms ease,
               border-color     150ms ease,
@@ -62,47 +62,47 @@
 
 /* ─── Variants ─── */
 
-.kol-control--filled {
-  background-color: var(--kol-surface-secondary);
-  color: var(--kol-surface-on-primary);
+.ac-control--filled {
+  background-color: var(--ac-surface-secondary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-control--ghost {
+.ac-control--ghost {
   /* Subtle resting bg so the input bounds are discoverable without
    * hovering. Theme-independent darken via fg-absolute-04 (4% black);
    * on dark theme this reads as a softly sunken input area, on light
    * theme as a faintly tinted field. Hover/focus then reveals the
    * border for affordance. */
-  background-color: var(--kol-fg-absolute-04);
-  color: var(--kol-fg-meta);
+  background-color: var(--ac-fg-absolute-04);
+  color: var(--ac-fg-meta);
 }
-.kol-control--ghost:hover,
-.kol-control--ghost:focus-within {
-  border-color: var(--kol-fg-16);
-  color: var(--kol-surface-on-primary);
+.ac-control--ghost:hover,
+.ac-control--ghost:focus-within {
+  border-color: var(--ac-fg-16);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-control--outline {
+.ac-control--outline {
   background-color: transparent;
-  color: var(--kol-surface-on-primary);
-  border-color: var(--kol-fg-16);
+  color: var(--ac-surface-on-primary);
+  border-color: var(--ac-fg-16);
 }
 
 /* Textarea modifier — flips the inline-flex shell to block so a multi-line
  * textarea takes full width. Resize is disabled (textarea is fixed at its
  * `rows` count, content scrolls). The kol resize-corner icon in the
  * bottom-right is decorative. Used by atoms/Textarea.jsx. */
-.kol-control--textarea {
+.ac-control--textarea {
   display: block;
   position: relative;
   padding: 0; /* outer label is purely a wrapper; inner textarea owns padding */
 }
-.kol-control--textarea > textarea {
+.ac-control--textarea > textarea {
   padding: 4px 12px;
 }
-.kol-control--textarea.kol-control-md > textarea { padding: 6px 16px; }
-.kol-control--textarea.kol-control-lg > textarea { padding: 8px 20px; }
-.kol-textarea-resize-icon {
+.ac-control--textarea.ac-control-md > textarea { padding: 6px 16px; }
+.ac-control--textarea.ac-control-lg > textarea { padding: 8px 20px; }
+.ac-textarea-resize-icon {
   position: absolute;
   bottom: 4px;
   right: 4px;
@@ -111,15 +111,15 @@
 
 /* ─── Sizes (padding only — type class applied via JSX) ─── */
 
-.kol-control-sm { padding: 4px 12px; }
-.kol-control-md { padding: 6px 16px; }
-.kol-control-lg { padding: 8px 20px; }
+.ac-control-sm { padding: 4px 12px; }
+.ac-control-md { padding: 6px 16px; }
+.ac-control-lg { padding: 8px 20px; }
 
 /* ─── Disabled ─── */
 
-.kol-control[aria-disabled="true"],
-.kol-control:disabled,
-.kol-control:has(:disabled) {
+.ac-control[aria-disabled="true"],
+.ac-control:disabled,
+.ac-control:has(:disabled) {
   opacity: 0.5;
   pointer-events: none;
 }
@@ -129,145 +129,145 @@
  * Button — atoms/Button.jsx
  *
  * Variants:
- *   .kol-btn-primary    subtle bg-fg-04 fill, daily chrome (default)
- *   .kol-btn-secondary  heavy inverted ink, CTA-adjacent (font-weight 500)
- *   .kol-btn-accent     brand-yellow filled CTA (font-weight 500)
- *   .kol-btn-outline    bordered, transparent bg
+ *   .ac-btn-primary    subtle bg-fg-04 fill, daily chrome (default)
+ *   .ac-btn-secondary  heavy inverted ink, CTA-adjacent (font-weight 500)
+ *   .ac-btn-accent     brand-yellow filled CTA (font-weight 500)
+ *   .ac-btn-outline    bordered, transparent bg
  *
- * Sizes (padding shared with .kol-control):
- *   .kol-btn-sm  4px 12px → kol-mono-12
- *   .kol-btn-md  6px 16px → kol-mono-14
- *   .kol-btn-lg  8px 20px → kol-mono-16
+ * Sizes (padding shared with .ac-control):
+ *   .ac-btn-sm  4px 12px → kol-mono-12
+ *   .ac-btn-md  6px 16px → kol-mono-14
+ *   .ac-btn-lg  8px 20px → kol-mono-16
  *
  * Modifiers:
- *   .kol-btn-animate    disables default hover states (consumer drives)
+ *   .ac-btn-animate    disables default hover states (consumer drives)
  *   :disabled           opacity-disabled + not-allowed cursor
  *
- * Type: applied via .kol-mono-{12,14,16} on the size variant in JSX.
+ * Type: applied via .ac-mono-{12,14,16} on the size variant in JSX.
  * No uppercase / capitalize — author strings in the case they should
- * render (per ARCHITECTURE.md §2). Radius hard 4px (--kol-radius-sm).
+ * render (per ARCHITECTURE.md §2). Radius hard 4px (--ac-radius-sm).
  * ═══════════════════════════════════════════════════════════════ */
 
-.kol-btn {
+.ac-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--kol-radius-sm);
+  border-radius: var(--ac-radius-sm);
   white-space: nowrap;
-  transition: background-color var(--kol-transition-base),
-              color var(--kol-transition-base),
-              border-color var(--kol-transition-base);
+  transition: background-color var(--ac-transition-base),
+              color var(--ac-transition-base),
+              border-color var(--ac-transition-base);
   cursor: pointer;
 }
 
-.kol-btn-primary {
-  background: var(--kol-surface-secondary);
-  color: var(--kol-surface-on-primary);
+.ac-btn-primary {
+  background: var(--ac-surface-secondary);
+  color: var(--ac-surface-on-primary);
   border: 1px solid transparent;
 }
-.kol-btn-primary:not(.kol-btn-animate):hover {
-  background-color: var(--kol-fg-08);
-  color: var(--kol-surface-on-primary);
+.ac-btn-primary:not(.ac-btn-animate):hover {
+  background-color: var(--ac-fg-08);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-btn-secondary {
-  background: var(--kol-surface-on-primary);
-  color: var(--kol-surface-primary);
+.ac-btn-secondary {
+  background: var(--ac-surface-on-primary);
+  color: var(--ac-surface-primary);
   border: 1px solid transparent;
   font-weight: 500;
 }
-.kol-btn-secondary:not(.kol-btn-animate):hover {
-  background-color: color-mix(in srgb, var(--kol-surface-on-primary) 20%, transparent);
-  color: var(--kol-surface-on-primary);
+.ac-btn-secondary:not(.ac-btn-animate):hover {
+  background-color: color-mix(in srgb, var(--ac-surface-on-primary) 20%, transparent);
+  color: var(--ac-surface-on-primary);
   border-color: transparent;
 }
 
-.kol-btn-accent {
-  background: var(--kol-accent-primary);
-  color: var(--kol-accent-on-primary);
+.ac-btn-accent {
+  background: var(--ac-accent-primary);
+  color: var(--ac-accent-on-primary);
   border: 1px solid transparent;
   font-weight: 500;
 }
-.kol-btn-accent:not(.kol-btn-animate):hover {
-  background-color: var(--kol-accent-primary-strong);
-  color: var(--kol-accent-on-primary);
+.ac-btn-accent:not(.ac-btn-animate):hover {
+  background-color: var(--ac-accent-primary-strong);
+  color: var(--ac-accent-on-primary);
 }
 
-.kol-btn-outline {
+.ac-btn-outline {
   background: transparent;
-  color: var(--kol-surface-on-primary);
-  border: 1px solid var(--kol-fg-16);
+  color: var(--ac-surface-on-primary);
+  border: 1px solid var(--ac-fg-16);
 }
-.kol-btn-outline:not(.kol-btn-animate):hover {
-  background-color: var(--kol-fg-08);
-  border-color: color-mix(in srgb, var(--kol-surface-on-primary) 25%, transparent);
-  color: var(--kol-surface-on-primary);
+.ac-btn-outline:not(.ac-btn-animate):hover {
+  background-color: var(--ac-fg-08);
+  border-color: color-mix(in srgb, var(--ac-surface-on-primary) 25%, transparent);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-btn-ghost {
+.ac-btn-ghost {
   background: transparent;
-  color: var(--kol-fg-48);
+  color: var(--ac-fg-48);
   border: 1px solid transparent;
 }
-.kol-btn-ghost:not(.kol-btn-animate):hover {
-  background-color: var(--kol-fg-08);
-  color: var(--kol-surface-on-primary);
+.ac-btn-ghost:not(.ac-btn-animate):hover {
+  background-color: var(--ac-fg-08);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-btn-sm { padding: 4px 12px; }
-.kol-btn-md { padding: 6px 16px; }
-.kol-btn-lg { padding: 8px 20px; }
+.ac-btn-sm { padding: 4px 12px; }
+.ac-btn-md { padding: 6px 16px; }
+.ac-btn-lg { padding: 8px 20px; }
 
-.kol-btn:disabled,
-.kol-btn[disabled] {
-  opacity: var(--kol-opacity-disabled);
+.ac-btn:disabled,
+.ac-btn[disabled] {
+  opacity: var(--ac-opacity-disabled);
   cursor: not-allowed;
 }
 
-.kol-btn-animate {
+.ac-btn-animate {
   /* Consumer-driven hover behavior; disables default :hover rules above. */
 }
 
-/* .kol-btn-quiet — secondary-action icon button: dimmed at rest, brightens
+/* .ac-btn-quiet — secondary-action icon button: dimmed at rest, brightens
  * on hover, stays dimmed when disabled (no hover lift on a non-actionable
  * state). For icon-only buttons in panel chrome (add layer, delete, etc.)
  * that shouldn't compete with primary content visually. */
-.kol-btn-quiet {
-  opacity: var(--kol-opacity-disabled);
+.ac-btn-quiet {
+  opacity: var(--ac-opacity-disabled);
   transition: opacity 150ms ease;
 }
-.kol-btn-quiet:not(:disabled):hover {
+.ac-btn-quiet:not(:disabled):hover {
   opacity: 1;
 }
 
 /* Icon-swap animation (Button.jsx iconLeft / iconRight with hover icon) */
 
-.kol-icon-swap-container {
+.ac-icon-swap-container {
   position: relative;
   display: inline-flex;
   overflow: hidden;
 }
 
-.kol-icon-default {
+.ac-icon-default {
   position: absolute;
-  transition: opacity var(--kol-transition-base),
-              transform var(--kol-transition-base);
+  transition: opacity var(--ac-transition-base),
+              transform var(--ac-transition-base);
 }
 
-.kol-icon-hover {
+.ac-icon-hover {
   position: absolute;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity var(--kol-transition-base),
-              transform var(--kol-transition-base);
+  transition: opacity var(--ac-transition-base),
+              transform var(--ac-transition-base);
 }
 
-.kol-btn:hover .kol-icon-default {
+.ac-btn:hover .ac-icon-default {
   opacity: 0;
   transform: translateY(-4px);
 }
 
-.kol-btn:hover .kol-icon-hover {
+.ac-btn:hover .ac-icon-hover {
   opacity: 1;
   transform: translateY(0);
 }
@@ -276,15 +276,15 @@
 /* ═══════════════════════════════════════════════════════════════
  * Toggle Bracket — molecules/ToggleBracket.jsx
  *
- * Default-variant chrome comes from .kol-control--filled. The active
+ * Default-variant chrome comes from .ac-control--filled. The active
  * state overrides bg + color via this modifier — preserves the
  * accent-yellow identity while the rest of the chrome stays shell.
  * Plain variant is bare-text with no shell (defined inline in JSX).
  * ═══════════════════════════════════════════════════════════════ */
 
 .toggle-bracket--active {
-  background-color: var(--kol-accent-primary);
-  color: var(--kol-accent-on-primary);
+  background-color: var(--ac-accent-primary);
+  color: var(--ac-accent-on-primary);
 }
 
 
@@ -303,20 +303,20 @@
   gap: 12px;
   padding: 10px 14px;
   border-radius: 4px;
-  border: 1px solid color-mix(in srgb, var(--kol-surface-on-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ac-surface-on-primary) 12%, transparent);
   background-color: transparent;
-  color: var(--kol-surface-on-primary);
-  transition: background-color var(--kol-transition-base),
-              border-color var(--kol-transition-base);
+  color: var(--ac-surface-on-primary);
+  transition: background-color var(--ac-transition-base),
+              border-color var(--ac-transition-base);
 }
 
 .toggle-switch:hover,
 .toggle-switch:focus-visible {
-  border-color: color-mix(in srgb, var(--kol-surface-on-primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--ac-surface-on-primary) 18%, transparent);
 }
 
 .toggle-switch-label {
-  font-family: var(--kol-font-family-mono);
+  font-family: var(--ac-font-family-mono);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -325,10 +325,10 @@
 .toggle-switch-indicator {
   width: 20px;
   height: 12px;
-  border-radius: var(--kol-radius-full);
-  background-color: color-mix(in srgb, var(--kol-surface-on-primary) 16%, transparent);
+  border-radius: var(--ac-radius-full);
+  background-color: color-mix(in srgb, var(--ac-surface-on-primary) 16%, transparent);
   position: relative;
-  transition: background-color var(--kol-transition-base);
+  transition: background-color var(--ac-transition-base);
 }
 
 .toggle-switch-indicator::after {
@@ -338,19 +338,19 @@
   left: 2px;
   width: 8px;
   height: 8px;
-  border-radius: var(--kol-radius-full);
-  background-color: var(--kol-surface-primary);
-  transition: transform var(--kol-transition-base),
-              background-color var(--kol-transition-base);
+  border-radius: var(--ac-radius-full);
+  background-color: var(--ac-surface-primary);
+  transition: transform var(--ac-transition-base),
+              background-color var(--ac-transition-base);
 }
 
 .toggle-switch[data-state='on'] .toggle-switch-indicator {
-  background-color: var(--kol-color-absolute-white);
+  background-color: var(--ac-color-absolute-white);
 }
 
 .toggle-switch[data-state='on'] .toggle-switch-indicator::after {
   transform: translateX(8px);
-  background-color: var(--kol-color-absolute-black);
+  background-color: var(--ac-color-absolute-black);
 }
 
 .toggle-switch--plain {
@@ -391,22 +391,22 @@
   width: 16px;
   height: 16px;
   border-radius: 3px;
-  border: 1px solid color-mix(in srgb, var(--kol-surface-on-primary) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ac-surface-on-primary) 25%, transparent);
   background-color: transparent;
-  transition: background-color var(--kol-transition-base),
-              border-color var(--kol-transition-base);
+  transition: background-color var(--ac-transition-base),
+              border-color var(--ac-transition-base);
 }
 
 .toggle-checkbox-indicator svg {
   width: 10px;
   height: 8px;
-  stroke: var(--kol-color-absolute-black);
+  stroke: var(--ac-color-absolute-black);
   opacity: 0;
-  transition: opacity var(--kol-transition-base);
+  transition: opacity var(--ac-transition-base);
 }
 
 .toggle-checkbox.is-active .toggle-checkbox-indicator {
-  background-color: var(--kol-color-absolute-white);
+  background-color: var(--ac-color-absolute-white);
   border-color: transparent;
 }
 
@@ -425,7 +425,7 @@
  *             Pattern Lab cols/rows/gap, Compositor sliders, Type Lab.
  *   subtle    filled rounded chip — for inspector-style controls.
  *
- * Track color is exposed as `--kol-slider-track` (set on `.slider-black`)
+ * Track color is exposed as `--ac-slider-track` (set on `.slider-black`)
  * so consumers can override per-instance via inline style or className.
  * Default = fg-64 (dim grey); subtle overrides to full ink.
  * ═══════════════════════════════════════════════════════════════ */
@@ -439,15 +439,15 @@
   background-color: transparent;
   border: none;
   height: 24px;
-  transition: color var(--kol-transition-base);
+  transition: color var(--ac-transition-base);
 }
 
-.control-slider label { color: var(--kol-fg-80); }
+.control-slider label { color: var(--ac-fg-80); }
 .control-slider span  {
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
   padding: 8px 0;
   border-radius: 4px;
-  background-color: var(--kol-surface-secondary);
+  background-color: var(--ac-surface-secondary);
   width: 64px;
   text-align: center;
   flex-shrink: 0;
@@ -459,22 +459,22 @@
   align-items: center;
   padding: 6px 16px;
   border-radius: 4px;
-  background-color: var(--kol-surface-secondary);
+  background-color: var(--ac-surface-secondary);
   border: none;
-  transition: background-color var(--kol-transition-base),
-              color var(--kol-transition-base);
+  transition: background-color var(--ac-transition-base),
+              color var(--ac-transition-base);
 }
 
 .control-slider-subtle label {
-  color: var(--kol-fg-48);
+  color: var(--ac-fg-48);
 }
 
 .control-slider-subtle .slider-black {
-  --kol-slider-track: var(--kol-surface-on-primary);
+  --ac-slider-track: var(--ac-surface-on-primary);
 }
 
 .slider-black {
-  --kol-slider-track: var(--kol-fg-64);
+  --ac-slider-track: var(--ac-fg-64);
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -483,13 +483,13 @@
 }
 
 .slider-black::-webkit-slider-runnable-track {
-  background: var(--kol-slider-track);
+  background: var(--ac-slider-track);
   height: 2px;
   border-radius: 0;
 }
 
 .slider-black::-moz-range-track {
-  background: var(--kol-slider-track);
+  background: var(--ac-slider-track);
   height: 2px;
   border-radius: 0;
 }
@@ -497,7 +497,7 @@
 .slider-black::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background: var(--kol-surface-on-primary);
+  background: var(--ac-surface-on-primary);
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -507,7 +507,7 @@
 
 .slider-black::-moz-range-thumb {
   appearance: none;
-  background: var(--kol-surface-on-primary);
+  background: var(--ac-surface-on-primary);
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -518,63 +518,63 @@
 /* ═══════════════════════════════════════════════════════════════
  * Sidenav primitives — promoted from kol-framework.css 2026-04-30.
  *
- * .kol-sidenav-hop          row primitive (icon + label, full-width)
- * .kol-sidenav-hop-icon     icon slot inside the hop
- * .kol-sidenav-hop-label    label slot — collapses to display:none in
+ * .ac-sidenav-hop          row primitive (icon + label, full-width)
+ * .ac-sidenav-hop-icon     icon slot inside the hop
+ * .ac-sidenav-hop-label    label slot — collapses to display:none in
  *                           rail mode (responsive cascade in framework.css)
- * .kol-sidenav-link         nav link with active-dot indicator
- * .kol-sidenav-group        small vertical wrapper
+ * .ac-sidenav-link         nav link with active-dot indicator
+ * .ac-sidenav-group        small vertical wrapper
  *
  * Layout/sizing/responsive collapse rules stay in kol-framework.css
  * (they're page-grid concerns, not component chrome).
  * ═══════════════════════════════════════════════════════════════ */
 
-.kol-sidenav-hop {
-  color: var(--kol-fg-80);
+.ac-sidenav-hop {
+  color: var(--ac-fg-80);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   transition: color 150ms ease, background 150ms ease;
 }
 
-.kol-sidenav-hop:hover {
-  color: var(--kol-fg-96);
+.ac-sidenav-hop:hover {
+  color: var(--ac-fg-96);
 }
 
-.kol-sidenav-hop.is-active {
-  color: var(--kol-surface-on-primary);
+.ac-sidenav-hop.is-active {
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-sidenav-hop-icon {
-  color: var(--kol-fg-80);
+.ac-sidenav-hop-icon {
+  color: var(--ac-fg-80);
   transition: color 150ms ease;
 }
 
-.kol-sidenav-hop:hover .kol-sidenav-hop-icon {
-  color: var(--kol-surface-on-primary);
+.ac-sidenav-hop:hover .ac-sidenav-hop-icon {
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-sidenav-hop.is-active .kol-sidenav-hop-icon {
-  color: var(--kol-accent-primary);
+.ac-sidenav-hop.is-active .ac-sidenav-hop-icon {
+  color: var(--ac-accent-primary);
 }
 
-.kol-sidenav-group {
+.ac-sidenav-group {
   padding: 4px 0 4px;
 }
 
-.kol-sidenav-link.is-active {
-  color: var(--kol-surface-on-primary);
+.ac-sidenav-link.is-active {
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-sidenav-link.is-active::before {
+.ac-sidenav-link.is-active::before {
   content: "";
   position: absolute;
-  left: var(--kol-sidenav-dot-left, 2px);
+  left: var(--ac-sidenav-dot-left, 2px);
   top: 50%;
   transform: translateY(-50%);
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--kol-accent-primary);
+  background: var(--ac-accent-primary);
 }
 
 
@@ -584,12 +584,12 @@
  * Hides on the first PageSection of a page.
  * ═══════════════════════════════════════════════════════════════ */
 
-.kol-page-section-divider {
+.ac-page-section-divider {
   margin-top: -64px;
   margin-bottom: 64px;
 }
 
-.kol-page-section:first-of-type > .kol-page-section-divider {
+.ac-page-section:first-of-type > .ac-page-section-divider {
   display: none;
 }
 
@@ -601,74 +601,74 @@
  * components (SectionLabel etc.).
  * ═══════════════════════════════════════════════════════════════ */
 
-.kol-label-mono-sm {
-  font-family: var(--kol-font-family-mono);
+.ac-label-mono-sm {
+  font-family: var(--ac-font-family-mono);
   font-weight: 470;
   font-size: clamp(14px, 1.5vw, 24px);
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-label-mono-md {
-  font-family: var(--kol-font-family-mono);
+.ac-label-mono-md {
+  font-family: var(--ac-font-family-mono);
   font-weight: 470;
   font-size: clamp(12px, 1vw, 16px);
   line-height: 125%;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-label-mono-xs {
-  font-family: var(--kol-font-family-mono);
+.ac-label-mono-xs {
+  font-family: var(--ac-font-family-mono);
   font-weight: 470;
   font-size: clamp(10px, 0.8vw, 14px);
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-label-compact-lg {
-  font-family: var(--kol-font-family-mono);
+.ac-label-compact-lg {
+  font-family: var(--ac-font-family-mono);
   font-weight: 500;
   font-size: clamp(24px, 2vw, 28px);
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-label-compact-md {
-  font-family: var(--kol-font-family-mono);
+.ac-label-compact-md {
+  font-family: var(--ac-font-family-mono);
   font-weight: 500;
   font-size: clamp(12px, 1vw, 16px);
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-label {
-  font-family: var(--kol-font-family-mono);
+.ac-label {
+  font-family: var(--ac-font-family-mono);
   font-weight: 470;
   font-size: clamp(14px, 1.5vw, 24px);
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
-.kol-label-compact {
-  font-family: var(--kol-font-family-mono);
+.ac-label-compact {
+  font-family: var(--ac-font-family-mono);
   font-weight: 500;
   font-size: clamp(12px, 1vw, 16px);
   line-height: 100%;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: var(--kol-surface-on-primary);
+  color: var(--ac-surface-on-primary);
 }
 
 
@@ -676,22 +676,22 @@
  * Icon-swap utility — promoted from residual kol-components.css.
  * Used by molecules/SectionLabel.jsx and any <button>/<a> with
  * .icon-default / .icon-hover children.
- * (Distinct from .kol-icon-swap-* used internally by atoms/Button.jsx
+ * (Distinct from .ac-icon-swap-* used internally by atoms/Button.jsx
  * — see Button section above.)
  * ═══════════════════════════════════════════════════════════════ */
 
 .icon-default {
   transform: translate(0, 0) scale(1);
   opacity: 1;
-  transition: transform var(--kol-transition-base) ease,
-              opacity var(--kol-transition-base) ease;
+  transition: transform var(--ac-transition-base) ease,
+              opacity var(--ac-transition-base) ease;
 }
 
 .icon-hover {
   transform: translate(-100%, -100%) scale(0.8);
   opacity: 0;
-  transition: transform var(--kol-transition-base) ease,
-              opacity var(--kol-transition-base) ease;
+  transition: transform var(--ac-transition-base) ease,
+              opacity var(--ac-transition-base) ease;
 }
 
 button:hover .icon-default,

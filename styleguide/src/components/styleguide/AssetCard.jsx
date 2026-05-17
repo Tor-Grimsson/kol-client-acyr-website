@@ -13,7 +13,7 @@ export default function AssetCard({ caption, children }) {
   return (
     <figure>
       {caption && (
-        <figcaption className="kol-helper-12 uppercase tracking-widest text-meta mb-3">
+        <figcaption className="ac-helper-12 uppercase tracking-widest text-meta mb-3">
           {caption}
         </figcaption>
       )}

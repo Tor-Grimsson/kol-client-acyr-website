@@ -10,9 +10,9 @@ import Input from './Input'
  *   default — bare track + boxed value (was `minimal`). Most usage.
  *   subtle  — filled rounded chip; for inspector-style controls.
  *
- * Track color is exposed as the `--kol-slider-track` CSS variable on
+ * Track color is exposed as the `--ac-slider-track` CSS variable on
  * `.slider-black`. Default = fg-64; subtle overrides to full ink.
- * Override per-instance via style={{ '--kol-slider-track': '...' }}.
+ * Override per-instance via style={{ '--ac-slider-track': '...' }}.
  *
  * @param {Object} props
  * @param {string} props.label - Slider label text
@@ -88,7 +88,7 @@ const Slider = ({
   return (
     <div className={`${variantClass} gap-3 shadow-none ${className}`}>
       {label && (
-        <label className="kol-helper-12 whitespace-nowrap shrink-0 w-fit" style={fontSize ? { fontSize } : undefined}>
+        <label className="ac-helper-12 whitespace-nowrap shrink-0 w-fit" style={fontSize ? { fontSize } : undefined}>
           {label}
         </label>
       )}

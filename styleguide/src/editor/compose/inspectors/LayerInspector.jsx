@@ -197,7 +197,7 @@ function GroupFields({ layer, ungroupLayer }) {
   return (
     <>
       <LabeledControl label="Children">
-        <span className="kol-helper-12 text-meta">{childCount} layer{childCount === 1 ? '' : 's'}</span>
+        <span className="ac-helper-12 text-meta">{childCount} layer{childCount === 1 ? '' : 's'}</span>
       </LabeledControl>
       <EditorButton
         variant="primary"
@@ -689,9 +689,9 @@ function PositionFields({ layer, setProp, patch }) {
             style={{
               transform: 'translate(-50%, -50%)',
               border: 'none',
-              background: 'var(--kol-surface-primary)',
+              background: 'var(--ac-surface-primary)',
               cursor: 'pointer',
-              color: aspectLocked ? 'var(--kol-accent-primary)' : 'var(--kol-fg-48)',
+              color: aspectLocked ? 'var(--ac-accent-primary)' : 'var(--ac-fg-48)',
             }}
           >
             <Icon name={aspectLocked ? 'lock' : 'unlock'} size={12} />

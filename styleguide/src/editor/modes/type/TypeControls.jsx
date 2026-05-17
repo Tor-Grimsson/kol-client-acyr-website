@@ -94,7 +94,7 @@ function FrameInspector({ frame, onUpdateFrame, onExplode }) {
 
       <div className="border-t border-fg-08 pt-4">
         <div className="flex items-center justify-between mb-3">
-          <span className="kol-helper-10 uppercase text-meta">Variable axis</span>
+          <span className="ac-helper-10 uppercase text-meta">Variable axis</span>
           <ViewToggle
             options={[{ value: 'off', label: 'Off' }, { value: 'on', label: 'On' }]}
             viewMode={frame.axisOn ? 'on' : 'off'}
@@ -193,7 +193,7 @@ function FrameInspector({ frame, onUpdateFrame, onExplode }) {
               Explode to per-letter frames
             </EditorButton>
 
-            <p className="kol-helper-10 text-subtle">
+            <p className="ac-helper-10 text-subtle">
               {(frame.axisMode ?? 'morph') === 'morph'
                 ? 'Real SVG path morph between Cut A and Cut B (loads woff2 outlines via opentype.js). Drag the dot to scrub.'
                 : (frame.axisMode ?? 'morph') === 'fade'
@@ -239,7 +239,7 @@ export default function TypeControls({ state, set, selectedFrame, onUpdateFrame,
 
       <div className="border-t border-fg-08 pt-3">
         <div className="flex items-center justify-between mb-2">
-          <span className="kol-helper-10 uppercase text-meta">
+          <span className="ac-helper-10 uppercase text-meta">
             {selectedFrame ? 'Selected frame' : 'No frame selected'}
           </span>
           <EditorButton variant="primary" size="sm" iconLeft="plus" onClick={onAddFrame} title="Add frame">
@@ -249,7 +249,7 @@ export default function TypeControls({ state, set, selectedFrame, onUpdateFrame,
         {selectedFrame ? (
           <FrameInspector frame={selectedFrame} onUpdateFrame={onUpdateFrame} onExplode={onExplode} />
         ) : (
-          <p className="kol-helper-12 text-subtle">Click a frame on the canvas to edit, or hit + Add frame.</p>
+          <p className="ac-helper-12 text-subtle">Click a frame on the canvas to edit, or hit + Add frame.</p>
         )}
       </div>
 

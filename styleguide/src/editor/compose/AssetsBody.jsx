@@ -30,7 +30,7 @@ export default function AssetsBody() {
   return (
     <div className="px-4 py-3 flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <p className="kol-helper-10 uppercase tracking-widest text-meta">Logos</p>
+        <p className="ac-helper-10 uppercase tracking-widest text-meta">Logos</p>
         <ViewToggle
           variant="icon"
           viewMode={view}
@@ -51,7 +51,7 @@ export default function AssetsBody() {
               <span className="block w-full h-12 text-emphasis">
                 <KolLogo variant={variant} className="block w-full h-full" />
               </span>
-              <span className="kol-helper-10 text-meta normal-case tracking-normal truncate w-full text-center">
+              <span className="ac-helper-10 text-meta normal-case tracking-normal truncate w-full text-center">
                 {variant}
               </span>
             </button>
@@ -70,7 +70,7 @@ export default function AssetsBody() {
                 <span className="block w-8 h-6 shrink-0 text-emphasis">
                   <KolLogo variant={variant} className="block w-full h-full" />
                 </span>
-                <span className="kol-helper-12 text-emphasis normal-case tracking-normal truncate flex-1">
+                <span className="ac-helper-12 text-emphasis normal-case tracking-normal truncate flex-1">
                   {variant}
                 </span>
               </button>

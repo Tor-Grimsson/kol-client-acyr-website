@@ -9,7 +9,7 @@ export default function AssetCarousel({ items, className = '', options, category
 
   return (
     <>
-      <Carousel className={`kol-asset-carousel ${className}`.trim()} {...(options ? { options } : {})}>
+      <Carousel className={`ac-asset-carousel ${className}`.trim()} {...(options ? { options } : {})}>
         {items.map((item, i) => (
           <AssetCard key={item.src ?? i} item={item} category={category} onOpen={() => setCurrent(item)} />
         ))}
@@ -24,22 +24,22 @@ export default function AssetCarousel({ items, className = '', options, category
 function AssetCard({ item, category, onOpen }) {
   const { src, alt, caption, logo, fit = 'contain' } = item
   return (
-    <figure className="kol-asset-card">
+    <figure className="ac-asset-card">
       <button
         type="button"
-        className={`kol-asset-card-frame${fit === 'cover' ? ' is-cover' : ''}`}
+        className={`ac-asset-card-frame${fit === 'cover' ? ' is-cover' : ''}`}
         onClick={onOpen}
         aria-label={caption ? `Open ${caption} fullscreen` : 'Open fullscreen'}
       >
         <Image src={src} alt={alt ?? ''} category={category} name={caption ?? alt} />
         {logo && (
-          <span className="kol-asset-card-overlay text-emphasis" aria-hidden="true">
+          <span className="ac-asset-card-overlay text-emphasis" aria-hidden="true">
             <KolLogo variant={logo} />
           </span>
         )}
       </button>
       {caption && (
-        <figcaption className="kol-helper-12 uppercase tracking-wider text-meta mt-2">
+        <figcaption className="ac-helper-12 uppercase tracking-wider text-meta mt-2">
           {caption}
         </figcaption>
       )}

@@ -11,19 +11,19 @@ export default function Press() {
       <section className="max-w-3xl mx-auto px-8 pt-20">
         <Link
           to="/"
-          className="kol-back-link kol-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
+          className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
           ← Back
         </Link>
 
-        <p className="kol-prose-label">Press</p>
-        <h1 className="kol-prose-display-md">Press</h1>
-        <p className="kol-prose-tagline" style={{ marginTop: '8px' }}>
+        <p className="ac-prose-label">Press</p>
+        <h1 className="ac-prose-display-md">Press</h1>
+        <p className="ac-prose-tagline" style={{ marginTop: '8px' }}>
           For journalists, editors, and writers.
         </p>
 
-        <div className="kol-prose">
+        <div className="ac-prose">
           <h2>About</h2>
           <p>Another Creation is a womenswear label founded in Reykjavík in 2013 by Ýr Þrastardóttir. Garments are made by hand in small numbers — cut and stitched in the studio, sourced and finished to last.</p>
 

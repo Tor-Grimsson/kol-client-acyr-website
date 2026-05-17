@@ -3,7 +3,7 @@
  *
  * Layers ON TOP of kol-theme/src/kol-color.css. The DS theme ships brand-neutral
  * (accent defaults to ink-on-surface). This file declares the AC brand
- * primitives (burgundy ramp + cream + grey) and rebinds --kol-accent-* to point
+ * primitives (burgundy ramp + cream + grey) and rebinds --ac-accent-* to point
  * at the brand role. Import AFTER kol-theme.css.
  *
  * Out of scope for `init-scaffold`. Pulled by `init-client` (or a manual import
@@ -69,15 +69,15 @@
 /* =============================================================================
  * ACCENT REBIND — brand layer takes over the DS accent role.
  *
- * kol-theme defaults --kol-accent-* to ink-on-surface (brand-neutral). When
+ * kol-theme defaults --ac-accent-* to ink-on-surface (brand-neutral). When
  * kol-brand-color.css loads, accent points at the burgundy brand identity.
  * Buttons, focus rings, sidenav active dots all switch from ink to brand.
  * ============================================================================= */
 
 :root {
-  --kol-accent-primary:        var(--brand-burgundy-100);
-  --kol-accent-on-primary:     var(--cream-100);
-  --kol-accent-primary-strong: var(--brand-burgundy-300);
+  --ac-accent-primary:        var(--brand-burgundy-100);
+  --ac-accent-on-primary:     var(--cream-100);
+  --ac-accent-primary-strong: var(--brand-burgundy-300);
 }
 
 /* =============================================================================

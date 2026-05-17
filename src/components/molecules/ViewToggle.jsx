@@ -3,17 +3,17 @@ import Icon from '../loaders/icons/Icon'
 /**
  * ViewToggle — control for switching between view modes.
  *
- *   variant="text"   — segmented bare buttons; active uses kol-control--filled,
+ *   variant="text"   — segmented bare buttons; active uses ac-control--filled,
  *                      inactive is bare text-meta with text-emphasis on hover.
  *   variant="icon"   — bordered chip-row container holding square icon
  *                      buttons. Active uses bg-fg-absolute-24.
  *   variant="single" — single button binary toggle. Click flips between the
  *                      two `options` values. The button shows the *current*
- *                      option's label; active = on (kol-control--filled),
+ *                      option's label; active = on (ac-control--filled),
  *                      inactive = off (bare text). Use for compact on/off
  *                      where a segmented two-button toggle is overkill.
  *
- * Built on the .kol-control shell. Default options use grid-06 / list-01
+ * Built on the .ac-control shell. Default options use grid-06 / list-01
  * icons; consumers can pass `options` to override. For `variant="single"`,
  * the FIRST option in `options` is the "off" value; the SECOND is "on".
  */
@@ -35,8 +35,8 @@ const ViewToggle = ({
     const isOn = viewMode === onOpt.value
     const next = isOn ? offOpt.value : onOpt.value
     const cls  = isOn
-      ? `kol-control kol-control--filled kol-control-sm kol-mono-12 ${className}`
-      : `kol-control kol-control-sm kol-mono-12 text-meta hover:text-emphasis ${className}`
+      ? `ac-control ac-control--filled ac-control-sm ac-mono-12 ${className}`
+      : `ac-control ac-control-sm ac-mono-12 text-meta hover:text-emphasis ${className}`
     /* Both labels stack in a single grid cell so the button width is fixed
      * to the longer label — flipping state never reflows the row. */
     return (
@@ -72,8 +72,8 @@ const ViewToggle = ({
      * border-reveal hover. (Earlier ghost variant revealed an outline on
      * hover; that's deliberately gone.) */
     return isActive
-      ? 'kol-control kol-control--filled kol-control-sm kol-mono-12'
-      : 'kol-control kol-control-sm kol-mono-12 text-meta hover:text-emphasis'
+      ? 'ac-control ac-control--filled ac-control-sm ac-mono-12'
+      : 'ac-control ac-control-sm ac-mono-12 text-meta hover:text-emphasis'
   }
 
   return (

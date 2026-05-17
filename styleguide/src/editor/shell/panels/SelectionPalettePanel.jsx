@@ -25,7 +25,7 @@ export default function SelectionPalettePanel() {
   }, [selectedId])
 
   return (
-    <div className="kol-compose-rail">
+    <div className="ac-compose-rail">
       <div className="border-b border-fg-08">
         <TabsRow tabs={TABS} active={tab} onChange={setTab} />
       </div>

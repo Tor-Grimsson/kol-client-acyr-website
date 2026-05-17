@@ -22,11 +22,11 @@ export default function FullscreenOverlay({ open, onClose, children }) {
   }
 
   return (
-    <div className="kol-overlay" role="dialog" aria-modal="true" onMouseDown={onBackdropClick}>
-      <div ref={sheetRef} className="kol-overlay-sheet">
+    <div className="ac-overlay" role="dialog" aria-modal="true" onMouseDown={onBackdropClick}>
+      <div ref={sheetRef} className="ac-overlay-sheet">
         <button
           type="button"
-          className="kol-overlay-close"
+          className="ac-overlay-close"
           onClick={onClose}
           aria-label="Close"
         >

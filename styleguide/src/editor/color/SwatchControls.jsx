@@ -133,7 +133,7 @@ function NoneMarker({ onClick, className = '', style }) {
         height: 10,
         background:
           'linear-gradient(45deg, #fff 0%, #fff 42%, #DC2626 42%, #DC2626 58%, #fff 58%, #fff 100%)',
-        boxShadow: '0 0 0 1px var(--kol-fg-32)',
+        boxShadow: '0 0 0 1px var(--ac-fg-32)',
         ...style,
       }}
     />

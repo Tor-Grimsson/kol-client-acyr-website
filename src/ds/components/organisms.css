@@ -1,0 +1,220 @@
+/**
+ * KOL components — organism tier
+ *
+ * Component CSS that belongs to the organism layer (composite, multi-part
+ * components). Atoms + molecules live elsewhere (see kol-components.css for
+ * now; will split into kol-components-atoms.css / -molecules.css when the
+ * volume justifies it).
+ *
+ * ─────────────────────────────────────────────────────────────────────
+ * Table — src/components/organisms/Table.jsx
+ * ─────────────────────────────────────────────────────────────────────
+ *
+ * Structural (applied by Table.jsx; do not use directly):
+ *   .ac-table-wrapper            outer container — scroll, border, radius
+ *   .ac-table                    the <table>
+ *   .ac-table-thead              header bg + bottom border
+ *   .ac-table-row                body row separator
+ *
+ * Cell classes (pass via column.className / column.headerClassName):
+ *   .ac-table-cell-title         header cells — 12px mono, uppercase, nowrap
+ *   .ac-table-cell-text          default body cell — 12px mono, nowrap
+ *   .ac-table-cell-meta          wrapping description — 10px, max 24rem
+ *   .ac-table-cell-meta-strong   same as -meta, full ink opacity
+ *
+ * Inline content (use inside cell render() funcs; no padding):
+ *   .ac-table-meta               meta text, no cell padding
+ *   .ac-table-meta-strong        same, full opacity
+ *   .ac-table-pair               min-width 18rem container for key-value
+ *   .ac-table-pill               base pill (combine with variant below)
+ *   .ac-table-pill-light         pill — secondary surface bg
+ *   .ac-table-pill-muted         pill — fg-16 bg
+ *   .ac-table-pill-dark          pill — inverted ink
+ *   .ac-table-token              inline code-token badge
+ *
+ * Variant (set via Table component's `variant` prop, not directly):
+ *   .ac-table--simple            borderless, flush, no column dividers
+ */
+
+/* =============================================================================
+ * Table
+ * ============================================================================= */
+
+.ac-table-wrapper {
+  overflow-x: auto;
+  scrollbar-width: none;
+  border: 1px solid var(--ac-fg-08);
+  border-radius: 4px;
+}
+
+.ac-table-wrapper::-webkit-scrollbar { display: none; }
+
+.ac-table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.ac-table-thead {
+  background: var(--ac-fg-04);
+  border-bottom: 1px solid var(--ac-fg-08);
+}
+
+.ac-table-row {
+  border-bottom: 1px solid var(--ac-fg-08);
+  vertical-align: top;
+}
+
+.ac-table-row:last-child { border-bottom: none; }
+
+.ac-table-cell-title {
+  padding: 12px 16px;
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--ac-surface-on-primary);
+  white-space: nowrap;
+}
+
+.ac-table-cell-text {
+  padding: 12px 16px;
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ac-fg-64);
+  white-space: nowrap;
+}
+
+.ac-table-cell-meta {
+  padding: 12px 16px;
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ac-fg-64);
+  white-space: normal;
+  min-width: 10rem;
+  max-width: 24rem;
+}
+
+.ac-table-cell-meta-strong {
+  padding: 12px 16px;
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ac-surface-on-primary);
+  white-space: normal;
+  min-width: 10rem;
+}
+
+/* Content classes — no padding, used inside cells */
+
+.ac-table-meta {
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ac-fg-64);
+  white-space: normal;
+  max-width: 24rem;
+}
+
+.ac-table-meta-strong {
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ac-surface-on-primary);
+  white-space: normal;
+}
+
+.ac-table-pair {
+  min-width: 18rem;
+}
+
+.ac-table-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 12px;
+  border-radius: 9999px;
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.ac-table-pill-light { background-color: var(--ac-surface-secondary); color: var(--ac-surface-on-secondary); }
+.ac-table-pill-muted { background-color: var(--ac-fg-16); color: var(--ac-surface-on-primary); }
+.ac-table-pill-dark  { background-color: var(--ac-surface-on-primary); color: var(--ac-surface-primary); }
+
+.ac-table-token {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 4px;
+  margin: 0 4px;
+  border-radius: 2px;
+  font-family: var(--ac-font-family-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ac-table-wrapper.ac-table--simple { border: none; border-radius: 0; }
+.ac-table-wrapper.ac-table--simple .ac-table-thead { background: none; border-bottom: 1px solid var(--ac-fg-12); }
+.ac-table-wrapper.ac-table--simple .ac-table-row   { border-bottom: 1px solid var(--ac-fg-08); }
+.ac-table-wrapper.ac-table--simple .ac-table th,
+.ac-table-wrapper.ac-table--simple .ac-table td { border-right: none; }
+.ac-table-wrapper.ac-table--simple .ac-table th:first-child,
+.ac-table-wrapper.ac-table--simple .ac-table td:first-child { padding-inline-start: 0; }
+.ac-table-wrapper.ac-table--simple .ac-table th:last-child,
+.ac-table-wrapper.ac-table--simple .ac-table td:last-child { padding-inline-end: 0; }
+
+.ac-table th,
+.ac-table td { border-right: 1px solid var(--ac-fg-08); }
+.ac-table th:last-child,
+.ac-table td:last-child { border-right: none; }
+
+.ac-table code {
+  font-family: var(--ac-font-family-mono);
+  font-size: 11px;
+  color: var(--ac-fg-80);
+  padding: 2px 5px;
+  background-color: var(--ac-fg-08);
+  border-radius: 3px;
+}
+
+.ac-table a {
+  color: var(--ac-fg-88);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.ac-table a:hover { color: var(--ac-accent-primary); }
+
+@media (max-width: 768px) {
+  .ac-table-cell-title,
+  .ac-table-cell-text,
+  .ac-table-cell-meta,
+  .ac-table-cell-meta-strong { padding: 8px 12px; }
+}
+
+@media (max-width: 480px) {
+  .ac-table-cell-title,
+  .ac-table-cell-text,
+  .ac-table-cell-meta,
+  .ac-table-cell-meta-strong {
+    font-size: 0.65rem;
+    padding: 6px 10px;
+  }
+}

@@ -4,14 +4,14 @@ const TABS = ['Stroke', 'Colour', 'Swatches']
 
 export default function PanelTabsRef({ active = 'Colour', onChange }) {
   return (
-    <div className="kol-color-panel">
-      <div className="kol-color-panel-tabs flex items-center gap-[14px] h-9 px-[10px]">
-        <div className="kol-color-panel-close" title="Close" />
-        <div className="kol-color-panel-divider" />
+    <div className="ac-color-panel">
+      <div className="ac-color-panel-tabs flex items-center gap-[14px] h-9 px-[10px]">
+        <div className="ac-color-panel-close" title="Close" />
+        <div className="ac-color-panel-divider" />
         {TABS.map((t) => (
           <div
             key={t}
-            className={`kol-color-panel-tab${t === active ? ' is-active' : ''}`}
+            className={`ac-color-panel-tab${t === active ? ' is-active' : ''}`}
             onClick={() => onChange?.(t)}
           >
             {t}

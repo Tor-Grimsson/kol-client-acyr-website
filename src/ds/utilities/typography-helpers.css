@@ -1,0 +1,38 @@
+/**
+ * typography-helpers.css — small mono helper text utilities.
+ *
+ * Consumes `--ac-font-family-mono` + `--ac-text-helper-*` from
+ * tokens/brand-typography.css. Tiny single-purpose utility classes
+ * for label-flavored mono text at three sizes plus a generic mono body.
+ */
+
+.ac-helper-s {
+  font-family: var(--ac-font-family-mono);
+  font-size: var(--ac-text-helper-s);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.ac-helper-xs {
+  font-family: var(--ac-font-family-mono);
+  font-size: var(--ac-text-helper-xs);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.ac-helper-xxs {
+  font-family: var(--ac-font-family-mono);
+  font-size: var(--ac-text-helper-xxs);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+}
+
+.ac-mono-text {
+  font-family: var(--ac-font-family-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+}

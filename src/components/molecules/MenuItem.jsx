@@ -44,7 +44,7 @@ export function MenuItem({
         ref={popover.refs.setReference}
         {...popover.getReferenceProps()}
         type="button"
-        className={`kol-helper-12 px-3 h-8 inline-flex items-center gap-2 rounded text-body hover:text-emphasis transition-colors ${buttonClassName}`}
+        className={`ac-helper-12 px-3 h-8 inline-flex items-center gap-2 rounded text-body hover:text-emphasis transition-colors ${buttonClassName}`}
       >
         <span>{label}</span>
         <Icon
@@ -94,12 +94,12 @@ export function MenuDropdownItem({ onClick, disabled, prefix, iconLeft, shortcut
       onClick={onClick}
       disabled={disabled}
       role="menuitem"
-      className="w-full kol-helper-12 px-3 h-8 inline-flex items-center gap-2 text-body hover:text-emphasis disabled:opacity-40 disabled:cursor-not-allowed text-left"
+      className="w-full ac-helper-12 px-3 h-8 inline-flex items-center gap-2 text-body hover:text-emphasis disabled:opacity-40 disabled:cursor-not-allowed text-left"
     >
       {prefix && <span className="shrink-0 inline-flex items-center">{prefix}</span>}
       {iconLeft && <span className="shrink-0 w-4 inline-flex items-center justify-center">{iconLeft}</span>}
       <span className="flex-1 truncate">{children}</span>
-      {shortcut && <span className="kol-helper-10 text-emphasis shrink-0 inline-flex items-center">{shortcut}</span>}
+      {shortcut && <span className="ac-helper-10 text-emphasis shrink-0 inline-flex items-center">{shortcut}</span>}
     </button>
   )
 }
@@ -126,7 +126,7 @@ export function MenuDropdownNest({ prefix, iconLeft, label, children }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="w-full kol-helper-12 px-3 h-8 inline-flex items-center gap-2 text-body hover:text-emphasis text-left"
+        className="w-full ac-helper-12 px-3 h-8 inline-flex items-center gap-2 text-body hover:text-emphasis text-left"
       >
         {prefix && <span className="shrink-0 inline-flex items-center">{prefix}</span>}
         {iconLeft && <span className="shrink-0 w-4 inline-flex items-center justify-center">{iconLeft}</span>}

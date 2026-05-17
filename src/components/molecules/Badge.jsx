@@ -1,25 +1,25 @@
 /**
  * Badge — status / categorization indicator
  *
- * Converted from Badge.tsx (shadcn/CVA) → plain JSX with kol- CSS variables.
+ * Converted from Badge.tsx (shadcn/CVA) → plain JSX with ac- CSS variables.
  * CSS classes live in components.css under 2-LABELS → Badges.
  */
 
 const VARIANT_MAP = {
-  default: 'kol-badge-default',
-  secondary: 'kol-badge-secondary',
-  destructive: 'kol-badge-destructive',
-  outline: 'kol-badge-outline',
-  success: 'kol-badge-success',
-  warning: 'kol-badge-warning',
-  critical: 'kol-badge-critical',
-  info: 'kol-badge-info'
+  default: 'ac-badge-default',
+  secondary: 'ac-badge-secondary',
+  destructive: 'ac-badge-destructive',
+  outline: 'ac-badge-outline',
+  success: 'ac-badge-success',
+  warning: 'ac-badge-warning',
+  critical: 'ac-badge-critical',
+  info: 'ac-badge-info'
 }
 
 const SIZE_MAP = {
-  sm: 'kol-badge-sm',
-  md: 'kol-badge-md',
-  lg: 'kol-badge-lg'
+  sm: 'ac-badge-sm',
+  md: 'ac-badge-md',
+  lg: 'ac-badge-lg'
 }
 
 const Badge = ({
@@ -34,7 +34,7 @@ const Badge = ({
 
   return (
     <div
-      className={`kol-badge ${variantClass} ${sizeClass} ${className}`.trim()}
+      className={`ac-badge ${variantClass} ${sizeClass} ${className}`.trim()}
       {...props}
     >
       {children}

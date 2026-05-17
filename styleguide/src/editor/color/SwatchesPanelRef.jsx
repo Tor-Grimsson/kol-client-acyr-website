@@ -11,22 +11,22 @@ const SWATCHES = [
 export default function SwatchesPanelRef() {
   return (
     <PanelBody>
-      <p className="kol-color-panel-uplabel mb-[6px]">Recent</p>
-      <div className="kol-color-panel-recent mb-[14px]" />
+      <p className="ac-color-panel-uplabel mb-[6px]">Recent</p>
+      <div className="ac-color-panel-recent mb-[14px]" />
       <div className="flex items-center gap-[6px] mb-3">
-        <div className="kol-color-panel-pal-select">
+        <div className="ac-color-panel-pal-select">
           <span className="text-[#6a6a6a]">▤</span>
           <span className="flex-1">bingo</span>
           <ChevYStack />
         </div>
         <div className="flex gap-[6px]">
-          <div className="kol-color-panel-tool-btn">+</div>
-          <div className="kol-color-panel-tool-btn">⋯</div>
+          <div className="ac-color-panel-tool-btn">+</div>
+          <div className="ac-color-panel-tool-btn">⋯</div>
         </div>
       </div>
       <div className="grid grid-cols-8 gap-1 mb-[14px]">
         {SWATCHES.map((c, i) => (
-          <div key={i} className="kol-color-panel-sw-grid-cell" style={{ background: c }} />
+          <div key={i} className="ac-color-panel-sw-grid-cell" style={{ background: c }} />
         ))}
       </div>
       <div className="flex items-center gap-2 pt-[10px] border-t border-[#2a2a2a] text-[#6a6a6a]">
@@ -34,7 +34,7 @@ export default function SwatchesPanelRef() {
           <circle cx="4.5" cy="4.5" r="3.2" />
           <path d="M7 7l3 3" />
         </svg>
-        <input className="kol-color-panel-search-input" placeholder="search swatches" />
+        <input className="ac-color-panel-search-input" placeholder="search swatches" />
       </div>
     </PanelBody>
   )

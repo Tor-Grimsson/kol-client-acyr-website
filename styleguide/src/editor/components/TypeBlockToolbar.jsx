@@ -47,7 +47,7 @@ function ToolbarBtn({ active, title, onClick, children }) {
       aria-pressed={active ? true : undefined}
       onMouseDown={(e) => e.stopPropagation()}
       onClick={(e) => { e.stopPropagation(); onClick?.(e) }}
-      className={`kol-mono-12 inline-flex items-center justify-center rounded transition-colors px-2 py-1 text-absolute-white ${
+      className={`ac-mono-12 inline-flex items-center justify-center rounded transition-colors px-2 py-1 text-absolute-white ${
         active ? 'bg-fg-absolute-24' : 'bg-transparent hover:bg-fg-absolute-16'
       }`}
       style={{ minWidth: 24, height: 24, lineHeight: 1 }}

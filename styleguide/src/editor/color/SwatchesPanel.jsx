@@ -7,7 +7,7 @@ import { resolveCssVar } from '../../components/sections/ColorRamp'
  * SwatchesPanel — AC brand-token swatch picker.
  *
  * Default bank reads live from CSS custom properties so the panel stays in
- * sync with `kol-color.css` / `kol-opacity.css` / `kol-brand-color.css`. Five
+ * sync with `ac-color.css` / `ac-opacity.css` / `ac-brand-color.css`. Five
  * sub-banks render in order:
  *   1. Foreground opacity ramp (14 stops)
  *   2. Burgundy ramp (5 stops)
@@ -42,7 +42,7 @@ export function SwatchesBody({ onPick }) {
   const [palette, setPalette] = useState('ac')
   const [tick, setTick]       = useState(0)
 
-  /* Re-resolve when the document theme shifts (kol-system rebrand events). */
+  /* Re-resolve when the document theme shifts (ac-system rebrand events). */
   useEffect(() => {
     const onTheme = () => setTick((t) => t + 1)
     window.addEventListener('kol:theme-change', onTheme)
@@ -51,7 +51,7 @@ export function SwatchesBody({ onPick }) {
 
   const swatches = useMemo(() => {
     if (palette === 'ac') {
-      const fg       = FG_STOPS.map((s) => resolveCssVar(`--kol-fg-${s}`))
+      const fg       = FG_STOPS.map((s) => resolveCssVar(`--ac-fg-${s}`))
       const burgundy = BURGUNDY_STOPS.map((s) => resolveCssVar(`--brand-burgundy-${s}`))
       const cream    = CREAM_STOPS.map((s) => resolveCssVar(`--cream-${s}`))
       const grey     = GREY_STOPS.map((s) => resolveCssVar(`--grey-${s}`))

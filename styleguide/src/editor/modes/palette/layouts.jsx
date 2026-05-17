@@ -3,7 +3,7 @@
  *
  * Every layout accepts { palette, logo } and renders its geometry with the
  * current palette's 5 role-colors. Structural CSS lives in foundations.css
- * under `.kol-combo-*`. Inline styles here are strictly data-driven
+ * under `.ac-combo-*`. Inline styles here are strictly data-driven
  * (background + color from the palette).
  */
 import KolLogo from '@brand/logos/KolLogo'
@@ -13,7 +13,7 @@ import { fgOn } from '../../../utils/contrast'
 const LogoSlot = ({ logo, size = 48 }) => {
   if (!logo || logo.id === 'none' || !logo.variant) return null
   return (
-    <span className="kol-combo-logo" style={{ width: size }}>
+    <span className="ac-combo-logo" style={{ width: size }}>
       <KolLogo variant={logo.variant} />
     </span>
   )
@@ -23,19 +23,19 @@ const LogoSlot = ({ logo, size = 48 }) => {
 export function RatioBar({ palette, logo }) {
   const { primary, secondary, light } = palette
   return (
-    <div className="kol-combo-stage kol-combo-frame kol-combo-stage--fill kol-combo-stage--ratio">
-      <div className="kol-combo-slab" style={{ background: primary, color: fgOn(primary) }}>
-        <span className="kol-combo-label">Primary</span>
+    <div className="ac-combo-stage ac-combo-frame ac-combo-stage--fill ac-combo-stage--ratio">
+      <div className="ac-combo-slab" style={{ background: primary, color: fgOn(primary) }}>
+        <span className="ac-combo-label">Primary</span>
         <LogoSlot logo={logo} size={48} />
-        <span className="kol-combo-number">10</span>
+        <span className="ac-combo-number">10</span>
       </div>
-      <div className="kol-combo-slab" style={{ background: secondary, color: fgOn(secondary) }}>
-        <span className="kol-combo-label">Secondary</span>
-        <span className="kol-combo-number">30</span>
+      <div className="ac-combo-slab" style={{ background: secondary, color: fgOn(secondary) }}>
+        <span className="ac-combo-label">Secondary</span>
+        <span className="ac-combo-number">30</span>
       </div>
-      <div className="kol-combo-slab" style={{ background: light, color: fgOn(light) }}>
-        <span className="kol-combo-label">Neutral</span>
-        <span className="kol-combo-number">60</span>
+      <div className="ac-combo-slab" style={{ background: light, color: fgOn(light) }}>
+        <span className="ac-combo-label">Neutral</span>
+        <span className="ac-combo-number">60</span>
       </div>
     </div>
   )
@@ -45,15 +45,15 @@ export function RatioBar({ palette, logo }) {
 export function Tower({ palette, logo }) {
   const { primary, secondary, light, dark } = palette
   const band = (bg, label) => (
-    <div className="kol-combo-slab kol-combo-slab--end" style={{ background: bg, color: fgOn(bg) }}>
-      <span className="kol-combo-label">{label}</span>
+    <div className="ac-combo-slab ac-combo-slab--end" style={{ background: bg, color: fgOn(bg) }}>
+      <span className="ac-combo-label">{label}</span>
     </div>
   )
   return (
-    <div className="kol-combo-stage kol-combo-frame kol-combo-stage--tower">
-      <div className="kol-combo-slab kol-combo-slab--between" style={{ background: primary, color: fgOn(primary) }}>
+    <div className="ac-combo-stage ac-combo-frame ac-combo-stage--tower">
+      <div className="ac-combo-slab ac-combo-slab--between" style={{ background: primary, color: fgOn(primary) }}>
         <LogoSlot logo={logo} size={48} />
-        <span className="kol-combo-label">Primary</span>
+        <span className="ac-combo-label">Primary</span>
       </div>
       {band(secondary, 'Secondary')}
       {band(light, 'Light')}
@@ -66,18 +66,18 @@ export function Tower({ palette, logo }) {
 export function QuadSplit({ palette, logo }) {
   const { primary, light, dark, accent } = palette
   return (
-    <div className="kol-combo-stage kol-combo-frame kol-combo-stage--fill kol-combo-stage--quad">
-      <div className="kol-combo-slab kol-combo-slab--between" style={{ background: primary, color: fgOn(primary) }}>
+    <div className="ac-combo-stage ac-combo-frame ac-combo-stage--fill ac-combo-stage--quad">
+      <div className="ac-combo-slab ac-combo-slab--between" style={{ background: primary, color: fgOn(primary) }}>
         <LogoSlot logo={logo} size={64} />
-        <span className="kol-combo-label">Primary · 50</span>
+        <span className="ac-combo-label">Primary · 50</span>
       </div>
-      <div className="kol-combo-quad-col">
-        <div className="kol-combo-slab kol-combo-slab--end" style={{ background: light, color: fgOn(light) }}>
-          <span className="kol-combo-label">Light · 25</span>
+      <div className="ac-combo-quad-col">
+        <div className="ac-combo-slab ac-combo-slab--end" style={{ background: light, color: fgOn(light) }}>
+          <span className="ac-combo-label">Light · 25</span>
         </div>
-        <div className="kol-combo-slab kol-combo-slab--between" style={{ background: dark, color: fgOn(dark) }}>
-          <span className="kol-combo-label" style={{ color: accent }}>Accent</span>
-          <span className="kol-combo-label">Dark · 25</span>
+        <div className="ac-combo-slab ac-combo-slab--between" style={{ background: dark, color: fgOn(dark) }}>
+          <span className="ac-combo-label" style={{ color: accent }}>Accent</span>
+          <span className="ac-combo-label">Dark · 25</span>
         </div>
       </div>
     </div>
@@ -89,15 +89,15 @@ export function CardRow({ palette, logo }) {
   const { primary, secondary, light, dark } = palette
   const card = (bg, label, withLogo = false) => (
     <div
-      className={`kol-combo-card kol-combo-frame${withLogo ? ' kol-combo-card--between' : ' kol-combo-card--end'}`}
+      className={`ac-combo-card ac-combo-frame${withLogo ? ' ac-combo-card--between' : ' ac-combo-card--end'}`}
       style={{ background: bg, color: fgOn(bg) }}
     >
       {withLogo && <LogoSlot logo={logo} size={40} />}
-      <span className="kol-combo-label">{label}</span>
+      <span className="ac-combo-label">{label}</span>
     </div>
   )
   return (
-    <div className="kol-combo-stage kol-combo-stage--card-row">
+    <div className="ac-combo-stage ac-combo-stage--card-row">
       {card(primary, 'Primary', true)}
       {card(secondary, 'Secondary')}
       {card(light, 'Light')}
@@ -114,37 +114,37 @@ export function StripeRow({ palette }) {
   const ruleColor = `${dark}20`
   return (
     <div
-      className="kol-combo-stage kol-combo-frame kol-combo-stage--stripe-row"
+      className="ac-combo-stage ac-combo-frame ac-combo-stage--stripe-row"
       style={{
         '--stripe-rule': ruleColor,
         '--stripe-accent': accent,
       }}
     >
       {/* Method 01 — single-row proportion bar */}
-      <div className="kol-combo-stripe-row">
-        <div className="kol-combo-stripe-bar">
-          <div className="kol-combo-stripe-seg kol-combo-stripe-seg--6" style={{ background: primary }} />
-          <div className="kol-combo-stripe-seg kol-combo-stripe-seg--3 kol-combo-stripe-neutral" style={{ background: light }} />
-          <div className="kol-combo-stripe-seg kol-combo-stripe-seg--1" style={{ background: accent }} />
-          <span className="kol-combo-stripe-method">Method 01</span>
+      <div className="ac-combo-stripe-row">
+        <div className="ac-combo-stripe-bar">
+          <div className="ac-combo-stripe-seg ac-combo-stripe-seg--6" style={{ background: primary }} />
+          <div className="ac-combo-stripe-seg ac-combo-stripe-seg--3 ac-combo-stripe-neutral" style={{ background: light }} />
+          <div className="ac-combo-stripe-seg ac-combo-stripe-seg--1" style={{ background: accent }} />
+          <span className="ac-combo-stripe-method">Method 01</span>
         </div>
       </div>
       {/* Method 02 — split-row */}
-      <div className="kol-combo-stripe-row">
-        <div className="kol-combo-stripe-bar">
-          <div className="kol-combo-stripe-group kol-combo-stripe-group--3">
-            <div className="kol-combo-stripe-seg kol-combo-stripe-seg--1" style={{ background: primary }} />
-            <div className="kol-combo-stripe-seg kol-combo-stripe-seg--1" style={{ background: secondary }} />
+      <div className="ac-combo-stripe-row">
+        <div className="ac-combo-stripe-bar">
+          <div className="ac-combo-stripe-group ac-combo-stripe-group--3">
+            <div className="ac-combo-stripe-seg ac-combo-stripe-seg--1" style={{ background: primary }} />
+            <div className="ac-combo-stripe-seg ac-combo-stripe-seg--1" style={{ background: secondary }} />
           </div>
-          <div className="kol-combo-stripe-group kol-combo-stripe-group--3">
-            <div className="kol-combo-stripe-seg kol-combo-stripe-seg--1 kol-combo-stripe-neutral" style={{ background: light }} />
-            <div className="kol-combo-stripe-seg kol-combo-stripe-seg--1" style={{ background: light }} />
+          <div className="ac-combo-stripe-group ac-combo-stripe-group--3">
+            <div className="ac-combo-stripe-seg ac-combo-stripe-seg--1 ac-combo-stripe-neutral" style={{ background: light }} />
+            <div className="ac-combo-stripe-seg ac-combo-stripe-seg--1" style={{ background: light }} />
           </div>
-          <div className="kol-combo-stripe-group kol-combo-stripe-group--1">
-            <div className="kol-combo-stripe-seg kol-combo-stripe-seg--1" style={{ background: accent }} />
-            <div className="kol-combo-stripe-seg kol-combo-stripe-seg--1" style={{ background: dark }} />
+          <div className="ac-combo-stripe-group ac-combo-stripe-group--1">
+            <div className="ac-combo-stripe-seg ac-combo-stripe-seg--1" style={{ background: accent }} />
+            <div className="ac-combo-stripe-seg ac-combo-stripe-seg--1" style={{ background: dark }} />
           </div>
-          <span className="kol-combo-stripe-method">Method 02</span>
+          <span className="ac-combo-stripe-method">Method 02</span>
         </div>
       </div>
     </div>
@@ -155,23 +155,23 @@ export function StripeRow({ palette }) {
 export function AppliedCard({ palette, logo }) {
   const { primary, secondary, light, dark, accent } = palette
   return (
-    <div className="kol-combo-stage kol-combo-frame kol-combo-stage--applied" style={{ background: light }}>
+    <div className="ac-combo-stage ac-combo-frame ac-combo-stage--applied" style={{ background: light }}>
       {/* Main logo plate */}
-      <div className="kol-combo-applied-plate" style={{ background: primary, color: fgOn(primary) }}>
+      <div className="ac-combo-applied-plate" style={{ background: primary, color: fgOn(primary) }}>
         <LogoSlot logo={logo} size={72} />
-        <span className="kol-combo-label">Front</span>
+        <span className="ac-combo-label">Front</span>
       </div>
       {/* Right swatch column */}
-      <div className="kol-combo-applied-col">
-        <div className="kol-combo-slab kol-combo-slab--between kol-combo-applied-surface" style={{ background: light, color: fgOn(light) }}>
-          <span className="kol-combo-label">Surface</span>
-          <div className="kol-combo-applied-accent-strip">
-            <span className="kol-combo-applied-accent-chip" style={{ background: secondary }} />
-            <span className="kol-combo-applied-accent-chip" style={{ background: accent }} />
+      <div className="ac-combo-applied-col">
+        <div className="ac-combo-slab ac-combo-slab--between ac-combo-applied-surface" style={{ background: light, color: fgOn(light) }}>
+          <span className="ac-combo-label">Surface</span>
+          <div className="ac-combo-applied-accent-strip">
+            <span className="ac-combo-applied-accent-chip" style={{ background: secondary }} />
+            <span className="ac-combo-applied-accent-chip" style={{ background: accent }} />
           </div>
         </div>
-        <div className="kol-combo-applied-band kol-combo-applied-band--lg" style={{ background: secondary }} />
-        <div className="kol-combo-applied-band kol-combo-applied-band--sm" style={{ background: dark }} />
+        <div className="ac-combo-applied-band ac-combo-applied-band--lg" style={{ background: secondary }} />
+        <div className="ac-combo-applied-band ac-combo-applied-band--sm" style={{ background: dark }} />
       </div>
     </div>
   )

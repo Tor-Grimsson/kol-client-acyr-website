@@ -55,14 +55,14 @@ function LayerRow({
   const selectHandlers = useShiftClickHandlers(onSelect, onShiftSelect)
 
   return (
-    <div className="kol-compose-layer-line group">
+    <div className="ac-compose-layer-line group">
       {isGroup ? (
         <button
           type="button"
           onClick={onToggleGroup}
           aria-expanded={!groupCollapsed}
           title={groupCollapsed ? 'Expand group' : 'Collapse group'}
-          className="kol-compose-layer-collapse"
+          className="ac-compose-layer-collapse"
         >
           <EditorIcon
             name="chevron-down"
@@ -71,7 +71,7 @@ function LayerRow({
           />
         </button>
       ) : (
-        <span aria-hidden="true" className="kol-compose-layer-collapse" />
+        <span aria-hidden="true" className="ac-compose-layer-collapse" />
       )}
       <div
         draggable
@@ -81,7 +81,7 @@ function LayerRow({
         onDrop={(e) => onDrop(e, layer.id)}
         onDragEnd={onDragEnd}
         className={
-          `kol-compose-layer-row${active ? ' is-active' : ''}` +
+          `ac-compose-layer-row${active ? ' is-active' : ''}` +
           `${!layer.visible ? ' is-hidden' : ''}` +
           `${isDragging ? ' is-dragging' : ''}` +
           `${isDropAbove ? ' is-drop-above' : ''}` +
@@ -93,12 +93,12 @@ function LayerRow({
           type="button"
           onMouseDown={selectHandlers.onMouseDown}
           onClick={selectHandlers.onClick}
-          className="kol-compose-layer-main"
+          className="ac-compose-layer-main"
         >
-          <span className="kol-compose-layer-btn-icon" aria-hidden="true">
+          <span className="ac-compose-layer-btn-icon" aria-hidden="true">
             <EditorIcon name={TYPE_ICONS[layer.type] ?? 'layer-shape'} size={14} />
           </span>
-          <span className="kol-helper-12 truncate flex-1 text-left">
+          <span className="ac-helper-12 truncate flex-1 text-left">
             {rowLabelForLayer(layer)}
           </span>
         </button>
@@ -237,13 +237,13 @@ function AddLayerButton({ addLayer }) {
  * Selecting Canvas routes the inspector to CanvasInspector. */
 function CanvasRow({ active, collapsed, onToggleCollapse, onSelect }) {
   return (
-    <div className="kol-compose-layer-line group">
+    <div className="ac-compose-layer-line group">
       <button
         type="button"
         onClick={onToggleCollapse}
         aria-expanded={!collapsed}
         title={collapsed ? 'Expand layers' : 'Collapse layers'}
-        className="kol-compose-layer-collapse"
+        className="ac-compose-layer-collapse"
       >
         <EditorIcon
           name="chevron-down"
@@ -252,18 +252,18 @@ function CanvasRow({ active, collapsed, onToggleCollapse, onSelect }) {
         />
       </button>
       <div
-        className={`kol-compose-layer-row${active ? ' is-active' : ''}`}
+        className={`ac-compose-layer-row${active ? ' is-active' : ''}`}
         data-layer-id="canvas"
       >
         <button
           type="button"
           onClick={onSelect}
-          className="kol-compose-layer-main"
+          className="ac-compose-layer-main"
         >
-          <span className="kol-compose-layer-btn-icon" aria-hidden="true">
+          <span className="ac-compose-layer-btn-icon" aria-hidden="true">
             <EditorIcon name="maximize" size={14} />
           </span>
-          <span className="kol-mono-12 truncate flex-1 text-left">Canvas</span>
+          <span className="ac-mono-12 truncate flex-1 text-left">Canvas</span>
         </button>
       </div>
     </div>
@@ -273,20 +273,20 @@ function CanvasRow({ active, collapsed, onToggleCollapse, onSelect }) {
 function ChildRow({ layer, active, onSelect, onShiftSelect }) {
   const handlers = useShiftClickHandlers(onSelect, onShiftSelect)
   return (
-    <div className="kol-compose-layer-line">
-      <span aria-hidden="true" className="kol-compose-layer-collapse" />
+    <div className="ac-compose-layer-line">
+      <span aria-hidden="true" className="ac-compose-layer-collapse" />
       <button
         type="button"
         onMouseDown={handlers.onMouseDown}
         onClick={handlers.onClick}
-        className={`kol-compose-layer-row${active ? ' is-active' : ''}`}
+        className={`ac-compose-layer-row${active ? ' is-active' : ''}`}
         data-layer-id={layer.id}
       >
-        <span className="kol-compose-layer-main">
-          <span className="kol-compose-layer-btn-icon" aria-hidden="true">
+        <span className="ac-compose-layer-main">
+          <span className="ac-compose-layer-btn-icon" aria-hidden="true">
             <EditorIcon name={TYPE_ICONS[layer.type] ?? 'layer-shape'} size={14} />
           </span>
-          <span className="kol-helper-12 truncate flex-1 text-left">
+          <span className="ac-helper-12 truncate flex-1 text-left">
             {rowLabelForLayer(layer)}
           </span>
         </span>
@@ -380,7 +380,7 @@ export function LayerStackBody() {
   const hasLayerSelection = selectedIds.some((id) => id !== 'canvas')
 
   return (
-    <div className="kol-compose-rail min-h-[240px]" data-layer-stack="true">
+    <div className="ac-compose-rail min-h-[240px]" data-layer-stack="true">
       <ul className="flex flex-col pb-3 px-4 pt-3">
         <li>
           <CanvasRow
@@ -391,7 +391,7 @@ export function LayerStackBody() {
           />
         </li>
         {!canvasCollapsed && [...layers].reverse().map((layer) => (
-          <li key={layer.id} className="kol-compose-layer-nest">
+          <li key={layer.id} className="ac-compose-layer-nest">
             <LayerRow
               layer={layer}
               active={selectedIds.includes(layer.id)}
@@ -412,7 +412,7 @@ export function LayerStackBody() {
               onDragEnd={onDragEnd}
             />
             {layer.type === 'group' && !collapsedGroups.has(layer.id) && Array.isArray(layer.children) && layer.children.length > 0 && (
-              <ul className="flex flex-col kol-compose-layer-nest">
+              <ul className="flex flex-col ac-compose-layer-nest">
                 {[...layer.children].reverse().map((child) => (
                   <li key={child.id}>
                     <ChildRow

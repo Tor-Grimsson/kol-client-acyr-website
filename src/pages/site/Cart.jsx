@@ -19,7 +19,7 @@ function QtyControl({ qty, onChange }) {
       >
         <Icon name="minus" size={12} />
       </button>
-      <span className="kol-helper-xs" style={{ minWidth: '1.5em', textAlign: 'center' }}>{qty}</span>
+      <span className="ac-helper-xs" style={{ minWidth: '1.5em', textAlign: 'center' }}>{qty}</span>
       <button
         type="button"
         aria-label="Increase quantity"
@@ -41,15 +41,15 @@ export default function Cart() {
   return (
     <main className="bg-surface-primary pb-24">
       <section className="max-w-5xl mx-auto px-8 pt-16 pb-8">
-        <p className="kol-prose-label">Cart</p>
-        <h1 className="kol-prose-display-md">Shopping cart</h1>
+        <p className="ac-prose-label">Cart</p>
+        <h1 className="ac-prose-display-md">Shopping cart</h1>
       </section>
 
       <section className="max-w-5xl mx-auto px-8">
         <Divider className="mb-8" />
 
         {items.length === 0 ? (
-          <div className="kol-prose">
+          <div className="ac-prose">
             <p>Your cart is empty.</p>
             <p>Browse the <Link to="/shop">shop</Link> or the <Link to="/handmade">handmade</Link> pieces.</p>
           </div>
@@ -68,21 +68,21 @@ export default function Cart() {
                     <div>
                       <Link
                         to={`/${it.kind === 'pod' ? 'shop' : 'handmade'}/${it.slug}`}
-                        className="kol-prose-label no-underline text-emphasis hover:text-emphasis"
+                        className="ac-prose-label no-underline text-emphasis hover:text-emphasis"
                         style={{ marginBottom: '4px' }}
                       >
                         {it.name}
                       </Link>
-                      {it.size && <p className="kol-helper-xxs text-meta" style={{ margin: '0 0 12px' }}>Size: {it.size}</p>}
+                      {it.size && <p className="ac-helper-xxs text-meta" style={{ margin: '0 0 12px' }}>Size: {it.size}</p>}
                       <QtyControl qty={it.qty} onChange={(q) => updateQty(it.id, q)} />
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                      <p className="kol-prose-label" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
+                      <p className="ac-prose-label" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
                       <button
                         type="button"
                         aria-label={`Remove ${it.name}`}
                         onClick={() => removeItem(it.id)}
-                        className="kol-helper-xxs text-meta hover:text-emphasis transition-colors"
+                        className="ac-helper-xxs text-meta hover:text-emphasis transition-colors"
                         style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
                       >
                         Remove
@@ -94,12 +94,12 @@ export default function Cart() {
             </ul>
 
             <aside className="bg-surface-secondary p-6 rounded sticky top-20">
-              <p className="kol-prose-label" style={{ marginBottom: '16px' }}>Summary</p>
-              <div className="kol-prose">
+              <p className="ac-prose-label" style={{ marginBottom: '16px' }}>Summary</p>
+              <div className="ac-prose">
                 <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 8px' }}>
                   <span>Subtotal</span><strong>{formatPrice(subtotal, currency)}</strong>
                 </p>
-                <p style={{ display: 'flex', justifyContent: 'space-between', margin: 0, color: 'var(--kol-fg-48)' }}>
+                <p style={{ display: 'flex', justifyContent: 'space-between', margin: 0, color: 'var(--ac-fg-48)' }}>
                   <span>Shipping</span><span>at checkout</span>
                 </p>
               </div>
@@ -108,7 +108,7 @@ export default function Cart() {
                   Checkout
                 </Button>
               </div>
-              <p className="kol-helper-xxs text-meta mt-4" style={{ marginBottom: 0 }}>
+              <p className="ac-helper-xxs text-meta mt-4" style={{ marginBottom: 0 }}>
                 Tax + shipping calculated at the next step.
               </p>
             </aside>

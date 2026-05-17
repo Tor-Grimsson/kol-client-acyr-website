@@ -16,11 +16,11 @@ export default function LogoCard({ variant, caption, backdrop, className = '', c
 
   return (
     <figure
-      className={`kol-logo-card flex flex-col ${figureSizing} ${className}`.trim()}
+      className={`ac-logo-card flex flex-col ${figureSizing} ${className}`.trim()}
       style={figureStyle}
     >
       <div
-        className={`kol-logo-card-frame flex-1 min-h-0 flex items-center justify-center ${frameChrome}`.trim()}
+        className={`ac-logo-card-frame flex-1 min-h-0 flex items-center justify-center ${frameChrome}`.trim()}
         style={frameStyle}
       >
         {clearspace ? (
@@ -31,7 +31,7 @@ export default function LogoCard({ variant, caption, backdrop, className = '', c
       </div>
       <div className="flex items-center justify-between mt-2">
         {caption && (
-          <figcaption className="kol-helper-12 uppercase tracking-wider text-meta">
+          <figcaption className="ac-helper-12 uppercase tracking-wider text-meta">
             {caption}
           </figcaption>
         )}
