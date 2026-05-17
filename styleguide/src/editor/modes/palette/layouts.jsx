@@ -7,7 +7,7 @@
  * (background + color from the palette).
  */
 import KolLogo from '@brand/logos/KolLogo'
-import { fgOn } from './palettes'
+import { fgOn } from '../../../utils/contrast'
 
 /* LogoSlot — size is a numeric prop, rendered as inline width. */
 const LogoSlot = ({ logo, size = 48 }) => {

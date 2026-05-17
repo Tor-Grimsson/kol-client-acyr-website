@@ -3,5 +3,7 @@
     { "source": "/site", "destination": "/", "permanent": true },
     { "source": "/site/:path*", "destination": "/:path*", "permanent": true }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/metadata-proxy" }
+  ]
 }

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /cart
+Disallow: /checkout
+Disallow: /checkout/confirmation
+
+Sitemap: https://another-creation.xyz/sitemap.xml

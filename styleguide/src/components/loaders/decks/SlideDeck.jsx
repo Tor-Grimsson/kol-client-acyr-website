@@ -1,6 +1,6 @@
 import usePageTitle from '../../hooks/usePageTitle'
 import DeckShell from './DeckShell'
-import { fgOn } from '../../../editor/modes/palette/palettes'
+import { fgOn } from '../../../utils/contrast'
 import { BRAND } from '@brand/config'
 import { BRAND_INFO } from '@brand/data/info'
 
