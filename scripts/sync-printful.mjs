@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
  * Pull sync products from the Printful API store and write them to
- * src/brand/data/printful-products.json (+ download primary mockups into
- * public/brand/shop/pod/<slug>.jpg).
+ * apps/website/src/data/printful-products.json (+ download primary mockups into
+ * assets/brand/shop/pod/<slug>.png via the apps/website/public/brand symlink).
  *
- * Run via `pnpm sync-printful`. Token is loaded from .env.local at runtime
- * via Node's --env-file flag — it never reaches the bundle.
+ * Run via `pnpm sync-printful` from repo root. Token loaded from .env.local at
+ * runtime via Node's --env-file flag — it never reaches the bundle.
  */
 
 import { writeFile, mkdir } from 'node:fs/promises'
@@ -17,10 +17,11 @@ if (!TOKEN) {
   process.exit(1)
 }
 
-const API         = 'https://api.printful.com'
-const IMG_DIR     = resolve('public/brand/shop/pod')
-const IMG_URL_DIR = '/brand/shop/pod'
-const OUTPUT_JSON = resolve('src/brand/data/printful-products.json')
+const API           = 'https://api.printful.com'
+const WEBSITE_ROOT  = resolve('apps/website')
+const IMG_DIR       = resolve(WEBSITE_ROOT, 'public/brand/shop/pod')
+const IMG_URL_DIR   = '/brand/shop/pod'
+const OUTPUT_JSON   = resolve(WEBSITE_ROOT, 'src/data/printful-products.json')
 
 const slugify = (s) =>
   s.toLowerCase()
@@ -87,7 +88,7 @@ async function main() {
     const imageRelPath  = `${IMG_URL_DIR}/${slug}.${imageExt}`
 
     if (previewUrl) {
-      await downloadImage(previewUrl, resolve(`public${imageRelPath}`))
+      await downloadImage(previewUrl, resolve(WEBSITE_ROOT, `public${imageRelPath}`))
       console.log(`  ${slug} ← image (.${imageExt})`)
     } else {
       console.warn(`  ${slug}: no preview image, skipping image download`)

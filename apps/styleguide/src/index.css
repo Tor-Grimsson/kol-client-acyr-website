@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* AC Design System — single cascade entry. */
+@import "@ac/ds/index.css";
+
+/* Styleguide-only design-foundations UI (combo lab, spectrum grid,
+   mood tiles, asset cards, type samples, etc). */
+@import "./styles/design-foundations.css";

@@ -18,7 +18,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(__dirname, '..')
-const PUBLIC_DIR = join(REPO_ROOT, 'public')
+const PUBLIC_DIR = join(REPO_ROOT, 'apps/website/public')
 
 const projectId = process.env.SANITY_PROJECT_ID
 const dataset = process.env.SANITY_DATASET

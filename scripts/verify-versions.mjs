@@ -29,8 +29,8 @@ const SHARED = [
 ]
 
 const TARGETS = [
-  { name: 'root',       path: resolve(repoRoot, 'package.json') },
-  { name: 'styleguide', path: resolve(repoRoot, 'styleguide/package.json') },
+  { name: 'website',    path: resolve(repoRoot, 'apps/website/package.json') },
+  { name: 'styleguide', path: resolve(repoRoot, 'apps/styleguide/package.json') },
 ]
 
 function loadDeps(target) {

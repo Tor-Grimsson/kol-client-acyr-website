@@ -1,0 +1,15 @@
+{
+  "name": "@ac/ds",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./index.css",
+  "exports": {
+    ".": "./index.css",
+    "./index.css": "./index.css",
+    "./tokens/*": "./tokens/*",
+    "./utilities/*": "./utilities/*",
+    "./components/*": "./components/*",
+    "./framework/*": "./framework/*"
+  }
+}
