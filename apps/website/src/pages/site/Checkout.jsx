@@ -161,6 +161,14 @@ export default function Checkout() {
       }
       const result = await res.json()
 
+      if (newsletter && email) {
+        fetch('/api/newsletter/subscribe', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ email }),
+        }).catch(() => {})
+      }
+
       const snapshotItems = items.map((it) => ({ ...it }))
       clear()
 

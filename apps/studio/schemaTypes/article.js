@@ -57,6 +57,18 @@ export default defineType({
       options: {hotspot: true},
     }),
     defineField({
+      name: 'seo',
+      title: 'SEO + social',
+      type: 'object',
+      description: 'Optional overrides for search and social-share previews. Each field falls back to its parent (title / excerpt / cover) when blank.',
+      options: {collapsible: true, collapsed: true},
+      fields: [
+        {name: 'seoTitle',       title: 'Title override',        type: 'string'},
+        {name: 'seoDescription', title: 'Description override',  type: 'text', rows: 2},
+        {name: 'ogImage',        title: 'Share image (1.91:1)',  type: 'image', options: {hotspot: true}},
+      ],
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'array',

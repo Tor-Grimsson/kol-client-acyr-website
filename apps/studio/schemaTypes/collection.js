@@ -56,6 +56,18 @@ export default defineType({
       description: 'Used on the /collections index card. Usually the first look.',
     }),
     defineField({
+      name: 'seo',
+      title: 'SEO + social',
+      type: 'object',
+      description: 'Optional overrides for search and social-share previews. Each field falls back to its parent (title / excerpt / cover) when blank.',
+      options: {collapsible: true, collapsed: true},
+      fields: [
+        {name: 'seoTitle',       title: 'Title override',        type: 'string'},
+        {name: 'seoDescription', title: 'Description override',  type: 'text', rows: 2},
+        {name: 'ogImage',        title: 'Share image (1.91:1)',  type: 'image', options: {hotspot: true}},
+      ],
+    }),
+    defineField({
       name: 'heroImage',
       title: 'Hero image',
       type: 'image',

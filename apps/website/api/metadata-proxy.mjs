@@ -3,10 +3,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   DEFAULT_META,
-  lookupMeta,
   escapeHtml,
   SITE_URL,
 } from '../src/data/seo-metadata.js'
+import { resolveMeta } from './_lib/meta-resolver.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
     /* fall through with default */
   }
 
-  const resolved = lookupMeta(pathname)
+  const resolved = await resolveMeta(pathname)
   const meta = resolved ?? DEFAULT_META
   const status = resolved ? 200 : 404
   const fullUrl = SITE_URL + pathname

@@ -160,6 +160,8 @@ export const SOCIAL = [
   { platform: 'Facebook',    handle: '@anothercreationyr',  url: 'https://www.facebook.com/anothercreationyr/',   notes: null },
   { platform: 'LinkedIn',    handle: 'creatoryr',           url: 'https://www.linkedin.com/in/creatoryr/',        notes: "Ýr's professional profile." },
   { platform: 'FilmFreeway', handle: 'YrThrastardottir',    url: 'https://filmfreeway.com/YrThrastardottir',      notes: 'Director profile.' },
+  { platform: 'TikTok',      handle: '@yr_another_creation', url: 'https://www.tiktok.com/@yr_another_creation',  notes: null },
+  { platform: 'X',           handle: '@xYrx',               url: 'https://x.com/xYrx',                           notes: "Ýr's secondary handle." },
 ]
 
 /* ── Vendors / business contacts. ── */
