@@ -12,9 +12,7 @@ import {
   COMPANIES, COLLABORATIONS, SOCIAL,
   VENDORS, STACK, LIVE_SITE_MAP, MARKETING_PLAYBOOK, OPEN_QUESTIONS,
 } from '@ac/brand-data/business-data'
-import { COLLECTIONS } from '@website-data/collections-data'
 import { PRODUCTS } from '@website-data/shop-data'
-import { ARTICLES, AUTHORS } from '@website-data/blog-data'
 
 /* ── Helpers ── */
 
@@ -155,26 +153,27 @@ const gapsCols = [
   { accessor: 'note',  header: 'Note',  render: (r) => <span className="text-body">{r.note}</span> },
 ]
 
-/* ── Media inventory (auto-derived from data files) ── */
+/* ── Media inventory ── */
+/* Collections + Journal counts now live in Sanity (not derived here).
+   See studio.another-creation.xyz for live content. */
 
 const mediaInventoryRows = [
-  ...COLLECTIONS.map((c) => ({
-    surface: `Collection · ${c.title}`,
-    to:      `/site/collections/${c.slug}`,
-    images: c.looks.length,
-    video:  c.cover?.type === 'video' ? 1 : 0,
-    coverType: c.cover?.type ?? '—',
-    yearKnown: c.year !== 'TBD',
-    creditsKnown: !!c.show?.venue,
-  })),
-  ...ARTICLES.map((a) => ({
-    surface: `Journal · ${a.title}`,
-    images: a.cover ? 1 : 0,
-    video:  0,
-    coverType: a.cover ? 'image' : '—',
-    yearKnown: !!a.publishedAt,
-    creditsKnown: !!a.authorSlug,
-  })),
+  {
+    surface: 'Collections · live in Sanity',
+    images: '—',
+    video: '—',
+    coverType: 'see Studio',
+    yearKnown: true,
+    creditsKnown: true,
+  },
+  {
+    surface: 'Journal · live in Sanity',
+    images: '—',
+    video: 0,
+    coverType: 'see Studio',
+    yearKnown: true,
+    creditsKnown: true,
+  },
   {
     surface: 'Shop · POD line',
     images: PRODUCTS.filter((p) => p.kind === 'pod').length,
@@ -212,11 +211,7 @@ export default function Acyr() {
   const timelineDesc = [...TIMELINE].sort(yearDesc)
 
   const counts = {
-    collections: COLLECTIONS.length,
-    looks:       COLLECTIONS.reduce((acc, c) => acc + c.looks.length, 0),
     products:    PRODUCTS.length,
-    articles:    ARTICLES.length,
-    authors:     AUTHORS.length,
     timeline:    TIMELINE.length,
     press:       PRESS.length,
     awards:      AWARDS.length,
@@ -236,12 +231,11 @@ export default function Acyr() {
       >
         <div className="ac-prose mt-12">
           <p>
-            <strong>Snapshot.</strong> {counts.collections} collections · {counts.looks} runway looks ·
-            {' '}{counts.products} catalog products · {counts.articles} journal articles ·
+            <strong>Snapshot.</strong> {counts.products} catalog products ·
             {' '}{counts.companies} companies · {counts.films} films ·
             {' '}{counts.timeline} dated career events · {counts.press} press citations ·
             {' '}{counts.awards} awards · {counts.collaborations} collaborators ·
-            {' '}{counts.social} social channels.
+            {' '}{counts.social} social channels. Collections + journal counts live in Sanity.
           </p>
         </div>
       </PageSection>

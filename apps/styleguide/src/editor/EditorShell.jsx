@@ -1,4 +1,4 @@
-import './styles/kol-editor.css'
+import './styles/editor.css'
 import { panelsForSlot } from './state/panels'
 import MenuTop from './shell/MenuTop'
 import ShortcutsOverlay from './shell/ShortcutsOverlay'

@@ -5,7 +5,6 @@
  * The legacy PALETTES export was removed during the color rebuild —
  * no consumers, replaced by pool-driven generation.
  *
- * Architecture: docs/kol-migration/locked/color-system.md
  */
 
 import { BRAND } from '@ac/brand-data/config'

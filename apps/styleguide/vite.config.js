@@ -25,8 +25,9 @@ export default defineConfig({
       // Until those move into @ac/ds/components/jsx, the styleguide reaches into the
       // website's component kit via this temporary alias.
       '@components': resolve(__dirname, '../website/src/components'),
-      // Pre-Sanity blog/collections + commerce shop data still referenced by Acyr.jsx.
-      // Temporary; Phase 4 deletes the dead refs along with blog-data + collections-data.
+      // Acyr.jsx uses the website's shop-data for live product counts. Cross-app data
+      // import; will go away when shop-data is either moved into brand-data OR the
+      // styleguide acquires its own Sanity-backed data fetcher.
       '@website-data': resolve(__dirname, '../website/src/data'),
     },
   },

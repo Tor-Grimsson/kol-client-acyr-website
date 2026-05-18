@@ -8,7 +8,6 @@
  *   UI_COLORS_SECTIONS     — chrome layer:    surface · state · absolute ·
  *                            fg-* opacity primitives · fg-* class families
  *
- * Architecture: docs/kol-migration/locked/color-system.md
  *
  * Pattern (consumed by src/pages/Reference.jsx, mirrors typography.js):
  *   { id, label, title, intro, reasoning?, tables: [{ caption, columns, rows }] }

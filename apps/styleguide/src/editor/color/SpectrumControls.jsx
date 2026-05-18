@@ -311,7 +311,7 @@ export function WheelTriangle({ hue, sat, val, onChangeHue, onChangeSV }) {
 
       {/* Outer ring: foreignObject + CSS conic gradient, clipped to a torus
           path so only the band is visible. */}
-      <foreignObject x="0" y="0" width="100" height="100" clipPath="url(#kol-wheel-ring-clip)">
+      <foreignObject x="0" y="0" width="100" height="100" clipPath="url(#ac-wheel-ring-clip)">
         <div
           xmlns="http://www.w3.org/1999/xhtml"
           style={{
@@ -326,8 +326,8 @@ export function WheelTriangle({ hue, sat, val, onChangeHue, onChangeSV }) {
 
       {/* Triangle layers — three stacked polygons mix to a true HSV triangle */}
       <polygon points={trianglePoints} fill={`hsl(${hue}, 100%, 50%)`} />
-      <polygon points={trianglePoints} fill="url(#kol-wheel-white-fade)" />
-      <polygon points={trianglePoints} fill="url(#kol-wheel-black-fade)" />
+      <polygon points={trianglePoints} fill="url(#ac-wheel-white-fade)" />
+      <polygon points={trianglePoints} fill="url(#ac-wheel-black-fade)" />
 
       {/* Handles. Ring handle is larger than the SV handle to match the Ref. */}
       <SvgHandle cx={ringHx}  cy={ringHy}  r={3.2} />

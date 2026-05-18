@@ -9,7 +9,6 @@
  * `colors` / `defaults` getters. Single source of truth: src/ds/tokens/color.css.
  * Edit a token there and the lab regenerates with the new value on next render.
  *
- * Architecture: docs/kol-migration/locked/color-system.md
  */
 
 import { resolveCssVar } from '../../../components/sections/ColorRamp'

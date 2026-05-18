@@ -1,6 +1,15 @@
 /**
  * One-shot migration: ARTICLES + AUTHORS + COLLECTIONS  →  Sanity dataset.
  *
+ * RETIRED 2026-05-18 (Phase 4). The source data files
+ * (`apps/website/src/data/blog-data.js` + `collections-data.js`) were deleted —
+ * Sanity is now the sole source of truth. This script remains as a reference
+ * for the migration pattern (deterministic doc IDs, SHA-1 asset dedup, custom-
+ * block → Portable Text converter). To re-run for any reason, restore the data
+ * files from git history (pre-commit `phase-4-naming-hygiene`) and update the
+ * source paths below.
+ *
+ * Original docstring:
  * Idempotent: doc IDs are deterministic (author-<slug>, article-<slug>,
  * collection-<slug>), assets are deduped by SHA-1 of file content. Safe to
  * re-run after a schema tweak.

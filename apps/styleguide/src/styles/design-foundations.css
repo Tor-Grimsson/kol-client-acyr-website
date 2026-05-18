@@ -442,7 +442,7 @@
 .ac-combo-stage-anim {
   width: 100%;
   height: 100%;
-  animation: kol-combo-fade 260ms ease;
+  animation: ac-combo-fade 260ms ease;
   display: flex;
   align-items: stretch;
 }
@@ -453,7 +453,7 @@
 .ac-page--fullbleed .ac-combo-lab { flex: 1; }
 .ac-page--fullbleed .ac-combo-stage-wrap { min-height: 520px; }
 
-@keyframes kol-combo-fade {
+@keyframes ac-combo-fade {
   from { opacity: 0.2; transform: translateY(6px); }
   to   { opacity: 1;   transform: none; }
 }

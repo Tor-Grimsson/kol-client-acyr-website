@@ -1,4 +1,4 @@
-import '../../styles/kol-typography-fonts-full.css'
+import '../../styles/typography-fonts-full.css'
 import EditorShell from '../../EditorShell'
 import TypeCanvasPanel from './TypeCanvasPanel'
 import TypeControlsPanel from './TypeControlsPanel'

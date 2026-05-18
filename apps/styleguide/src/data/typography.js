@@ -5,7 +5,6 @@
  * carries its own table data, reasoning prose, and any token paths needed for
  * live CSS reads.
  *
- * Architecture: docs/kol-migration/locked/typography-system.md
  *
  * Pattern (consumed by src/pages/Reference.jsx):
  *   TYPOGRAPHY_SECTIONS = [

@@ -652,13 +652,13 @@ export default function CanvasArea() {
           className="relative w-full h-full"
           onMouseDown={onStageMouseDown}
           onDragOver={(e) => {
-            if (e.dataTransfer.types.includes('application/x-kol-library')) {
+            if (e.dataTransfer.types.includes('application/x-ac-library')) {
               e.preventDefault()
               e.dataTransfer.dropEffect = 'copy'
             }
           }}
           onDrop={(e) => {
-            const raw = e.dataTransfer.getData('application/x-kol-library')
+            const raw = e.dataTransfer.getData('application/x-ac-library')
             if (!raw) return
             e.preventDefault()
             try {
