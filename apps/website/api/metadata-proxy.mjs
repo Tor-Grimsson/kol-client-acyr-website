@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import {
   DEFAULT_META,
   lookupMeta,
@@ -7,15 +8,33 @@ import {
   SITE_URL,
 } from '../src/data/seo-metadata.js'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Candidate paths, tried in order. Vercel's function bundler places included
+// files at different roots depending on Node runtime + Root Directory config,
+// so we search rather than guess.
+const TEMPLATE_CANDIDATES = [
+  path.resolve(__dirname, '..', 'dist', 'app.html'),     // function-relative (apps/website/api/.. → apps/website/dist)
+  path.resolve(process.cwd(), 'dist', 'app.html'),       // cwd-relative (worked pre-Phase-2 layout)
+  path.resolve(__dirname, '..', '..', 'dist', 'app.html'), // one-up fallback if function lives nested deeper
+]
+
 let cachedTemplate = null
+let lastError = null
 
 async function getTemplate() {
   if (cachedTemplate) return cachedTemplate
-  // Reads dist/app.html (renamed from index.html post-build so Vercel's
-  // filesystem routing can't shortcut bare `/` past our rewrite).
-  const filePath = path.join(process.cwd(), 'dist', 'app.html')
-  cachedTemplate = await readFile(filePath, 'utf8')
-  return cachedTemplate
+  const attempts = []
+  for (const candidate of TEMPLATE_CANDIDATES) {
+    try {
+      cachedTemplate = await readFile(candidate, 'utf8')
+      return cachedTemplate
+    } catch (err) {
+      attempts.push(`${candidate}: ${err.code || err.message}`)
+    }
+  }
+  lastError = `dist/app.html not found. Tried:\n  ${attempts.join('\n  ')}`
+  throw new Error(lastError)
 }
 
 export default async function handler(req, res) {
@@ -34,9 +53,9 @@ export default async function handler(req, res) {
   let template
   try {
     template = await getTemplate()
-  } catch {
+  } catch (err) {
     res.setHeader('Content-Type', 'text/plain; charset=utf-8')
-    res.status(500).send('Metadata proxy: dist/app.html not built. Run `pnpm build` first.')
+    res.status(500).send(`Metadata proxy: ${err.message}`)
     return
   }
 
