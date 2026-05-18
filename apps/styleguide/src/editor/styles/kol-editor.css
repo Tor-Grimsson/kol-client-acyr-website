@@ -15,22 +15,22 @@
 
 /* ───── 1. Shell layout ─────────────────────────────────────────────── */
 
-.kol-editor-shell {
+.ac-editor-shell {
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  background: var(--kol-surface-primary);
+  background: var(--ac-surface-primary);
   user-select: none;
   -webkit-user-select: none;
 }
-.kol-editor-shell input,
-.kol-editor-shell textarea,
-.kol-editor-shell [contenteditable="true"] {
+.ac-editor-shell input,
+.ac-editor-shell textarea,
+.ac-editor-shell [contenteditable="true"] {
   user-select: text;
   -webkit-user-select: text;
 }
 
-.kol-editor-grid {
+.ac-editor-grid {
   display: grid;
   grid-template-columns: 320px minmax(0, 1fr) 320px;
   grid-template-rows: minmax(0, 1fr);
@@ -38,38 +38,38 @@
   flex: 1 1 auto;
   min-height: 0;
 }
-.kol-editor-left {
+.ac-editor-left {
   grid-area: left;
-  border-right: 1px solid var(--kol-fg-08);
+  border-right: 1px solid var(--ac-fg-08);
   display: flex;
   flex-direction: column;
   min-height: 0;
 }
-.kol-editor-right {
+.ac-editor-right {
   grid-area: right;
-  border-left: 1px solid var(--kol-fg-08);
+  border-left: 1px solid var(--ac-fg-08);
   display: flex;
   flex-direction: column;
   min-height: 0;
 }
 /* Canvas column wraps an optional canvas.header sub-bar + the canvas
- * main. Lives in the grid's `canvas` cell. The .kol-editor-canvas main
+ * main. Lives in the grid's `canvas` cell. The .ac-editor-canvas main
  * keeps its dark background; the header sits above it inside the same
  * column so it spans only the canvas, not the rails. */
-.kol-editor-canvas-column {
+.ac-editor-canvas-column {
   grid-area: canvas;
   min-height: 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
 }
-.kol-editor-canvas-header {
+.ac-editor-canvas-header {
   flex: 0 0 auto;
-  border-bottom: 1px solid var(--kol-fg-08);
-  background-color: var(--kol-surface-primary);
+  border-bottom: 1px solid var(--ac-fg-08);
+  background-color: var(--ac-surface-primary);
 }
-.kol-editor-canvas-header:empty { display: none; }
-.kol-editor-canvas {
+.ac-editor-canvas-header:empty { display: none; }
+.ac-editor-canvas {
   flex: 1 1 auto;
   min-height: 0;
   min-width: 0;
@@ -86,14 +86,14 @@
   cursor: inherit !important;
 }
 
-.kol-editor-rail-header {
+.ac-editor-rail-header {
   flex: 0 0 auto;
-  border-bottom: 1px solid var(--kol-fg-08);
+  border-bottom: 1px solid var(--ac-fg-08);
 }
 /* Empty header (e.g. left.header has no panels) collapses entirely so its
    border-bottom doesn't stack on top of the panel header below. */
-.kol-editor-rail-header:empty { display: none; }
-.kol-editor-rail-body {
+.ac-editor-rail-header:empty { display: none; }
+.ac-editor-rail-body {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
@@ -102,33 +102,33 @@
 }
 /* Stacked panels in the rail body shouldn't force height:100% as the
    single-occupant compose rail does. */
-.kol-editor-rail-body .kol-compose-rail { height: auto; }
+.ac-editor-rail-body .ac-compose-rail { height: auto; }
 
 
 /* ───── 2. Compose rail ─────────────────────────────────────────────── */
 
-.kol-compose-rail {
+.ac-compose-rail {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-.kol-compose-rail-head {
+.ac-compose-rail-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 16px 8px;
-  border-top: 1px solid var(--kol-fg-08);
+  border-top: 1px solid var(--ac-fg-08);
 }
 /* Suppress border-top for the first panel in a rail body — its top edge
    meets the topbar's border-bottom, so an extra line would stack. */
-.kol-editor-rail-body > .kol-compose-rail:first-child > .kol-compose-rail-head {
+.ac-editor-rail-body > .ac-compose-rail:first-child > .ac-compose-rail-head {
   border-top: none;
 }
 
-.kol-compose-rail-add {
+.ac-compose-rail-add {
   margin-top: auto;
   padding: 16px;
-  border-top: 1px solid var(--kol-fg-08);
+  border-top: 1px solid var(--ac-fg-08);
   display: flex;
   flex-direction: column;
 }
@@ -138,12 +138,12 @@
 
 /* Each list item is a flex row of [chevron-or-spacer, layer-row pill]. The
    chevron sits outside the pill so hover/active fills only the row area. */
-.kol-compose-layer-line {
+.ac-compose-layer-line {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-.kol-compose-layer-collapse {
+.ac-compose-layer-collapse {
   width: 16px;
   height: 16px;
   flex: 0 0 16px;
@@ -153,50 +153,50 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--kol-fg-64);
+  color: var(--ac-fg-64);
   padding: 0;
 }
-.kol-compose-layer-collapse:hover { color: var(--kol-surface-on-primary); }
+.ac-compose-layer-collapse:hover { color: var(--ac-surface-on-primary); }
 /* Indent nested rows so the parent-child hierarchy reads visually. */
-.kol-compose-layer-nest { padding-left: 16px; }
+.ac-compose-layer-nest { padding-left: 16px; }
 
-.kol-compose-layer-row {
+.ac-compose-layer-row {
   display: flex;
   align-items: center;
   flex: 1 1 auto;
   min-width: 0;
   padding: 4px 60px 4px 8px;  /* right padding reserves space for the
                                  absolutely-positioned lock + eye buttons. */
-  color: var(--kol-fg-64);
+  color: var(--ac-fg-64);
   border-radius: 4px;
   cursor: grab;
   position: relative;
 }
-.kol-compose-layer-row:hover,
-.kol-compose-layer-row.is-active {
-  background: var(--kol-fg-04);
-  color: var(--kol-surface-on-primary);
+.ac-compose-layer-row:hover,
+.ac-compose-layer-row.is-active {
+  background: var(--ac-fg-04);
+  color: var(--ac-surface-on-primary);
 }
-.kol-compose-layer-row.is-hidden  { opacity: 0.45; }
-.kol-compose-layer-row.is-dragging { opacity: 0.4; cursor: grabbing; }
-.kol-compose-layer-row[draggable]:active { cursor: grabbing; }
+.ac-compose-layer-row.is-hidden  { opacity: 0.45; }
+.ac-compose-layer-row.is-dragging { opacity: 0.4; cursor: grabbing; }
+.ac-compose-layer-row[draggable]:active { cursor: grabbing; }
 
 /* Drop indicator — 2px accent line at the top or bottom of the target row. */
-.kol-compose-layer-row.is-drop-above::before,
-.kol-compose-layer-row.is-drop-below::after {
+.ac-compose-layer-row.is-drop-above::before,
+.ac-compose-layer-row.is-drop-below::after {
   content: '';
   position: absolute;
   left: 4px;
   right: 4px;
   height: 2px;
-  background: var(--kol-accent-primary);
+  background: var(--ac-accent-primary);
   pointer-events: none;
   z-index: 1;
 }
-.kol-compose-layer-row.is-drop-above::before { top: -1px; }
-.kol-compose-layer-row.is-drop-below::after  { bottom: -1px; }
+.ac-compose-layer-row.is-drop-above::before { top: -1px; }
+.ac-compose-layer-row.is-drop-below::after  { bottom: -1px; }
 
-.kol-compose-layer-main {
+.ac-compose-layer-main {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -209,14 +209,14 @@
   padding: 0;
   text-align: left;
 }
-.kol-compose-layer-swatch {
+.ac-compose-layer-swatch {
   width: 18px;
   height: 18px;
   border-radius: 2px;
-  border: 1px solid var(--kol-fg-08);
+  border: 1px solid var(--ac-fg-08);
   flex-shrink: 0;
 }
-.kol-compose-layer-btn-icon {
+.ac-compose-layer-btn-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -225,7 +225,7 @@
   flex-shrink: 0;
 }
 
-.kol-compose-layer-mini {
+.ac-compose-layer-mini {
   width: 22px;
   height: 22px;
   display: inline-flex;
@@ -234,64 +234,64 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--kol-fg-48);
+  color: var(--ac-fg-48);
   border-radius: 2px;
   padding: 0;
 }
-.kol-compose-layer-mini:hover {
-  color: var(--kol-surface-on-primary);
-  background: var(--kol-fg-08);
+.ac-compose-layer-mini:hover {
+  color: var(--ac-surface-on-primary);
+  background: var(--ac-fg-08);
 }
 
 
 /* ───── 4. Inspector body ───────────────────────────────────────────── */
 
-.kol-compose-inspector-body {
+.ac-compose-inspector-body {
   padding: 20px 16px;
   flex: 1;
   overflow-y: auto;
 }
-.kol-compose-placeholder { padding: 0; }
+.ac-compose-placeholder { padding: 0; }
 
 
 /* ───── 5. Canvas patterns ──────────────────────────────────────────── */
 
 /* Grid backdrop — ruled lines for alignment guidance. Two-tier (major +
-   minor); tunable via --kol-grid-step / --kol-grid-major-every. */
-.kol-grid-bg {
-  --kol-grid-step: 32px;
-  --kol-grid-major-every: 4;
-  --kol-grid-minor: color-mix(in srgb, var(--kol-surface-on-primary) 2%, transparent);
-  --kol-grid-major: color-mix(in srgb, var(--kol-surface-on-primary) 4%, transparent);
+   minor); tunable via --ac-grid-step / --ac-grid-major-every. */
+.ac-grid-bg {
+  --ac-grid-step: 32px;
+  --ac-grid-major-every: 4;
+  --ac-grid-minor: color-mix(in srgb, var(--ac-surface-on-primary) 2%, transparent);
+  --ac-grid-major: color-mix(in srgb, var(--ac-surface-on-primary) 4%, transparent);
   background-image:
-    linear-gradient(to right,  var(--kol-grid-major) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--kol-grid-major) 1px, transparent 1px),
-    linear-gradient(to right,  var(--kol-grid-minor) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--kol-grid-minor) 1px, transparent 1px);
+    linear-gradient(to right,  var(--ac-grid-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ac-grid-major) 1px, transparent 1px),
+    linear-gradient(to right,  var(--ac-grid-minor) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ac-grid-minor) 1px, transparent 1px);
   background-size:
-    calc(var(--kol-grid-step) * var(--kol-grid-major-every)) calc(var(--kol-grid-step) * var(--kol-grid-major-every)),
-    calc(var(--kol-grid-step) * var(--kol-grid-major-every)) calc(var(--kol-grid-step) * var(--kol-grid-major-every)),
-    var(--kol-grid-step) var(--kol-grid-step),
-    var(--kol-grid-step) var(--kol-grid-step);
+    calc(var(--ac-grid-step) * var(--ac-grid-major-every)) calc(var(--ac-grid-step) * var(--ac-grid-major-every)),
+    calc(var(--ac-grid-step) * var(--ac-grid-major-every)) calc(var(--ac-grid-step) * var(--ac-grid-major-every)),
+    var(--ac-grid-step) var(--ac-grid-step),
+    var(--ac-grid-step) var(--ac-grid-step);
 }
 
 /* Checker pattern — Photoshop-style transparency indicator. Currently
    unused in the editor (artboard reveals the grid instead) but kept here
    for any consumer that needs it. */
-.kol-checker {
-  --kol-checker-c1: color-mix(in srgb, var(--kol-surface-on-primary) 8%, var(--kol-surface-primary));
-  --kol-checker-c2: var(--kol-surface-primary);
-  --kol-checker-size: 16px;
-  background-color: var(--kol-checker-c2);
+.ac-checker {
+  --ac-checker-c1: color-mix(in srgb, var(--ac-surface-on-primary) 8%, var(--ac-surface-primary));
+  --ac-checker-c2: var(--ac-surface-primary);
+  --ac-checker-size: 16px;
+  background-color: var(--ac-checker-c2);
   background-image:
-    linear-gradient(45deg, var(--kol-checker-c1) 25%, transparent 25%),
-    linear-gradient(-45deg, var(--kol-checker-c1) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--kol-checker-c1) 75%),
-    linear-gradient(-45deg, transparent 75%, var(--kol-checker-c1) 75%);
-  background-size: var(--kol-checker-size) var(--kol-checker-size);
+    linear-gradient(45deg, var(--ac-checker-c1) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--ac-checker-c1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--ac-checker-c1) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--ac-checker-c1) 75%);
+  background-size: var(--ac-checker-size) var(--ac-checker-size);
   background-position:
     0 0,
-    0 calc(var(--kol-checker-size) / 2),
-    calc(var(--kol-checker-size) / 2) calc(var(--kol-checker-size) / -2),
-    calc(var(--kol-checker-size) / -2) 0;
+    0 calc(var(--ac-checker-size) / 2),
+    calc(var(--ac-checker-size) / 2) calc(var(--ac-checker-size) / -2),
+    calc(var(--ac-checker-size) / -2) 0;
 }

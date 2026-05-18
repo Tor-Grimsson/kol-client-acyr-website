@@ -2,7 +2,7 @@
  * Workshop port of `_tmp/_components-2import/color modal/Color Panel.html`.
  * Visual decoration only; layout + spacing live as Tailwind utilities on the JSX. */
 
-.kol-color-panel {
+.ac-color-panel {
   --cp-panel:   #1a1a1a;
   --cp-panel-2: #161616;
   --cp-panel-3: #222222;
@@ -27,11 +27,11 @@
 }
 
 /* ─── Tabs row ─── */
-.kol-color-panel-tabs {
+.ac-color-panel-tabs {
   background: var(--cp-panel-2);
   border-bottom: 1px solid var(--cp-line);
 }
-.kol-color-panel-close {
+.ac-color-panel-close {
   width: 11px;
   height: 11px;
   border-radius: 50%;
@@ -41,8 +41,8 @@
   cursor: pointer;
   flex: none;
 }
-.kol-color-panel-close::before,
-.kol-color-panel-close::after {
+.ac-color-panel-close::before,
+.ac-color-panel-close::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -52,16 +52,16 @@
   background: var(--cp-mute);
   transform-origin: center;
 }
-.kol-color-panel-close::before { transform: translate(-50%, -50%) rotate(45deg); }
-.kol-color-panel-close::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+.ac-color-panel-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.ac-color-panel-close::after  { transform: translate(-50%, -50%) rotate(-45deg); }
 
-.kol-color-panel-divider {
+.ac-color-panel-divider {
   width: 1px;
   height: 14px;
   background: var(--cp-line-2);
 }
 
-.kol-color-panel-tab {
+.ac-color-panel-tab {
   font-size: 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -70,8 +70,8 @@
   cursor: pointer;
   position: relative;
 }
-.kol-color-panel-tab.is-active { color: var(--cp-text); }
-.kol-color-panel-tab.is-active::after {
+.ac-color-panel-tab.is-active { color: var(--cp-text); }
+.ac-color-panel-tab.is-active::after {
   content: "";
   position: absolute;
   left: 0;
@@ -82,8 +82,8 @@
 }
 
 /* ─── Top row: dual swatch + eyedropper + mode select ─── */
-.kol-color-panel-swatch-stack { position: relative; width: 56px; height: 40px; flex: none; }
-.kol-color-panel-ring {
+.ac-color-panel-swatch-stack { position: relative; width: 56px; height: 40px; flex: none; }
+.ac-color-panel-ring {
   position: absolute;
   width: 30px;
   height: 30px;
@@ -91,10 +91,10 @@
   border: 1px solid var(--cp-line-2);
   background: var(--cp-panel-3);
 }
-.kol-color-panel-ring.is-back  { right: 0; top: 0;     background: #0a0a0a; }
-.kol-color-panel-ring.is-front { left: 0;  bottom: 0;  background: var(--cp-current); z-index: 2; }
-.kol-color-panel-swap  { position: absolute; top: -2px; left: 18px; width: 14px; height: 14px; color: var(--cp-mute); }
-.kol-color-panel-none {
+.ac-color-panel-ring.is-back  { right: 0; top: 0;     background: #0a0a0a; }
+.ac-color-panel-ring.is-front { left: 0;  bottom: 0;  background: var(--cp-current); z-index: 2; }
+.ac-color-panel-swap  { position: absolute; top: -2px; left: 18px; width: 14px; height: 14px; color: var(--cp-mute); }
+.ac-color-panel-none {
   position: absolute;
   bottom: -2px;
   left: -2px;
@@ -106,7 +106,7 @@
   overflow: hidden;
   z-index: 3;
 }
-.kol-color-panel-none::after {
+.ac-color-panel-none::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -117,7 +117,7 @@
     transparent calc(50% + 1px));
 }
 
-.kol-color-panel-eyedrop-swatch {
+.ac-color-panel-eyedrop-swatch {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -125,7 +125,7 @@
   border: 1px solid var(--cp-line-2);
 }
 
-.kol-color-panel-mode-select {
+.ac-color-panel-mode-select {
   position: relative;
   background: var(--cp-panel-3);
   border: 1px solid var(--cp-line-2);
@@ -135,7 +135,7 @@
   cursor: pointer;
   min-width: 92px;
 }
-.kol-color-panel-mode-menu {
+.ac-color-panel-mode-menu {
   position: absolute;
   top: calc(100% + 4px);
   right: 0;
@@ -147,18 +147,18 @@
   z-index: 10;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
 }
-.kol-color-panel-mode-item {
+.ac-color-panel-mode-item {
   padding: 5px 10px;
   font-size: 11px;
   color: var(--cp-dim);
   cursor: pointer;
 }
-.kol-color-panel-mode-item:hover { background: #2a2a2a; color: var(--cp-text); }
-.kol-color-panel-mode-item.is-active { color: var(--cp-text); }
-.kol-color-panel-mode-item.is-active::before { content: "✓ "; color: var(--cp-mute); }
+.ac-color-panel-mode-item:hover { background: #2a2a2a; color: var(--cp-text); }
+.ac-color-panel-mode-item.is-active { color: var(--cp-text); }
+.ac-color-panel-mode-item.is-active::before { content: "✓ "; color: var(--cp-mute); }
 
 /* ─── Hue mode: hue strip + SB square ─── */
-.kol-color-panel-hue {
+.ac-color-panel-hue {
   position: relative;
   height: 14px;
   border-radius: 2px;
@@ -168,7 +168,7 @@
     hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%),
     hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(360, 100%, 50%));
 }
-.kol-color-panel-sb {
+.ac-color-panel-sb {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 0.7;
@@ -182,14 +182,14 @@
 }
 
 /* ─── Wheel mode ─── */
-.kol-color-panel-wheel-wrap {
+.ac-color-panel-wheel-wrap {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
 }
-.kol-color-panel-wheel {
+.ac-color-panel-wheel {
   position: relative;
   width: 92%;
   aspect-ratio: 1;
@@ -200,7 +200,7 @@
       hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%),
       hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(360, 100%, 50%));
 }
-.kol-color-panel-triangle-wrap {
+.ac-color-panel-triangle-wrap {
   position: absolute;
   inset: 0;
   margin: auto;
@@ -209,7 +209,7 @@
   display: grid;
   place-items: center;
 }
-.kol-color-panel-triangle {
+.ac-color-panel-triangle {
   width: 90%;
   height: 90%;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
@@ -219,7 +219,7 @@
 }
 
 /* shared handles (wheel ring, wheel triangle, hue strip, SB square, sliders) */
-.kol-color-panel-handle {
+.ac-color-panel-handle {
   position: absolute;
   width: 12px;
   height: 12px;
@@ -229,11 +229,11 @@
   pointer-events: none;
   transform: translate(-50%, -50%);
 }
-.kol-color-panel-handle.is-hue   { width: 14px; height: 14px; }
-.kol-color-panel-handle.is-tri   { width: 10px; height: 10px; }
+.ac-color-panel-handle.is-hue   { width: 14px; height: 14px; }
+.ac-color-panel-handle.is-tri   { width: 10px; height: 10px; }
 
 /* ─── Sliders mode ─── */
-.kol-color-panel-slider-track {
+.ac-color-panel-slider-track {
   position: relative;
   height: 12px;
   border-radius: 2px;
@@ -241,7 +241,7 @@
   cursor: pointer;
   background: linear-gradient(to right, #1a1a1a, #d4d4d4);
 }
-.kol-color-panel-num-input {
+.ac-color-panel-num-input {
   background: var(--cp-panel-3);
   border: 1px solid var(--cp-line-2);
   border-radius: 3px;
@@ -251,7 +251,7 @@
   text-align: right;
   font-family: inherit;
 }
-.kol-color-panel-pal-strip {
+.ac-color-panel-pal-strip {
   width: 100%;
   height: 56px;
   border: 1px solid var(--cp-line-2);
@@ -264,7 +264,7 @@
 }
 
 /* ─── Opacity row ─── */
-.kol-color-panel-op-track {
+.ac-color-panel-op-track {
   position: relative;
   flex: 1;
   height: 12px;
@@ -280,13 +280,13 @@
   background-color: #1a1a1a;
   overflow: hidden;
 }
-.kol-color-panel-op-track::after {
+.ac-color-panel-op-track::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(to right, transparent, var(--cp-text));
 }
-.kol-color-panel-op-handle {
+.ac-color-panel-op-handle {
   position: absolute;
   top: 50%;
   width: 12px;
@@ -298,7 +298,7 @@
   z-index: 2;
   transform: translate(-50%, -50%);
 }
-.kol-color-panel-op-input {
+.ac-color-panel-op-input {
   background: var(--cp-panel-3);
   border: 1px solid var(--cp-line-2);
   border-radius: 3px;
@@ -309,14 +309,14 @@
 }
 
 /* ─── Stroke tab ─── */
-.kol-color-panel-seg {
+.ac-color-panel-seg {
   display: flex;
   border: 1px solid var(--cp-line-2);
   border-radius: 3px;
   overflow: hidden;
   background: var(--cp-panel-2);
 }
-.kol-color-panel-seg-opt {
+.ac-color-panel-seg-opt {
   flex: 1;
   padding: 5px 0;
   font-size: 11px;
@@ -327,22 +327,22 @@
   display: grid;
   place-items: center;
 }
-.kol-color-panel-seg-opt:last-child { border-right: 0; }
-.kol-color-panel-seg-opt:hover { color: var(--cp-text); }
-.kol-color-panel-seg-opt.is-active {
+.ac-color-panel-seg-opt:last-child { border-right: 0; }
+.ac-color-panel-seg-opt:hover { color: var(--cp-text); }
+.ac-color-panel-seg-opt.is-active {
   background: #2a2a2a;
   color: var(--cp-text);
 }
 
 /* ─── Swatches tab ─── */
-.kol-color-panel-recent {
+.ac-color-panel-recent {
   height: 22px;
   border: 1px solid var(--cp-line-2);
   border-radius: 2px;
   background:
     linear-gradient(to right, #5a5a5a, #d4d4d4 20%, #2a2a2a 40%, #7a7a7a 60%, #404040 80%, #b0b0b0);
 }
-.kol-color-panel-pal-select {
+.ac-color-panel-pal-select {
   flex: 1;
   display: flex;
   align-items: center;
@@ -355,7 +355,7 @@
   color: var(--cp-text);
   cursor: pointer;
 }
-.kol-color-panel-tool-btn {
+.ac-color-panel-tool-btn {
   width: 24px;
   height: 24px;
   display: grid;
@@ -367,18 +367,18 @@
   font-size: 12px;
   cursor: pointer;
 }
-.kol-color-panel-tool-btn:hover { color: var(--cp-text); }
-.kol-color-panel-sw-grid-cell {
+.ac-color-panel-tool-btn:hover { color: var(--cp-text); }
+.ac-color-panel-sw-grid-cell {
   aspect-ratio: 1;
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   cursor: pointer;
 }
-.kol-color-panel-sw-grid-cell:hover {
+.ac-color-panel-sw-grid-cell:hover {
   outline: 1px solid var(--cp-text);
   outline-offset: 1px;
 }
-.kol-color-panel-search-input {
+.ac-color-panel-search-input {
   flex: 1;
   background: transparent;
   border: 0;
@@ -387,10 +387,10 @@
   font-size: 11px;
   outline: none;
 }
-.kol-color-panel-search-input::placeholder { color: var(--cp-mute); }
+.ac-color-panel-search-input::placeholder { color: var(--cp-mute); }
 
 /* helper labels (used in opacity / recent / sb-eyedropper rows) */
-.kol-color-panel-uplabel {
+.ac-color-panel-uplabel {
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -398,7 +398,7 @@
 }
 
 /* small chevron stack (up + down arrows, used in mode-select, op-input) */
-.kol-color-panel-chev-y {
+.ac-color-panel-chev-y {
   display: flex;
   flex-direction: column;
   gap: 1px;
