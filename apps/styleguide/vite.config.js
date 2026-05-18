@@ -8,6 +8,7 @@ import { photoIndexPlugin } from './vite-plugins/photoIndexPlugin.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+// redeploy trigger 2026-05-18
 export default defineConfig({
   server: {
     // Pin styleguide to 5174 so the live site reliably owns 5173 — keeps
