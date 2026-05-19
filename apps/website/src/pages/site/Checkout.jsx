@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import usePageTitle from '../../components/hooks/usePageTitle'
 import { BRAND } from '@ac/brand-data/config'
-import Button from '../../components/atoms/Button'
 import Divider from '../../components/atoms/Divider'
 import Input from '../../components/atoms/Input'
+import PropertyInput from '../../components/molecules/PropertyInput'
 import Dropdown from '../../components/molecules/Dropdown'
 import Icon from '../../components/loaders/icons/Icon'
 import { useCart } from '../../components/site/CartContext'
@@ -33,29 +33,10 @@ const PAYPAL_OPTS = {
   components:  'buttons',
 }
 
-function StepHeader({ index, label, status, onEdit }) {
+function SectionHeading({ children }) {
   return (
-    <div className="flex items-center justify-between" style={{ marginBottom: '8px' }}>
-      <p className="ac-prose-label" style={{ margin: 0 }}>
-        <span className="text-meta">{String(index).padStart(2, '0')}</span>
-        <span style={{ marginLeft: '12px' }}>{label}</span>
-      </p>
-      {status === 'done' && (
-        <button
-          type="button"
-          onClick={onEdit}
-          className="ac-helper-xxs text-meta hover:text-emphasis"
-          style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
-        >
-          Edit
-        </button>
-      )}
-    </div>
+    <h2 className="ac-helper-xxs uppercase text-emphasis mb-4">{children}</h2>
   )
-}
-
-function StepCollapsed({ children }) {
-  return <div className="ac-prose"><p style={{ margin: 0 }}>{children}</p></div>
 }
 
 export default function Checkout() {
@@ -63,7 +44,6 @@ export default function Checkout() {
   const navigate              = useNavigate()
   const { items, subtotal, currency, clear } = useCart()
 
-  const [step, setStep]         = useState(items.length === 0 ? null : 'email')
   const [email, setEmail]       = useState('')
   const [newsletter, setNewsletter] = useState(true)
   const [delivery, setDelivery] = useState({
@@ -73,57 +53,60 @@ export default function Checkout() {
   const [paying, setPaying]             = useState(false)
   const [shipping, setShipping]         = useState(null)
   const [shippingError, setShippingError] = useState(null)
+  const [shippingLoading, setShippingLoading] = useState(false)
 
   const tax       = 0
   const shipRate  = shipping?.rate ?? 0
   const total     = subtotal + shipRate
 
-  // Fetch real Printful shipping when entering the pay step. Refetches on
-  // re-entry (user edits delivery, comes back).
-  useEffect(() => {
-    if (step !== 'pay' || items.length === 0) return
-    let cancelled = false
-    fetch('/api/printful/shipping-rates', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({
-        items: items.map((it) => ({ slug: it.slug, size: it.size, qty: it.qty })),
-        delivery,
-      }),
-    })
-      .then(async (r) => {
-        const body = await r.json().catch(() => ({}))
-        if (!r.ok) throw new Error(body.error ?? 'Could not calculate shipping')
-        return body
-      })
-      .then((rate) => { if (!cancelled) setShipping(rate) })
-      .catch((err)  => { if (!cancelled) setShippingError(err.message) })
-    return () => { cancelled = true }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step])
-
-  if (items.length === 0) {
-    return (
-      <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
-        <p className="ac-prose-label">Checkout</p>
-        <h1 className="ac-prose-display-md">Your cart is empty.</h1>
-        <Link to="/shop" className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline">← Back to shop</Link>
-      </main>
-    )
-  }
-
+  const emailReady = /\S+@\S+\.\S+/.test(email)
   const deliveryReady = Boolean(
     delivery.firstName && delivery.lastName && delivery.street &&
     delivery.city && delivery.postcode && delivery.country,
   )
 
-  const states = {
-    email:    step === 'email'    ? 'open' : email           ? 'done' : 'pending',
-    delivery: step === 'delivery' ? 'open' : delivery.street ? 'done' : 'pending',
-    pay:      step === 'pay'      ? 'open' : 'pending',
+  // Auto-fetch shipping rate when delivery is ready. Debounced so we don't
+  // hammer the API on every keystroke.
+  useEffect(() => {
+    if (!deliveryReady || items.length === 0) {
+      setShipping(null)
+      setShippingError(null)
+      return
+    }
+    setShippingLoading(true)
+    setShippingError(null)
+    const t = setTimeout(() => {
+      fetch('/api/printful/shipping-rates', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          items: cartPayload(),
+          delivery,
+        }),
+      })
+        .then(async (r) => {
+          const body = await r.json().catch(() => ({}))
+          if (!r.ok) throw new Error(body.error ?? 'Could not calculate shipping')
+          return body
+        })
+        .then((rate) => { setShipping(rate); setShippingLoading(false) })
+        .catch((err)  => { setShippingError(err.message); setShippingLoading(false) })
+    }, 600)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deliveryReady, delivery.street, delivery.city, delivery.postcode, delivery.country, items.length])
+
+  if (items.length === 0) {
+    return (
+      <main className="bg-surface-primary min-h-dvh max-w-3xl mx-auto px-8 py-24 text-center">
+        <p className="ac-helper-xxs uppercase text-meta">Checkout</p>
+        <h1 className="ac-prose-display-md">Your bag is empty.</h1>
+        <Link to="/shop" className="ac-helper-xxs uppercase text-emphasis underline underline-offset-4 hover:no-underline">← Back to shop</Link>
+      </main>
+    )
   }
 
-  const cartPayload = () => items.map((it) => ({ slug: it.slug, size: it.size, qty: it.qty }))
+  const cartPayload = () => items.map((it) => ({ slug: it.slug, size: it.size, color: it.color, qty: it.qty }))
 
   const createOrder = async () => {
     setPayError(null)
@@ -196,163 +179,177 @@ export default function Checkout() {
     }
   }
 
+  const paymentReady = emailReady && deliveryReady && !!shipping && !paying
+
   return (
     <PayPalScriptProvider options={PAYPAL_OPTS}>
-      <main className="bg-surface-primary pb-24">
-        <section className="max-w-6xl mx-auto px-8 pt-16 pb-8">
-          <p className="ac-prose-label">Checkout</p>
-          <h1 className="ac-prose-display-md">Secure checkout</h1>
-        </section>
-
-        <section className="max-w-6xl mx-auto px-8">
-          <div className="grid gap-12 lg:grid-cols-[1fr_360px] items-start">
-            {/* Steps */}
-            <div className="flex flex-col gap-4">
-              {/* 01 — Email */}
-              <div className="border border-fg-08 rounded p-6">
-                <StepHeader index={1} label="Your email" status={states.email} onEdit={() => setStep('email')} />
-                {states.email === 'open' ? (
-                  <form
-                    onSubmit={(e) => { e.preventDefault(); setStep('delivery') }}
-                    className="flex flex-col gap-4"
-                  >
-                    <Input
-                      type="email"
-                      required
-                      placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+      <main className="bg-surface-primary min-h-dvh">
+        <section className="lg:pr-[480px]">
+          {/* LEFT — single-page form (constrained reading width, makes room for fixed aside on lg) */}
+          <div className="px-8 lg:pl-16 lg:pr-12 pt-12 pb-4 lg:pt-16 lg:min-h-dvh flex flex-col justify-center">
+            <div className="w-[680px] max-w-full mx-auto flex flex-col gap-8">
+              <h1 className="ac-sans-heading-02 m-0">Checkout</h1>
+              {/* Contact */}
+              <section>
+                <div className="flex flex-col gap-3">
+                  <PropertyInput
+                    size="lg"
+                    label="Contact"
+                    labelClassName="text-fg-48 ac-helper-xxs uppercase text-emphasis mb-2"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <label className="ac-helper-xxs text-meta inline-flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={newsletter}
+                      onChange={(e) => setNewsletter(e.target.checked)}
+                      style={{ accentColor: 'var(--brand-primary)' }}
                     />
-                    <label className="ac-helper-xxs text-meta inline-flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" checked={newsletter} onChange={(e) => setNewsletter(e.target.checked)} />
-                      Sign up to get the latest collections in your inbox.
-                    </label>
-                    <div><Button type="submit" variant="primary" size="lg">Continue</Button></div>
-                  </form>
-                ) : states.email === 'done' ? (
-                  <StepCollapsed>{email}</StepCollapsed>
-                ) : null}
-              </div>
+                    Sign up to get the latest collections in your inbox.
+                  </label>
+                </div>
+              </section>
 
-              {/* 02 — Delivery */}
-              <div className="border border-fg-08 rounded p-6">
-                <StepHeader index={2} label="Delivery" status={states.delivery} onEdit={() => setStep('delivery')} />
-                {states.delivery === 'open' ? (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault()
-                      setShipping(null)
-                      setShippingError(null)
-                      setStep('pay')
-                    }}
-                    className="flex flex-col gap-4"
-                  >
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Input placeholder="First name" required value={delivery.firstName} onChange={(e) => setDelivery({ ...delivery, firstName: e.target.value })} />
-                      <Input placeholder="Last name"  required value={delivery.lastName}  onChange={(e) => setDelivery({ ...delivery, lastName:  e.target.value })} />
-                    </div>
-                    <Input placeholder="Street address" required value={delivery.street} onChange={(e) => setDelivery({ ...delivery, street: e.target.value })} />
-                    <div className="grid gap-4 sm:grid-cols-3">
-                      <Input placeholder="City"     required value={delivery.city}     onChange={(e) => setDelivery({ ...delivery, city:     e.target.value })} />
-                      <Input placeholder="Postcode" required value={delivery.postcode} onChange={(e) => setDelivery({ ...delivery, postcode: e.target.value })} />
-                      <Dropdown options={COUNTRIES} value={delivery.country} onChange={(v) => setDelivery({ ...delivery, country: v })} />
-                    </div>
-                    <Input type="tel" placeholder="Phone (optional)" value={delivery.phone} onChange={(e) => setDelivery({ ...delivery, phone: e.target.value })} />
-                    <div><Button type="submit" variant="primary" size="lg">Continue to payment</Button></div>
-                  </form>
-                ) : states.delivery === 'done' ? (
-                  <StepCollapsed>
-                    {delivery.firstName} {delivery.lastName} · {delivery.street}, {delivery.postcode} {delivery.city}, {COUNTRIES.find((c) => c.value === delivery.country)?.label}
-                  </StepCollapsed>
-                ) : null}
-              </div>
+              {/* Delivery (country) + Shipping (auto-rate) */}
+              <section>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <PropertyInput label="Delivery" labelClassName="ac-helper-xxs uppercase text-emphasis mb-2">
+                    <Dropdown
+                      variant="subtle"
+                      className="w-full"
+                      options={COUNTRIES}
+                      value={delivery.country}
+                      onChange={(v) => setDelivery({ ...delivery, country: v })}
+                    />
+                  </PropertyInput>
+                  <PropertyInput label="Shipping" labelClassName="ac-helper-xxs uppercase text-emphasis mb-2">
+                    <Input
+                      variant="outline"
+                      size="lg"
+                      disabled
+                      value={
+                        !deliveryReady ? 'Enter address to see options'
+                          : shippingLoading ? 'Calculating…'
+                          : shippingError ? shippingError
+                          : shipping ? `${shipping.name ?? 'Standard'} · ${formatPrice(shipping.rate, currency)}`
+                          : ''
+                      }
+                      onChange={() => {}}
+                      className="w-full"
+                    />
+                  </PropertyInput>
+                </div>
+              </section>
 
-              {/* 03 — Pay */}
-              <div className="border border-fg-08 rounded p-6">
-                <StepHeader index={3} label="Pay" status={states.pay} />
-                {states.pay === 'open' && (
-                  <div className="flex flex-col gap-4">
-                    <div className="ac-prose">
-                      <p style={{ margin: 0 }}>
-                        {shipping
-                          ? <>Total {formatPrice(total, currency)} — paid securely through PayPal. Pay with a PayPal account or any major card.</>
-                          : shippingError
-                            ? <>We couldn't calculate shipping for this address. Edit your delivery details and try again.</>
-                            : <>Calculating shipping…</>}
-                      </p>
-                    </div>
+              {/* Address */}
+              <section>
+                <div className="flex flex-col gap-3">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <PropertyInput size="lg" label="First name" value={delivery.firstName} onChange={(e) => setDelivery({ ...delivery, firstName: e.target.value })} />
+                    <PropertyInput size="lg" label="Last name"  value={delivery.lastName}  onChange={(e) => setDelivery({ ...delivery, lastName:  e.target.value })} />
+                  </div>
+                  <PropertyInput size="lg" label="Street address" value={delivery.street} onChange={(e) => setDelivery({ ...delivery, street: e.target.value })} />
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <PropertyInput size="lg" label="Postcode" value={delivery.postcode} onChange={(e) => setDelivery({ ...delivery, postcode: e.target.value })} />
+                    <PropertyInput size="lg" label="City"     value={delivery.city}     onChange={(e) => setDelivery({ ...delivery, city:     e.target.value })} />
+                  </div>
+                  <PropertyInput size="lg" label="Phone (optional)" type="tel" value={delivery.phone} onChange={(e) => setDelivery({ ...delivery, phone: e.target.value })} />
+                </div>
+              </section>
 
-                    {(payError || shippingError) && (
-                      <div className="p-3 rounded bg-fg-04">
-                        <p className="ac-helper-xs text-emphasis" style={{ margin: 0 }}>{payError ?? shippingError}</p>
-                      </div>
-                    )}
 
-                    {paying ? (
-                      <div className="ac-helper-xs text-meta">Processing your order…</div>
-                    ) : (
-                      <PayPalButtons
-                        style={{ layout: 'vertical', color: 'black', shape: 'rect', label: 'pay', height: 48 }}
-                        disabled={!deliveryReady || !shipping}
-                        createOrder={createOrder}
-                        onApprove={onApprove}
-                        onError={(err) => {
-                          console.error('PayPal error:', err)
-                          setPayError('Payment could not be completed. Please try again.')
-                        }}
-                        onCancel={() => setPayError(null)}
-                      />
-                    )}
+              {/* Payment */}
+              <section>
+                <SectionHeading>Payment</SectionHeading>
+
+                {payError && (
+                  <div className="p-3 rounded-[4px] bg-fg-04 mb-3">
+                    <p className="ac-helper-xs text-emphasis m-0">{payError}</p>
                   </div>
                 )}
-              </div>
-            </div>
 
-            {/* Right — order summary */}
-            <aside className="bg-surface-secondary p-6 rounded">
-              <p className="ac-prose-label" style={{ marginBottom: '16px' }}>Order summary</p>
-              <ul className="flex flex-col gap-3" style={{ marginBottom: '20px' }}>
-                {items.map((it) => (
-                  <li key={it.id} className="grid gap-3 grid-cols-[40px_1fr_auto] sm:grid-cols-[48px_1fr_auto] items-start">
-                    <div className="w-10 sm:w-12 aspect-[3/4] rounded overflow-hidden bg-surface-primary">
+                {paying ? (
+                  <div className="ac-helper-xs text-meta">Processing your order…</div>
+                ) : (
+                  <div className={paymentReady ? '' : 'opacity-50 pointer-events-none'}>
+                    <PayPalButtons
+                      style={{ layout: 'vertical', color: 'black', shape: 'rect', label: 'pay', height: 48 }}
+                      disabled={!paymentReady}
+                      createOrder={createOrder}
+                      onApprove={onApprove}
+                      onError={(err) => {
+                        console.error('PayPal error:', err)
+                        setPayError('Payment could not be completed. Please try again.')
+                      }}
+                      onCancel={() => setPayError(null)}
+                    />
+                  </div>
+                )}
+
+              </section>
+            </div>
+          </div>
+
+          {/* RIGHT — drawer-as-permanent-sidebar, fixed to viewport so it covers the nav */}
+          <aside className="lg:fixed lg:right-0 lg:top-0 lg:h-dvh lg:w-[480px] lg:z-[60] bg-surface-secondary flex flex-col pb-4">
+            <header className="flex items-center px-8 h-14 flex-shrink-0">
+              <p className="ac-helper-xs uppercase text-emphasis">
+                Your bag {items.length > 0 && <span className="text-meta">· {items.reduce((n, it) => n + it.qty, 0)}</span>}
+              </p>
+            </header>
+            <div className="px-8"><Divider /></div>
+
+            <ul className="flex-1 overflow-y-auto flex flex-col">
+              {items.map((it) => (
+                <li key={it.id} className="px-8">
+                  <div className="grid gap-5 grid-cols-[64px_1fr_auto] items-start py-5">
+                    <div className="w-16 h-16 aspect-square rounded-[4px] overflow-hidden bg-surface-primary">
                       <img src={it.image} alt={it.name} className="w-full h-full object-cover" />
                     </div>
-                    <div>
-                      <p className="ac-helper-xxs text-emphasis" style={{ margin: 0 }}>{it.name}</p>
-                      <p className="ac-helper-xxs text-meta" style={{ margin: '2px 0 0' }}>
-                        {it.size && <>Size: {it.size} · </>}
-                        Qty: {it.qty}
+                    <div className="min-w-0 pt-1">
+                      <p className="ac-helper-xs uppercase text-emphasis m-0">{it.name}</p>
+                      <p className="ac-helper-xs text-meta mt-2 mb-0">
+                        {[it.size, it.color].filter(Boolean).join(' · ')}
+                        {(it.size || it.color) && ' · '}Qty: {it.qty}
                       </p>
                     </div>
-                    <p className="ac-helper-xxs text-emphasis" style={{ margin: 0 }}>{formatPrice(it.price * it.qty, it.currency)}</p>
-                  </li>
-                ))}
-              </ul>
-              <Divider />
-              <div className="ac-prose" style={{ marginTop: '16px' }}>
-                <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 4px' }}>
-                  <span>Subtotal</span><span>{formatPrice(subtotal, currency)}</span>
-                </p>
-                <p style={{ display: 'flex', justifyContent: 'space-between', margin: '0 0 8px' }}>
-                  <span>Shipping</span>
-                  <span>
-                    {shipping
-                      ? formatPrice(shipping.rate, currency)
-                      : step === 'pay'
-                        ? (shippingError ? '—' : 'Calculating…')
-                        : 'At checkout'}
-                  </span>
-                </p>
-                <Divider />
-                <p style={{ display: 'flex', justifyContent: 'space-between', margin: '12px 0 0' }}>
-                  <span><strong>Total</strong></span><span><strong>{formatPrice(total, currency)}</strong></span>
-                </p>
+                    <p className="ac-helper-xs text-emphasis m-0 pt-1">{formatPrice(it.price * it.qty, it.currency)}</p>
+                  </div>
+                  <Divider />
+                </li>
+              ))}
+            </ul>
+
+            <footer className="flex-shrink-0 flex flex-col gap-3 px-8 py-5">
+              <div className="flex items-center justify-between ac-helper-xs">
+                <span className="text-meta uppercase">Subtotal</span>
+                <span className="text-emphasis">{formatPrice(subtotal, currency)}</span>
               </div>
-              <p className="ac-helper-xxs text-meta inline-flex items-center gap-2 mt-6" style={{ marginBottom: 0 }}>
+              <div className="flex items-center justify-between ac-helper-xs">
+                <span className="text-meta uppercase">Shipping</span>
+                <span className="text-emphasis">
+                  {shipping
+                    ? formatPrice(shipping.rate, currency)
+                    : shippingLoading
+                      ? 'Calculating…'
+                      : shippingError
+                        ? '—'
+                        : 'Enter address'}
+                </span>
+              </div>
+              <Divider />
+              <div className="flex items-center justify-between">
+                <span className="ac-helper-xs uppercase text-emphasis">Total</span>
+                <span className="ac-helper-xs text-emphasis"><strong>{formatPrice(total, currency)}</strong></span>
+              </div>
+              <p className="ac-helper-xs text-meta inline-flex items-center gap-2 m-0 pt-2">
                 <Icon name="lock" size={12} /> Secure checkout via PayPal
               </p>
-            </aside>
-          </div>
+            </footer>
+          </aside>
         </section>
       </main>
     </PayPalScriptProvider>

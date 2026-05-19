@@ -1,9 +1,11 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import Nav from './Nav'
 import ThemeToggle from '../framework/ThemeToggle'
 import Footer from './Footer'
 import Icon from '../loaders/icons/Icon'
 import { CartProvider, useCart } from './CartContext'
+import CartDrawer from './CartDrawer'
+import { BRAND } from '@ac/brand-data/config'
 
 const NAV_LEFT = [
   { label: 'Shop',        to: '/shop' },
@@ -43,12 +45,18 @@ const cartBadgeStyle = {
 }
 
 function CartIcon() {
-  const { itemCount } = useCart()
+  const { itemCount, openCart } = useCart()
   return (
-    <Link to="/cart" aria-label={`Cart (${itemCount})`} style={iconBtnStyle} className="ac-site-nav-link">
+    <button
+      type="button"
+      onClick={openCart}
+      aria-label={`Open bag (${itemCount})`}
+      style={iconBtnStyle}
+      className="ac-site-nav-link"
+    >
       <Icon name="shopping-bag" size={16} />
       {itemCount > 0 && <span style={cartBadgeStyle}>{itemCount}</span>}
-    </Link>
+    </button>
   )
 }
 
@@ -61,6 +69,8 @@ function SearchIcon() {
 }
 
 function SiteShell() {
+  const { pathname } = useLocation()
+  const isCheckout = pathname.startsWith('/checkout')
   return (
     <div className="font-display bg-surface-primary text-emphasis min-h-dvh flex flex-col">
       <Nav
@@ -81,7 +91,8 @@ function SiteShell() {
       <div className="flex-1">
         <Outlet />
       </div>
-      <Footer />
+      {!isCheckout && <Footer />}
+      {!isCheckout && <CartDrawer />}
     </div>
   )
 }

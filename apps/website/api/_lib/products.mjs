@@ -10,11 +10,15 @@
 
 import productsData from '../../src/data/printful-products.json' with { type: 'json' }
 
-export function lookupVariant(slug, size) {
+export function lookupVariant(slug, size, color = null) {
   const product = productsData.find((p) => p.slug === slug)
   if (!product) return null
   const wantedSize = size || 'One size'
-  const variant    = product.variants.find((v) => v.size === wantedSize)
+  const variant    = product.variants.find((v) => {
+    if (v.size !== wantedSize) return false
+    if (color == null) return true
+    return v.color === color
+  })
   if (!variant) return null
   return { product, variant }
 }
@@ -29,9 +33,10 @@ export function validateAndPrice(items) {
   let currency  = 'EUR'
 
   for (const it of items) {
-    const found = lookupVariant(it.slug, it.size)
+    const found = lookupVariant(it.slug, it.size, it.color ?? null)
     if (!found) {
-      throw new Error(`Unknown product: ${it.slug}${it.size ? ` (${it.size})` : ''}`)
+      const variantTag = [it.size, it.color].filter(Boolean).join(' / ')
+      throw new Error(`Unknown product: ${it.slug}${variantTag ? ` (${variantTag})` : ''}`)
     }
     const qty = Number(it.qty) || 0
     if (qty < 1 || qty > 99 || !Number.isInteger(qty)) {
@@ -46,6 +51,7 @@ export function validateAndPrice(items) {
     lines.push({
       slug:          it.slug,
       size:          found.variant.size,
+      color:         found.variant.color,
       qty,
       name:          found.product.name,
       unitPrice:     unit,

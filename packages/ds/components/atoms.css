@@ -101,7 +101,7 @@
   padding: 4px 12px;
 }
 .ac-control--textarea.ac-control-md > textarea { padding: 6px 16px; }
-.ac-control--textarea.ac-control-lg > textarea { padding: 8px 20px; }
+.ac-control--textarea.ac-control-lg > textarea { padding: 8px 16px; }
 .ac-textarea-resize-icon {
   position: absolute;
   bottom: 4px;
@@ -113,7 +113,7 @@
 
 .ac-control-sm { padding: 4px 12px; }
 .ac-control-md { padding: 6px 16px; }
-.ac-control-lg { padding: 8px 20px; }
+.ac-control-lg { padding: 8px 16px; }
 
 /* ─── Disabled ─── */
 

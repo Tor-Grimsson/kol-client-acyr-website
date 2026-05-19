@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Pull sync products from the Printful API store and write them to
- * apps/website/src/data/printful-products.json (+ download primary mockups into
- * assets/brand/shop/pod/<slug>.png via the apps/website/public/brand symlink).
+ * apps/website/src/data/printful-products.json. Mockups download into
+ * assets/brand/shop/pod/<slug>/<color-slug>/<N>.<ext> via the apps/website
+ * /public/brand symlink, grouped by color.
  *
  * Run via `pnpm sync-printful` from repo root. Token loaded from .env.local at
  * runtime via Node's --env-file flag — it never reaches the bundle.
@@ -28,8 +29,6 @@ const slugify = (s) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
-// Printful auto-fills external_id with a hex hash when none is set. Only
-// trust the field when it looks deliberate — i.e. has a hyphen.
 const slugFromProduct = (sp) => {
   const ext = sp.external_id?.trim()
   if (ext && /-/.test(ext)) return ext
@@ -80,36 +79,86 @@ async function main() {
       continue
     }
 
-    const slug          = slugFromProduct(sp)
-    const firstVariant  = variants[0]
-    const previewFile   = firstVariant.files.find((f) => f.type === 'preview')
-    const previewUrl    = previewFile?.preview_url
-    const imageExt      = previewUrl ? extFromUrl(previewUrl) : 'png'
-    const imageRelPath  = `${IMG_URL_DIR}/${slug}.${imageExt}`
+    const slug      = slugFromProduct(sp)
+    const productDir = resolve(IMG_DIR, slug)
+    await mkdir(productDir, { recursive: true })
 
-    if (previewUrl) {
-      await downloadImage(previewUrl, resolve(WEBSITE_ROOT, `public${imageRelPath}`))
-      console.log(`  ${slug} ← image (.${imageExt})`)
-    } else {
-      console.warn(`  ${slug}: no preview image, skipping image download`)
+    // Group variants by color (preserve first-seen order).
+    const colorOrder = []
+    const byColor    = new Map()
+    for (const v of variants) {
+      const colorName = v.color || 'Default'
+      if (!byColor.has(colorName)) {
+        colorOrder.push(colorName)
+        byColor.set(colorName, [])
+      }
+      byColor.get(colorName).push(v)
     }
 
-    const prices     = new Set(variants.map((v) => v.retail_price))
+    const colors = []
+    for (const colorName of colorOrder) {
+      const colorSlug    = slugify(colorName)
+      const colorDir     = resolve(productDir, colorSlug)
+      const colorUrlBase = `${IMG_URL_DIR}/${slug}/${colorSlug}`
+      await mkdir(colorDir, { recursive: true })
+
+      // Collect preview URLs across all variants of this color, dedupe by URL.
+      const seen = new Set()
+      const previews = []
+      for (const v of byColor.get(colorName)) {
+        for (const f of v.files || []) {
+          if (f.type !== 'preview') continue
+          if (!f.preview_url) continue
+          if (seen.has(f.preview_url)) continue
+          seen.add(f.preview_url)
+          previews.push(f.preview_url)
+        }
+      }
+
+      const images = []
+      for (let i = 0; i < previews.length; i++) {
+        const url     = previews[i]
+        const ext     = extFromUrl(url)
+        const fname   = `${i + 1}.${ext}`
+        const dest    = resolve(colorDir, fname)
+        const relPath = `${colorUrlBase}/${fname}`
+        await downloadImage(url, dest)
+        images.push(relPath)
+      }
+
+      console.log(`  ${slug} / ${colorName} ← ${images.length} image(s)`)
+
+      colors.push({
+        name:   colorName,
+        slug:   colorSlug,
+        images,
+      })
+    }
+
     const currencies = new Set(variants.map((v) => v.currency))
-    if (prices.size > 1)     console.warn(`  ⚠ ${slug}: variants have different prices: ${[...prices].join(', ')}`)
     if (currencies.size > 1) console.warn(`  ⚠ ${slug}: variants have different currencies: ${[...currencies].join(', ')}`)
 
     const sizes = [...new Set(variants.map((v) => v.size).filter(Boolean))]
+
+    const prices    = variants.map((v) => Number(v.retailPrice ?? v.retail_price))
+    const minPrice  = Math.min(...prices)
+    const maxPrice  = Math.max(...prices)
+    const fromPrice = minPrice !== maxPrice ? minPrice : null
+
+    const primaryImage = colors[0]?.images?.[0] ?? null
 
     products.push({
       source:            'printful',
       printfulProductId: sp.id,
       slug,
       name:              sp.name,
-      price:             Number(firstVariant.retail_price),
-      currency:          firstVariant.currency,
-      image:             imageRelPath,
+      price:             minPrice,
+      priceMax:          maxPrice !== minPrice ? maxPrice : null,
+      fromPrice,
+      currency:          variants[0].currency,
+      image:             primaryImage,
       sizes:             sizes.length > 0 ? sizes : ['One size'],
+      colors,
       variants: variants.map((v) => ({
         syncVariantId:    v.id,
         catalogVariantId: v.variant_id,

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
-const KEY = 'kol.ac.cart.v1'
+const KEY = 'kol.ac.cart.v2'
 const Ctx = createContext(null)
 
 const safeRead = () => {
@@ -26,12 +26,12 @@ const safeWrite = (items) => {
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState(() => safeRead())
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     safeWrite(items)
   }, [items])
 
-  // Cross-tab sync
   useEffect(() => {
     const onStorage = (e) => {
       if (e.key === KEY && e.newValue) {
@@ -43,11 +43,11 @@ export function CartProvider({ children }) {
   }, [])
 
   const value = useMemo(() => {
-    const lineId = (slug, size) => `${slug}::${size ?? '-'}`
+    const lineId = (slug, size, color) => `${slug}::${size ?? '-'}::${color ?? '-'}`
 
-    const addItem = (product, { size = null, qty = 1 } = {}) => {
+    const addItem = (product, { size = null, color = null, qty = 1, price, image } = {}) => {
       setItems((prev) => {
-        const id = lineId(product.slug, size)
+        const id = lineId(product.slug, size, color)
         const existing = prev.find((it) => it.id === id)
         if (existing) {
           return prev.map((it) => (it.id === id ? { ...it, qty: it.qty + qty } : it))
@@ -58,15 +58,17 @@ export function CartProvider({ children }) {
             id,
             slug:     product.slug,
             name:     product.name,
-            image:    product.image,
+            image:    image ?? product.image,
             kind:     product.kind,
-            price:    product.price,
+            price:    price ?? product.price,
             currency: product.currency,
             size,
+            color,
             qty,
           },
         ]
       })
+      setIsOpen(true)
     }
 
     const updateQty = (id, qty) => {
@@ -80,12 +82,20 @@ export function CartProvider({ children }) {
     const removeItem = (id) => setItems((prev) => prev.filter((it) => it.id !== id))
     const clear      = () => setItems([])
 
+    const openCart  = () => setIsOpen(true)
+    const closeCart = () => setIsOpen(false)
+    const toggleCart = () => setIsOpen((v) => !v)
+
     const itemCount = items.reduce((acc, it) => acc + it.qty, 0)
     const subtotal  = items.reduce((acc, it) => acc + it.price * it.qty, 0)
     const currency  = items[0]?.currency ?? 'EUR'
 
-    return { items, addItem, updateQty, removeItem, clear, itemCount, subtotal, currency }
-  }, [items])
+    return {
+      items, addItem, updateQty, removeItem, clear,
+      itemCount, subtotal, currency,
+      isOpen, openCart, closeCart, toggleCart,
+    }
+  }, [items, isOpen])
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }
