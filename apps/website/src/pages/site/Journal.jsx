@@ -7,7 +7,7 @@ import Divider from '../../components/atoms/Divider'
 import { sortedArticles, formatDate } from '../../lib/queries'
 import { urlFor } from '../../lib/sanity'
 
-export default function Blog() {
+export default function Journal() {
   usePageTitle(`${BRAND.name} — Journal`)
   const [articles, setArticles] = useState(null)
 
@@ -47,7 +47,7 @@ export default function Blog() {
                 {i > 0 && <Divider />}
                 <li>
                   <Link
-                    to={`/blog/${article.slug}`}
+                    to={`/journal/${article.slug}`}
                     className="grid gap-8 py-12 sm:grid-cols-[280px_1fr] no-underline hover:opacity-80 transition-opacity"
                   >
                     {article.cover && (

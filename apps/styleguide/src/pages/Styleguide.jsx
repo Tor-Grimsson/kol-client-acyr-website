@@ -161,7 +161,7 @@ export default function Styleguide() {
         title="About Another Creation"
         body="An Icelandic womenswear label by Ýr Þrastardóttir — handmade clothing built on conscious production, made for the independent woman."
       >
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <p>Founded in Reykjavík in 2013, Another Creation works against the cycle of overproduction and material waste that defines mainstream fashion. Each garment is made by hand, in small numbers, with sustainability written into every step — from material sourcing to finishing.</p>
 
           <p>Ýr Þrastardóttir, the brand's creator, draws on a long Icelandic lineage of strong, independent women, translating that heritage into modern garments designed for long ownership. She holds a BA in fashion design from the Icelandic Academy of the Arts (2010) and represented Iceland at Designer's Nest during Copenhagen Fashion Week in 2011. Another Creation has shown four times at Reykjavík Fashion Festival, was selected from over 200 applicants for StartupReykjavík in 2013, and earned a special award that year at the Creative Business Cup for combining creative power with commercial sensibility.</p>
@@ -185,7 +185,7 @@ export default function Styleguide() {
         title="Voice"
         body="How the brand sounds — quiet, deliberate, anti-trend."
       >
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <p>Another Creation speaks quietly and deliberately. The voice is anti-trend, anti-noise — it favours specifics over claims, materials over marketing, the considered phrase over the loud one. It addresses the buyer who reads the label, not the one who chases the season.</p>
         </div>
       </PageSection>
@@ -196,7 +196,7 @@ export default function Styleguide() {
         title="Look"
         body="How the brand appears — editorial, restrained, photo-driven."
       >
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <p>Visually, the brand sits in restraint. Photography leans editorial — landscape, material, figure — with natural light over studio gloss. Compositions are direct, not styled. Type is set quietly, with deliberate spacing. Color holds to a small, confident palette anchored on burgundy and cream. The brand never ornaments where it can let the garment speak.</p>
         </div>
       </PageSection>
@@ -207,10 +207,10 @@ export default function Styleguide() {
         title="The mark"
         body="Two distinct marks — a wordmark and a signature — used alone or in lockup."
       >
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <p>The current mark system replaces the previous brand mark with a pair: the wordmark, set in Right Grotesk Compact Medium (the earlier Baskerville-set wordmark is retired), and the signature — a personal trace from Ýr Þrastardóttir herself. Used alone, each carries the brand; together as a lockup, they form the primary application.</p>
         </div>
-        <div className="ac-grid mt-12">
+        <div className="ac-grid">
           <LogoCard variant="wordmark" clearspace={false} frame={false} />
           <LogoCard variant="logomark" clearspace={false} frame={false} />
         </div>
@@ -222,7 +222,7 @@ export default function Styleguide() {
         title="Marks and lockups"
         body="Logomark, wordmark, and two primary lockups."
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <LogoCard variant="logomark"    caption="Logomark" />
           <LogoCard variant="wordmark"    caption="Wordmark" />
           <LogoCard variant="lockup-hori" caption="Horizontal lockup" />
@@ -236,24 +236,24 @@ export default function Styleguide() {
         title="Palette"
         body="Greyscale carries the structure; five brand hue ramps + cream carry identity. All swatches read live from ac-color.css."
       >
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <h3>Concept</h3>
           <p>The system splits color into two roles. Greyscale handles the structural backbone — surfaces, ink, dividers, the canvas. The brand palette names the identity through five hue families (yellow, red, blue, orange, teal), with cream as a complementary neutral surface.</p>
 
           <h3>Greyscale</h3>
           <p>Carries the canvas and structural ink. Legacy 10-stop ramp; kept until the opacity-hex (solid neutral) primitive is reintroduced.</p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {GREY_RAMP.stops.map((s) => <LiveSwatch key={s} token={`--${GREY_RAMP.id}-${s}`} />)}
         </div>
 
         {HUE_RAMPS.map((ramp) => (
           <div key={ramp.id}>
-            <div className="ac-prose mt-12">
+            <div className="ac-prose">
               <h3>{ramp.label} ramp</h3>
               <p>{ramp.note}</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {ramp.stops.map((s) => (
                 <LiveSwatch
                   key={s}
@@ -266,15 +266,15 @@ export default function Styleguide() {
           </div>
         ))}
 
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <h3>{CREAM_RAMP.label} ramp</h3>
           <p>{CREAM_RAMP.note} Use for warm-light editorial moments and tinting.</p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {CREAM_RAMP.stops.map((s) => <LiveSwatch key={s} token={`--${CREAM_RAMP.id}-${s}`} />)}
         </div>
 
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <h3>Usage</h3>
           <p>Greyscale carries the canvas and structural ink. The five brand ramps name the identity — yellow primary, red secondary, with blue, orange, and teal as supporting hues. Cream sits as a neutral surface for warm-leaning compositions. Apply brand color with restraint, never decoratively.</p>
           <p>Try compositions in the <a href="/generators#combo-lab">Combo lab</a> — interactive scratchpad for layout × palette × logo combinations.</p>
@@ -287,7 +287,7 @@ export default function Styleguide() {
         title="Type"
         body="Right Grotesk across the whole system — one family carrying display, headings, body, and labels through its sub-cuts."
       >
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <h3>Concept</h3>
           <p>Right Grotesk is the brand voice. The family covers the full scale through its variants — Narrow for display, title, and H1; Compact for H2–H4 and lede; Mono for labels and code. The base cut carries the body. Designed for editorial set, quiet by default.</p>
 
@@ -295,7 +295,7 @@ export default function Styleguide() {
           <p>Each role at its actual size — the load-bearing reference for the system.</p>
         </div>
 
-        <div className="mt-8">
+        <div>
           <TypeSample label="D1 · Right Grotesk Narrow · 500 · 80 / 80" family="Right Grotesk Narrow" weight={500} size={80} lineHeight={80}>
             Another Creation
           </TypeSample>
@@ -341,17 +341,17 @@ export default function Styleguide() {
         title="Stationery"
         body="Standard correspondence — business card, envelope, letterhead, email signature. Quiet typography, generous space, monochrome restraint."
       >
-        <div className="ac-grid mt-8">
+        <div className="ac-grid">
           <div className="col-span-2"><AssetCard caption="Business card · front"><Graphic category="stationery" name="business-card-front" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Business card · back"><Graphic category="stationery" name="business-card-back" /></AssetCard></div>
         </div>
 
-        <div className="ac-grid mt-6">
+        <div className="ac-grid">
           <div className="col-span-2"><AssetCard caption="Letterhead · A4 [A]"><Graphic category="stationery" name="letterhead-a4-mock" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Letterhead · A4 [B]"><Graphic category="stationery" name="letterhead-a4-empty" /></AssetCard></div>
         </div>
 
-        <div className="ac-grid mt-6">
+        <div className="ac-grid">
           <div className="col-span-2"><AssetCard caption="Envelope · DL"><Graphic category="stationery" name="envelope" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Email signature"><Graphic category="stationery" name="email-signature" /></AssetCard></div>
         </div>
@@ -364,13 +364,13 @@ export default function Styleguide() {
         body="Sewn into the garment, tied to it, or bundled with it on arrival."
       >
         {/* Edition cards — large, paired side by side */}
-        <div className="ac-grid mt-8">
+        <div className="ac-grid">
           <div className="col-span-2"><AssetCard caption="Edition card [A]"><Graphic category="labels" name="certificate-of-authenticity-01" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Edition card [B]"><Graphic category="labels" name="certificate-of-authenticity-02" /></AssetCard></div>
         </div>
 
         {/* Hangtags — 4-wide */}
-        <div className="ac-grid mt-6 items-start">
+        <div className="ac-grid items-start">
           <div className="col-span-1"><AssetCard caption="Hangtag · front [A]"><Graphic category="labels" name="hang-label-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Hangtag · back [A]"><Graphic category="labels" name="hang-label-02" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Hangtag · front [B]"><Graphic category="labels" name="hang-label-03" /></AssetCard></div>
@@ -378,7 +378,7 @@ export default function Styleguide() {
         </div>
 
         {/* Size labels — 4-wide */}
-        <div className="ac-grid mt-6 items-start">
+        <div className="ac-grid items-start">
           <div className="col-span-1"><AssetCard caption="Size label [A]"><Graphic category="labels" name="size-label-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Size · S [B]"><Graphic category="labels" name="size-label-02" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Size · M [B]"><Graphic category="labels" name="size-label-03" /></AssetCard></div>
@@ -386,7 +386,7 @@ export default function Styleguide() {
         </div>
 
         {/* Care, Neck, Swing — 4-wide */}
-        <div className="ac-grid mt-6 items-start">
+        <div className="ac-grid items-start">
           <div className="col-span-1"><AssetCard caption="Care label [A]"><Graphic category="labels" name="care-label-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Care label [B]"><Graphic category="labels" name="care-label-02" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Neck label"><Graphic category="labels" name="neck-label" /></AssetCard></div>
@@ -401,14 +401,14 @@ export default function Styleguide() {
         body="How the garment travels — dust bag, garment bag, and gift box."
       >
         {/* Garment bags + package — paired side by side, package fills 2 cols */}
-        <div className="ac-grid ac-grid--tight-y mt-8 items-start">
+        <div className="ac-grid ac-grid--tight-y items-start">
           <div className="col-span-1"><AssetCard caption="Garment bag [A]"><Graphic category="garment-bags" name="garment-bag-01" /></AssetCard></div>
           <div className="col-span-1"><AssetCard caption="Garment bag [B]"><Graphic category="garment-bags" name="garment-bag-02" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Gift box [A]"><Graphic category="packaging" name="package" /></AssetCard></div>
         </div>
 
         {/* Dust bags — paired side by side */}
-        <div className="ac-grid mt-6 items-start">
+        <div className="ac-grid items-start">
           <div className="col-span-2"><AssetCard caption="Dust bag [A]"><Graphic category="garment-bags" name="dust-bag-01" /></AssetCard></div>
           <div className="col-span-2"><AssetCard caption="Dust bag [B]"><Graphic category="garment-bags" name="dust-bag-02" /></AssetCard></div>
         </div>
@@ -427,7 +427,7 @@ export default function Styleguide() {
           const rest  = filtered.filter((n) => !FRONT.includes(n))
           const visible = [...front, ...rest]
           return (
-            <div className="flex flex-col gap-12 mt-12">
+            <div className="flex flex-col gap-12">
               <figure className="flex flex-col gap-3">
                 <DeckShell inline total={visible.length}>
                   {visible.map((name) => (
@@ -455,7 +455,7 @@ export default function Styleguide() {
         title="Post sizes"
         body="One template at each of the three Instagram aspect ratios — square feed (1:1), portrait feed (4:5), and story / reel (9:16). Editorial photography, restrained typography, a deliberate cadence."
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           <AssetCard caption="Post · 1:1 square"><Graphic category="social" name="social-04" /></AssetCard>
           <AssetCard caption="Post · 4:5 portrait"><Graphic category="social" name="social-05" /></AssetCard>
           <AssetCard caption="Story · 9:16"><Graphic category="social" name="social-06" /></AssetCard>
@@ -468,7 +468,7 @@ export default function Styleguide() {
         title="Profile"
         body="Avatar treatment for profile pictures across platforms — round-cropped on burgundy, signature centered."
       >
-        <div className="ac-grid mt-8 items-start">
+        <div className="ac-grid items-start">
           <AssetCard><Avatar bg="#FCFBFB" polarity="dark" /></AssetCard>
           <AssetCard><Avatar bg="#F2E5CB" polarity="dark" /></AssetCard>
           <AssetCard><Avatar bg="#750E20" polarity="light" /></AssetCard>
@@ -482,7 +482,7 @@ export default function Styleguide() {
         title="Generators"
         body="Interactive tools for content creation. Click the arrow column to launch in a new tab."
       >
-        <Table caption="Generators" columns={generatorCols} rows={GENERATOR_ROWS} className="mt-8" />
+        <Table variant="simple" caption="Generators" columns={generatorCols} rows={GENERATOR_ROWS} />
       </PageSection>
 
       <PageSection
@@ -491,7 +491,7 @@ export default function Styleguide() {
         title="Slide deck"
         body="A slide deck for Another Creation — typographic spreads across the Right Grotesk family. Click prev/next to browse."
       >
-        <div className="flex flex-col gap-12 mt-12">
+        <div className="flex flex-col gap-12">
           <figure className="flex flex-col gap-3">
             <SlideDeck inline />
             <figcaption className="ac-helper-12 uppercase tracking-widest text-meta">Slide deck — 14 slides</figcaption>
@@ -505,7 +505,7 @@ export default function Styleguide() {
         title="Patterns"
         body="Tileable patterns from src/components/loaders/graphics/svg/patterns/, rendered via the Graphic loader inside a labeled card."
       >
-        <div className="ac-grid mt-8">
+        <div className="ac-grid">
           {(GRAPHICS.patterns ?? []).map((name) => (
             <GraphicCard key={name} category="patterns" name={name} />
           ))}

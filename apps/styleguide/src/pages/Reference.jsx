@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import BrandHero from '../components/framework/BrandHero'
 import PageSection from '../components/framework/PageSection'
 import Table from '@components/organisms/Table'
 import AssetTable, { markRows, graphicRows, markWidthFor, graphicWidthFor } from '../components/styleguide/AssetTable'
@@ -249,7 +250,7 @@ function SystemSection({ section, columnsDict }) {
       divider={section.divider === true}
     >
       {section.reasoning && (
-        <div className="ac-prose mt-8 max-w-[60ch]">
+        <div className="ac-prose">
           <p className="text-meta">{section.reasoning}</p>
         </div>
       )}
@@ -260,7 +261,6 @@ function SystemSection({ section, columnsDict }) {
           columns={typeof t.columns === 'string' ? columnsDict[t.columns] : t.columns}
           rows={t.rows}
           variant="simple"
-          className="mt-8"
         />
       ))}
     </PageSection>
@@ -299,22 +299,28 @@ export default function Reference() {
 
   return (
     <>
+      <BrandHero
+        label="developer reference"
+        title="Token + asset reference"
+        lede="Every color token, type role, asset path, and route the project ships. Authored from data files; tables render live values where they can."
+      />
+
       <PageSection
         id="routes"
-        label="00 — routes"
+        label="01 — routes"
         title="Routes"
         body="Every URL the app serves. Wired in src/App.jsx via react-router."
       >
-        <Table caption="Routes" columns={routeCols} rows={routeRows} className="mt-8" />
+        <Table variant="simple" caption="Routes" columns={routeCols} rows={routeRows} />
       </PageSection>
 
       <PageSection
         id="generators"
-        label="01 — generators"
+        label="02 — generators"
         title="Generators"
         body="Interactive tools available at /generators. Each opens in its own full-viewport workspace; click the arrow column to launch in a new tab."
       >
-        <Table caption="Generators" columns={generatorCols} rows={GENERATOR_ROWS} className="mt-8" />
+        <Table variant="simple" caption="Generators" columns={generatorCols} rows={GENERATOR_ROWS} />
       </PageSection>
 
       {/* Brand colors — identity layer (aliases · hue ramps · cream · grey) */}
@@ -325,8 +331,8 @@ export default function Reference() {
       {/* Typography — data-driven from src/data/typography.js. Each
        * section carries its own label, intro, reasoning prose, and tables
        * (with a string `columns` key that resolves to TYPE_COLUMNS above).
-       * `sans-families` (10) + `sans-atomic` (11) are filtered out — kept
-       * for the styleguide but not surfaced here. */}
+       * `sans-families` + `sans-atomic` are filtered out — kept for the
+       * styleguide but not surfaced here. */}
       {TYPOGRAPHY_SECTIONS
         .filter((s) => s.id !== 'sans-families' && s.id !== 'sans-atomic')
         .map((section) => (
@@ -335,7 +341,7 @@ export default function Reference() {
 
       <PageSection
         id="logos"
-        label="10 — assets · logos"
+        label="11 — assets · logos"
         title="Logos"
         body="Every mark in src/brand/logos/svg/. Click a row to open the overlay; toggle the color dot to swap ink vs surface; download recolored on the fly."
       >
@@ -344,7 +350,7 @@ export default function Reference() {
 
       <PageSection
         id="graphics"
-        label="11 — assets · graphics"
+        label="12 — assets · graphics"
         title="Graphics"
         body="Abstract forms in src/components/loaders/graphics/svg/abstract/. Same overlay + recolor + download behavior as the logo table."
       >
@@ -353,7 +359,7 @@ export default function Reference() {
 
       <PageSection
         id="patterns"
-        label="12 — assets · patterns"
+        label="13 — assets · patterns"
         title="Patterns"
         body="Tileable patterns in src/components/loaders/graphics/svg/patterns/."
       >
@@ -362,20 +368,20 @@ export default function Reference() {
 
       <PageSection
         id="branded-assets"
-        label="13 — assets · branded"
+        label="14 — assets · branded"
         title="Branded assets"
         body="Stationery, garment-attached labels, soft goods and packaging. Mocks live in src/components/styleguide/StationeryMocks.jsx and render in /styleguide chapter 6."
       >
-        <Table caption="Branded assets" columns={brandedAssetCols} rows={brandedAssetRows} className="mt-8" />
+        <Table variant="simple" caption="Branded assets" columns={brandedAssetCols} rows={brandedAssetRows} />
       </PageSection>
 
       <PageSection
         id="photos"
-        label="14 — assets · photos"
+        label="15 — assets · photos"
         title="Photos"
         body="Every group surfaced by photoIndexPlugin (scans public/brand/). Click a group name to jump to its panel in /gallery."
       >
-        <Table caption="Photos" columns={photoCols} rows={photoRows} className="mt-8" />
+        <Table variant="simple" caption="Photos" columns={photoCols} rows={photoRows} />
       </PageSection>
     </>
   )

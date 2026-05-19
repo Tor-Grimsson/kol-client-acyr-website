@@ -9,7 +9,7 @@ const NAV_LEFT = [
   { label: 'Shop',        to: '/shop' },
   { label: 'Handmade',    to: '/handmade' },
   { label: 'Collections', to: '/collections' },
-  { label: 'Journal',     to: '/blog' },
+  { label: 'Journal',     to: '/journal' },
   { label: 'About',       to: '/about' },
   { label: 'Contact',     to: '/contact' },
 ]

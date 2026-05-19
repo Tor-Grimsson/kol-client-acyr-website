@@ -147,7 +147,7 @@ const fgFamilyRows = [
 export const BRAND_COLORS_SECTIONS = [
   {
     id: 'brand-aliases',
-    label: '02 — brand · aliases',
+    label: '03 — brand · aliases',
     title: 'Brand aliases',
     intro:
       "Semantic identity tokens. Pointers to ramp stops; consume these, not the " +
@@ -162,7 +162,7 @@ export const BRAND_COLORS_SECTIONS = [
   },
   {
     id: 'brand-ramps',
-    label: '03 — brand · burgundy',
+    label: '04 — brand · burgundy',
     title: 'Burgundy ramp',
     intro:
       "AC brand identity hue. 5 stops (100–500). Anchor at 200 — Burgundy. Hex " +
@@ -180,7 +180,7 @@ export const BRAND_COLORS_SECTIONS = [
   },
   {
     id: 'cream',
-    label: '04 — brand · cream',
+    label: '05 — brand · cream',
     title: 'Cream ramp',
     intro: "Utility neutral, no anchor. 5 stops (100–500).",
     tables: [
@@ -189,7 +189,7 @@ export const BRAND_COLORS_SECTIONS = [
   },
   {
     id: 'grey',
-    label: '05 — brand · greyscale',
+    label: '06 — brand · greyscale',
     title: 'Greyscale',
     intro:
       "Legacy 10-stop neutral, kept until opacity-hex revival (drift §13). " +

@@ -222,14 +222,14 @@ const ContentFilters = ({
       <Divider className="mb-4" />
 
       {isExpanded && (
-        <div className="flex items-start gap-16 pb-4">
+        <div className="flex flex-col gap-6 pb-4">
           {filterGroups.map((group) => renderFilterGroup(group))}
           {activeFilters.size > 0 && (
             <button
               type="button"
               onClick={clearAllFilters}
-              className="ac-helper-12 transition-colors underline text-fg-48"
-              style={{ marginLeft: 'auto', background: 'transparent', border: 'none', cursor: 'pointer' }}
+              className="ac-helper-12 transition-colors underline text-fg-48 self-start"
+              style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
             >
               Clear all ({activeFilters.size})
             </button>

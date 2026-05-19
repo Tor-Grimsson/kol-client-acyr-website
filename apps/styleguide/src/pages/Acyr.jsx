@@ -1,5 +1,5 @@
-import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import BrandHero from '../components/framework/BrandHero'
 import PageSection from '../components/framework/PageSection'
 import Table from '@components/organisms/Table'
 import Divider from '@components/atoms/Divider'
@@ -222,92 +222,89 @@ export default function Acyr() {
   }
 
   return (
-    <main className="ac-page">
-      <PageSection
-        id="overview"
-        label="ACYR · Source of truth"
-        title="Yr Þrastardóttir"
-        body="Single-page registry of everything we know about the brand: identity, career timeline, press, collaborators, vendors, live-site mirror, and gaps. All data drawn live from the project's data files — edit once, propagate everywhere."
+    <>
+      <BrandHero
+        label="ACYR · source of truth"
+        title="Ýr Þrastardóttir"
+        lede="Single-page registry of everything we know about the brand: identity, career timeline, press, collaborators, vendors, live-site mirror, and gaps. All data drawn live from the project's data files — edit once, propagate everywhere."
       >
-        <div className="ac-prose mt-12">
-          <p>
-            <strong>Snapshot.</strong> {counts.products} catalog products ·
-            {' '}{counts.companies} companies · {counts.films} films ·
-            {' '}{counts.timeline} dated career events · {counts.press} press citations ·
-            {' '}{counts.awards} awards · {counts.collaborations} collaborators ·
-            {' '}{counts.social} social channels. Collections + journal counts live in Sanity.
-          </p>
-        </div>
-      </PageSection>
+        <p className="ac-sans-body-03 max-w-[60ch] text-meta">
+          <strong>Snapshot.</strong> {counts.products} catalog products ·
+          {' '}{counts.companies} companies · {counts.films} films ·
+          {' '}{counts.timeline} dated career events · {counts.press} press citations ·
+          {' '}{counts.awards} awards · {counts.collaborations} collaborators ·
+          {' '}{counts.social} social channels. Collections + journal counts live in Sanity.
+        </p>
+      </BrandHero>
 
       <PageSection id="identity" label="01 — identity" title="Identity" body="Pulled live from src/data/brand-info.js.">
-        <div className="mt-8"><Table columns={identityCols} rows={identityRows} /></div>
+        <Table variant="simple" columns={identityCols} rows={identityRows} />
       </PageSection>
 
       <PageSection id="bio" label="02 — bio" title="Designer & director" body="Two parallel biographies — fashion designer and filmmaker — plus a personal-detail card.">
-        <div className="ac-prose mt-12">
+        <div className="ac-prose">
           <p>
             <strong>Born.</strong> {new Date(BIO.birthDate).toLocaleDateString('en', { day: 'numeric', month: 'long', year: 'numeric' })} in {BIO.birthCity}. Moved to Iceland age {BIO.movedToIcelandAge}; grew up in {BIO.hometown}.
           </p>
-          <p style={{ margin: '0 0 24px' }}>{BIO.designerBio}</p>
-          <p style={{ margin: 0, fontStyle: 'italic' }}>{BIO.directorBio}</p>
-          <blockquote style={{ marginTop: '32px' }}>
+          <p>{BIO.designerBio}</p>
+          <p style={{ fontStyle: 'italic' }}>{BIO.directorBio}</p>
+          <blockquote>
             <p>{BIO.quote}</p>
           </blockquote>
         </div>
       </PageSection>
 
       <PageSection id="timeline" label="03 — career timeline" title="Career timeline" body="Education, shows, press, awards, milestones, films — sorted newest first.">
-        <div className="mt-8"><Table columns={timelineCols} rows={timelineDesc} /></div>
+        <Table variant="simple" columns={timelineCols} rows={timelineDesc} />
       </PageSection>
 
       <PageSection id="press" label="04 — press" title="Press archive" body="Articles, interviews, mentions. Items tagged 'video' are interviews; 'archive' is institutional record; 'photo-gallery' is image-only.">
-        <div className="mt-8"><Table columns={timelineCols} rows={[...PRESS].sort(yearDesc)} /></div>
+        <Table variant="simple" columns={timelineCols} rows={[...PRESS].sort(yearDesc)} />
       </PageSection>
 
       <PageSection id="awards" label="05 — awards & education" title="Awards & education" body="Recognition + formal education credentials.">
-        <div className="mt-8"><Table columns={timelineCols} rows={[...AWARDS, ...TIMELINE.filter((t) => t.kind === 'education')].sort(yearDesc)} /></div>
+        <Table variant="simple" columns={timelineCols} rows={[...AWARDS, ...TIMELINE.filter((t) => t.kind === 'education')].sort(yearDesc)} />
       </PageSection>
 
       <PageSection id="films" label="06 — films" title="Films" body="Director's work. Pivot from fashion-only to filmmaking + multidisciplinary post Icelandic Film School (2022).">
-        <div className="mt-8"><Table columns={timelineCols} rows={[...FILMS].sort(yearDesc)} /></div>
+        <Table variant="simple" columns={timelineCols} rows={[...FILMS].sort(yearDesc)} />
       </PageSection>
 
       <PageSection id="companies" label="07 — companies" title="Companies founded" body="Studios and labels Ýr has founded or co-founded.">
-        <div className="mt-8"><Table columns={companyCols} rows={COMPANIES} /></div>
+        <Table variant="simple" columns={companyCols} rows={COMPANIES} />
       </PageSection>
 
       <PageSection id="collaborations" label="08 — collaborations" title="Collaborations & commissions" body="Long-form clients (opera, dance) and short-form credits (music videos, films, co-design).">
-        <div className="mt-8"><Table columns={collabCols} rows={COLLABORATIONS} /></div>
+        <Table variant="simple" columns={collabCols} rows={COLLABORATIONS} />
       </PageSection>
 
       <PageSection id="social" label="09 — social" title="Social presence" body="Public channels including the FilmFreeway director profile.">
-        <div className="mt-8"><Table columns={socialCols} rows={SOCIAL} /></div>
+        <Table variant="simple" columns={socialCols} rows={SOCIAL} />
       </PageSection>
 
       <PageSection id="vendors" label="10 — vendors" title="Vendors & business contacts" body="Active and TBD vendors. Henson is included for disambiguation only — it is not a partner.">
-        <div className="mt-8"><Table columns={vendorCols} rows={VENDORS} /></div>
+        <Table variant="simple" columns={vendorCols} rows={VENDORS} />
       </PageSection>
 
       <PageSection id="stack" label="11 — stack" title="Tech stack & decisions" body="What we ship, what is proposed, what is planned.">
-        <div className="mt-8"><Table columns={stackCols} rows={STACK} /></div>
+        <Table variant="simple" columns={stackCols} rows={STACK} />
       </PageSection>
 
       <PageSection id="live-site" label="12 — live-site map" title="Her live site mirrored against ours" body="Cross-reference — every page on anothercreation.com matched against our route table. Coverage shows where we have solved 1:1, where we are partial, where we are still planning.">
-        <div className="mt-8"><Table columns={liveMapCols} rows={LIVE_SITE_MAP} /></div>
+        <Table variant="simple" columns={liveMapCols} rows={LIVE_SITE_MAP} />
       </PageSection>
 
       <PageSection id="media" label="13 — media inventory" title="Media inventory" body="Per-surface counts. Surfaces marked 'no' on Date known / Credits known are gaps to fill.">
-        <div className="mt-8"><Table columns={mediaInventoryCols} rows={mediaInventoryRows} /></div>
+        <Table variant="simple" columns={mediaInventoryCols} rows={mediaInventoryRows} />
       </PageSection>
 
       <PageSection id="marketing" label="14 — marketing infra" title="Instagram / Facebook ads playbook" body="Story-linked product ads — Ýr asked about this. It is admin not engineering. Five steps; total effort half a day.">
-        <div className="mt-8"><Table columns={playbookCols} rows={MARKETING_PLAYBOOK} /></div>
+        <Table variant="simple" columns={playbookCols} rows={MARKETING_PLAYBOOK} />
       </PageSection>
 
       <PageSection id="gaps" label="15 — gaps" title="Open questions" body="Things we cannot answer from the data files; need Ýr's input before they can be filled in.">
-        <div className="mt-8"><Table columns={gapsCols} rows={OPEN_QUESTIONS} /></div>
+        <Table variant="simple" columns={gapsCols} rows={OPEN_QUESTIONS} />
       </PageSection>
-    </main>
+    </>
   )
 }

@@ -54,17 +54,17 @@ function slugFrom(pathname, prefix) {
 
 export async function resolveMeta(pathname) {
   // Tier 1 — Sanity
-  if (pathname.startsWith('/blog/author/')) {
-    const slug = slugFrom(pathname, '/blog/author/')
+  if (pathname.startsWith('/journal/author/')) {
+    const slug = slugFrom(pathname, '/journal/author/')
     if (slug) {
       const meta = await fetchAuthorMeta(slug).catch(() => null)
-      if (meta) return withFallback(meta, '/blog')
+      if (meta) return withFallback(meta, '/journal')
     }
-  } else if (pathname.startsWith('/blog/')) {
-    const slug = slugFrom(pathname, '/blog/')
+  } else if (pathname.startsWith('/journal/')) {
+    const slug = slugFrom(pathname, '/journal/')
     if (slug) {
       const meta = await fetchArticleMeta(slug).catch(() => null)
-      if (meta) return withFallback(meta, '/blog')
+      if (meta) return withFallback(meta, '/journal')
     }
   } else if (pathname.startsWith('/collections/')) {
     const slug = slugFrom(pathname, '/collections/')

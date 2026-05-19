@@ -198,7 +198,7 @@ export const TYPOGRAPHY_SECTIONS = [
 
   {
     id: 'prose',
-    label: '06 — type · prose',
+    label: '07 — type · prose',
     title: 'Prose container',
     intro:
       ".ac-prose is a rich-text container that cascades to native HTML " +
@@ -219,7 +219,7 @@ export const TYPOGRAPHY_SECTIONS = [
 
   {
     id: 'mono',
-    label: '07 — type · mono',
+    label: '08 — type · mono',
     title: 'Mono',
     intro:
       "JetBrains Mono. Two scales at the same px stops, distinguished by " +
@@ -244,7 +244,7 @@ export const TYPOGRAPHY_SECTIONS = [
 
   {
     id: 'opacity',
-    label: '08 — type · reading hierarchy',
+    label: '09 — type · reading hierarchy',
     title: 'Reading hierarchy (descriptors)',
     intro:
       "Five-stop ink hierarchy: subtle / meta / body / strong / emphasis. " +
@@ -265,7 +265,7 @@ export const TYPOGRAPHY_SECTIONS = [
 
   {
     id: 'cuts',
-    label: '09 — type · cuts loaded',
+    label: '10 — type · cuts loaded',
     title: 'Cuts loaded',
     intro:
       "Font families currently @font-face declared. Right Grotesk variants " +

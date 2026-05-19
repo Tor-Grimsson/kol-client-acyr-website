@@ -4,9 +4,9 @@ import NotFound from './pages/NotFound'
 
 import SiteLayout from './components/site/SiteLayout'
 import Home from './pages/site/Home'
-import Blog from './pages/site/Blog'
-import BlogArticle from './pages/site/BlogArticle'
-import BlogAuthor from './pages/site/BlogAuthor'
+import Journal from './pages/site/Journal'
+import JournalArticle from './pages/site/JournalArticle'
+import JournalAuthor from './pages/site/JournalAuthor'
 import Collections from './pages/site/Collections'
 import CollectionDetail from './pages/site/CollectionDetail'
 import Shop from './pages/site/Shop'
@@ -31,9 +31,9 @@ export default function App() {
           <Route path="/"                       element={<Home />} />
           <Route path="/about"                  element={<About />} />
           <Route path="/contact"                element={<Contact />} />
-          <Route path="/blog"                   element={<Blog />} />
-          <Route path="/blog/author/:slug"      element={<BlogAuthor />} />
-          <Route path="/blog/:slug"             element={<BlogArticle />} />
+          <Route path="/journal"                element={<Journal />} />
+          <Route path="/journal/author/:slug"   element={<JournalAuthor />} />
+          <Route path="/journal/:slug"          element={<JournalArticle />} />
           <Route path="/collections"            element={<Collections />} />
           <Route path="/collections/:slug"      element={<CollectionDetail />} />
           <Route path="/shop"                   element={<Shop />} />

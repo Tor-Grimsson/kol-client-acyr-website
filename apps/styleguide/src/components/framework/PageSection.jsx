@@ -5,6 +5,7 @@ export default function PageSection({ id, label, title, body, children, classNam
   const cls = [
     'ac-page',
     'ac-page-section',
+    'flex flex-col gap-8',
     fullbleed && 'ac-page--fullbleed',
     className,
   ].filter(Boolean).join(' ')
@@ -12,7 +13,7 @@ export default function PageSection({ id, label, title, body, children, classNam
     <section id={id} className={cls}>
       {divider && <Divider className="ac-page-section-divider" />}
       {hasHead && (
-        <header className={fullbleed ? 'max-w-[960px]' : 'max-w-[720px]'}>
+        <header className="max-w-[60ch]">
           {label && <p  className="ac-prose-label">{label}</p>}
           {title && <h2 className="ac-prose-title">{title}</h2>}
           {body  && <p  className="ac-prose-lede">{body}</p>}

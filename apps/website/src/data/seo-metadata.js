@@ -14,14 +14,14 @@ const OG = '/og'
 
 // Named image constants. Mapped to three sets dropped into public/og/:
 //   logo-* → brand-forward routes (default, home, contact, brand, legal)
-//   ps-*   → product / editorial routes (shop, blog, collections)
+//   ps-*   → product / editorial routes (shop, journal, collections)
 //   yr-*   → personal routes (handmade, about, press)
 // All images are 2400x1260 (2x retina 1200x630, 1.91:1).
 const OG_DEFAULT     = `${OG}/open-graph-logo-01.jpg`
 const OG_HOME        = OG_DEFAULT
 const OG_SHOP        = `${OG}/open-graph-ps-01.jpg`
 const OG_HANDMADE    = `${OG}/open-graph-yr-01.jpg`
-const OG_BLOG        = `${OG}/open-graph-ps-02.jpg`
+const OG_JOURNAL     = `${OG}/open-graph-ps-02.jpg`
 const OG_COLLECTIONS = `${OG}/open-graph-ps-03.jpg`
 const OG_ABOUT       = `${OG}/open-graph-yr-02.jpg`
 const OG_CONTACT     = `${OG}/open-graph-logo-02.jpg`
@@ -56,10 +56,10 @@ export const STATIC_META = {
     image: SITE_URL + OG_CONTACT,
     robots: 'index, follow',
   },
-  '/blog': {
+  '/journal': {
     title: 'Journal — Another Creation',
     description: 'Notes from the atelier. Process, material, and what gets made between collections.',
-    image: SITE_URL + OG_BLOG,
+    image: SITE_URL + OG_JOURNAL,
     robots: 'index, follow',
   },
   '/collections': {
@@ -133,17 +133,17 @@ export const STATIC_META = {
 /**
  * Resolve metadata for any pathname.
  * Pass 1 — static map + parent-listing fallback for dynamic routes.
- * Pass 2 will add Sanity lookups for /blog/:slug, /collections/:slug.
+ * Pass 2 will add Sanity lookups for /journal/:slug, /collections/:slug.
  * Pass 3 will add shop-data lookups for /shop/:slug, /handmade/:slug.
  */
 export function lookupMeta(pathname) {
   if (STATIC_META[pathname]) return STATIC_META[pathname]
 
-  if (pathname.startsWith('/blog/author/')) return STATIC_META['/blog']
-  if (pathname.startsWith('/blog/'))        return STATIC_META['/blog']
-  if (pathname.startsWith('/collections/')) return STATIC_META['/collections']
-  if (pathname.startsWith('/shop/'))        return STATIC_META['/shop']
-  if (pathname.startsWith('/handmade/'))    return STATIC_META['/handmade']
+  if (pathname.startsWith('/journal/author/')) return STATIC_META['/journal']
+  if (pathname.startsWith('/journal/'))        return STATIC_META['/journal']
+  if (pathname.startsWith('/collections/'))    return STATIC_META['/collections']
+  if (pathname.startsWith('/shop/'))           return STATIC_META['/shop']
+  if (pathname.startsWith('/handmade/'))       return STATIC_META['/handmade']
 
   return null
 }

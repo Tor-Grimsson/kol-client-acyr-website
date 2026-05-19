@@ -9,7 +9,7 @@ import BlogBody from '../../components/site/BlogBody'
 import { findArticle, formatDate } from '../../lib/queries'
 import { urlFor } from '../../lib/sanity'
 
-export default function BlogArticle() {
+export default function JournalArticle() {
   const { slug } = useParams()
   const [state, setState] = useState({ status: 'loading', article: null })
 
@@ -32,7 +32,7 @@ export default function BlogArticle() {
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
         <p className="ac-prose-label">404</p>
         <h1 className="ac-prose-display-md">Article not found.</h1>
-        <Link to="/blog" className="ac-prose-label" style={{ marginBottom: 0 }}>← Back to journal</Link>
+        <Link to="/journal" className="ac-prose-label" style={{ marginBottom: 0 }}>← Back to journal</Link>
       </main>
     )
   }
@@ -54,7 +54,7 @@ export default function BlogArticle() {
 
       <div className="max-w-3xl mx-auto px-8">
         <Link
-          to="/blog"
+          to="/journal"
           className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
@@ -72,7 +72,7 @@ export default function BlogArticle() {
           <Divider className="pt-4" />
           <div className="ac-prose-label flex items-center gap-3 flex-wrap pt-4" style={{ marginBottom: 0 }}>
             {author && (
-              <Link to={`/blog/author/${author.slug}`} className="inline-flex items-center gap-2.5 no-underline text-meta hover:text-emphasis">
+              <Link to={`/journal/author/${author.slug}`} className="inline-flex items-center gap-2.5 no-underline text-meta hover:text-emphasis">
                 <Avatar
                   initial={author.avatarInitial}
                   src={author.avatar ? urlFor(author.avatar).width(64).height(64).url() : null}
@@ -93,7 +93,7 @@ export default function BlogArticle() {
 
         {author && (
           <aside className="mt-20 p-8 rounded border border-fg-08 bg-surface-secondary">
-            <Link to={`/blog/author/${author.slug}`} className="flex gap-5 no-underline hover:opacity-80 transition-opacity">
+            <Link to={`/journal/author/${author.slug}`} className="flex gap-5 no-underline hover:opacity-80 transition-opacity">
               <Avatar
                 initial={author.avatarInitial}
                 src={author.avatar ? urlFor(author.avatar).width(112).height(112).url() : null}

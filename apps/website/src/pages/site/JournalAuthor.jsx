@@ -8,7 +8,7 @@ import Badge from '../../components/molecules/Badge'
 import { findAuthor, articlesByAuthor, formatDate } from '../../lib/queries'
 import { urlFor } from '../../lib/sanity'
 
-export default function BlogAuthor() {
+export default function JournalAuthor() {
   const { slug } = useParams()
   const [state, setState] = useState({ status: 'loading', author: null, articles: [] })
 
@@ -31,7 +31,7 @@ export default function BlogAuthor() {
       <main className="bg-surface-primary max-w-3xl mx-auto px-8 py-24 text-center">
         <p className="ac-prose-label">404</p>
         <h1 className="ac-prose-display-md">Author not found.</h1>
-        <Link to="/blog" className="ac-prose-label" style={{ marginBottom: 0 }}>← Back to journal</Link>
+        <Link to="/journal" className="ac-prose-label" style={{ marginBottom: 0 }}>← Back to journal</Link>
       </main>
     )
   }
@@ -40,7 +40,7 @@ export default function BlogAuthor() {
     <main className="bg-surface-primary">
       <section className="max-w-4xl mx-auto px-8 py-20">
         <Link
-          to="/blog"
+          to="/journal"
           className="ac-back-link ac-helper-xs uppercase tracking-widest text-body hover:text-emphasis no-underline inline-flex items-center gap-1.5"
           style={{ marginBottom: '32px' }}
         >
@@ -87,7 +87,7 @@ export default function BlogAuthor() {
               {i > 0 && <Divider />}
               <li>
                 <Link
-                  to={`/blog/${article.slug}`}
+                  to={`/journal/${article.slug}`}
                   className="grid gap-8 py-10 sm:grid-cols-[240px_1fr] no-underline hover:opacity-80 transition-opacity"
                 >
                   {article.cover && (

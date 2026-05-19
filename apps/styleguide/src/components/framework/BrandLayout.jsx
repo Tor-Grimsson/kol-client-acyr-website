@@ -39,9 +39,9 @@ export default function BrandLayout() {
         />
 
         <SideNav drawerOpen={drawerOpen} onCloseDrawer={() => setDrawerOpen(false)} />
-        <div className="min-w-0">
+        <main className="min-w-0">
           <Outlet />
-        </div>
+        </main>
       </div>
       </ModalProvider>
     </GeneratorLibraryProvider>

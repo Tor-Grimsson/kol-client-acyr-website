@@ -1,7 +1,9 @@
 {
   "redirects": [
     { "source": "/site", "destination": "/", "permanent": true },
-    { "source": "/site/:path*", "destination": "/:path*", "permanent": true }
+    { "source": "/site/:path*", "destination": "/:path*", "permanent": true },
+    { "source": "/blog", "destination": "/journal", "permanent": true },
+    { "source": "/blog/:path*", "destination": "/journal/:path*", "permanent": true }
   ],
   "rewrites": [
     { "source": "/", "destination": "/api/metadata-proxy" },
