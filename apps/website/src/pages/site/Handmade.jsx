@@ -16,12 +16,9 @@ const CATEGORIES = [
   { value: 'general',    label: 'General enquiry' },
 ]
 
-// Curated set imagery — Handmade uses set-01..08 (Shop uses 09..20, no overlap).
-const SET = Array.from({ length: 8 }, (_, i) => `/brand/shop/set/set-${String(i + 1).padStart(2, '0')}.jpg`)
-
 export default function Handmade() {
   usePageTitle(`${BRAND.name} — Handmade`)
-  const products = handmadeProducts().slice(0, 8)
+  const products = handmadeProducts()
 
   return (
     <main className="bg-surface-primary">
@@ -36,14 +33,15 @@ export default function Handmade() {
       {/* Pieces */}
       <SiteSection width="full" className="px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {products.map((p, i) => (
+          {products.map((p) => (
             <div key={p.slug} className="opacity-70 hover:opacity-100 transition-opacity duration-300">
               <ProductCard
                 to={`/handmade/${p.slug}`}
-                src={SET[i % SET.length]}
+                src={p.image}
+                label={p.name}
                 name={p.name}
                 price={formatPrice(p.price, p.currency)}
-                overlay={false}
+                cta="Enquire"
               />
             </div>
           ))}

@@ -31,6 +31,10 @@ export default function LookbookCarousel() {
 
   useGSAP(() => {
     if (prefersReducedMotion()) return
+    // Touch devices (phones/tablets): the pinned scrub scroll-jacks and reads
+    // as confusing under a finger — the section is hidden on coarse pointers,
+    // so skip the animation too. Narrow desktop windows keep it.
+    if (window.matchMedia('(pointer: coarse)').matches) return
     const grid = gridRef.current
     const wrap = wrapRef.current
     if (!grid || !wrap) return
@@ -72,7 +76,7 @@ export default function LookbookCarousel() {
   }, { scope: wrapRef })
 
   return (
-    <section className="relative w-screen ml-[calc(50%-50vw)] bg-surface-primary">
+    <section className="pointer-coarse:hidden relative w-screen ml-[calc(50%-50vw)] bg-surface-primary">
       <div ref={wrapRef} className="lookbook-wrap">
         <div ref={gridRef} className="lookbook-grid">
           {ITEMS.map((src, i) => (

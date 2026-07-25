@@ -14,6 +14,7 @@ export default function CarouselArrow({
   onClick,
   disabled = false,
   className = '',
+  style,
   ariaLabel,
 }) {
   const isLeft   = direction === 'left'
@@ -24,7 +25,8 @@ export default function CarouselArrow({
       aria-label={ariaLabel ?? (isLeft ? 'Previous' : 'Next')}
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-fg-12 hover:bg-fg-24 text-emphasis transition-opacity duration-300 disabled:opacity-30 ${className}`.trim()}
+      style={style}
+      className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-fg-12 hover:bg-fg-24 text-emphasis transition-opacity duration-300 cursor-pointer disabled:cursor-default disabled:opacity-30 ${className}`.trim()}
     >
       <Icon name={iconName} size={20} />
     </button>

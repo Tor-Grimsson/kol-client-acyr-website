@@ -17,8 +17,7 @@
       "https://cdn.another-creation.xyz/product/445808294/01.jpg",
       "https://cdn.another-creation.xyz/product/445808294/02.jpg",
       "https://cdn.another-creation.xyz/product/445808294/03.jpg",
-      "https://cdn.another-creation.xyz/product/445808294/04.jpg",
-      "https://cdn.another-creation.xyz/product/445808294/05.jpg"
+      "https://cdn.another-creation.xyz/product/445808294/04.jpg"
     ]
   },
   "445808352": {
@@ -28,7 +27,10 @@
       "https://cdn.another-creation.xyz/product/445808352/01.jpg",
       "https://cdn.another-creation.xyz/product/445808352/02.jpg",
       "https://cdn.another-creation.xyz/product/445808352/03.jpg",
-      "https://cdn.another-creation.xyz/product/445808352/04.jpg"
+      "https://cdn.another-creation.xyz/product/445808352/04.jpg",
+      "https://cdn.another-creation.xyz/product/445808352/05.jpg",
+      "https://cdn.another-creation.xyz/product/445808352/06.jpg",
+      "https://cdn.another-creation.xyz/product/445808352/07.jpg"
     ]
   },
   "445808401": {
@@ -95,7 +97,11 @@
     "images": [
       "https://cdn.another-creation.xyz/product/445808625/01.jpg",
       "https://cdn.another-creation.xyz/product/445808625/02.jpg",
-      "https://cdn.another-creation.xyz/product/445808625/03.jpg"
+      "https://cdn.another-creation.xyz/product/445808625/03.jpg",
+      "https://cdn.another-creation.xyz/product/445808625/04.jpg",
+      "https://cdn.another-creation.xyz/product/445808625/05.jpg",
+      "https://cdn.another-creation.xyz/product/445808625/06.jpg",
+      "https://cdn.another-creation.xyz/product/445808625/07.jpg"
     ]
   },
   "445808711": {
@@ -119,8 +125,7 @@
       "https://cdn.another-creation.xyz/product/445808852/02.jpg",
       "https://cdn.another-creation.xyz/product/445808852/03.jpg",
       "https://cdn.another-creation.xyz/product/445808852/04.jpg",
-      "https://cdn.another-creation.xyz/product/445808852/05.jpg",
-      "https://cdn.another-creation.xyz/product/445808852/06.jpg"
+      "https://cdn.another-creation.xyz/product/445808852/05.jpg"
     ]
   },
   "445808857": {
@@ -183,7 +188,7 @@
     ]
   },
   "445808886": {
-    "slug": "mens-board-shorts",
+    "slug": "pixel-mens-board-shorts",
     "hero": "https://cdn.another-creation.xyz/product/445808886/01.jpg",
     "images": [
       "https://cdn.another-creation.xyz/product/445808886/01.jpg",
@@ -244,7 +249,7 @@
     ]
   },
   "445808920": {
-    "slug": "womens-cropped-windbreaker",
+    "slug": "pixel-windbreaker",
     "hero": "https://cdn.another-creation.xyz/product/445808920/01.jpg",
     "images": [
       "https://cdn.another-creation.xyz/product/445808920/01.jpg",

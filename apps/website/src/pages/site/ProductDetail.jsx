@@ -9,6 +9,7 @@ import { findProduct, formatPrice } from '../../data/shop-data'
 import { useCart } from '../../components/site/CartContext'
 import BackLink from '../../components/site/BackLink'
 import CarouselArrow from '../../components/molecules/CarouselArrow'
+import FullscreenOverlay from '../../components/primitives/FullscreenOverlay'
 import PageHero from '../../components/site/PageHero'
 import SiteSection from '../../components/site/SiteSection'
 
@@ -119,12 +120,22 @@ export default function ProductDetail() {
   const [color, setColor]       = useState(initColor?.name ?? null)
   const [imageIdx, setImageIdx] = useState(0)
   const [qty, setQty]           = useState(1)
+  const [zoom, setZoom]         = useState(false)
 
   usePageTitle(product ? `${product.name} · ${BRAND.name}` : `${BRAND.name}`)
 
   useEffect(() => {
     if (product?.sizes?.length === 1) setSize(product.sizes[0])
   }, [product])
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowLeft')  setImageIdx((i) => i - 1)
+      if (e.key === 'ArrowRight') setImageIdx((i) => i + 1)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   const selectColor = (next) => {
     setColor(next)
@@ -165,11 +176,15 @@ export default function ProductDetail() {
   const colorObj       = colors.find((c) => c.name === color)
   // CDN gallery (product-media.json) is the source of truth; fall back to
   // per-color Printful mockups, then the single card image.
-  const galleryImages  = (
+  const rawImages      = (
     product.media?.length ? product.media
     : colorObj?.images?.length ? colorObj.images
     : [product.image]
   ).filter(Boolean)
+  // The hero is the /shop card cover, not a gallery view — drop it from the
+  // gallery entirely (unless it's the only image we have).
+  const withoutHero    = rawImages.filter((src) => src !== product.image)
+  const galleryImages  = withoutHero.length ? withoutHero : rawImages
   const hasGallery     = galleryImages.length > 1
   const safeIdx        = ((imageIdx % galleryImages.length) + galleryImages.length) % galleryImages.length
   const activeImage    = galleryImages[safeIdx] ?? null
@@ -179,7 +194,7 @@ export default function ProductDetail() {
     <main className="bg-surface-primary">
       <section className="grid lg:grid-cols-[3fr_2fr] items-start min-h-[calc(100dvh-var(--ac-topnav-h,0px))]">
         {/* IMAGE */}
-        <div className="bg-surface-secondary aspect-square lg:aspect-auto lg:h-[calc(100dvh-var(--ac-topnav-h,0px))] lg:sticky lg:top-[var(--ac-topnav-h,0px)] overflow-hidden relative">
+        <div className="bg-surface-secondary mt-16 lg:mt-0 aspect-square lg:aspect-auto lg:h-[calc(100dvh-var(--ac-topnav-h,0px))] lg:sticky lg:top-[var(--ac-topnav-h,0px)] overflow-hidden relative">
           {activeImage ? (
             <img
               src={activeImage}
@@ -188,36 +203,48 @@ export default function ProductDetail() {
             />
           ) : null}
 
+          {activeImage && (
+            <button
+              type="button"
+              onClick={() => setZoom(true)}
+              aria-label="View full image"
+              className="lg:hidden absolute right-4 bottom-14 inline-flex items-center justify-center w-9 h-9 rounded-full bg-surface-primary text-emphasis"
+              style={{ border: 'none', cursor: 'pointer' }}
+            >
+              <Icon name="zoom-in" size={16} />
+            </button>
+          )}
+
           {hasGallery && (
             <>
               <CarouselArrow
                 direction="left"
                 onClick={() => stepImage(-1)}
                 className="absolute left-4 top-1/2 -translate-y-1/2"
+                style={{ backgroundColor: 'var(--ac-surface-primary)' }}
               />
               <CarouselArrow
                 direction="right"
                 onClick={() => stepImage(1)}
                 className="absolute right-4 top-1/2 -translate-y-1/2"
+                style={{ backgroundColor: 'var(--ac-surface-primary)' }}
               />
-              <div className="absolute right-4 bottom-4 site-meta-status bg-surface-primary/70 px-2 py-1 rounded-full">
+              <div className="absolute right-4 bottom-4 site-meta-status bg-surface-primary px-2 py-1 rounded-full">
                 {safeIdx + 1} / {galleryImages.length}
               </div>
-              <div className="absolute left-4 bottom-4 flex flex-col gap-2 max-h-[calc(100%-2rem)] overflow-y-auto">
+              <div className="absolute left-4 bottom-4 flex gap-2 max-w-[calc(100%-6rem)] overflow-x-auto">
                 {galleryImages.map((src, i) => {
-                  const active = i === safeIdx
                   return (
                     <button
                       type="button"
                       key={src}
                       onClick={() => setImageIdx(i)}
                       aria-label="View image"
-                      className="block w-14 h-14 rounded-[4px] overflow-hidden bg-surface-primary"
+                      className="shrink-0 block w-14 h-14 rounded-[4px] overflow-hidden bg-surface-primary"
                       style={{
-                        border: `1px solid ${active ? 'var(--ac-surface-on-primary)' : 'var(--ac-fg-12)'}`,
+                        border: '1px solid var(--ac-fg-12)',
                         padding: 0,
                         cursor: 'pointer',
-                        transition: 'border-color 150ms ease',
                       }}
                     >
                       <img src={src} alt="" className="w-full h-full object-cover" />
@@ -247,7 +274,9 @@ export default function ProductDetail() {
 
             <div className="ac-prose mb-8">
               <p style={{ margin: 0 }}>{product.excerpt}</p>
-              {desc?.blurb && <p style={{ margin: '12px 0 0' }}>{desc.blurb}</p>}
+              {desc?.blurb && desc.blurb !== product.excerpt && (
+                <p style={{ margin: '12px 0 0' }}>{desc.blurb}</p>
+              )}
             </div>
 
             {isPod && multiColor && (
@@ -347,6 +376,29 @@ export default function ProductDetail() {
           </div>
         </div>
       </section>
+
+      <FullscreenOverlay open={zoom} onClose={() => setZoom(false)}>
+        {activeImage && <img src={activeImage} alt={product.name} />}
+        {hasGallery && (
+          <>
+            <CarouselArrow
+              direction="left"
+              onClick={() => stepImage(-1)}
+              className="absolute left-4 top-1/2 -translate-y-1/2"
+              style={{ backgroundColor: 'var(--ac-surface-primary)' }}
+            />
+            <CarouselArrow
+              direction="right"
+              onClick={() => stepImage(1)}
+              className="absolute right-4 top-1/2 -translate-y-1/2"
+              style={{ backgroundColor: 'var(--ac-surface-primary)' }}
+            />
+            <div className="absolute right-4 bottom-4 site-meta-status bg-surface-primary px-2 py-1 rounded-full">
+              {safeIdx + 1} / {galleryImages.length}
+            </div>
+          </>
+        )}
+      </FullscreenOverlay>
     </main>
   )
 }

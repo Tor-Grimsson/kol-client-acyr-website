@@ -6,26 +6,25 @@ import { PRODUCTS, formatPrice } from '../../data/shop-data'
 /**
  * Collection — featured products in a 2×4 grid, revealed on scroll-into-view.
  *
- * Imagery uses the curated `set` shoot; product name / price / link still come
- * from the featured PRODUCTS (paired by index).
+ * An explicit, ordered pick of real products (3 handmade + 5 POD); imagery is
+ * each product's CDN hero.
  */
 
-// Curated set images for the grid (chosen to not overlap the bento above).
-const SET = [
-  '/brand/shop/set/set-01.jpg',
-  '/brand/shop/set/set-04.jpg',
-  '/brand/shop/set/set-07.jpg',
-  '/brand/shop/set/set-09.jpg',
-  '/brand/shop/set/set-10.jpg',
-  '/brand/shop/set/set-14.jpg',
-  '/brand/shop/set/set-16.jpg',
-  '/brand/shop/set/set-19.jpg',
+const FEATURED_SLUGS = [
+  'modular-leather-jacket',
+  'vigdis-coat',
+  'nepal-cashmere-coat',
+  'art-deco-printed-high-waist-bikini',
+  'earth-print-leggings-with-pockets',
+  'metal-printed-crop-top',
+  'metal-print-windbreaker',
+  'art-deco-printed-yoga-leggings',
 ]
 
 export default function Collection() {
   const sectionRef = useRef(null)
   const gridRef = useRef(null)
-  const featured = PRODUCTS.filter((p) => p.featured).slice(0, 8)
+  const featured = FEATURED_SLUGS.map((s) => PRODUCTS.find((p) => p.slug === s)).filter(Boolean)
 
   useGSAP(() => {
     if (prefersReducedMotion()) return
@@ -61,11 +60,11 @@ export default function Collection() {
       </div>
 
       <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {featured.map((p, i) => (
+        {featured.map((p) => (
           <div key={p.slug} className="opacity-70 hover:opacity-100 transition-opacity duration-300">
             <ProductCard
               to={p.kind === 'pod' ? `/shop/${p.slug}` : `/handmade/${p.slug}`}
-              src={SET[i] ?? p.image}
+              src={p.image}
               name={p.name}
               price={formatPrice(p.price, p.currency)}
               overlay={false}

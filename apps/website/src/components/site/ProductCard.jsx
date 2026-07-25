@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Button from '../atoms/Button'
 
-export default function ProductCard({ src, label, name, price, sizes = [], color, to, overlay = true, fill = false }) {
+export default function ProductCard({ src, label, name, price, sizes = [], color, to, overlay = true, fill = false, cta = 'Add to Bag' }) {
   const Wrapper = to ? Link : 'div'
   const wrapperProps = to ? { to, className: `${fill ? 'flex flex-col h-full ' : ''}block no-underline`.trim() } : { className: fill ? 'flex flex-col h-full' : undefined }
 
@@ -24,7 +24,7 @@ export default function ProductCard({ src, label, name, price, sizes = [], color
             <p className="site-name-card mb-1">{name}</p>
             <p className="site-meta-card mb-4">{price}</p>
             <Button variant="ghost" size="md" className="w-full">
-              Add to Bag
+              {cta}
             </Button>
           </div>
         )}
